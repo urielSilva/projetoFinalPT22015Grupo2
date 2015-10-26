@@ -20,8 +20,9 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+  host: localhost
   username: postgres
-  password: 
+  password: postgres
 
 development:
   <<: *default
@@ -83,5 +84,5 @@ test:
 production:
   <<: *default
   database: SAP_production
-  username: SAP
-  password: <%= ENV['SAP_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: postgres
