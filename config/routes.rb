@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+<<<<<<< HEAD
+  resources :sectors
+
+  resources :knowledge_levels
+
+=======
 
   get 'index/index'
 
@@ -7,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :sectors
   resources :knowledge_levels
+>>>>>>> 07b26b8ceda2cfe3e3d37e4db8bbde89dbf0becd
   resources :type_activities
   resources :profiles
   resources :jobs
