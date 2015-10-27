@@ -16,7 +16,17 @@ ActiveRecord::Schema.define(version: 20151026154737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+
   create_table "activities", force: :cascade do |t|
+
+  create_table "jobs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "knowledge_levels", force: :cascade do |t|
+    t.string   "level"
     t.string   "description"
     t.integer  "credits"
     t.string   "type"
@@ -24,7 +34,8 @@ ActiveRecord::Schema.define(version: 20151026154737) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "jobs", force: :cascade do |t|
+
+  create_table "profiles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,10 +48,12 @@ ActiveRecord::Schema.define(version: 20151026154737) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
+  create_table "sectors", force: :cascade do |t|
+    t.string   "short_name"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "type_activities", force: :cascade do |t|
