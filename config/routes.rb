@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
 
+<<<<<<< HEAD
   resources :sectors
 
   resources :knowledge_levels
 
+=======
+
+  get 'index/index'
+
+
+
+  resources :sectors
+  resources :knowledge_levels
+>>>>>>> 07b26b8ceda2cfe3e3d37e4db8bbde89dbf0becd
   resources :type_activities
   resources :profiles
   resources :jobs
@@ -12,7 +22,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+   root 'index#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
