@@ -11,7 +11,7 @@ table
   tbody
     - @profiles.each do |profile|
       tr
-        td class="light-blue" = profile.name 
+        td = profile.name
         td = link_to 'Show', profile
         td = link_to 'Edit', edit_profile_path(profile)
         td = link_to 'Destroy', profile, data: {:confirm => 'Are you sure?'}, :method => :delete
