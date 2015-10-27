@@ -13,6 +13,8 @@
 #
 # Configure Using Gemfile
 # gem 'pg'
+
+#oi
 #
 default: &default
   adapter: postgresql
