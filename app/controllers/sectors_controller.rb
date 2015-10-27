@@ -4,7 +4,7 @@ class SectorsController < ApplicationController
   # GET /sectors
   # GET /sectors.json
   def index
-    @sectors = Sector.where(name: "wololo")
+    @sectors = Sector.all
   end
 
   # GET /sectors/1

@@ -9,8 +9,11 @@ table
       th
 
   tbody
+    
     - @jobs.each do |job|
+    
       tr
+        td = job.id
         td = job.name
         td = link_to 'Show', job
         td = link_to 'Edit', edit_job_path(job)
