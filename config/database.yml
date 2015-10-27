@@ -21,8 +21,8 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   host: localhost
   pool: 5
-  username: bruno
-  password: 92351038
+  username: postgres
+  password: postgres
 
 development:
   <<: *default
@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: SAP_production
-  username: SAP
-  password: <%= ENV['SAP_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: postgres

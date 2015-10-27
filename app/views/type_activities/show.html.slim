@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Type activity description:
+  = @type_activity.Type_Activity_description
+
+= link_to 'Edit', edit_type_activity_path(@type_activity)
+'|
+= link_to 'Back', type_activities_path
