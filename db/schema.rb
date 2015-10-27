@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20151026154737) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sectors", force: :cascade do |t|
+    t.string   "short_name"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "type_activities", force: :cascade do |t|
     t.string   "Type_Activity_description"
     t.datetime "created_at",                null: false
