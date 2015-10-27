@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
   resources :sectors
-=======
+
   resources :knowledge_levels
->>>>>>> 885682f4f927d2b0bcda70eefdfa7baa404a7256
+
   resources :type_activities
   resources :profiles
   resources :jobs
