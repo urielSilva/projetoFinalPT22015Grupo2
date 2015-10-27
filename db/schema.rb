@@ -11,26 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026154208) do
+
+
+ActiveRecord::Schema.define(version: 20151026152216) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
 
   create_table "activities", force: :cascade do |t|
     t.string   "description"
     t.integer  "credits"
     t.string   "type"
+
+  create_table "knowledge_levels", force: :cascade do |t|
+    t.string   "level"
+    t.string   "description"
+
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "jobs", force: :cascade do |t|
+  create_table "nome_do_models", force: :cascade do |t|
+    t.string   "Nivel_Conhecimento"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+
+  create_table "profiles", force: :cascade do |t|
+
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
+
+  create_table "jobs", force: :cascade do |t|
+
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
