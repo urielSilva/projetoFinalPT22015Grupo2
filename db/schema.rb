@@ -11,18 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151027182842) do
+=======
+ActiveRecord::Schema.define(version: 20151026152216) do
+>>>>>>> 885682f4f927d2b0bcda70eefdfa7baa404a7256
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "jobs", force: :cascade do |t|
+=======
+  create_table "knowledge_levels", force: :cascade do |t|
+    t.string   "level"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "nome_do_models", force: :cascade do |t|
+    t.string   "Nivel_Conhecimento"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+
+  create_table "profiles", force: :cascade do |t|
+>>>>>>> 885682f4f927d2b0bcda70eefdfa7baa404a7256
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "profiles", force: :cascade do |t|
+=======
+  create_table "jobs", force: :cascade do |t|
+>>>>>>> 885682f4f927d2b0bcda70eefdfa7baa404a7256
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
