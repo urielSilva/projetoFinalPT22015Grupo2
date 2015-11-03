@@ -1,10 +1,8 @@
-h1 Listing knowledge_levels
-
-table
+table class="highlight responsive-table"
   thead
     tr
-      th Level
-      th Description
+      th Nível
+      th Descrição
       th
       th
       th
@@ -14,10 +12,10 @@ table
       tr
         td = knowledge_level.level
         td = knowledge_level.description
-        td = link_to 'Show', knowledge_level
-        td = link_to 'Edit', edit_knowledge_level_path(knowledge_level)
-        td = link_to 'Destroy', knowledge_level, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Exibir', knowledge_level
+        td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
+        td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
-= link_to 'New Knowledge level', new_knowledge_level_path
+= link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn green darken-3'

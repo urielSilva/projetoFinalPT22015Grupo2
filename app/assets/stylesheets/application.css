@@ -14,11 +14,20 @@
  *= require_self
  */
 
+nav {
+	margin-bottom: 30px;
+}
+
 body {
 	font-family: 'Roboto Condensed', sans-serif;
+	background-color: #c8e6c9;
 }
 
 h1 {
-	font-size: 40px;
+	font-family: 'Lobster Two', 'cursive';
+	margin-bottom: 40px;
+	margin-top: 80px;
 	text-align: center;
+	font-size: 60px;
+	color: #212121;
 }

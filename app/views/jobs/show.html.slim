@@ -1,9 +1,9 @@
 p#notice = notice
 
 p
-  strong Name:
+  strong Nome: 
   = @job.name
 
-= link_to 'Edit', edit_job_path(@job)
+= link_to 'Editar', edit_job_path(@job), :class=>'waves-effect waves-light btn green darken-3'
 '|
-= link_to 'Back', jobs_path
+= link_to 'Voltar', jobs_path, :class=>'waves-effect waves-light btn green darken-3'

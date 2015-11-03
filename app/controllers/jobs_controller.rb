@@ -36,7 +36,7 @@ class JobsController < ApplicationController
       end
     end
   end
-
+  
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update

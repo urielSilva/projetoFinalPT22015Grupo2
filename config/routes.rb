@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   get "/profiles" => "profiles#index"
 
+  get 'index' => 'index#index', as: :index
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
