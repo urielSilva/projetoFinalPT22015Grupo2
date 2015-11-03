@@ -15,10 +15,10 @@ table
       tr
         td = job.id
         td = job.name
-        td = link_to 'Show', job
-        td = link_to 'Edit', edit_job_path(job)
+        td = link_to 'Show', mostrar_cargo_path(job)
+        td = link_to 'Edit', editar_cargo_path(job)
         td = link_to 'Destroy', job, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Job', new_job_path
+= link_to 'New Job', criar_cargo_path

@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :profiles
   resources :jobs
 
+  get 'cargos' => 'jobs#index', as: :cargos
+  get 'cargo/:id' => 'jobs#show', as: :cargo
+  get 'mostrar_cargo/:id' => 'jobs#show', as: :mostrar_cargo
+  get 'editar_cargo/:id' => 'jobs#edit', as: :editar_cargo
+  get 'criar_cargo' => 'jobs#new', as: :criar_cargo
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
