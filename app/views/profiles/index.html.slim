@@ -1,9 +1,7 @@
-h1 Listing profiles
-
-table
+table class="highlight responsive-table"
   thead
     tr
-      th Name
+      th Nome
       th
       th
       th
@@ -12,10 +10,11 @@ table
     - @profiles.each do |profile|
       tr
         td = profile.name
-        td = link_to 'Show', profile
-        td = link_to 'Edit', edit_profile_path(profile)
-        td = link_to 'Destroy', profile, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Exibir', profile
+        td = link_to 'Editar', edit_profile_path(profile)
+        td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
-= link_to 'New Profile', new_profile_path
+= link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn green darken-3'
+

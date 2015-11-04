@@ -4,11 +4,27 @@
   <title>SAP</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="container">
+    <h1>Sistema de Acompanhamento de Projetos</h1>
+    <nav class="green darken-3">
+      <ul class="left hide-on-med-and-down">
+        <li><%= link_to 'Inicio', index_path %></li>
+        <li><%= link_to 'Perfis', profiles_path %></li>
+        <li><%= link_to 'Núcleos', sectors_path %></li>
+        <li><%= link_to 'Cargos', jobs_path %></li>
+        <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
+        <li><%= link_to 'Tipos de Atividades', type_activities_path %></li>
+      </ul>
+    </nav>
+    <div class="row" style="text-align:justify; margin: 1px; padding: 10px; background-color: #e8f5e9; border-style: solid; border-color: #81c784">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

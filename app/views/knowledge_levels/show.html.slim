@@ -1,12 +1,12 @@
 p#notice = notice
 
 p
-  strong Level:
+  strong Nível: 
   = @knowledge_level.level
 p
-  strong Description:
+  strong Descrição: 
   = @knowledge_level.description
 
-= link_to 'Edit', edit_knowledge_level_path(@knowledge_level)
+= link_to 'Editar', edit_knowledge_level_path(@knowledge_level), :class=>'waves-effect waves-light btn green darken-3'
 '|
-= link_to 'Back', knowledge_levels_path
+= link_to 'Voltar', knowledge_levels_path, :class=>'waves-effect waves-light btn green darken-3'

@@ -1,4 +1,3 @@
-.fundo-azul
 h1.center Listing knowledge levels
 
 - if @knowledge_levels.size == 0
@@ -19,7 +18,4 @@ h1.center Listing knowledge levels
           td = link_to knowledge_level.description, edit_knowledge_level_path(knowledge_level)
           td = link_to knowledge_level.level, edit_knowledge_level_path(knowledge_level)
           td = link_to 'Destroy', knowledge_level, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-    br
-
-= link_to 'New Knowledge level', new_knowledge_level_path
+= link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn green darken-3'
