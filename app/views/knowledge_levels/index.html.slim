@@ -1,13 +1,12 @@
-h1.center Listing knowledge levels
-
 - if @knowledge_levels.size == 0
   .font-y.p No hay nada
+  
 - else
-  table
+  table class="highlight responsive-table"
     thead
       tr
-        th Level
-        th Description
+        th Nível
+        th Descrição
         th
         th
         th
@@ -17,5 +16,8 @@ h1.center Listing knowledge levels
         tr.font-y
           td = link_to knowledge_level.description, edit_knowledge_level_path(knowledge_level)
           td = link_to knowledge_level.level, edit_knowledge_level_path(knowledge_level)
-          td = link_to 'Destroy', knowledge_level, data: {:confirm => 'Are you sure?'}, :method => :delete
+          td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+br
+
 = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn green darken-3'
