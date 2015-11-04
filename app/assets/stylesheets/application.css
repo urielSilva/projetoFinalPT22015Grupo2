@@ -14,14 +14,24 @@
  *= require_self
  */
 
-nav {
-	margin-bottom: 30px;
-}
-
 body {
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: #c8e6c9;
 	margin-bottom: 50px;
+}
+
+nav {
+	margin-bottom: 30px;
+}
+
+#header {
+	margin-top: 130px;
+	margin-bottom: 55px;
+}
+
+#logo {
+	float: right;
+	margin-top: -95px;
 }
 
 #main {
@@ -40,10 +50,8 @@ body {
 }
 
 h1 {
-	font-family: 'Lobster Two', 'cursive';
-	margin-bottom: 40px;
-	margin-top: 80px;
-	text-align: center;
-	font-size: 60px;
+	font-family: 'Lato', sans-serif;
+	text-align: left;
+	font-size: 38px;
 	color: #212121;
 }
