@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :profiles
   resources :jobs
 
+  get 'show_level:id' => 'knowledge_levels#show'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,23 +1,25 @@
-h1 Listing knowledge_levels
+.fundo-azul
+h1.center Listing knowledge levels
 
-table
-  thead
-    tr
-      th Level
-      th Description
-      th
-      th
-      th
-
-  tbody
-    - @knowledge_levels.each do |knowledge_level|
+- if @knowledge_levels.size == 0
+  .font-y.p No hay nada
+- else
+  table
+    thead
       tr
-        td = knowledge_level.level
-        td = knowledge_level.description
-        td = link_to 'Show', knowledge_level
-        td = link_to 'Edit', edit_knowledge_level_path(knowledge_level)
-        td = link_to 'Destroy', knowledge_level, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Level
+        th Description
+        th
+        th
+        th
 
-br
+    tbody
+      - @knowledge_levels.each do |knowledge_level|
+        tr.font-y
+          td = link_to knowledge_level.description, edit_knowledge_level_path(knowledge_level)
+          td = link_to knowledge_level.level, edit_knowledge_level_path(knowledge_level)
+          td = link_to 'Destroy', knowledge_level, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+    br
 
 = link_to 'New Knowledge level', new_knowledge_level_path
