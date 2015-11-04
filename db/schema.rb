@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 20151027182842) do
     t.datetime "updated_at",  null: false
   end
 
+<<<<<<< HEAD
+  create_table "nome_do_models", force: :cascade do |t|
+    t.string   "Nivel_Conhecimento"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+=======
+>>>>>>> f529d2a8aeaff71df3c43b0e331e75bccef8a076
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false

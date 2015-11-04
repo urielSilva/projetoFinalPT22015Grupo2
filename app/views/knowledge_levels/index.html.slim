@@ -1,21 +1,21 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th Nível
-      th Descrição
-      th
-      th
-      th
+h1.center Listing knowledge levels
 
-  tbody
-    - @knowledge_levels.each do |knowledge_level|
+- if @knowledge_levels.size == 0
+  .font-y.p No hay nada
+- else
+  table
+    thead
       tr
-        td = knowledge_level.level
-        td = knowledge_level.description
-        td = link_to 'Exibir', knowledge_level
-        td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
-        td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th Level
+        th Description
+        th
+        th
+        th
 
-br
-
+    tbody
+      - @knowledge_levels.each do |knowledge_level|
+        tr.font-y
+          td = link_to knowledge_level.description, edit_knowledge_level_path(knowledge_level)
+          td = link_to knowledge_level.level, edit_knowledge_level_path(knowledge_level)
+          td = link_to 'Destroy', knowledge_level, data: {:confirm => 'Are you sure?'}, :method => :delete
 = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn green darken-3'
