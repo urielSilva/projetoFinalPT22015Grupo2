@@ -11,22 +11,24 @@
 </head>
 <body>
   <div class="container">
-    <div id="header">
+    <div id="header" class="no-select">
       <h1>Sistema de Acompanhamento de Projetos</h1>
       <div id="logo">
         <%= image_tag("cjr.png")%>
       </div>
     </div>
-    <nav class="green darken-3" style="position: relative">
-      <ul class="left hide-on-med-and-down">
-        <li><%= link_to 'Inicio', index_path %></li>
-        <li><%= link_to 'Perfis', profiles_path %></li>
-        <li><%= link_to 'Núcleos', sectors_path %></li>
-        <li><%= link_to 'Cargos', jobs_path %></li>
-        <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
-        <li><%= link_to 'Tipos de Atividades', type_activities_path %></li>
-      </ul>
-    </nav>
+    <div id="menu" class="no-select">
+      <nav class="green darken-3" style="position: relative">
+        <ul class="left hide-on-med-and-down">
+          <li><%= link_to 'Inicio', index_path %></li>
+          <li><%= link_to 'Perfis', profiles_path %></li>
+          <li><%= link_to 'Núcleos', sectors_path %></li>
+          <li><%= link_to 'Cargos', jobs_path %></li>
+          <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
+          <li><%= link_to 'Tipos de Atividades', type_activities_path %></li>
+        </ul>
+      </nav>
+    </div>
     <div id="main" class="row">
       <div id="main-content">
         <%= yield %>

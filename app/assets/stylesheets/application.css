@@ -49,6 +49,15 @@ nav {
 	margin-bottom: 15px;
 }
 
+.noselect {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
 h1 {
 	font-family: 'Lato', sans-serif;
 	text-align: left;
