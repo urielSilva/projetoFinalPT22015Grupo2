@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <h1>Sistema de Acompanhamento de Projetos</h1>
-    <nav class="green darken-3">
+    <nav class="green darken-3" style="position: relative">
       <ul class="left hide-on-med-and-down">
         <li><%= link_to 'Inicio', index_path %></li>
         <li><%= link_to 'Perfis', profiles_path %></li>
@@ -22,8 +22,10 @@
         <li><%= link_to 'Tipos de Atividades', type_activities_path %></li>
       </ul>
     </nav>
-    <div class="row" style="text-align:justify; margin: 1px; padding: 10px; background-color: #e8f5e9; border-style: solid; border-color: #81c784">
-      <%= yield %>
+    <div id="main" class="row">
+      <div id="main-content">
+        <%= yield %>
+      </div>
     </div>
   </div>
 </body>

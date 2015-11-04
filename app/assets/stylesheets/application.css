@@ -21,6 +21,22 @@ nav {
 body {
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: #c8e6c9;
+	margin-bottom: 50px;
+}
+
+#main {
+	text-align: justify; 
+	padding: 15px;
+	margin: 1px;
+	margin-top: -40px;
+	background-color: #e8f5e9; 
+	border: 1px solid; 
+	border-color: #81c784;
+}
+
+#main-content {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 h1 {
