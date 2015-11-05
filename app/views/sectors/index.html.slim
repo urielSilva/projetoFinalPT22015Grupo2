@@ -1,14 +1,9 @@
-h1 Listing sectors
-
-table
+table class="highlight responsive-table"
   thead
     tr
-      th Short name
-      th Name
-      th Description
-      th
-      th
-      th
+      th Sigla
+      th Nome
+      th Descrição
 
   tbody
     - @sectors.each do |sector|
@@ -16,10 +11,11 @@ table
         td = sector.short_name
         td = sector.name
         td = sector.description
-        td = link_to 'Show', sector
-        td = link_to 'Edit', edit_sector_path(sector)
-        td = link_to 'Destroy', sector, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Exibir', sector
+        td = link_to 'Editar', edit_sector_path(sector)
+        td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
-= link_to 'New Sector', new_sector_path
+= link_to 'Novo Núcleo', new_sector_path, :class=>'waves-effect waves-light btn green darken-3'
+

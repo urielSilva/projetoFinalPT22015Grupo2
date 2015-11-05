@@ -11,26 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20151026154737) do
-
 ActiveRecord::Schema.define(version: 20151027182842) do
-
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-
-
-
-  create_table "activities", force: :cascade do |t|
-    t.string   "description"
-    t.integer  "credits"
-    t.string   "type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
 
   create_table "jobs", force: :cascade do |t|
     t.string   "name"
@@ -45,33 +29,23 @@ ActiveRecord::Schema.define(version: 20151027182842) do
     t.datetime "updated_at",  null: false
   end
 
-
+<<<<<<< HEAD
   create_table "nome_do_models", force: :cascade do |t|
     t.string   "Nivel_Conhecimento"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
-
-
+=======
+>>>>>>> f529d2a8aeaff71df3c43b0e331e75bccef8a076
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-
-  create_table "knowledge_levels", force: :cascade do |t|
-    t.string   "level"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "sectors", force: :cascade do |t|
     t.string   "short_name"
-
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  null: false

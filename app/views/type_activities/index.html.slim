@@ -1,9 +1,7 @@
-h1 Listing type_activities
-
-table
+table class="highlight responsive-table"
   thead
     tr
-      th Type activity description
+      th Descrição
       th
       th
       th
@@ -12,10 +10,10 @@ table
     - @type_activities.each do |type_activity|
       tr
         td = type_activity.Type_Activity_description
-        td = link_to 'Show', type_activity
-        td = link_to 'Edit', edit_type_activity_path(type_activity)
-        td = link_to 'Destroy', type_activity, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Exibir', type_activity
+        td = link_to 'Editar', edit_type_activity_path(type_activity)
+        td = link_to 'Excluir', type_activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
-= link_to 'New Type activity', new_type_activity_path
+= link_to 'Novo Tipo de Atividade', new_type_activity_path, :class=>'waves-effect waves-light btn green darken-3'

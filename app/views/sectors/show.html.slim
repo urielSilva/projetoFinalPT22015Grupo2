@@ -1,15 +1,15 @@
 p#notice = notice
 
 p
-  strong Short name:
+  strong Sigla: 
   = @sector.short_name
 p
-  strong Name:
+  strong Nome: 
   = @sector.name
 p
-  strong Description:
+  strong Descrição: 
   = @sector.description
 
-= link_to 'Edit', edit_sector_path(@sector)
+= link_to 'Editar', edit_sector_path(@sector), :class=>'waves-effect waves-light btn green darken-3'
 '|
-= link_to 'Back', sectors_path
+= link_to 'Voltar', sectors_path, :class=>'waves-effect waves-light btn green darken-3'

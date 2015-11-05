@@ -1,10 +1,8 @@
-h1 Listing jobs
-
-table
+table class="highlight responsive-table"
   thead
     tr
-      th Name
-      th
+      th ID
+      th Nome
       th
       th
 
@@ -15,10 +13,10 @@ table
       tr
         td = job.id
         td = job.name
-        td = link_to 'Show', job
-        td = link_to 'Edit', edit_job_path(job)
-        td = link_to 'Destroy', job, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Exibir', mostrar_cargo_path(job)
+        td = link_to 'Editar', editar_cargo_path(job)
+        td = link_to 'Excluir', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
-= link_to 'New Job', new_job_path
+= link_to 'Novo Cargo', criar_cargo_path, :class=>'waves-effect waves-light btn green darken-3'
