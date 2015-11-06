@@ -13,7 +13,7 @@
 
     tbody
       - @knowledge_levels.each do |knowledge_level|
-        tr.font-y
+        tr
           td = link_to knowledge_level.description, edit_knowledge_level_path(knowledge_level)
           td = link_to knowledge_level.level, edit_knowledge_level_path(knowledge_level)
           td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
