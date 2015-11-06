@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027182842) do
+ActiveRecord::Schema.define(version: 20151105152638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "credits"
+    t.string   "type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "jobs", force: :cascade do |t|
     t.string   "name"
@@ -29,20 +37,46 @@ ActiveRecord::Schema.define(version: 20151027182842) do
     t.datetime "updated_at",  null: false
   end
 
-<<<<<<< HEAD
-  create_table "nome_do_models", force: :cascade do |t|
-    t.string   "Nivel_Conhecimento"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+  create_table "members", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-=======
->>>>>>> f529d2a8aeaff71df3c43b0e331e75bccef8a076
+  add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
+  add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true, using: :btree
+
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "project_statuses", force: :cascade do |t|
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "description"
+    t.float    "price"
+    t.string   "link"
+    t.integer  "project_status_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "projects", ["project_status_id"], name: "index_projects_on_project_status_id", using: :btree
 
   create_table "sectors", force: :cascade do |t|
     t.string   "short_name"
@@ -58,4 +92,30 @@ ActiveRecord::Schema.define(version: 20151027182842) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.integer  "profile_id"
+    t.integer  "job_id"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["job_id"], name: "index_users_on_job_id", using: :btree
+  add_index "users", ["profile_id"], name: "index_users_on_profile_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  add_foreign_key "projects", "project_statuses"
+  add_foreign_key "users", "jobs"
+  add_foreign_key "users", "profiles"
 end
