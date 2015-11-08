@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  activity_description,: MyString
+  activity_credit_number: 1
+
+two:
+  activity_description,: MyString
+  activity_credit_number: 1

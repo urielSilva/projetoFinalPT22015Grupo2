@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
+    #@profiles = Profile.find(1) para retornar pefil que o usuario eh igual 1.
   end
 
   # GET /profiles/1
