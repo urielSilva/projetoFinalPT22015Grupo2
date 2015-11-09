@@ -1,3 +1,3 @@
 class Project < ActiveRecord::Base
-  belongs_to :status
+  belongs_to :project_status
 end
