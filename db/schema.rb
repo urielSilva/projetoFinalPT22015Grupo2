@@ -86,6 +86,20 @@ ActiveRecord::Schema.define(version: 20151105152638) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "technologies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "tecnologies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "type_activities", force: :cascade do |t|
     t.string   "Type_Activity_description"
     t.datetime "created_at",                null: false
@@ -115,7 +129,14 @@ ActiveRecord::Schema.define(version: 20151105152638) do
   add_index "users", ["profile_id"], name: "index_users_on_profile_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "users", "jobs"
+  add_foreign_key "users", "profiles"
   add_foreign_key "projects", "project_statuses"
   add_foreign_key "users", "jobs"
   add_foreign_key "users", "profiles"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
 end
