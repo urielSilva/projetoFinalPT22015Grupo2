@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :type_activities
   resources :profiles
   resources :jobs
+  resources :technologies
 
   get 'cargos' => 'jobs#index', as: :cargos
   get 'cargo/:id' => 'jobs#show', as: :cargo
