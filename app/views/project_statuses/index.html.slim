@@ -1,0 +1,22 @@
+table class="highlight responsive-table"
+  thead
+    tr
+      th ID
+      th status
+      th
+      th
+
+  tbody
+    
+    - @projectstatuses.each do |project|
+    
+      tr
+        td = project.id
+        td = project.status
+        td = link_to 'Exibir', project
+        td = link_to 'Editar', edit_project_path(project)
+        td = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+br
+
+= link_to 'Novo Status', new_project_status_path, :class=>'waves-effect waves-light btn green darken-3'

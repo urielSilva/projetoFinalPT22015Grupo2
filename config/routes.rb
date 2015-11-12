@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :type_activities
   resources :profiles
   resources :jobs
+  resources :project_statuses
+  resources :projects
+
+  
 
   get 'cargos' => 'jobs#index', as: :cargos
   get 'cargo/:id' => 'jobs#show', as: :cargo
@@ -16,6 +20,8 @@ Rails.application.routes.draw do
   get "/profiles" => "profiles#index"
 
   get 'index' => 'index#index', as: :index
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
