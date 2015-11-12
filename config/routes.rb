@@ -8,14 +8,6 @@ Rails.application.routes.draw do
   resources :jobs
   resources :technologies
 
-  get 'cargos' => 'jobs#index', as: :cargos
-  get 'cargo/:id' => 'jobs#show', as: :cargo
-  get 'mostrar_cargo/:id' => 'jobs#show', as: :mostrar_cargo
-  get 'editar_cargo/:id' => 'jobs#edit', as: :editar_cargo
-  get 'criar_cargo' => 'jobs#new', as: :criar_cargo
-
-  get "/profiles" => "profiles#index"
-
   get 'index' => 'index#index', as: :index
 
   # The priority is based upon order of creation: first created -> highest priority.
