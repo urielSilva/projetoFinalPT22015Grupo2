@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'criar_cargo' => 'jobs#new', as: :criar_cargo
 
   get "/profiles" => "profiles#index"
+  resources :technologies
 
   get 'index' => 'index#index', as: :index
 

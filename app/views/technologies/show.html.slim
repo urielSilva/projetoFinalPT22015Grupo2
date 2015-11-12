@@ -1,0 +1,14 @@
+p#notice = notice
+
+p
+  strong Nome: 
+  = @technology.name
+
+  br
+
+  strong Description: 
+  = @technology.description
+
+= link_to 'Editar', edit_technology_path(@technology), :class=>'waves-effect waves-light btn green darken-3'
+'|
+= link_to 'Voltar', technologies_path, :class=>'waves-effect waves-light btn green darken-3'
