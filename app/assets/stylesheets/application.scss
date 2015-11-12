@@ -14,8 +14,26 @@
  *= require_self
  */
 
+@import "materialize";
+
+/*body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+#logo {
+	font-family: 'Francois One', sans-serif;
+	font-size: 50px;
+}
+
+#content {
+	background-color: #fafafa;
+	padding: 10px 30px 10px 30px;
+	margin-top: 50px;
+}
+*/
+
 body {
-	font-family: 'Roboto Condensed', sans-serif;
+	font-family: 'Lato', sans-serif;
 	background-color: #c8e6c9;
 	margin-bottom: 130px;
 	overflow: scroll;
