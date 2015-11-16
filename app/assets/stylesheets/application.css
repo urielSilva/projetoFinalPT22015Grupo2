@@ -18,6 +18,7 @@ body {
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: #c8e6c9;
 	margin-bottom: 130px;
+	overflow: scroll;
 }
 
 nav {
@@ -63,4 +64,8 @@ h1 {
 	text-align: left;
 	font-size: 38px;
 	color: #212121;
+}
+
+.gambiarra{
+	display: inline;
 }
