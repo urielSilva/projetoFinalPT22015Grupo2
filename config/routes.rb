@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
   resources :sectors
   resources :knowledge_levels
+  resources :knowledges
   resources :type_activities
   resources :profiles
   resources :jobs
+
 
   get 'cargos' => 'jobs#index', as: :cargos
   get 'cargo/:id' => 'jobs#show', as: :cargo

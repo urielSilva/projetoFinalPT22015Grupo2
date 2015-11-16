@@ -4,7 +4,9 @@ class SectorsController < ApplicationController
   # GET /sectors
   # GET /sectors.json
   def index
-    @sectors = Sector.all
+    #@sectors = Sector.all
+    @sectors = Sector.includes(:areas, :profiles, :job).all
+
   end
 
   # GET /sectors/1
