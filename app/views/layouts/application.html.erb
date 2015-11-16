@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SAP</title>
+  <title>SAP - CJR</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <link type="text/css" rel="stylesheet" href="stylesheets/materialize.min.css"  media="screen,projection">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<!--   <header>
-    <div class="container">
-      <p id="logo">SAP.CJR</p>
-    </div>
+  <header>
+    <nav class="grey lighten-5">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="/index" class="brand-logo" style="color: #757575">SAP</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/index">Sobre</a></li>
+            <li><a href="/users/sign_in">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
 
   <main>
@@ -24,38 +34,14 @@
       </div>
     </div>
   </main>
- -->
 
-  <div class="container">
-    <div id="header" class="no-select">
-      <h1>Sistema de Acompanhamento de Projetos</h1>
-      <div id="logo">
-        <%= image_tag("cjr.png")%>
-      </div>
+  <div class="footer-copyright z-depth-2 grey lighten-4">
+    <div class="container">
+      <p class="left">2015 © Sistema de Acompanhamento de Projetos</p>
+      <p class="right"><a class="grey-text text-darken-1 right" href="http://www.cjr.org.br">Empresa Júnior de Computação - CJR</a></p>
     </div>
-    <div id="menu" class="no-select">
-      <nav class="green darken-3" style="position: relative">
-        <ul class="left hide-on-med-and-down">
-          <li><%= link_to 'Inicio', index_path %></li>
-          <li><%= link_to 'Perfis', profiles_path %></li>
-          <li><%= link_to 'Núcleos', sectors_path %></li>
-          <li><%= link_to 'Cargos', jobs_path %></li>
-          <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
-          <li><%= link_to 'Tipos de Atividades', type_activities_path %></li>
-          <li><%= link_to 'Atividades', activities_path %></li>
-          <li><%= link_to 'Tecnologias', technologies_path %></li>
-        </ul>
-      </nav>
-    </div>
-    <div id="main" class="row">
-      <div id="main-content">
-        <%= yield %>
-      </div>
-    </div>
+  </div>
 
-
-    <script type="text/javascript" src="javascripts/materialize.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
+  <script type="text/javascript" src="javascripts/materialize.min.js"></script>
 </body>
 </html>

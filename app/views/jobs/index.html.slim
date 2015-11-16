@@ -1,14 +1,20 @@
 - if @jobs.size == 0
-  p Nao ha nada!
+  == render '/errorempty'
+  br
+  br
+  .center
+    = link_to 'Novo Cargo', new_job_path, :class=>'waves-effect waves-light btn blue darken-2'
 
 - else
+
+  .titlepage.right
+    span Cargos
+
   table class="highlight responsive-table"
     thead
       tr
         th ID
         th Nome
-        th
-        th
 
     tbody
       
@@ -23,4 +29,4 @@
 
   br
 
-  = link_to 'Novo Cargo', new_job_path, :class=>'waves-effect waves-light btn green darken-3'
+  = link_to 'Novo Cargo', new_job_path, :class=>'waves-effect waves-light btn blue darken-2'

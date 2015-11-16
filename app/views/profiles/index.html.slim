@@ -1,21 +1,32 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th Nome
-      th
-      th
-      th
+- if @profiles.empty?
+  == render '/errorempty'
+  br
+  br
+  .center
+    = link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn blue darken-2'
 
-  tbody
-    - @profiles.each do |profile|
+- else
+
+  .titlepage.right
+    span Perfis
+
+  table class="highlight responsive-table"
+    thead
       tr
-        td = profile.name
-        td = link_to 'Exibir', profile
-        td = link_to 'Editar', edit_profile_path(profile)
-        td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Nome
 
-br
+    tbody
+      - @profiles.each do |profile|
+        tr
+          td = profile.id
+          td = profile.name
+          td = link_to 'Exibir', profile
+          td = link_to 'Editar', edit_profile_path(profile)
+          td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-= link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn green darken-3'
+  br
+
+  = link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn blue darken-2'
 
 

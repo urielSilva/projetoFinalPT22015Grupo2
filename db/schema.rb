@@ -16,6 +16,10 @@ ActiveRecord::Schema.define(version: 20151111223454) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 09f37fb6bbb9a8ea7e80a43d31b2123bcc04e195
   create_table "activities", force: :cascade do |t|
     t.string   "activity_description"
     t.integer  "activity_credit_number"
