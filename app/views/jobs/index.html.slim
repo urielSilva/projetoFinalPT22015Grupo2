@@ -1,22 +1,26 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th ID
-      th Nome
-      th
-      th
+- if @jobs.size == 0
+  p Nao ha nada!
 
-  tbody
-    
-    - @jobs.each do |job|
-    
+- else
+  table class="highlight responsive-table"
+    thead
       tr
-        td = job.id
-        td = job.name
-        td = link_to 'Exibir', mostrar_cargo_path(job)
-        td = link_to 'Editar', editar_cargo_path(job)
-        td = link_to 'Excluir', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Nome
+        th
+        th
 
-br
+    tbody
+      
+      - @jobs.each do |job|
+      
+        tr
+          td = job.id
+          td = job.name
+          td = link_to 'Exibir', job
+          td = link_to 'Editar', edit_job_path(job)
+          td = link_to 'Excluir', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-= link_to 'Novo Cargo', criar_cargo_path, :class=>'waves-effect waves-light btn green darken-3'
+  br
+
+  = link_to 'Novo Cargo', new_job_path, :class=>'waves-effect waves-light btn green darken-3'

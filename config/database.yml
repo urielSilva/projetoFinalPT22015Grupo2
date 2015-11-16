@@ -24,6 +24,10 @@ default: &default
   username: bruno
   password: 92351038
 
+  username: postgres
+  password: postgres
+  
+
 development:
   <<: *default
   database: SAP_development

@@ -6,14 +6,15 @@ table class="highlight responsive-table"
       th Descrição
 
   tbody
-    - @sectors.each do |sector|
-      tr
-        td = sector.short_name
-        td = sector.name
-        td = sector.description
-        td = link_to 'Exibir', sector
-        td = link_to 'Editar', edit_sector_path(sector)
-        td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+     - @sectors.each do |sector|
+      
+        tr
+          td = sector.short_name
+          td = sector.name
+          td = sector.description
+          td = link_to 'Exibir', sector
+          td = link_to 'Editar', edit_sector_path(sector)
+          td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
