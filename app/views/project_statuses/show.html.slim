@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong status: 
+  = @projectstatus.status
+
+= link_to 'Editar', edit_project_status_path(@projectstatus), :class=>'waves-effect waves-light btn green darken-3'
+'|
+= link_to 'Voltar', project_status_path, :class=>'waves-effect waves-light btn green darken-3'
