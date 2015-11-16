@@ -1,0 +1,25 @@
+- if @knowledges.size == 0
+	.font-y.p No hay nada
+
+-else
+	table class="highlight responsive-table"
+		thead
+			tr
+				th NívelDeConhecimento
+				th Descrição
+				th
+				th
+				th
+
+		tbody
+			- @knowledges.each do |knowledge|
+			tr
+	        	td = knowledge.knowledge_level
+	        	td = knowledge.description
+	          	td = link_to 'edit', edit_knowledge_path(knowledge)
+	          	td = link_to 'show', show_knowledge_path(knowledge)
+	          	td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+br
+
+= link_to 'Novo Conhecimento', new_knowledge_path, :class=>'waves-effect waves-light btn green darken-3'

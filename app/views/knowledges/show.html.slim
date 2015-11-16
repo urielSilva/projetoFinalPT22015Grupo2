@@ -1,0 +1,13 @@
+p#notice =notice
+
+p
+  strong Nível de Conhecimento:
+  = @knowledge.knowledge_level
+
+p
+  strong Descrição:
+  = @knowledge.description
+
+= link_to 'Editar', edit_knowledge_path(@knowledge), :class=>'waves-effect waves-light btn green darken-3'
+'|
+= link_to 'Voltar', knowledges_path, :class=>'waves-effect waves-light btn green darken-3'
