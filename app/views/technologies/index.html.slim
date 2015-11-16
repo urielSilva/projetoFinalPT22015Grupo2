@@ -1,23 +1,34 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th ID
-      th Nome
-      th Descrição
-      th
+- if @technologies.empty?
+  == render '/errorempty'
+  br
+  br
+  .center
+    = link_to 'Nova Tecnologia', new_technology_path, :class=>'waves-effect waves-light btn blue darken-2'
+    
+- else
 
-  tbody
+  .titlepage.right
+    span Tecnologias
     
-    - @technologies.each do |technology|
-    
+  table class="highlight responsive-table"
+    thead
       tr
-        td = technology.id
-        td = technology.name
-        td = technology.description
-        td = link_to 'Exibir', technology
-        td = link_to 'Editar', edit_technology_path(technology)
-        td = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Nome
+        th Descrição
 
-br
+    tbody
+      
+      - @technologies.each do |technology|
+      
+        tr
+          td = technology.id
+          td = technology.name
+          td = technology.description
+          td = link_to 'Exibir', technology
+          td = link_to 'Editar', edit_technology_path(technology)
+          td = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-= link_to 'Nova Tecnologia', new_technology_path, :class=>'waves-effect waves-light btn green darken-3'
+  br
+
+  = link_to 'Nova Tecnologia', new_technology_path, :class=>'waves-effect waves-light btn blue darken-2'

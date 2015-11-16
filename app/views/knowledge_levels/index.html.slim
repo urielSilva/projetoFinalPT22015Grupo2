@@ -1,23 +1,32 @@
-- if @knowledge_levels.size == 0
-  .font-y.p No hay nada
-  
+- if @knowledge_levels.empty?
+  == render '/errorempty'
+  br
+  br
+  .center
+    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn blue darken-2'
+
 - else
+
+  .titlepage.right
+    span Níveis de Conhecimento
+
   table class="highlight responsive-table"
     thead
       tr
+        th ID
         th Nível
         th Descrição
-        th
-        th
-        th
 
     tbody
       - @knowledge_levels.each do |knowledge_level|
         tr
-          td = link_to knowledge_level.description, edit_knowledge_level_path(knowledge_level)
-          td = link_to knowledge_level.level, edit_knowledge_level_path(knowledge_level)
+          td = knowledge_level.id
+          td = knowledge_level.level
+          td = knowledge_level.description
+          td = link_to 'Exibir', knowledge_level
+          td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
           td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-br
+  br
 
-= link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn green darken-3'
+  = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn blue darken-2'

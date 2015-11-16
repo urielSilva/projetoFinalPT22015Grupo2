@@ -1,21 +1,35 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th Sigla
-      th Nome
-      th Descrição
+- if @sectors.size == 0
+  == render '/errorempty'
+  br
+  br
+  .center
+    = link_to 'Novo Núcleo', new_sector_path, :class=>'waves-effect waves-light btn blue darken-2'
 
-  tbody
-    - @sectors.each do |sector|
+- else
+
+  .titlepage.right
+    span Núcleos
+
+  table class="highlight responsive-table"
+    thead
       tr
-        td = sector.short_name
-        td = sector.name
-        td = sector.description
-        td = link_to 'Exibir', sector
-        td = link_to 'Editar', edit_sector_path(sector)
-        td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Sigla
+        th Nome
+        th Descrição
 
-br
+    tbody
+      - @sectors.each do |sector|
+        tr
+          td = sector.id
+          td = sector.short_name
+          td = sector.name
+          td = sector.description
+          td = link_to 'Exibir', sector
+          td = link_to 'Editar', edit_sector_path(sector)
+          td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-= link_to 'Novo Núcleo', new_sector_path, :class=>'waves-effect waves-light btn green darken-3'
+  br
+
+  = link_to 'Novo Núcleo', new_sector_path, :class=>'waves-effect waves-light btn blue darken-2'
 
