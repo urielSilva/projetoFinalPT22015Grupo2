@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Descrição: 
+  = @activities.activity_description
+
+  strong Numero de Creditos:
+  = @activities.activity_credit_number 
+
+= link_to 'Editar', edit_activities_path(@type_activity), :class=>'waves-effect waves-light btn green darken-3'
+'|
+= link_to 'Voltar', activities_path, :class=>'waves-effect waves-light btn green darken-3'
