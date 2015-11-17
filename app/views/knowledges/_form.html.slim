@@ -11,5 +11,11 @@
     = f.text_field :description
   .field
     = f.label :knowledge_level
-    = f.text_field :knowledge_level
+    = f.select :knowledge_level_id,KnowledgeLevel.all.map{|k| [k.id,k.level]}
+  
+  br
+  br
+  br
+  br
+
   .actions = f.submit
