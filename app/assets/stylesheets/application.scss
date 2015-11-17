@@ -25,12 +25,12 @@ body {
     flex-direction: column;
 }
 
-main {
-	flex: 1 0 auto;
-}
-
 nav {
 	position: fixed;
+}
+
+main {
+	flex: 1 0 auto;
 }
 
 body, nav ul a, .footer-copyright, #cruds .box span {
@@ -52,7 +52,7 @@ body, nav ul a, .footer-copyright, #cruds .box span {
 
 #content {
 	background-color: #fafafa;
-	padding: 100px 50px 30px 50px;
+	padding: 100px 50px 70px 50px;
 	min-height: 100%;
 }
 
@@ -84,4 +84,12 @@ h1 {
 	text-align: left;
 	font-size: 38px;
 	color: #212121;
+}
+
+footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	z-index: 1000;
 }
