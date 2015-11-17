@@ -20,18 +20,11 @@
     tbody
       - @knowledge_levels.each do |knowledge_level|
         tr
-<<<<<<< HEAD
           td = knowledge_level.level
           td = knowledge_level.description
-          td = link_to 'edit', edit_knowledge_level_path(knowledge_level)
-          td = link_to 'show', show_knowledge_level_path(knowledge_level)
-=======
           td = knowledge_level.id
-          td = knowledge_level.level
-          td = knowledge_level.description
           td = link_to 'Exibir', knowledge_level
           td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
->>>>>>> 0cc7410501cb9dcfdb7de226dc4fd3ef76e96fd1
           td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
