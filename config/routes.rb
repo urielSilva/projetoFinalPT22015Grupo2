@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :knowledge_levels
   resources :knowledges
   resources :type_activities
+  resources :activities
   resources :profiles
   resources :jobs
   resources :project_statuses
@@ -22,9 +23,9 @@ Rails.application.routes.draw do
   get "/profiles" => "profiles#index"
   resources :technologies
 
-  get 'index' => 'index#index', as: :index
-
-
+  get 'index' => 'index#index'
+  get "/profiles" => "profiles#index"
+  get 'activities' => 'activities#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

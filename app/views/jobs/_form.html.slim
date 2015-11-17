@@ -1,4 +1,5 @@
 = form_for @job do |f|
+
   - if @job.errors.any?
     #error_explanation
       h2 = "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
@@ -7,7 +8,7 @@
           li = message
 
   .field
-    = f.label :name
-    = f.text_field :name, class: 'validate'
-  .actions
-    = f.submit 
+    = f.label 'Nome'
+    = f.text_field :name, class:'validate'
+
+  .actions = f.button "Criar Cargo", class:"waves-effect waves-light btn blue darken-2"
