@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :project_statuses
   resources :projects
   resources :technologies
+  resources :areas
 
   get 'index' => 'index#index'
   get "/profiles" => "profiles#index"
