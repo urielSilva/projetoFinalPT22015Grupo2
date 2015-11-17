@@ -1,9 +1,22 @@
-p#notice = notice
+i.material-icons.left.small.azul perm_identity
+
+.titlepage.right
+	span Cargo: 
+	span = @job.name
+
+.aviso
+	p#notice = notice
+
+br
+br
+br
 
 p
-  strong Nome: 
+  b Nome: 
   = @job.name
 
-= link_to 'Editar', edit_job_path(@job), :class=>'waves-effect waves-light btn blue darken-2'
-'|
-= link_to 'Voltar', jobs_path, :class=>'waves-effect waves-light btn blue darken-2'
+br
+
+= link_to 'Editar', edit_job_path(@job), :class=>'waves-effect waves-light btn blue darken-2 left'
+
+= link_to 'Voltar', jobs_path, :class=>'waves-effect waves-light btn blue darken-2 right'

@@ -11,4 +11,6 @@
     = f.label 'Nome'
     = f.text_field :name, class:'validate'
 
-  .actions = f.button "Criar Cargo", class:"waves-effect waves-light btn blue darken-2"
+  .actions
+    = f.button "Criar Cargo", class:"waves-effect waves-light btn blue darken-2 left"
+    = link_to 'Voltar', jobs_path, class:"waves-effect waves-light btn blue darken-2 right"
