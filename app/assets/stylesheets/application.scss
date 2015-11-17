@@ -16,6 +16,10 @@
 
 @import "materialize";
 
+html {
+	height: 100%;
+}
+
 body {
 	font-family: 'Lato', sans-serif;
 	font-size: 13px;
@@ -37,7 +41,7 @@ body, nav ul a, .footer-copyright, #cruds .box span {
 	color: #757575;
 }
 
-#cruds .box a, .titlepage {
+#cruds .box a, .titlepage, .azul {
 	color: #1e88e5;
 }
 
@@ -92,4 +96,8 @@ footer {
 	bottom: 0px;
 	width: 100%;
 	z-index: 1000;
+}
+
+.aviso {
+	margin-top: 5px;
 }

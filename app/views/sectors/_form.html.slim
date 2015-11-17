@@ -8,11 +8,19 @@
 
   .field
     = f.label :short_name
-    = f.text_field :short_name
+    = f.text_field :short_name, length:3
+
+  javascript:
+    $('input#input_text').characterCounter();
+
   .field
     = f.label :name
     = f.text_field :name
+  
   .field
     = f.label :description
     = f.text_field :description
-  .actions = f.submit
+
+  .actions 
+    = f.button 'Criar Núcleo'
+
