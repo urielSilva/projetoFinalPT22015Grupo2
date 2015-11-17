@@ -13,10 +13,14 @@
     = f.label :knowledge_level
     br
     = f.select :knowledge_level_id,KnowledgeLevel.all.map{|k| [k.level,k.id]}
-  
+
   br
   br
   br
   br
 
   .actions = f.submit
+
+    / gambiarra master
+  javascript:
+    $('select').material_select();
