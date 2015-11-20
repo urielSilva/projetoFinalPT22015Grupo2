@@ -11,6 +11,11 @@
    </div>
 
    <div class="field">
+      <%= f.label :profile_id %><br />
+      <%= f.select :profile_id, Profile.all.map{|ps| [ps.name,ps.id]} %>
+   </div>
+
+   <div class="field">
       <%= f.label :email %><br />
       <%= f.text_field :email %>
    </div>   
@@ -28,5 +33,9 @@
    <div class="actions">
       <%= f.submit %>
    </div>
+
+  <script>
+    $('select').material_select();
+   </script>
 
 <% end %>
