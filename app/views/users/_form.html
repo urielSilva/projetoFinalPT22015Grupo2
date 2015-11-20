@@ -16,6 +16,11 @@
    </div>
 
    <div class="field">
+      <%= f.label :job_id %><br />
+      <%= f.select :job_id, Job.all.map{|ps| [ps.name, ps.id]} %>
+   </div>
+
+   <div class="field">
       <%= f.label :email %><br />
       <%= f.text_field :email %>
    </div>   
