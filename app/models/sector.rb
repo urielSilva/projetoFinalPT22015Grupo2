@@ -4,5 +4,6 @@ class Sector < ActiveRecord::Base
   validates_length_of :short_name, maximum: 3
 
   has_many :areas
+  has_many :users
   
 end
