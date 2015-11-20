@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   resources :sectors
   resources :knowledge_levels
   resources :knowledges
@@ -10,29 +9,30 @@ Rails.application.routes.draw do
   resources :jobs
   resources :project_statuses
   resources :projects
-
-  
-
-
-  get 'cargos' => 'jobs#index', as: :cargos
-  get 'cargo/:id' => 'jobs#show', as: :cargo
-  get 'mostrar_cargo/:id' => 'jobs#show', as: :mostrar_cargo
-  get 'editar_cargo/:id' => 'jobs#edit', as: :editar_cargo
-  get 'criar_cargo' => 'jobs#new', as: :criar_cargo
-
-  get "/profiles" => "profiles#index"
   resources :technologies
   resources :areas
 
-  get 'index' => 'index#index'
-  get "/profiles" => "profiles#index"
-  get 'activities' => 'activities#index'
+  devise_for :users, :controllers => { registrations: 'users' }
+  resources :users
+
+  resources :admin
+  resources :member
+
+  devise_scope :user do
+    root to: "devise/sessions#new"
+    get '/login' => 'devise/sessions#new'
+    get '/logout' => 'devise/sessions#destroy'
+  end
+  
+  # root :to => "dashboard#index"
+
+  # devise_for :users, controllers: { registrations: "registrations" }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'index#index'
+  # root 'index#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -3,7 +3,6 @@ class ActivitiesController < ApplicationController
 
 	#GET/
 	def index
-		#
 		@activities = Activity.all
 	end
 

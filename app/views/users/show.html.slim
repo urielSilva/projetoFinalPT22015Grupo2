@@ -1,0 +1,35 @@
+i.material-icons.left.small.azul perm_identity
+
+.titlepage.right
+	span Usuário: 
+	span = @user.name
+
+.aviso
+	p#notice = notice
+
+br
+br
+br
+
+p
+  b Nome: 
+  = @user.name
+  br
+  b Sobrenome: 
+  = @user.last_name
+  br
+  b Cargo: 
+  = @user.job.name
+  br
+  b Email: 
+  = @user.email
+  br
+  b Último login: 
+  = @user.last_sign_in_at
+
+br
+
+- if can? :edit, @user
+	= link_to 'Editar', edit_user_path(@user), :class=>'waves-effect waves-light btn blue darken-2 left'
+
+= link_to 'Voltar', users_path, :class=>'waves-effect waves-light btn blue darken-2 right'
