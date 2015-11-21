@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   belongs_to :job
+  belongs_to :sector
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
