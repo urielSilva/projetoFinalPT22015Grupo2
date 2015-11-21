@@ -16,7 +16,15 @@
     <nav class="grey lighten-5">
       <div class="container">
         <div class="nav-wrapper">
-          <%= link_to 'SAP', '/', class:'brand-logo', style:'color: #757575' %>
+          <% if current_user.present? %>
+            <% if current_user.profile_id == 1 %>
+              <%= link_to 'SAP', '/member', class:'brand-logo', style:'color: #757575' %>
+            <% else %>
+              <%= link_to 'SAP', '/admin', class:'brand-logo', style:'color: #757575' %>
+            <% end %>
+          <% else %>
+            <%= link_to 'SAP', '/', class:'brand-logo', style:'color: #757575' %>
+          <% end %>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <% if current_user.present? %>
               <span style="color: #1e88e5">Olá, <%= current_user.name %></span>
@@ -30,9 +38,18 @@
     </nav>
   </header>
 
-  <main>
+  <main role="main">
     <div id="content" class="container z-depth-1">
       <div class="row">
+
+        <% flash.each do |name, msg| %>
+          <% if msg.is_a?(String) %>
+            <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+              <%= content_tag :div, msg, :id => "flash_#{name}" %>
+            </div>
+          <% end %>
+        <% end %>
+
         <%= yield %>
       </div>
     </div>

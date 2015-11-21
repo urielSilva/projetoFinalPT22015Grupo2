@@ -7,8 +7,10 @@ class Ability
     #   user ||= User.new # guest user (not logged in)
     if user.profile_id == 2
         can :manage, :all
+        
     else
         can :read, :all
+        can [:update, :destroy], User #, :user_id => user.id
     end
     #
     # The first argument to `can` is the action you are giving the user 

@@ -1,7 +1,6 @@
-p#notice = notice
-
 .titlepage.right
-  span Usuários
+  span Usuários: 
+  span = @users.count
 
 table
 
@@ -26,8 +25,12 @@ table
             span Administrador
 
         td = link_to 'Exibir', user
-        - if can? :edit, @user
-          td = link_to 'Editar', edit_user_path(user)
+        td
+          - if current_user.profile_id == 1
+            - if user.id == current_user.id
+              = link_to 'Editar', edit_user_path(user)
+          - else
+              = link_to 'Editar', edit_user_path(user)
         - if can? :destroy, @user
           td = link_to 'Excluir', user, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
