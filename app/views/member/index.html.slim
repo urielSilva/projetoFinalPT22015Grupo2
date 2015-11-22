@@ -3,54 +3,50 @@
 		li.collection-item
 			= image_tag('member.png', :class => "photo")
 		li.collection-item
+			span
+				b Membro
+		li.collection-item
 			= link_to 'Ver Perfil', current_user
 		li.collection-item teste2 
 		li.collection-item teste3
 		li.collection-item teste4
 
 .col.s9
+	
+	.bigbox
 
-	ul	
-		li
-			span > 
+		.col.s3.box
 			= link_to 'usuários', users_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'perfis', profiles_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'tipos de atividade', type_activities_path
-
-		li
-			span > 
+		
+		.col.s3.box
 			= link_to 'nivel de conhecimento', knowledge_levels_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'conhecimento', knowledges_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'atividade', activities_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'projeto', projects_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'status de projeto', project_statuses_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'tecnologia', technologies_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'status de projeto', project_statuses_path
 
-		li
-			span > 
+		.col.s3.box
 			= link_to 'area', areas_path
+
+		.col.s3.box
+			= link_to 'cargo', jobs_path

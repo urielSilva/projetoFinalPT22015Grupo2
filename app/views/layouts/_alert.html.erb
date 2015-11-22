@@ -1,0 +1,15 @@
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <div class="alerta">
+      <div class="alert-message">
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<script>
+  $( ".alerta" ).click(function() {
+    $( ".alert-message" ).hide( "slow" );
+  });
+</script>
