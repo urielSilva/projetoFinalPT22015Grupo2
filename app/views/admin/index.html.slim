@@ -4,7 +4,8 @@
 			= image_tag('admin.png', :class => "photo")
 		li.collection-item
 			= link_to 'Ver Perfil', current_user
-		li.collection-item teste2 
+		li.collection-item 
+			= link_to 'Info', :info
 		li.collection-item teste3
 		li.collection-item teste4
 
@@ -46,10 +47,6 @@
 		li
 			span > 
 			= link_to 'tecnologia', technologies_path
-
-		li
-			span > 
-			= link_to 'status de projeto', project_statuses_path
 
 		li
 			span > 

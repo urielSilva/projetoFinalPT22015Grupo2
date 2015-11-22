@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :admin
   resources :member
+  get "projetoFD" => "infos#create"
+  get "info" => "infos#index"
 
   devise_scope :user do
     root to: "devise/sessions#new"
