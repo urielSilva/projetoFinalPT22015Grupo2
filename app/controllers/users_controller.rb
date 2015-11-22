@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:create]
 
   def index
     @users = User.all
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def edit
     # pros espertos
-    unless @user == current_user
+    unless @user == current_user or current_user.profile_id == 2
       redirect_to users_path, :alert => "Acesso negado."
     end
   end

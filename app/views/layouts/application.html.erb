@@ -13,55 +13,23 @@
 <body>
 
   <header>
-    <nav class="grey lighten-5">
-      <div class="container">
-        <div class="nav-wrapper">
-          <% if current_user.present? %>
-            <% if current_user.profile_id == 1 %>
-              <%= link_to 'SAP', '/member', class:'brand-logo', style:'color: #757575' %>
-            <% else %>
-              <%= link_to 'SAP', '/admin', class:'brand-logo', style:'color: #757575' %>
-            <% end %>
-          <% else %>
-            <%= link_to 'SAP', '/', class:'brand-logo', style:'color: #757575' %>
-          <% end %>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <% if current_user.present? %>
-              <span style="color: #1e88e5">Olá, <%= current_user.name %></span>
-              <li class="right"><%= link_to 'Sair', '/logout' %></li>
-            <% else %>
-              <li><a href="/users/sign_in">Login</a></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <%= render 'layouts/header' %>
   </header>
 
   <main role="main">
     <div id="content" class="container z-depth-1">
       <div class="row">
-
-        <% flash.each do |name, msg| %>
-          <% if msg.is_a?(String) %>
-            <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
-              <%= content_tag :div, msg, :id => "flash_#{name}" %>
-            </div>
-          <% end %>
-        <% end %>
-
+        <%= render 'layouts/alert' %>
         <%= yield %>
       </div>
     </div>
   </main>
 
   <footer class="z-depth-2 grey lighten-4">
-    <div class="container">
-      <p class="left">2015 © Sistema de Acompanhamento de Projetos</p>
-      <p class="right"><a class="grey-text text-darken-1 right" href="http://www.cjr.org.br">Empresa Júnior de Computação - CJR</a></p>
-    </div>
+    <%= render 'layouts/footer' %>
   </footer>
 
   <script type="text/javascript" src="javascripts/materialize.min.js"></script>
+  
 </body>
 </html>
