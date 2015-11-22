@@ -3,10 +3,13 @@ main {
 }
 
 #content {
-	background-color: #fafafa;
+	background-color: white;
 	padding: 100px 50px 70px 50px;
 	height: 100% !important;
 	color: #757575;
+	-webkit-box-shadow: 0px 0px 2px 1px rgba(227,227,227,1);
+	-moz-box-shadow: 0px 0px 2px 1px rgba(227,227,227,1);
+	box-shadow: 0px 0px 2px 1px rgba(227,227,227,1);
 }
 
 .titlepage {

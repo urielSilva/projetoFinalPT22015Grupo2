@@ -16,16 +16,11 @@
     <%= render 'layouts/header' %>
   </header>
 
-  <main role="main">
-    <div id="content" class="container z-depth-1">
-      <div class="row">
-        <%= render 'layouts/alert' %>
-        <%= yield %>
-      </div>
-    </div>
+  <main>
+    <%= render 'layouts/main' %>
   </main>
 
-  <footer class="z-depth-2 grey lighten-4">
+  <footer class="grey lighten-5">
     <%= render 'layouts/footer' %>
   </footer>
 

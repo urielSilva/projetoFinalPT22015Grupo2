@@ -1,20 +1,20 @@
 class ApplicationController < ActionController::Base
 
+  protect_from_forgery with: :exception
+
 	def after_sign_in_path_for(resource)
 
 		if current_user.profile_id == 2
-			admin_index_path
-			
+			admin_path
 		else
-			member_index_path
+			member_path
 		end
-	end
 
-  protect_from_forgery with: :exception
-  
+	end
+	
   rescue_from CanCan::AccessDenied do |exception|
-	flash[:error] = 'Você não tem autorização para tal ação.'
-	redirect_to root_url
+		flash[:error] = 'Você não tem autorização para tal ação.'
+		redirect_to root_url
   end
 
 end
