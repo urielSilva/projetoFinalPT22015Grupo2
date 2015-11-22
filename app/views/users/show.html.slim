@@ -15,6 +15,9 @@ p
   b Sobrenome: 
   = @user.last_name
   br
+  b Perfil: 
+  = @user.profile.name
+  br
   b Cargo: 
   = @user.job.name
   br
@@ -26,7 +29,7 @@ p
 
 br
 
-- if can? :edit, @user
+- if @user == current_user
 	= link_to 'Editar', edit_user_path(@user), :class=>'waves-effect waves-light btn blue darken-2 left'
 
 = link_to 'Voltar', users_path, :class=>'waves-effect waves-light btn blue darken-2 right'

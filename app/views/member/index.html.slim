@@ -10,6 +10,8 @@
 		li.collection-item teste2 
 		li.collection-item teste3
 		li.collection-item teste4
+		li.collection-item
+			= link_to 'Excluir Conta', current_user, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
 .col.s9
 	
