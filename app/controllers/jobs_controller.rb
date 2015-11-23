@@ -1,10 +1,12 @@
 class JobsController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = Job.all.order(:id)
   end
 
   # GET /jobs/1
@@ -28,7 +30,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.html { redirect_to @job, notice: 'O cargo foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+        format.html { redirect_to @job, notice: 'O cargo foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @job }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class JobsController < ApplicationController
   def destroy
     @job.destroy
     respond_to do |format|
-      format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
+      format.html { redirect_to jobs_url, notice: 'O cargo foi deletado com sucesso.' }
       format.json { head :no_content }
     end
   end

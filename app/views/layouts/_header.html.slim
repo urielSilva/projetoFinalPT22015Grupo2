@@ -1,0 +1,20 @@
+- if current_user.present?
+
+	nav.navbar.navbar-default.navbar-fixed-top
+
+		.container
+
+			.navbar-header
+				- if current_user.profile_id == 1
+					= link_to 'SAP.CJR', member_path, class:'navbar-brand', style:"font-size: 20px"
+				- else
+					= link_to 'SAP.CJR', admin_path, class:'navbar-brand', style:"font-size: 23px"
+
+			.collapse.navbar-collapse
+
+				ul.nav.navbar-nav.navbar-right
+					li
+						a href="/logout" Sair
+
+				p.navbar-text.navbar-right = current_user.name
+				p.navbar-text.navbar-right Seja bem vindo,

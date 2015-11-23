@@ -16,5 +16,4 @@ class ApplicationController < ActionController::Base
 		flash[:error] = 'Você não tem autorização para tal ação.'
 		redirect_to root_url
   end
-
 end

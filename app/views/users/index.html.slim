@@ -1,14 +1,19 @@
-.titlepage.right
+.titlepage.text-right
   span Usuários: 
   span = @users.count
 
-table
+br
+
+table.table.table-hover.table-responsive
 
   thead
     tr
+      th ID
       th Nome
       th Email
       th Perfil
+      th
+      th
       th
 
   tboby
@@ -16,6 +21,9 @@ table
     - @users.each do |user|
     
       tr
+        td 
+          strong
+            = user.id
         td = user.name
         td = user.email
         td
@@ -37,4 +45,10 @@ table
 br
 
 - if can? :new, @user
-  = link_to 'Criar usuário', new_user_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = link_to 'Criar usuário', new_user_path, class:'btn btn-primary'
+
+- if current_user.profile_id == 1
+  = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+- else
+  = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
