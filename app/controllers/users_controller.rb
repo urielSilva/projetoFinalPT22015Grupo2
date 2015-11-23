@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @users = User.all
+    @users = User.all.order(:name)
   end
 
   def new

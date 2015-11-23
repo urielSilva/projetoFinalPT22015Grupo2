@@ -1,0 +1,26 @@
+.vertical-align
+
+  h2 class="sap-login text-center" Sistema de Alocação de Projetos
+
+  .loginbox.center-block
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+
+      .field
+
+        .form-group
+          = f.label 'Email'
+          = f.email_field :email, autofocus: true, class:'form-control'
+
+        .form-group
+          = f.label 'Senha'
+          = f.password_field :password, autofocus: true, class:'form-control'
+
+        / - if devise_mapping.rememberable?
+
+        /   = f.check_box :remember_me
+        /   span Lembrar meus dados
+
+      .actions
+
+        = f.button 'Entrar', class:'btn btn-primary center-block'

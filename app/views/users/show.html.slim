@@ -29,7 +29,7 @@ p
 
 br
 
-- if @user == current_user
+- if @user == current_user or current_user.profile_id == 2
 	= link_to 'Editar', edit_user_path(@user), :class=>'waves-effect waves-light btn blue darken-2 left'
 
 = link_to 'Voltar', users_path, :class=>'waves-effect waves-light btn blue darken-2 right'

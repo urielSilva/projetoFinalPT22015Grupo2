@@ -1,52 +1,33 @@
-.col.s3.center
-	ul.collection
-		li.collection-item
-			= image_tag('admin.png', :class => "photo")
-		li.collection-item
-			span
-				b Administrador
-		li.collection-item
-			= link_to 'Ver Perfil', current_user
-		li.collection-item teste2 
-		li.collection-item teste3
-		li.collection-item teste4
-
-.col.s9
-	
-	.bigbox
-
-		.col.s3.box
-			= link_to 'usuários', users_path
-
-		.col.s3.box
-			= link_to 'perfis', profiles_path
-
-		.col.s3.box
-			= link_to 'tipos de atividade', type_activities_path
-		
-		.col.s3.box
-			= link_to 'nivel de conhecimento', knowledge_levels_path
-
-		.col.s3.box
-			= link_to 'conhecimento', knowledges_path
-
-		.col.s3.box
-			= link_to 'atividade', activities_path
-
-		.col.s3.box
-			= link_to 'projeto', projects_path
-
-		.col.s3.box
-			= link_to 'status de projeto', project_statuses_path
-
-		.col.s3.box
-			= link_to 'tecnologia', technologies_path
-
-		.col.s3.box
-			= link_to 'status de projeto', project_statuses_path
-
-		.col.s3.box
-			= link_to 'area', areas_path
-
-		.col.s3.box
-			= link_to 'cargo', jobs_path
+= image_tag('admin.png', :class => "photo")
+br
+br
+br
+= link_to 'Sair', '/logout'
+br
+= link_to 'Ver Perfil', current_user
+br
+= link_to 'Excluir Conta', current_user, data: {:confirm => 'Tem certeza?'}, :method => :delete
+br
+= link_to 'usuários', users_path
+br
+= link_to 'perfis', profiles_path
+br
+= link_to 'tipos de atividade', type_activities_path
+br
+= link_to 'nivel de conhecimento', knowledge_levels_path
+br
+= link_to 'conhecimento', knowledges_path
+br
+= link_to 'atividade', activities_path
+br
+= link_to 'projeto', projects_path
+br
+= link_to 'status de projeto', project_statuses_path
+br
+= link_to 'tecnologia', technologies_path
+br
+= link_to 'status de projeto', project_statuses_path
+br
+= link_to 'area', areas_path
+br
+= link_to 'cargo', jobs_path

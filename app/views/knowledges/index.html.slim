@@ -1,25 +1,41 @@
 - if @knowledges.size == 0
-	.font-y.p No hay nada
+  = render '/layouts/errorempty'
+  .vertical-align
+    = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary', style:'margin-top: 140px'
 
--else
-	table class="highlight responsive-table"
-		thead
-			tr
-				th NívelDeConhecimento
-				th Descrição
-				th 
-				th
-				th
+- else
 
-		tbody
-			- @knowledges.each do |knowledge|
-				tr
-        			td = knowledge.knowledge_level.level
-        			td = knowledge.description
-          			td = link_to 'edit', edit_knowledge_path(knowledge)
-          			td = link_to 'show', knowledge_path(knowledge)
-          			td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+  .titlepage.text-right Conhecimentos
 
-br
+  table.table.table-hover.table-responsive
 
-= link_to 'Novo Conhecimento', new_knowledge_path, :class=>'waves-effect waves-light btn green darken-3'
+    thead
+      tr
+        th ID
+        th Nível
+        th Descrição
+        th 
+        th
+        th
+
+    tbody
+
+      - @knowledges.each do |knowledge|
+
+        tr
+          td
+            strong
+              = knowledge.id
+          td = knowledge.knowledge_level.level
+          td = knowledge.description
+          td = link_to 'Editar', edit_knowledge_path(knowledge)
+          td = link_to 'Exibir', knowledge
+          td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+  = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'     

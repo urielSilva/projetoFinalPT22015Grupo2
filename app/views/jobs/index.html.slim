@@ -1,29 +1,30 @@
-/ p#notice = notice
-
 - if @jobs.size == 0
-  == render '/errorempty'
-  br
-  br
-  .center
-    = link_to 'Novo Cargo', new_job_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = render '/layouts/errorempty'
+  .vertical-align
+    = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary', style:'margin-top: 140px'
 
 - else
 
-  .titlepage.right
-    span Cargos
+  .titlepage.text-right Cargos
 
-  table class="highlight responsive-table"
+  table.table.table-hover.table-responsive
+
     thead
       tr
         th ID
         th Nome
+        th
+        th
+        th
 
     tbody
       
       - @jobs.each do |job|
       
         tr
-          td = job.id
+          td 
+            strong
+              = job.id
           td = job.name
           td = link_to 'Exibir', job
           td = link_to 'Editar', edit_job_path(job)
@@ -31,4 +32,10 @@
 
   br
 
-  = link_to 'Novo Cargo', new_job_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
