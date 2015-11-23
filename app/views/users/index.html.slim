@@ -8,7 +8,6 @@ table.table.table-hover.table-responsive
 
   thead
     tr
-      th ID
       th Nome
       th Email
       th Perfil
@@ -21,9 +20,6 @@ table.table.table-hover.table-responsive
     - @users.each do |user|
     
       tr
-        td 
-          strong
-            = user.id
         td = user.name
         td = user.email
         td

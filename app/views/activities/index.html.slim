@@ -1,4 +1,11 @@
-table class="highlight responsive-table"
+- if @activities.empty?
+  == render 'layouts/errorempty'
+  br
+  br
+  .center
+    = link_to 'Nova Atividade', new_activity_path, :class=>'waves-effect waves-light btn blue darken-2'
+
+table.table.table-hover.table-responsive
   thead
     tr
       th Descrição
@@ -10,9 +17,16 @@ table class="highlight responsive-table"
       tr
         td = type_activity.Type_Activity_description
         td = link_to 'Exibir', type_activity
-        td = link_to 'Editar', edit_type_activity_path(type_activity)
-        td = link_to 'Excluir', type_activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        td 
+          -if current_user.profile_id == 2
+            = link_to 'Editar', edit_type_activity_path(type_activity)
+        td 
+          -if current_user.profile_id == 2
+            = link_to 'Excluir', type_activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
-= link_to 'Nova Atividade', new_activity_path, :class=>'waves-effect waves-light btn green darken-3'
+- if can? :new, @activity
+  = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary pull-left'
+
+= link_to 'Voltar',  member_path, class:'btn btn-primary pull-right'

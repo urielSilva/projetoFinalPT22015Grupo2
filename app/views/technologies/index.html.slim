@@ -1,19 +1,18 @@
 - if @technologies.empty?
-  == render '/errorempty'
+  == render 'layouts/errorempty'
   br
   br
   .center
-    = link_to 'Nova Tecnologia', new_technology_path, :class=>'waves-effect waves-light btn blue darken-2'
+    = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary pull-left'
     
 - else
 
   .titlepage.right
     span Tecnologias
     
-  table class="highlight responsive-table"
+  table.table.table-hover.table-responsive
     thead
       tr
-        th ID
         th Nome
         th Descrição
 
@@ -22,13 +21,22 @@
       - @technologies.each do |technology|
       
         tr
-          td = technology.id
           td = technology.name
           td = technology.description
           td = link_to 'Exibir', technology
-          td = link_to 'Editar', edit_technology_path(technology)
-          td = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          td 
+            -if current_user.profile_id == 2
+              = link_to 'Editar', edit_technology_path(technology)
+          td 
+            -if current_user.profile_id == 2
+              = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
+  
+  - if can? :new, @technology
+    = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary pull-left'
 
-  = link_to 'Nova Tecnologia', new_technology_path, :class=>'waves-effect waves-light btn blue darken-2'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar',  member_path, class:'btn btn-primary pull-right'
+
