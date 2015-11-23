@@ -1,6 +1,8 @@
 class KnowledgeLevelsController < ApplicationController
   before_action :set_knowledge_level, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_user!
+
   # GET /knowledge_levels
   # GET /knowledge_levels.json
   def index

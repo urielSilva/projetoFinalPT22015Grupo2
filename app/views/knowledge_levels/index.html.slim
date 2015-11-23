@@ -1,32 +1,43 @@
 - if @knowledge_levels.empty?
-  == render '/errorempty'
-  br
-  br
-  .center
-    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = render '/layouts/errorempty'
+  .vertical-align
+    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary', style:'margin-top: 140px'
 
 - else
 
-  .titlepage.right
-    span Níveis de Conhecimento
+  .titlepage.text-right Níveis de Conhecimento
 
-  table class="highlight responsive-table"
+  table.table.table-hover.table-responsive
+
     thead
       tr
         th ID
         th Nível
         th Descrição
+        th
+        th
+        th
 
     tbody
+
       - @knowledge_levels.each do |knowledge_level|
+
         tr
+          td 
+            strong
+              = knowledge_level.id
           td = knowledge_level.level
           td = knowledge_level.description
-          td = knowledge_level.id
           td = link_to 'Exibir', knowledge_level
           td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
           td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'   

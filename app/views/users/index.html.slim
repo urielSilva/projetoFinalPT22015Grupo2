@@ -1,15 +1,19 @@
-p#notice = notice
+.titlepage.text-right
+  span Usuários: 
+  span = @users.count
 
-.titlepage.right
-  span Usuários
+br
 
-table
+table.table.table-hover.table-responsive
 
   thead
     tr
+      th ID
       th Nome
       th Email
       th Perfil
+      th
+      th
       th
 
   tboby
@@ -17,6 +21,9 @@ table
     - @users.each do |user|
     
       tr
+        td 
+          strong
+            = user.id
         td = user.name
         td = user.email
         td
@@ -26,12 +33,22 @@ table
             span Administrador
 
         td = link_to 'Exibir', user
-        - if can? :edit, @user
-          td = link_to 'Editar', edit_user_path(user)
+        td
+          - if current_user.profile_id == 1
+            - if user.id == current_user.id
+              = link_to 'Editar', edit_user_path(user)
+          - else
+              = link_to 'Editar', edit_user_path(user)
         - if can? :destroy, @user
           td = link_to 'Excluir', user, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
 br
 
 - if can? :new, @user
-  = link_to 'Criar usuário', new_user_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = link_to 'Criar usuário', new_user_path, class:'btn btn-primary'
+
+- if current_user.profile_id == 1
+  = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+- else
+  = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
