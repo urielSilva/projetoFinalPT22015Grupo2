@@ -1,3 +1,12 @@
+table class="highlight responsive-table"
+  thead
+    tr
+      th Descrição
+      th
+      th
+      th
+
+
 - if @type_activities.empty?
   == render '/errorempty'
   br
@@ -8,6 +17,7 @@
 - else
   .titlepage.right
     span Tipos de Atividade
+
 
   table class="highlight responsive-table"
     thead
