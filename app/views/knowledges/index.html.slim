@@ -1,11 +1,11 @@
 - if @knowledges.size == 0
   = render '/layouts/errorempty'
   .vertical-align
-    = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary', style:'margin-top: 140px'
+    = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.text-right Conhecimentos
+  h3.text-right Conhecimentos
 
   table.table.table-hover.table-responsive
 

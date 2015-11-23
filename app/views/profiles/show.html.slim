@@ -1,9 +1,12 @@
-p#notice = notice
+h3.text-right
+	span Perfil: 
+	span = @profile.name
 
 p
   strong Nome: 
   = @profile.name
 
-= link_to 'Editar', edit_profile_path(@profile), :class=>'waves-effect waves-light btn green darken-3'
-'|
-= link_to 'Voltar', profiles_path, :class=>'waves-effect waves-light btn blue darken-2'
+br
+
+= link_to 'Editar', edit_profile_path(@profile), class:'btn btn-primary'
+= link_to 'Voltar', profiles_path, class:'btn btn-primary pull-right'

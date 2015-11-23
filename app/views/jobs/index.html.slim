@@ -1,11 +1,11 @@
 - if @jobs.size == 0
   = render '/layouts/errorempty'
   .vertical-align
-    = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary', style:'margin-top: 140px'
+    = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.text-right Cargos
+  h3.text-right Cargos
 
   table.table.table-hover.table-responsive
 

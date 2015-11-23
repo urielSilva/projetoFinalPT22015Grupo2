@@ -1,26 +1,28 @@
 = form_for @knowledge do |f|
+
   - if @knowledge.errors.any?
+
     #error_explanation
       h2 = "#{pluralize(@knowledge.errors.count, "error")} prohibited this knowledge from being saved:"
       ul
         - @knowledge.errors.full_messages.each do |message|
         li = message
 
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :knowledge_level
+  .form-group
+    = f.label 'Descrição'
+    = f.text_field :description, class:'form-control'
+
+  .form-group
+    = f.label 'Nível de conhecimento'
+    = f.select :knowledge_level_id, KnowledgeLevel.all.map{|k| [k.level,k.id]}, {}, { class:'form-control' }
+
+  .actions
+
     br
-    = f.select :knowledge_level_id,KnowledgeLevel.all.map{|k| [k.level,k.id]}
 
-  br
-  br
-  br
-  br
-
-  .actions = f.submit
-
-  / gambiarra master
-  javascript:
-    $('select').material_select();
+    - if current_page?(new_knowledge_path)
+      = f.button 'Criar Conhecimento', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Conhecimento', class:'btn btn-primary'
+    
+    = link_to 'Voltar', knowledges_path, class:'btn btn-primary pull-right'

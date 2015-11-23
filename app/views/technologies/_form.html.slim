@@ -1,16 +1,28 @@
 = form_for @technology do |f|
+
   - if @technology.errors.any?
+
     #error_explanation
       h2 = "#{pluralize(@technology.errors.count, "error")} prohibited this technology from being saved:"
       ul
         - @technology.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-    = f.label :description
-    = f.text_field :description
+  .form-group
+    = f.label 'Nome'
+    = f.text_field :name, class:'form-control'
+
+  .form-group
+    = f.label 'Descrição'
+    = f.text_field :description, class:'form-control'
     
   .actions
-    = f.submit 
+
+    br
+
+    - if current_page?(new_technology_path)
+      = f.button 'Criar Tecnologia', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Tecnologia', class:'btn btn-primary'
+
+    = link_to 'Voltar', technologies_path, class:'btn btn-primary pull-right'

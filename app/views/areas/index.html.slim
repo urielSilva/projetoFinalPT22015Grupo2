@@ -1,33 +1,43 @@
 - if @areas.size == 0
-  == render 'layouts/errorempty'
-  br
-  br
-  .center
-    = link_to 'Nova Área', new_area_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = render 'layouts/errorempty'
+  .vertical-align
+    = link_to 'Nova Área', new_area_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.text-right
-    span Áreas
+  h3.text-right Áreas
 
-  table.table.
+  table.table.table-hover.table-responsive
+
     thead
       tr
         th ID
         th Nome
         th Núcleo
+        th
+        th
+        th
 
     tbody
-      - @sectors.each do |sector|
+
+      - @areas.each do |area|
+
         tr
-          td = area.id
+          td
+            strong
+              = area.id
           td = area.name
-          td = area.sector
+          td = area.sector.name
           td = link_to 'Exibir', area
-          td = link_to 'Editar', edit_area_path(sector)
+          td = link_to 'Editar', edit_area_path(area)
           td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Nova Área', new_area_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = link_to 'Nova Área', new_area_path, class:'btn btn-primary'
 
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
