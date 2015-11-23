@@ -2,16 +2,16 @@ table class="highlight responsive-table"
   thead
     tr
       th Descrição
-      th Nível
+      th Nível de dificuldade
       th 
 
   tbody
     - @activities.each do |activity|
       tr
-        td = type_activity.Type_Activity_description
-        td = link_to 'Exibir', type_activity
-        td = link_to 'Editar', edit_type_activity_path(type_activity)
-        td = link_to 'Excluir', type_activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        td = activity.Activity_description
+        td = link_to 'Exibir', activity
+        td = link_to 'Editar', edit_activity_path(activity)
+        td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 

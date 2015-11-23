@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20151120174653) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "activity_description"
-    t.integer  "activity_credit_number"
+    t.integer  "activity_difficulty_level"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
