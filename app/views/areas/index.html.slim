@@ -1,5 +1,5 @@
 - if @areas.size == 0
-  == render '/errorempty'
+  == render 'layouts/errorempty'
   br
   br
   .center
@@ -7,10 +7,10 @@
 
 - else
 
-  .titlepage.right
+  .titlepage.text-right
     span Áreas
 
-  table class="highlight responsive-table"
+  table.table.
     thead
       tr
         th ID

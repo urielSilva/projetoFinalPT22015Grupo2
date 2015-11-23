@@ -12,6 +12,6 @@
 
   .field
     = f.label 'Núcleo'
-    = f.text_field :sector_id
+    = f.select :sector_id,Sector.all.map{|ps| [ps.name,ps.id]}
  
   .actions = f.submit

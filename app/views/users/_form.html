@@ -1,51 +1,66 @@
 <%= form_for(@user) do |f| %>
-   
-   <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-   </div>   
+	
+  	<% if @user.errors.any? %>
+		<div id="#error_explanation">
+				<h2> <%= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:" %></h2>
+			  <% @user.errors.full_messages.each do |message| %>
+					<p><%= message %></p>
+				<% end %>
+		</div>
+	<% end %>
 
-   <div class="field">
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
-   </div>
+	<div class="field">
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</div>   
 
-   <div class="field">
-      <%= f.label :profile_id %><br />
-      <%= f.select :profile_id, Profile.all.map{|ps| [ps.name,ps.id]} %>
-   </div>
+	<div class="field">
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name %>
+	</div>
 
-   <div class="field">
-      <%= f.label :job_id %><br />
-      <%= f.select :job_id, Job.all.map{|ps| [ps.name, ps.id]} %>
-   </div>
+	<% if current_user.profile_id == 2 %>
+		<div class="field">
+			<%= f.label :profile_id %>
+			<%= f.select :profile_id, Profile.all.map{|ps| [ps.name,ps.id]} %>
+		</div>
+	<% end %>
 
-   <div class="field">
-      <%= f.label :sector_id %><br />
-      <%= f.select :sector_id, Sector.all.map{|ps| [ps.name, ps.id]} %>
-   </div>
+	<% if current_user.profile_id == 2 %>
+		<div class="field">
+			<%= f.label :job_id %>
+			<%= f.select :job_id, Job.all.map{|ps| [ps.name, ps.id]} %>
+		</div>
+	<% end %>
 
-   <div class="field">
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
-   </div>   
+	<% if current_user.profile_id == 2 %>	
+		<div class="field">
+			<%= f.label :sector_id %>
+			<%= f.select :sector_id, Sector.all.map{|ps| [ps.name, ps.id]} %>
+		</div>
+	<% end %>
+	
+	<div class="field">
+		<%= f.label :email %>
+		<%= f.text_field :email %>
+	</div>   
 
-   <div class="field">  
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password %>
-   </div>
+	<div class="field">  
+		<%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+		<%= f.password_field :password %>
+	</div>
 
-   <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation %>
-   </div>
+	<div class="field">
+		<%= f.label :password_confirmation %>
+		<%= f.password_field :password_confirmation %>
+	</div>
 
-   <div class="actions">
-      <%= f.submit %>
-   </div>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
 
   <script>
-    $('select').material_select();
-   </script>
+	 $('select').material_select();
+	</script>
 
 <% end %>
