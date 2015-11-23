@@ -1,0 +1,33 @@
+- if @areas.size == 0
+  == render '/errorempty'
+  br
+  br
+  .center
+    = link_to 'Nova Área', new_area_path, :class=>'waves-effect waves-light btn blue darken-2'
+
+- else
+
+  .titlepage.right
+    span Áreas
+
+  table class="highlight responsive-table"
+    thead
+      tr
+        th ID
+        th Nome
+        th Núcleo
+
+    tbody
+      - @sectors.each do |sector|
+        tr
+          td = area.id
+          td = area.name
+          td = area.sector
+          td = link_to 'Exibir', area
+          td = link_to 'Editar', edit_area_path(sector)
+          td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+  br
+
+  = link_to 'Nova Área', new_area_path, :class=>'waves-effect waves-light btn blue darken-2'
+

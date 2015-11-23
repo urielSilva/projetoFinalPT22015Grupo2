@@ -16,28 +16,38 @@
 
 @import "materialize";
 
+html {
+	height: 100% !important;;
+}
+
 body {
 	font-family: 'Lato', sans-serif;
 	font-size: 13px;
+    height: 100% !important;
     display: flex;
-    height: 100%;
-    min-height: 100vh;
     flex-direction: column;
+}
+
+#content {
+	background-color: #fafafa;
+	padding: 100px 50px 70px 50px;
+	height: 100% !important;
+}
+
+nav {
+	position: fixed;
+	z-index: 1000;
 }
 
 main {
 	flex: 1 0 auto;
 }
 
-nav {
-	position: fixed;
-}
-
 body, nav ul a, .footer-copyright, #cruds .box span {
 	color: #757575;
 }
 
-#cruds .box a, .titlepage {
+#cruds .box a, .titlepage, .azul {
 	color: #1e88e5;
 }
 
@@ -50,11 +60,6 @@ body, nav ul a, .footer-copyright, #cruds .box span {
 	height: 200px;
 }
 
-#content {
-	background-color: #fafafa;
-	padding: 100px 50px 30px 50px;
-	min-height: 100%;
-}
 
 h2 {
 	text-align: center;
@@ -84,4 +89,20 @@ h1 {
 	text-align: left;
 	font-size: 38px;
 	color: #212121;
+}
+
+footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	z-index: 1000;
+}
+
+//admins
+
+.photo {
+	witdh: 160px;
+	height: 170px;
+	margin: 0 auto;
 }

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   resources :sectors
   resources :knowledge_levels
+  resources :knowledges
   resources :type_activities
   resources :activities
   resources :profiles
@@ -10,16 +10,29 @@ Rails.application.routes.draw do
   resources :project_statuses
   resources :projects
   resources :technologies
+  resources :areas
 
-  get 'index' => 'index#index'
-  get "/profiles" => "profiles#index"
-  get 'activities' => 'activities#index'
+  devise_for :users, :controllers => { registrations: 'users' }
+  resources :users
+
+  resources :admin
+  resources :member
+
+  devise_scope :user do
+    root to: "devise/sessions#new"
+    get '/login' => 'devise/sessions#new'
+    get '/logout' => 'devise/sessions#destroy'
+  end
+  
+  # root :to => "dashboard#index"
+
+  # devise_for :users, controllers: { registrations: "registrations" }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'index#index'
+  # root 'index#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

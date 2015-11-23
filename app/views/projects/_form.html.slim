@@ -6,18 +6,28 @@
         - @project.errors.full_messages.each do |message|
           li = message
 
-  .input-field
-    = f.label :description
-    = f.text_field :description
-  .input-field
-    = f.label :price
-    = f.text_field :price
-  .input-field
-    = f.label :link
-    = f.text_field :link
-  .input-field
-    = f.label :project_status_id
+  .field
+    = f.label 'Descrição'
+    = f.text_field :description, class:'validate'
+
+  .field
+    = f.label 'Preço'
+    = f.text_field :price, class:'validate'
+
+  .field
+    = f.label 'Link'
+    = f.text_field :link, class:'validate'
+
+  .field
+    = f.label 'Status'
     br
     = f.select :project_status_id,ProjectStatus.all.map{|ps| [ps.status,ps.id]}
-  .actions.waves-effect.waves-light.btn.green.darken-3 
-    = f.submit 
+    br
+
+  .actions
+    = f.button 'Criar Projeto', class:"waves-effect waves-light btn blue darken-2"
+    = link_to 'Voltar', projects_path, class:"waves-effect waves-light btn blue darken-2 right"
+
+  / gambiarra master
+  javascript:
+    $('select').material_select();

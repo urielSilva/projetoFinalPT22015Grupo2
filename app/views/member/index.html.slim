@@ -1,0 +1,56 @@
+.col.s3.center
+	ul.collection
+		li.collection-item
+			= image_tag('member.png', :class => "photo")
+		li.collection-item
+			= link_to 'Ver Perfil', current_user
+		li.collection-item teste2 
+		li.collection-item teste3
+		li.collection-item teste4
+
+.col.s9
+
+	ul	
+		li
+			span > 
+			= link_to 'usuários', users_path
+
+		li
+			span > 
+			= link_to 'perfis', profiles_path
+
+		li
+			span > 
+			= link_to 'tipos de atividade', type_activities_path
+
+		li
+			span > 
+			= link_to 'nivel de conhecimento', knowledge_levels_path
+
+		li
+			span > 
+			= link_to 'conhecimento', knowledges_path
+
+		li
+			span > 
+			= link_to 'atividade', activities_path
+
+		li
+			span > 
+			= link_to 'projeto', projects_path
+
+		li
+			span > 
+			= link_to 'status de projeto', project_statuses_path
+
+		li
+			span > 
+			= link_to 'tecnologia', technologies_path
+
+		li
+			span > 
+			= link_to 'status de projeto', project_statuses_path
+
+		li
+			span > 
+			= link_to 'area', areas_path

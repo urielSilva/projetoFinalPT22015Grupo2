@@ -1,29 +1,41 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th ID
-      th description
-      th price
-      th link
-      th status
-      th
-      th
-      th
+- if @projects.size == 0
+  == render '/errorempty'
+  br
+  br
+  .center
+    = link_to 'Novo Projeto', new_project_path, :class=>'waves-effect waves-light btn blue darken-2'
 
-  tbody
-    
-    - @projects.each do |project|
-    
+- else
+
+  .titlepage.right
+    span Projetos
+
+  table class="highlight responsive-table"
+    thead
       tr
-        td = project.id
-        td = project.description
-        td = project.price
-        td = project.link
-        td = project.project_status.status
-        td = link_to 'Exibir', project
-        td = link_to 'Editar', edit_project_path(project)
-        td = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Descrição
+        th Preço
+        th Link
+        th Status
+        th
+        th
+        th
 
-br
+    tbody
+      
+      - @projects.each do |project|
+      
+        tr
+          td = project.id
+          td = project.description
+          td = project.price
+          td = project.link
+          td = project.project_status.status
+          td = link_to 'Exibir', project
+          td = link_to 'Editar', edit_project_path(project)
+          td = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-= link_to 'Novo Projeto', new_project_path, :class=>'waves-effect waves-light btn green darken-3'
+  br
+
+  = link_to 'Novo Projeto', new_project_path, :class=>'waves-effect waves-light btn blue darken-2'
