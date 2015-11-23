@@ -13,7 +13,8 @@
       tr
         th ID
         th Descrição
-        th Número de Créditos
+        th Créditos
+        th Tipo
         th
         th
         th
@@ -28,6 +29,7 @@
               = activity.id
           td = activity.description
           td = activity.credit_numbers
+          td = activity.activity_type.description
           td = link_to 'Exibir', activity
           td = link_to 'Editar', edit_activity_path(activity)
           td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete

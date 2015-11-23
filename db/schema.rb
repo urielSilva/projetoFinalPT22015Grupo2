@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123214457) do
+ActiveRecord::Schema.define(version: 20151123222347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,12 @@ ActiveRecord::Schema.define(version: 20151123214457) do
   create_table "activities", force: :cascade do |t|
     t.string   "description"
     t.integer  "credit_numbers"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "activity_type_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
+
+  add_index "activities", ["activity_type_id"], name: "index_activities_on_activity_type_id", using: :btree
 
   create_table "activity_types", force: :cascade do |t|
     t.string   "description"
@@ -124,6 +127,7 @@ ActiveRecord::Schema.define(version: 20151123214457) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["sector_id"], name: "index_users_on_sector_id", using: :btree
 
+  add_foreign_key "activities", "activity_types"
   add_foreign_key "areas", "sectors"
   add_foreign_key "knowledges", "knowledge_levels"
   add_foreign_key "projects", "project_statuses"
