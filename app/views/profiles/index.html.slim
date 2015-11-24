@@ -14,8 +14,10 @@
         th ID
         th Nome
         th
-        th
-        th
+        - if can? :edit, @profile
+          th
+        - if can? :destroy, @profile
+          th
 
     tbody
 

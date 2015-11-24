@@ -1,25 +1,32 @@
-.titlepage.text-right
-  span Usuários: 
-  span = @users.count
+h3
+  span Usuários
+  span.label.label-primary.pull-right = 'Total: ' + @users.count.to_s
 
-br
+hr.divider
 
 table.table.table-hover.table-responsive
 
   thead
     tr
+      - if can? :new, @user
+        th ID
       th Nome
       th Email
       th Perfil
       th
       th
-      th
+      - if can? :destroy, @user
+        th
 
   tboby
 
     - @users.each do |user|
     
       tr
+        - if can? :new, @user
+          td
+            strong
+              = user.id
         td = user.name
         td = user.email
         td
