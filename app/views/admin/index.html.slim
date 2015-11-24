@@ -1,35 +1,59 @@
-= image_tag('admin.png', :class => "photo")
-br
-br
-br
-= link_to 'Sair', '/logout'
-br
-= link_to 'Ver Perfil', current_user
-br
-= link_to 'Info', :info
-br
-= link_to 'Excluir Conta', current_user, data: {:confirm => 'Tem certeza?'}, :method => :delete
-br
-= link_to 'usuários', users_path
-br
-= link_to 'perfis', profiles_path
-br
-= link_to 'tipos de atividade', activity_types_path
-br
-= link_to 'nivel de conhecimento', knowledge_levels_path
-br
-= link_to 'conhecimento', knowledges_path
-br
-= link_to 'atividade', activities_path
-br
-= link_to 'projeto', projects_path
-br
-= link_to 'status de projeto', project_statuses_path
-br
-= link_to 'tecnologia', technologies_path
-br
-= link_to 'status de projeto', project_statuses_path
-br
-= link_to 'area', areas_path
-br
-= link_to 'cargo', jobs_path
+.row
+
+	.col-sm-3
+		
+		.ul.list-group.text-center
+
+			li.list-group-item.active
+				strong Administrador
+			li.list-group-item = image_tag('admin.png', :class => "photo")
+			li.list-group-item = current_user.name + ' ' + current_user.last_name
+			li.list-group-item = link_to 'Ver Perfil', current_user
+			li.list-group-item = link_to 'Informações', :info
+			li.list-group-item = link_to 'Sair', '/logout'
+
+	.col-sm-9
+		
+		ul.nav.nav-tabs.nav-justified
+
+			li.active
+				a href="#membros" data-toggle="tab" Membros
+			li
+				a href="#conhecimentos" data-toggle="tab" Conhecimentos
+			li
+				a href="#projetos" data-toggle="tab" Projetos
+
+		#tab-content
+
+			.tab-pane.active#membros
+
+				.content-home
+					= link_to 'usuários', users_path
+					br
+					= link_to 'perfis', profiles_path
+					br
+					= link_to 'tipos de atividade', activity_types_path
+					br
+					= link_to 'cargo', jobs_path
+					br
+					= link_to 'núcleo', sectors_path
+					br
+					= link_to 'area', areas_path
+
+			.tab-pane#conhecimentos
+					
+				.content-home
+					= link_to 'conhecimento', knowledges_path
+					br
+					= link_to 'nivel de conhecimento', knowledge_levels_path
+					br
+					= link_to 'tecnologia', technologies_path
+					br
+					= link_to 'atividade', activities_path
+
+			.tab-pane#projetos
+
+				.content-home
+					= link_to 'estado de projeto', project_statuses_path
+					br
+					= link_to 'projeto', projects_path
