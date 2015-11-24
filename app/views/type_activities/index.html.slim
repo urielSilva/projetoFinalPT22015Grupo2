@@ -29,7 +29,7 @@ table class="highlight responsive-table"
       - @type_activities.each do |type_activity|
         tr
           td = type_activity.id
-          td = type_activity.Type_Activity_description
+          td = type_activity.description
           td = link_to 'Exibir', type_activity
           td = link_to 'Editar', edit_type_activity_path(type_activity)
           td = link_to 'Excluir', type_activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
