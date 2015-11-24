@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:create]
+  before_action :authenticate_user!
 
   # GET /profiles
   # GET /profiles.json

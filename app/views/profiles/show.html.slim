@@ -8,5 +8,8 @@ p
 
 br
 
-= link_to 'Editar', edit_profile_path(@profile), class:'btn btn-primary'
+- if can? :edit, @profile
+	= link_to 'Editar', edit_profile_path(@profile), class:'btn btn-primary'
+	
 = link_to 'Voltar', profiles_path, class:'btn btn-primary pull-right'
+
