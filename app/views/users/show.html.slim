@@ -1,6 +1,9 @@
 h3
-  span = 'Usuário: ' + @user.name + ' ' + @user.last_name
-  span.label.label-primary.pull-right Jaja
+  span = @user.name + ' ' + @user.last_name
+  - if @user.user_status.status == "Ativo"
+    span.label.label-success.pull-right Ativo
+  - else
+    span.label.label-danger.pull-right Inativo
 
 hr.divider
 

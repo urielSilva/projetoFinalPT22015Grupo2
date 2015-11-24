@@ -10,6 +10,7 @@ table.table.table-hover.table-responsive
     tr
       - if can? :new, @user
         th ID
+      th Status
       th Nome
       th Email
       th Perfil
@@ -27,13 +28,23 @@ table.table.table-hover.table-responsive
           td
             strong
               = user.id
+        td 
+
+          - if user.user_status.status == 'Ativo'
+            .text-success
+              = user.user_status.status
+          - else
+            .text-danger
+              = user.user_status.status
+
         td = user.name
         td = user.email
         td
           - if user.profile_id == 1
             span Membro
           - else
-            span Administrador
+            .text-primary
+              strong Administrador
 
         td = link_to 'Exibir', user
         td

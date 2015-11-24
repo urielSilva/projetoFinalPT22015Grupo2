@@ -1,0 +1,27 @@
+= form_for @user_status do |f|
+
+  - if @user_status.errors.any?
+  
+    #error_explanation
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
+        - @user_status.errors.full_messages.each do |message|
+          p = message
+
+  .form-group
+    = f.label 'Status'
+    = f.text_field :status, class:'form-control'
+
+  .actions 
+
+    br
+
+    - if current_page?(new_user_status_path) or @user_status.errors.any?
+      = f.button 'Criar Status de Usuário', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Status de Usuário', class:'btn btn-primary'
+
+    = link_to 'Voltar', user_statuses_path, class:'btn btn-primary pull-right'
