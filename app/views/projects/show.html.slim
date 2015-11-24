@@ -1,4 +1,6 @@
-p#notice = notice
+h3.text-right
+	span Projeto: 
+	span = @project.description
 
 p
   strong Descrição: 
@@ -8,8 +10,12 @@ p
   = @project.price
 p
   strong Link: 
-  = @project.link
+  = link_to [@project.link], @project.link
+p
+	strong Estado: 
+	= @project.project_status.status
 
-= link_to 'Editar', edit_project_path(@project), :class=>'waves-effect waves-light btn green darken-3'
-'|
-= link_to 'Voltar', projects_path, :class=>'waves-effect waves-light btn green darken-3'
+br
+
+= link_to 'Editar', edit_project_path(@project), class:'btn btn-primary'
+= link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'

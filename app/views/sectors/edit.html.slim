@@ -1,6 +1,5 @@
-== render 'form'
+h3.text-right
+	span Núcleo: 
+	span = @sector.name
 
-= link_to 'Exibir', @sector, :class=>'waves-effect waves-light btn blue darken-2'
-'|
-= link_to 'Editar', sectors_path, :class=>'waves-effect waves-light btn blue darken-2'
-
+= render 'form'

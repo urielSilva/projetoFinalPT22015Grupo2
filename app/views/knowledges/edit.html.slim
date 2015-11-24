@@ -1,8 +1,5 @@
-== render 'form'
+h3.text-right
+	span Conhecimento: 
+	span = @knowledge.description
 
-br
-
-= link_to 'Editar', @knowledge, :class=>'waves-effect waves-light btn green darken-3'
-
-'|
-= link_to 'Voltar', knowledges_path, :class=>'waves-effect waves-light btn green darken-3'
+= render 'form'

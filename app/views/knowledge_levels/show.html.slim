@@ -1,4 +1,6 @@
-p#notice = notice
+h3.text-right
+	span Nível de conhecimento: 
+	span = @knowledge_level.level
 
 p
   strong Nível: 
@@ -7,7 +9,10 @@ p
   strong Descrição: 
   = @knowledge_level.description
 
+
+br
+
 - if can? :edit, @knowledge_level
-  = link_to 'Editar', edit_knowledge_level_path(@knowledge_level), :class=>'waves-effect waves-light btn blue darken-2'
-'|
-= link_to 'Voltar', knowledge_levels_path, :class=>'waves-effect waves-light btn blue darken-2'
+	= link_to 'Editar', edit_knowledge_level_path(@knowledge_level), class:'btn btn-primary'
+
+= link_to 'Voltar', knowledge_levels_path, class:'btn btn-primary pull-right'

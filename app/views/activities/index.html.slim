@@ -1,18 +1,46 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th Descrição
-      th Nível de dificuldade
-      th 
+- if @activities.size == 0
+  = render 'layouts/errorempty'
+  .vertical-align
+    = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary btn-empty'
 
-  tbody
-    - @activities.each do |activity|
+- else
+
+  h3.text-right Atividades
+
+  table.table.table-hover.table-responsive
+
+    thead
       tr
-        td = activity.Activity_description
-        td = link_to 'Exibir', activity
-        td = link_to 'Editar', edit_activity_path(activity)
-        td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Descrição
+        th Créditos
+        th Tipo
+        th
+        th
+        th
 
-br
+    tbody
 
-= link_to 'Nova Atividade', new_activity_path, :class=>'waves-effect waves-light btn green darken-3'
+      - @activities.each do |activity|
+
+        tr
+          td 
+            strong
+              = activity.id
+          td = activity.description
+          td = activity.credit_numbers
+          td = activity.activity_type.description
+          td = link_to 'Exibir', activity
+          td = link_to 'Editar', edit_activity_path(activity)
+          td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+    br
+
+  = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+

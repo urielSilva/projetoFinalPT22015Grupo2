@@ -1,3 +1,8 @@
 class Activity < ActiveRecord::Base
-	belongs_to :type_activity 
+
+	validates :description, presence: true
+	validates :credit_numbers, presence: true
+
+	belongs_to :activity_type
+
 end

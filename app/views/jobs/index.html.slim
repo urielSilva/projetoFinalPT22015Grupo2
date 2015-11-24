@@ -1,11 +1,12 @@
 - if @jobs.size == 0
   = render '/layouts/errorempty'
   .vertical-align
-    = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary', style:'margin-top: 140px'
+    - if can? :new, @job
+      = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.text-right Cargos
+  h3.text-right Cargos
 
   table.table.table-hover.table-responsive
 
@@ -14,8 +15,10 @@
         th ID
         th Nome
         th
-        th
-        th
+        - if can? :edit, @job
+          th
+        - if can? :delete, @job
+          th
 
     tbody
       
@@ -27,12 +30,15 @@
               = job.id
           td = job.name
           td = link_to 'Exibir', job
-          td = link_to 'Editar', edit_job_path(job)
-          td = link_to 'Excluir', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @job
+            td = link_to 'Editar', edit_job_path(job)
+          - if can? :delete, @job
+            td = link_to 'Excluir', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary'
+  - if can? :new, @job
+    = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary'
 
   - if current_user.profile_id == 1
     = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

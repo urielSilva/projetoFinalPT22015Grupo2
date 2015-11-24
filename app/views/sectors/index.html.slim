@@ -1,35 +1,49 @@
 - if @sectors.size == 0
-  == render '/errorempty'
-  br
-  br
-  .center
-    = link_to 'Novo Núcleo', new_sector_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = render 'layouts/errorempty'
+  .vertical-align
+    - if can? :new, @sector
+      = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.right
-    span Núcleos
+  h3.text-right Núcleos
 
-  table class="highlight responsive-table"
+  table.table.table-hover.table-responsive
+
     thead
       tr
         th ID
         th Sigla
         th Nome
         th Descrição
+        th
+        - if can? :edit, @sector
+          th
+        - if can? :delete, @sector
+          th
 
     tbody
+
       - @sectors.each do |sector|
+      
         tr
           td = sector.id
           td = sector.short_name
           td = sector.name
           td = sector.description
           td = link_to 'Exibir', sector
-          td = link_to 'Editar', edit_sector_path(sector)
-          td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @sector
+            td = link_to 'Editar', edit_sector_path(sector)
+          - if can? :delete, @sector
+            td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Novo Núcleo', new_sector_path, :class=>'waves-effect waves-light btn blue darken-2'
+  - if can? :new, @sector
+    = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary'
 
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'

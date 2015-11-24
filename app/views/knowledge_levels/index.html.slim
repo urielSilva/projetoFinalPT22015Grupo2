@@ -1,11 +1,11 @@
 - if @knowledge_levels.empty?
   = render '/layouts/errorempty'
   .vertical-align
-    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary', style:'margin-top: 140px'
+    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  .titlepage.text-right Níveis de Conhecimento
+  
+  h3.text-right Níveis de Conhecimento
 
   table.table.table-hover.table-responsive
 

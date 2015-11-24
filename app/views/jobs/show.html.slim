@@ -1,4 +1,4 @@
-.titlepage.text-right
+h3.text-right
 	span Cargo: 
 	span = @job.name
 
@@ -10,5 +10,7 @@ p
 
 br
 
-= link_to 'Editar', edit_job_path(@job), class:'btn btn-primary'
+- if can? :edit, @user
+	= link_to 'Editar', edit_job_path(@job), class:'btn btn-primary'
+	
 = link_to 'Voltar', jobs_path, class:'btn btn-primary pull-right'

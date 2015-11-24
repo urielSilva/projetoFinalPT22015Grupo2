@@ -1,15 +1,27 @@
 = form_for @knowledge_level do |f|
+
   - if @knowledge_level.errors.any?
+  
     #error_explanation
       h2 = "#{pluralize(@knowledge_level.errors.count, "error")} prohibited this knowledge_level from being saved:"
       ul
         - @knowledge_level.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :level
-    = f.text_field :level
-  .field
-    = f.label :description
-    = f.text_field :description
-  .actions = f.submit
+  .form-group
+    = f.label 'Nível'
+    = f.text_field :level, class:'form-control'
+
+  .form-group
+    = f.label 'Descrição'
+    = f.text_field :description, class:'form-control'
+
+  .actions
+
+    br
+    - if current_page?(new_knowledge_level_path)
+      = f.button 'Criar Nível de Conhecimento', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Nível de Conhecimento', class:'btn btn-primary'
+      
+    = link_to 'Voltar', knowledge_levels_path, class:'btn btn-primary pull-right'

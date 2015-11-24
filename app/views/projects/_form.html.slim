@@ -1,33 +1,36 @@
 = form_for @project do |f|
+
   - if @project.errors.any?
+
     #error_explanation
       h2 = "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
       ul
         - @project.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label 'Descrição'
-    = f.text_field :description, class:'validate'
+    = f.text_field :description, class:'form-control'
 
-  .field
+  .form-group
     = f.label 'Preço'
-    = f.text_field :price, class:'validate'
+    = f.text_field :price, class:'form-control'
 
-  .field
+  .form-group
     = f.label 'Link'
-    = f.text_field :link, class:'validate'
+    = f.text_field :link, class:'form-control'
 
-  .field
-    = f.label 'Status'
-    br
-    = f.select :project_status_id,ProjectStatus.all.map{|ps| [ps.status,ps.id]}
-    br
+  .form-group
+    = f.label 'Estado'
+    = f.select :project_status_id, ProjectStatus.all.map{|ps| [ps.status,ps.id]}, {}, {class:'form-control'}
 
   .actions
-    = f.button 'Criar Projeto', class:"waves-effect waves-light btn blue darken-2"
-    = link_to 'Voltar', projects_path, class:"waves-effect waves-light btn blue darken-2 right"
 
-  / gambiarra master
-  javascript:
-    $('select').material_select();
+    br
+
+    - if current_page?(new_project_path)
+      = f.button 'Criar Projeto', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Projeto', class:'btn btn-primary'
+
+    = link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'

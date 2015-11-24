@@ -1,22 +1,41 @@
-table class="highlight responsive-table"
-  thead
-    tr
-      th ID
-      th status
-      th
-      th
+- if @projectstatuses.size == 0
+  = render '/layouts/errorempty'
+  .vertical-align
+    = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary btn-empty'
 
-  tbody
-    
-    - @projectstatuses.each do |project|
-    
+- else
+
+  h3.text-right Estados de Projeto
+
+  table.table.table-hover.table-responsive
+
+    thead
       tr
-        td = project.id
-        td = project.status
-        td = link_to 'Exibir', project
-        td = link_to 'Editar', edit_project_path(project)
-        td = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Estado
+        th
+        th
+        th
 
-br
+    tbody
+      
+      - @projectstatuses.each do |project_status|
+      
+        tr
+          td
+            strong
+              = project_status.id
+          td = project_status.status
+          td = link_to 'Exibir', project_status
+          td = link_to 'Editar', edit_project_status_path(project_status)
+          td = link_to 'Excluir', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-= link_to 'Novo Status', new_project_status_path, :class=>'waves-effect waves-light btn green darken-3'
+  br
+
+  = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'

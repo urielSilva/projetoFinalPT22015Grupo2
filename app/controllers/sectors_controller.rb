@@ -1,12 +1,14 @@
 class SectorsController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_sector, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:create]
 
   # GET /sectors
   # GET /sectors.json
   def index
     #@sectors = Sector.all
-    @sectors = Sector.all
-
+    @sectors = Sector.all.order(:id)
   end
 
   # GET /sectors/1
@@ -30,7 +32,7 @@ class SectorsController < ApplicationController
 
     respond_to do |format|
       if @sector.save
-        format.html { redirect_to @sector, notice: 'Sector was successfully created.' }
+        format.html { redirect_to @sector, notice: 'O núcleo foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @sector }
       else
         format.html { render :new }
@@ -44,7 +46,7 @@ class SectorsController < ApplicationController
   def update
     respond_to do |format|
       if @sector.update(sector_params)
-        format.html { redirect_to @sector, notice: 'Sector was successfully updated.' }
+        format.html { redirect_to @sector, notice: 'O núcleo foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @sector }
       else
         format.html { render :edit }
@@ -58,7 +60,7 @@ class SectorsController < ApplicationController
   def destroy
     @sector.destroy
     respond_to do |format|
-      format.html { redirect_to sectors_url, notice: 'Sector was successfully destroyed.' }
+      format.html { redirect_to sectors_url, notice: 'O núcleo foi excluído com sucesso.' }
       format.json { head :no_content }
     end
   end

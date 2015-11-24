@@ -1,0 +1,49 @@
+- if @activity_types.size == 0
+  = render 'layouts/errorempty'
+  .vertical-align
+    - if can? :new, @activity_type
+      = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary btn-empty'
+
+- else
+
+  h3.text-right Tipos de Atividade
+
+  table.table.table-hover.table-responsive
+
+    thead
+      tr
+        th ID
+        th Descrição
+        th
+        - if can? :edit, @activity_type
+          th
+        - if can? :delete, @activity_type
+          th
+
+    tbody
+
+      - @activity_types.each do |activity_type|
+
+        tr
+          td
+            strong
+              = activity_type.id
+          td = activity_type.description
+          td = link_to 'Exibir', activity_type
+          - if can? :edit, @activity_type
+            td = link_to 'Editar', edit_activity_type_path(activity_type)
+          - if can? :delete, @activity_type
+            td = link_to 'Excluir', activity_type, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+  br
+  
+  - if can? :new, @activity_type
+    = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+
