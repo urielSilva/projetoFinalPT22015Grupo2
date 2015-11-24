@@ -18,13 +18,13 @@
         th Núcleo
 
     tbody
-      - @sectors.each do |sector|
+      - @area.each do |area|
         tr
           td = area.id
           td = area.name
-          td = area.sector
+          td = area.sector.name
           td = link_to 'Exibir', area
-          td = link_to 'Editar', edit_area_path(sector)
+          td = link_to 'Editar', edit_area_path(area)
           td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br

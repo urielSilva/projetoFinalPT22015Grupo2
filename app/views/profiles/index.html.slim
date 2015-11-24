@@ -1,5 +1,5 @@
 - if @profiles.empty?
-  == render '/errorempty'
+  == render '/layouts/errorempty'
   br
   br
   .center
@@ -22,11 +22,13 @@
           td = profile.id
           td = profile.name
           td = link_to 'Exibir', profile
-          td = link_to 'Editar', edit_profile_path(profile)
-          td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @profile
+            td = link_to 'Editar', edit_profile_path(profile)
+          - if can? :destroy, @profile  
+            td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  = link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn blue darken-2'
+  - if can? :create, @profile
+    = link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn blue darken-2'
 
 
