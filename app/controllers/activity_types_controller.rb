@@ -1,10 +1,13 @@
 class ActivityTypesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_activity_type, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:create]
 
   # GET /activity_types
   # GET /activity_types.json
   def index
-    @activity_types = ActivityType.all
+    @activity_types = ActivityType.all.order(:id)
   end
 
   # GET /activity_types/1
@@ -28,7 +31,7 @@ class ActivityTypesController < ApplicationController
 
     respond_to do |format|
       if @activity_type.save
-        format.html { redirect_to @activity_type, notice: 'Activity type was successfully created.' }
+        format.html { redirect_to @activity_type, notice: 'O tipo de atividade foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @activity_type }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class ActivityTypesController < ApplicationController
   def update
     respond_to do |format|
       if @activity_type.update(activity_type_params)
-        format.html { redirect_to @activity_type, notice: 'Activity type was successfully updated.' }
+        format.html { redirect_to @activity_type, notice: 'O tipo de atividade foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @activity_type }
       else
         format.html { render :edit }
@@ -56,7 +59,7 @@ class ActivityTypesController < ApplicationController
   def destroy
     @activity_type.destroy
     respond_to do |format|
-      format.html { redirect_to activity_types_url, notice: 'Activity type was successfully destroyed.' }
+      format.html { redirect_to activity_types_url, notice: 'O tipo de atividade foi excluído com sucesso.' }
       format.json { head :no_content }
     end
   end
