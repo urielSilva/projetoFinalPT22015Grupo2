@@ -16,11 +16,17 @@
           = f.label 'Senha'
           = f.password_field :password, autofocus: true, class:'form-control'
 
-        / - if devise_mapping.rememberable?
+        - if devise_mapping.rememberable?
 
-        /   = f.check_box :remember_me
-        /   span Lembrar meus dados
+          .checkbox
+            label
+              = f.check_box :remember_me
+              span Lembrar meus dados
 
       .actions
 
-        = f.button 'Entrar', class:'btn btn-primary center-block'
+        = f.button 'Entrar', class:'btn btn-primary form-control'
+
+  br
+
+  p.text-center SAP © CJR 2015

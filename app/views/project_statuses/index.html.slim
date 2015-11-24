@@ -1,7 +1,16 @@
-table class="highlight responsive-table"
+- if @projectstatuses.empty?
+  == render 'layouts/errorempty'
+  br
+  br
+  .center
+    = link_to 'Novo Status de Projeto', new_project_status_path, class:'btn btn-primary pull-left'
+
+.titlepage.right
+    span Status de Projeto
+
+table.table.table-hover.table-responsive
   thead
     tr
-      th ID
       th status
       th
       th
@@ -11,12 +20,19 @@ table class="highlight responsive-table"
     - @projectstatuses.each do |project|
     
       tr
-        td = project.id
         td = project.status
         td = link_to 'Exibir', project
-        td = link_to 'Editar', edit_project_path(project)
-        td = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        td 
+          -if current_user.profile_id == 2
+            = link_to 'Editar', edit_project_path(project)
+        td 
+          -if current_user.profile_id == 2
+            = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
-= link_to 'Novo Status', new_project_status_path, :class=>'waves-effect waves-light btn green darken-3'
+- if can? :new, @projectstatus
+  = link_to 'Novo Status', new_project_status_path, class:'btn btn-primary pull-left'
+
+- if current_user.profile_id == 1
+    = link_to 'Voltar',  member_path, class:'btn btn-primary pull-right'

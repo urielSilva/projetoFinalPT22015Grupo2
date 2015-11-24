@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
 
     $('#ProjetoFD').click(function () {
         $.getJSON('/projetoFD', function(json) {
