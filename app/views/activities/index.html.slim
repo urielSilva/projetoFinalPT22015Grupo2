@@ -15,15 +15,15 @@ table.table.table-hover.table-responsive
   tbody
     - @activities.each do |activity|
       tr
-        td = type_activity.Type_Activity_description
-        td = link_to 'Exibir', type_activity
+        td = activity.activity_description
+        td = link_to 'Exibir', activity
         td 
           -if current_user.profile_id == 2
-            = link_to 'Editar', edit_type_activity_path(type_activity)
+            = link_to 'Editar', edit_activity_path(activity)
         td 
           -if current_user.profile_id == 2
-            = link_to 'Excluir', type_activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
-        td = activity.Activity_description
+            = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        td = activity.activity_description
         td = link_to 'Exibir', activity
         td = link_to 'Editar', edit_activity_path(activity)
         td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
