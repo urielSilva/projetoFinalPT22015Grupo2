@@ -14,5 +14,7 @@ p
 
 br
 
-= link_to 'Editar', edit_sector_path(@sector), class:'btn btn-primary'
+- if can? :edit, @sector
+	= link_to 'Editar', edit_sector_path(@sector), class:'btn btn-primary'
+	
 = link_to 'Voltar', sectors_path, class:'btn btn-primary pull-right'

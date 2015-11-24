@@ -1,7 +1,8 @@
 - if @sectors.size == 0
   = render 'layouts/errorempty'
   .vertical-align
-    = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary btn-empty'
+    - if can? :new, @sector
+      = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -16,8 +17,10 @@
         th Nome
         th Descrição
         th
-        th
-        th
+        - if can? :edit, @sector
+          th
+        - if can? :delete, @sector
+          th
 
     tbody
 
@@ -29,12 +32,15 @@
           td = sector.name
           td = sector.description
           td = link_to 'Exibir', sector
-          td = link_to 'Editar', edit_sector_path(sector)
-          td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @sector
+            td = link_to 'Editar', edit_sector_path(sector)
+          - if can? :delete, @sector
+            td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary'
+  - if can? :new, @sector
+    = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary'
 
   - if current_user.profile_id == 1
     = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
