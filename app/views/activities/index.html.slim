@@ -1,7 +1,8 @@
 - if @activities.size == 0
   = render 'layouts/errorempty'
   .vertical-align
-    = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary btn-empty'
+    - if can? :new, @activity
+      = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -16,8 +17,10 @@
         th Créditos
         th Tipo
         th
-        th
-        th
+        - if can? :edit, @activity
+          th
+        - if can? :destroy, @activity
+          th
 
     tbody
 
@@ -31,12 +34,15 @@
           td = activity.credit_numbers
           td = activity.activity_type.description
           td = link_to 'Exibir', activity
-          td = link_to 'Editar', edit_activity_path(activity)
-          td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @activity
+            td = link_to 'Editar', edit_activity_path(activity)
+          - if can? :destroy, @activity
+            td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
     br
 
-  = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary'
+  - if can? :new, @activity
+    = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary'
 
   - if current_user.profile_id == 1
     = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

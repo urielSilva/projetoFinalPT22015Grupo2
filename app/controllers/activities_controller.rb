@@ -1,5 +1,8 @@
 class ActivitiesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:create]
 
   # GET /activities
   # GET /activities.json
@@ -28,7 +31,7 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
+        format.html { redirect_to @activity, notice: 'A atividade foi criada com sucesso.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class ActivitiesController < ApplicationController
   def update
     respond_to do |format|
       if @activity.update(activity_params)
-        format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
+        format.html { redirect_to @activity, notice: 'A atividade foi atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @activity }
       else
         format.html { render :edit }
@@ -56,7 +59,7 @@ class ActivitiesController < ApplicationController
   def destroy
     @activity.destroy
     respond_to do |format|
-      format.html { redirect_to activities_url, notice: 'Activity was successfully destroyed.' }
+      format.html { redirect_to activities_url, notice: 'A atividade foi excluída com sucesso.' }
       format.json { head :no_content }
     end
   end
