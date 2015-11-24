@@ -1,23 +1,21 @@
 - if @projects.size == 0
-  == render '/errorempty'
-  br
-  br
-  .center
-    = link_to 'Novo Projeto', new_project_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = render 'layouts/errorempty'
+  .vertical-align
+    = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.right
-    span Projetos
+  h3.text-right Projetos
 
-  table class="highlight responsive-table"
+  table.table.table.table-hover.table-responsive
+
     thead
       tr
         th ID
+        th Link
         th Descrição
         th Preço
-        th Link
-        th Status
+        th Estado
         th
         th
         th
@@ -27,10 +25,12 @@
       - @projects.each do |project|
       
         tr
-          td = project.id
+          td
+            strong
+              = project.id
+          td = link_to 'Acessar', project.link
           td = project.description
           td = project.price
-          td = project.link
           td = project.project_status.status
           td = link_to 'Exibir', project
           td = link_to 'Editar', edit_project_path(project)
@@ -38,4 +38,11 @@
 
   br
 
-  = link_to 'Novo Projeto', new_project_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary'
+
+  - if current_user.profile_id == 1
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
+
