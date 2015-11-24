@@ -13,7 +13,10 @@
     = f.label :knowledge_level
     br
     = f.select :knowledge_level_id,KnowledgeLevel.all.map{|k| [k.level,k.id]}
-
+  .field
+    = f.label :technology
+    br
+    = f.select :technology_id,Technology.all.map{|k| [k.name,k.id]}
   br
   br
   br

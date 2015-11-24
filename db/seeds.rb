@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+	KnowledgeLevel.create(level: "alto", description: "nivel alto")
+	Technology.create(name: "rails", description: "frameworkzao")

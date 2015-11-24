@@ -11,17 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120174653) do
+ActiveRecord::Schema.define(version: 20151124205250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "activities", force: :cascade do |t|
-    t.string   "activity_description"
-    t.integer  "activity_credit_number"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -50,9 +43,11 @@ ActiveRecord::Schema.define(version: 20151120174653) do
     t.integer  "knowledge_level_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "technology_id"
   end
 
   add_index "knowledges", ["knowledge_level_id"], name: "index_knowledges_on_knowledge_level_id", using: :btree
+  add_index "knowledges", ["technology_id"], name: "index_knowledges_on_technology_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
@@ -126,6 +121,7 @@ ActiveRecord::Schema.define(version: 20151120174653) do
 
   add_foreign_key "areas", "sectors"
   add_foreign_key "knowledges", "knowledge_levels"
+  add_foreign_key "knowledges", "technologies"
   add_foreign_key "projects", "project_statuses"
   add_foreign_key "users", "jobs"
   add_foreign_key "users", "profiles"

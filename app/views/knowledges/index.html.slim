@@ -14,7 +14,8 @@
         th ID
         th Nível
         th Descrição
-        th 
+        th Tecnologia
+        th
         th
         th
 
@@ -28,14 +29,15 @@
               = knowledge.id
           td = knowledge.knowledge_level.level
           td = knowledge.description
+          td = knowledge.technology.name
           td = link_to 'Editar', edit_knowledge_path(knowledge)
           td = link_to 'Exibir', knowledge
           td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary'
 
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+   - if current_user.profile_id == 1
+     = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
 
-  - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'     
+   - else
+     = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'     
