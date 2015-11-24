@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
 	
   rescue_from CanCan::AccessDenied do |exception|
 		flash[:error] = 'Você não tem autorização para tal ação.'
-		redirect_to root_url
+		redirect_to (request.referer || member_path)
   end
+  
 end

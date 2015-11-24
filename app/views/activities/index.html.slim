@@ -9,7 +9,7 @@ table.table.table-hover.table-responsive
   thead
     tr
       th Descrição
-      th Nível
+      th Nível de dificuldade
       th 
 
   tbody
@@ -23,6 +23,10 @@ table.table.table-hover.table-responsive
         td 
           -if current_user.profile_id == 2
             = link_to 'Excluir', type_activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        td = activity.Activity_description
+        td = link_to 'Exibir', activity
+        td = link_to 'Editar', edit_activity_path(activity)
+        td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
 br
 
