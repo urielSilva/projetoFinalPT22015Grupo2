@@ -13,6 +13,9 @@
 			.collapse.navbar-collapse
 
 				ul.nav.navbar-nav.navbar-right
+				
+					li
+						= gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true }, :gravatar => { :size => 30 }, class:'gravatar_header')
 					li
 						a href="/logout" Sair
 

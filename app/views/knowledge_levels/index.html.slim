@@ -38,9 +38,7 @@
 
   - if can? :create, @knowledge_level
     = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'   
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'   
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

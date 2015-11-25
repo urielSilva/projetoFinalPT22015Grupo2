@@ -39,9 +39,7 @@
 
   - if can? :new, @job
     = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

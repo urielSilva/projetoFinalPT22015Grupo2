@@ -4,7 +4,7 @@ class MemberController < ApplicationController
 
 	def index
 		if current_user.profile_id == 2
-			redirect_to admin_index_path
+			redirect_to admin_path
 		end
 	end	
 

@@ -20,8 +20,10 @@ hr.divider
         th ID
         th Status
         th
-        th
-        th
+        - if can? :edit, @user_status
+          th
+        - if can? :delete, @user_status
+          th
 
     tbody
 
@@ -33,16 +35,16 @@ hr.divider
               = user_status.id
           td = user_status.status
           td = link_to 'Exibir', user_status
-          td = link_to 'Editar', edit_user_status_path(user_status)
-          td = link_to 'Excluir', user_status, data: {:confirm => 'Are you sure?'}, :method => :delete
+          - if can? :edit, @user_status
+            td = link_to 'Editar', edit_user_status_path(user_status)
+          - if can? :delete, @user_status
+            td = link_to 'Excluir', user_status, data: {:confirm => 'Are you sure?'}, :method => :delete
 
   br
 
   - if can? :new, @user_status
     = link_to 'Novo Status de usuário', new_user_status_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

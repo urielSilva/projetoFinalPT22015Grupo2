@@ -1,7 +1,8 @@
 - if @areas.size == 0
   = render 'layouts/errorempty'
   .vertical-align
-    = link_to 'Nova Área', new_area_path, class:'btn btn-primary btn-empty'
+    - if can? :new, @area
+      = link_to 'Nova Área', new_area_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -15,8 +16,10 @@
         th Nome
         th Núcleo
         th
-        th
-        th
+        - if can? :edit, @area
+          th
+        - if can? :delete, @area
+          th
 
     tbody
 
@@ -29,15 +32,17 @@
           td = area.name
           td = area.sector.name
           td = link_to 'Exibir', area
-          td = link_to 'Editar', edit_area_path(area)
-          td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @area
+            td = link_to 'Editar', edit_area_path(area)
+          - if can? :delete, @area
+            td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  = link_to 'Nova Área', new_area_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  
+  - if can? :new, @area
+    = link_to 'Nova Área', new_area_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+

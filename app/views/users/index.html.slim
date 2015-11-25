@@ -28,8 +28,7 @@ table.table.table-hover.table-responsive
           td
             strong
               = user.id
-        td 
-
+        td
           - if user.user_status.status == 'Ativo'
             .text-success
               = user.user_status.status
@@ -37,22 +36,21 @@ table.table.table-hover.table-responsive
             .text-danger
               = user.user_status.status
 
-        td = user.name
+        td = user.name + ' ' + user.last_name
         td = user.email
         td
-          - if user.profile_id == 1
+          - if user.profile.name == "Membro"
             span Membro
           - else
             .text-primary
               strong Administrador
 
         td = link_to 'Exibir', user
+
         td
-          - if current_user.profile_id == 1
-            - if user.id == current_user.id
-              = link_to 'Editar', edit_user_path(user)
-          - else
-              = link_to 'Editar', edit_user_path(user)
+          - if user.id == current_user.id or current_user.profile.name == "Administrador"
+            = link_to 'Editar', edit_user_path(user)
+
         - if can? :destroy, @user
           td = link_to 'Excluir', user, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
@@ -60,9 +58,7 @@ br
 
 - if can? :new, @user
   = link_to 'Criar usuário', new_user_path, class:'btn btn-primary'
-
-- if current_user.profile_id == 1
-  = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
 
 - else
-  = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+  = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

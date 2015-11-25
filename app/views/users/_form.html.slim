@@ -19,7 +19,7 @@
     = f.label 'Sobrenome'
     = f.text_field :last_name, class:'form-control'
 
-  - if current_user.profile_id == 2 # Retire essa linha para o cadastro do 1º admin
+  - if can? :new, @user # Retire essa linha para o cadastro do 1º admin
 
     .form-group
       = f.label 'Status'

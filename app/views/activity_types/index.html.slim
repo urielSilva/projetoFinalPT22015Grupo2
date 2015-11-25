@@ -39,11 +39,10 @@
   
   - if can? :new, @activity_type
     = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+    
+  - else
     = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
 
-  - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
 
 

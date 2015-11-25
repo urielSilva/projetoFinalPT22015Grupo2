@@ -12,6 +12,7 @@ class Ability
     else
         can :read, :all
         can [:update], User #, :user_id => user.id
+        
     end
 
     #
