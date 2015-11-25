@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    console.log("aeae");
+
     $('#ProjetoFD').click(function () {
         $.getJSON('/projetoFD', function(json) {
     
