@@ -8,5 +8,7 @@ p
 
 br
 
-= link_to 'Editar', edit_project_status_path(@project_status), class:'btn btn-primary'
+- if can? :edit, @project_status
+  = link_to 'Editar', edit_project_status_path(@project_status), class:'btn btn-primary'
+
 = link_to 'Voltar', project_statuses_path, class:'btn btn-primary pull-right'

@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
   belongs_to :user_status
 
   devise :database_authenticatable, :rememberable, :trackable, :validatable
-
+  
 end

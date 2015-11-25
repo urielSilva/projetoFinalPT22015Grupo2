@@ -1,6 +1,7 @@
 - if @projectstatuses.size == 0
   = render '/layouts/errorempty'
   .vertical-align
+  - if can? :new, @project_status
     = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary btn-empty'
 
 - else
@@ -14,8 +15,10 @@
         th ID
         th Estado
         th
-        th
-        th
+        - if can? :edit, @project_status
+          th
+        - if can? :delete, @project_status
+          th
 
     tbody
       
@@ -27,15 +30,16 @@
               = project_status.id
           td = project_status.status
           td = link_to 'Exibir', project_status
-          td = link_to 'Editar', edit_project_status_path(project_status)
-          td = link_to 'Excluir', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @project_status
+            td = link_to 'Editar', edit_project_status_path(project_status)
+          - if can? :delete, @project_status
+            td = link_to 'Excluir', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  - if can? :new, @project_status
+    = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

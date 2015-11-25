@@ -1,8 +1,9 @@
 - if @technologies.empty?
   = render 'layouts/errorempty'
   .vertical-align
+    - if can? :new, @technology
     = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary btn-empty'
-    
+
 - else
 
   h3.text-right Tecnologias
@@ -11,12 +12,13 @@
 
     thead
       tr
-        th ID
         th Nome
         th Descrição
         th
-        th
-        th
+        - if can? :edit, @technology
+          th
+        - if can? :delete, @technology
+          th
 
     tbody
       
@@ -29,15 +31,18 @@
           td = technology.name
           td = technology.description
           td = link_to 'Exibir', technology
-          td = link_to 'Editar', edit_technology_path(technology)
-          td = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          td 
+            - if can? :edit, @technology
+              = link_to 'Editar', edit_technology_path(technology)
+          td 
+            - if can? :delete, @technology
+              = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  
+  - if can? :new, @technology
+    = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
+    = link_to 'Voltar',  member_path, class:'btn btn-primary pull-right'

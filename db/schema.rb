@@ -59,9 +59,11 @@ ActiveRecord::Schema.define(version: 20151124212414) do
     t.integer  "knowledge_level_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "technology_id"
   end
 
   add_index "knowledges", ["knowledge_level_id"], name: "index_knowledges_on_knowledge_level_id", using: :btree
+  add_index "knowledges", ["technology_id"], name: "index_knowledges_on_technology_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
@@ -138,6 +140,7 @@ ActiveRecord::Schema.define(version: 20151124212414) do
   add_foreign_key "activities", "activity_types"
   add_foreign_key "areas", "sectors"
   add_foreign_key "knowledges", "knowledge_levels"
+  add_foreign_key "knowledges", "technologies"
   add_foreign_key "projects", "project_statuses"
   add_foreign_key "users", "jobs"
   add_foreign_key "users", "profiles"

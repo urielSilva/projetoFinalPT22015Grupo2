@@ -8,10 +8,12 @@ p
 
   br
 
-  strong Description: 
+  strong Descrição: 
   = @technology.description
 
 br
 
-= link_to 'Editar', edit_technology_path(@technology), class:'btn btn-primary'
+- if can? :edit, @technology
+  = link_to 'Editar', edit_technology_path(@technology), class:'btn btn-primary'
+
 = link_to 'Voltar', technologies_path, class:'btn btn-primary pull-right'

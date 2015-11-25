@@ -1,6 +1,7 @@
 - if @projects.size == 0
   = render 'layouts/errorempty'
   .vertical-align
+    - if can? :new, @project
     = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary btn-empty'
 
 - else
@@ -17,8 +18,10 @@
         th Preço
         th Estado
         th
-        th
-        th
+        - if can? :edit, @project
+          th
+        - if can? :delete, @project
+          th
 
     tbody
       
@@ -33,16 +36,18 @@
           td = project.price
           td = project.project_status.status
           td = link_to 'Exibir', project
-          td = link_to 'Editar', edit_project_path(project)
-          td = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          td 
+            - if can? :edit, @project
+              = link_to 'Editar', edit_project_path(project)
+          td 
+            - if can? :delete, @project
+              = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
-
-  - else
+  - if can? :new, @project
+    = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary'
     = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
 
+  - else
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

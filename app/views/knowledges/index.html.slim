@@ -1,7 +1,8 @@
 - if @knowledges.size == 0
   = render '/layouts/errorempty'
   .vertical-align
-    = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary btn-empty'
+    - if can? :new, @knowledge
+      = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -14,9 +15,12 @@
         th ID
         th Nível
         th Descrição
-        th 
+        th Tecnologia
         th
-        th
+        - if can? :edit, @knowledge
+          th
+        - if can? :delete, @knowledge
+          th
 
     tbody
 
@@ -28,14 +32,16 @@
               = knowledge.id
           td = knowledge.knowledge_level.level
           td = knowledge.description
-          td = link_to 'Editar', edit_knowledge_path(knowledge)
+          td = knowledge.technology.name
           td = link_to 'Exibir', knowledge
-          td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @knowledge
+            td = link_to 'Editar', edit_knowledge_path(knowledge)
+          - if can? :delete, @knowledge
+            td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-  = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  - if can? :new, @knowledge
+    = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'     
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'     
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
