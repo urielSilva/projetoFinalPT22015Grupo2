@@ -1,1 +1,7 @@
-== render 'form'
+h3
+	span = 'Usuário: ' + @user.name + ' ' + @user.last_name
+	span.label.label-primary.pull-right Atualizar
+
+hr.divider
+
+= render 'form'

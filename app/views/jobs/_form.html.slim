@@ -14,5 +14,10 @@
   br
 
   .actions
-    = f.button "Criar Cargo", class:'btn btn-primary'
+
+    - if current_page?(new_job_path)
+      = f.button "Criar Cargo", class:'btn btn-primary'
+    - else
+      = f.button "Atualizar Cargo", class:'btn btn-primary'
+
     = link_to 'Voltar', jobs_path, class:'btn btn-primary pull-right'

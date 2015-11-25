@@ -1,38 +1,45 @@
-- if @projectstatuses.empty?
-  == render 'layouts/errorempty'
-  br
-  br
-  .center
-    = link_to 'Novo Status de Projeto', new_project_status_path, class:'btn btn-primary pull-left'
+- if @projectstatuses.size == 0
+  = render '/layouts/errorempty'
+  .vertical-align
+  - if can? :new, @project_status
+    = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary btn-empty'
 
-.titlepage.right
-    span Status de Projeto
+- else
 
-table.table.table-hover.table-responsive
-  thead
-    tr
-      th status
-      th
-      th
+  h3.text-right Estados de Projeto
 
-  tbody
-    
-    - @projectstatuses.each do |project|
-    
+  table.table.table-hover.table-responsive
+
+    thead
       tr
-        td = project.status
-        td = link_to 'Exibir', project
-        td 
-          -if current_user.profile_id == 2
-            = link_to 'Editar', edit_project_path(project)
-        td 
-          -if current_user.profile_id == 2
-            = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+        th ID
+        th Estado
+        th
+        - if can? :edit, @project_status
+          th
+        - if can? :delete, @project_status
+          th
 
-br
+    tbody
+      
+      - @projectstatuses.each do |project_status|
+      
+        tr
+          td
+            strong
+              = project_status.id
+          td = project_status.status
+          td = link_to 'Exibir', project_status
+          - if can? :edit, @project_status
+            td = link_to 'Editar', edit_project_status_path(project_status)
+          - if can? :delete, @project_status
+            td = link_to 'Excluir', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-- if can? :new, @projectstatus
-  = link_to 'Novo Status', new_project_status_path, class:'btn btn-primary pull-left'
+  br
 
-- if current_user.profile_id == 1
-    = link_to 'Voltar',  member_path, class:'btn btn-primary pull-right'
+  - if can? :new, @project_status
+    = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+  - else
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

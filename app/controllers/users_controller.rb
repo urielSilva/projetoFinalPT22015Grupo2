@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user! # Retire essa linha para o cadastro do 1º admin
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource except: [:create]
+  load_and_authorize_resource except: [:create] # Retire essa linha para o cadastro do 1º admin
 
   def index
     @users = User.all.order(:name)
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_path, notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'O usuário foi criado com sucesso.' }
       else
         format.html { render action: "new" }
       end
@@ -48,8 +48,8 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      if @user.update_attributes(params[:user].permit(:name, :last_name, :profile_id, :job_id, :sector_id, :email, :password, :password_confirmation))
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+      if @user.update_attributes(params[:user].permit(:name, :last_name, :user_status_id, :profile_id, :job_id, :sector_id, :email, :password, :password_confirmation))
+        format.html { redirect_to users_path, notice: 'O usuário foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_path, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_path, notice: 'O usuário foi excluído com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :last_name, :profile_id, :job_id, :sector_id, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :last_name, :user_status_id, :profile_id, :job_id, :sector_id, :email, :password, :password_confirmation)
     end
 
 end

@@ -1,6 +1,5 @@
-== render 'form'
+h3.text-right
+	span Estado de Projeto: 
+	span = @project_status.status
 
-= link_to 'Show', @project_status
-'|
-= link_to 'Back', project_status_path
-
+= render 'form'

@@ -1,32 +1,44 @@
 - if @profiles.empty?
-  == render '/errorempty'
-  br
-  br
-  .center
-    = link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn blue darken-2'
+  = render 'layouts/errorempty'
+  .vertical-align
+    = link_to 'Novo Perfil', new_profile_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.right
-    span Perfis
+  h3.text-right Perfis
 
-  table class="highlight responsive-table"
+  table.table.table-hover.table-responsive
+
     thead
       tr
         th ID
         th Nome
+        th
+        - if can? :edit, @profile
+          th
+        - if can? :destroy, @profile
+          th
 
     tbody
+
       - @profiles.each do |profile|
+
         tr
-          td = profile.id
+          td
+            strong
+              = profile.id
           td = profile.name
           td = link_to 'Exibir', profile
-          td = link_to 'Editar', edit_profile_path(profile)
-          td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @profile
+            td = link_to 'Editar', edit_profile_path(profile)
+          - if can? :destroy, @profile  
+            td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
+  - if can? :create, @profile
+    = link_to 'Novo Perfil', new_profile_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
 
-  = link_to 'Novo Perfil', new_profile_path, :class=>'waves-effect waves-light btn blue darken-2'
-
+  - else
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
 

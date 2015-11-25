@@ -1,13 +1,18 @@
-p#notice = notice
+h3.text-right
+	span Atividade: 
+	span = @activity.description
 
 p
-  strong Descrição: 
-  = @activities.activity_description
+  strong Descrição:  
+  = @activity.description
+p
+  strong Número de créditos: 
+  = @activity.credit_numbers
 
-  strong Nível de dificuldade:
-  = @activities.activity_difficulty_level 
+br
 
-- if @user == current_user or current_user.profile_id == 2
-	= link_to 'Editar', edit_activities_path(@activity), :class=>'waves-effect waves-light btn green darken-3'
-'|
-= link_to 'Voltar', activities_path, :class=>'waves-effect waves-light btn green darken-3'
+- if can? :edit, @activity
+	= link_to 'Editar', edit_activity_path(@activity), class:'btn btn-primary'
+	
+= link_to 'Voltar', activities_path, class:'btn btn-primary pull-right'
+

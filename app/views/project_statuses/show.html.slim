@@ -1,10 +1,14 @@
-p#notice = notice
+h3.text-right
+	span Estado de Projeto: 
+	span = @project_status.status
 
 p
-  strong Status: 
-  = @projectstatus.status
+  strong Estado: 
+  = @project_status.status
 
-- if @user == current_user or current_user.profile_id == 2
-	= link_to 'Editar', edit_project_status_path(@projectstatus), class:'btn btn-primary pull-left'
-'|
+br
+
+- if can? :edit, @project_status
+  = link_to 'Editar', edit_project_status_path(@project_status), class:'btn btn-primary'
+
 = link_to 'Voltar', project_statuses_path, class:'btn btn-primary pull-right'

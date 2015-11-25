@@ -1,12 +1,24 @@
 = form_for @profile do |f|
+
   - if @profile.errors.any?
+
     #error_explanation
       h2 = "#{pluralize(@profile.errors.count, "error")} prohibited this profile from being saved:"
       ul
         - @profile.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions = f.submit
+  .form-group
+    = f.label 'Nome'
+    = f.text_field :name, class:'form-control'
+
+  .actions
+
+  br
+
+  - if current_page?(new_profile_path)
+    = f.button 'Criar Perfil', class:'btn btn-primary'
+  - else
+    = f.button 'Atualizar Perfil', class:'btn btn-primary'
+    
+  = link_to 'Voltar', profiles_path, class:'btn btn-primary pull-right'

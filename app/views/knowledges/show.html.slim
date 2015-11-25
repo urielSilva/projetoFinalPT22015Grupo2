@@ -1,13 +1,16 @@
-p#notice =notice
+h3.text-right
+	span Conhecimento: 
+	span = @knowledge.description
 
 p
-  strong Nível de Conhecimento:
-  = @knowledge.knowledge_level
+  strong Nível de Conhecimento: 
+  = @knowledge.knowledge_level.level
 
 p
-  strong Descrição:
+  strong Descrição: 
   = @knowledge.description
 
-= link_to 'Editar', edit_knowledge_path(@knowledge), :class=>'waves-effect waves-light btn green darken-3'
-'|
-= link_to 'Voltar', knowledges_path, :class=>'waves-effect waves-light btn green darken-3'
+br
+
+= link_to 'Editar', edit_knowledge_path(@knowledge), class:'btn btn-primary'
+= link_to 'Voltar', knowledges_path, class:'btn btn-primary pull-right'

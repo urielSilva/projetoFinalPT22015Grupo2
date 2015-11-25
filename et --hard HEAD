@@ -1,0 +1,548 @@
+[33mcommit 8bca651fe26c731f4308d4f5169b2430b2b2ea43[m
+Merge: 44f0e3b 4a8dad7
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 24 13:16:09 2015 -0200
+
+    update
+
+[33mcommit 44f0e3b9eef68d6b28fa61bc9cd81100ca4a2b56[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 24 13:15:15 2015 -0200
+
+    update
+
+[33mcommit 4a8dad787b524d8c51ea6eb214aaeb223e59024b[m
+Merge: abdd30c 4717755
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Tue Nov 24 12:42:55 2015 -0200
+
+    arrumando conflito
+
+[33mcommit 4717755d218b0be7fe41195c2b0f034d5b33275e[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 23 16:47:55 2015 -0200
+
+    Materialize removido, tela de login reformulada, retirado ID th de users index
+
+[33mcommit abdd30cbc2c35f3bda5834f0b8a7013071283f8a[m
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Mon Nov 23 15:07:54 2015 -0200
+
+    Admin gerencia projetos e status de projetos
+
+[33mcommit 12bbbf12a5085e01c223290ecf2732ad3cde1ccc[m
+Merge: e30c8ad c02e0ee
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Mon Nov 23 13:19:49 2015 -0200
+
+    Merge https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit e30c8ade9d71c8436c56f45a37122b84004cb058[m
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Mon Nov 23 13:19:42 2015 -0200
+
+    conflito
+
+[33mcommit 525d282e49be21804865d0de06b7f30bd7e447a4[m
+Merge: 1fa7ff9 c02e0ee
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 23 13:19:14 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit c02e0ee922a6bc655ccc38d7892aa6402d175584[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 23 13:13:24 2015 -0200
+
+    fix config/locale
+
+[33mcommit 0d572038a06b9b29c1d74e21d0744fda2b2fdff9[m
+Merge: c4a9329 045657a
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 23 13:04:06 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit c4a93294508ba9de97e00bf6d0c9063ed1ff1082[m
+Merge: bce5e64 8ef09f7
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 23 13:03:17 2015 -0200
+
+    conflitos
+
+[33mcommit 8ef09f7e76192b85518634eb9db6f759b4d84dca[m
+Merge: 3412476 2638ea1
+Author: Rafael Alves Fernandes <rafaelalves@cjr.org.br>
+Date:   Mon Nov 23 12:57:08 2015 -0200
+
+    Merge pull request #5 from urielSilva/feature/rafael
+    
+    Merge Feature/rafael -> develop
+
+[33mcommit 2638ea17067de3e82ba4c3811266fdef0676ac64[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 23 12:55:02 2015 -0200
+
+    pacotao css/html
+
+[33mcommit 1fa7ff97566a85cb2f8ada8686f48b3564647382[m
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 23 12:29:29 2015 -0200
+
+    Atividade com algumas alteracoes.
+
+[33mcommit 045657a8c30297f757ce135a6a53e28c8f1a6641[m
+Merge: f5bf348 bce5e64
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 23 10:55:47 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit f5bf348f604e9ef7923ed9391551b6332a780cf0[m
+Merge: 363b864 c318fb1
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 23 10:55:23 2015 -0200
+
+    Atividade ...
+
+[33mcommit c2a3aafa18f26915b26a2b350c4a127f2ff8619d[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Sun Nov 22 18:24:55 2015 -0200
+
+    rotas arrumadas
+
+[33mcommit bce5e64c56c63390df2e55e982ee2dd72c6b930c[m
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Sun Nov 22 16:34:56 2015 -0200
+
+    Gráfico de projetos finalizados Em desenvolvimento criado
+
+[33mcommit 3412476fa97ed5a025ca84e0df87c1bed20c7842[m
+Merge: 9810f0f 7dc934f
+Author: Rafael Alves Fernandes <rafaelalves@cjr.org.br>
+Date:   Sun Nov 22 09:53:41 2015 -0200
+
+    Merge pull request #4 from urielSilva/feature/rafael
+    
+    Merge Feature/rafael -> develop
+
+[33mcommit 9810f0fc4fac0b9d593e4d02cc5c66270012e606[m
+Merge: 0dc150e 583da54
+Author: Rafael Alves Fernandes <rafaelalves@cjr.org.br>
+Date:   Sun Nov 22 09:23:11 2015 -0200
+
+    Merge pull request #3 from urielSilva/feature/gabrielalmeida
+    
+    Merge Feature/gabrielalmeida -> develop
+
+[33mcommit 7dc934f91154fa064c4c67fa041d0fe40af3d2db[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Sun Nov 22 07:49:38 2015 -0200
+
+    usuário pode deletar sua conta - tradução dos flashs - correção do botão 'editar' na view show de users, só aparecerá para o próprio usuário
+
+[33mcommit 0dc150ea667b6a7b20e188ab9692e08da04c66b0[m
+Merge: a44fafc b343813
+Author: Rafael Alves Fernandes <rafaelalves@cjr.org.br>
+Date:   Sun Nov 22 00:25:59 2015 -0200
+
+    Merge pull request #2 from urielSilva/feature/rafael
+    
+    Merge Feature/rafael -> develop
+
+[33mcommit 583da5424b4295e4acad04819e8e68f3cf720936[m
+Author: gabriel <g.almeidaa.campos@gmail.com>
+Date:   Sat Nov 21 23:57:32 2015 -0200
+
+    Autenticacao de knowledge_levels e Select em Areas
+
+[33mcommit b343813f4c03288c27d3e4ded25757c52da835b0[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Sat Nov 21 22:16:29 2015 -0200
+
+    fixed user create, novos estilos para os notices, reorganização dos htmls/css
+
+[33mcommit 1d669f3b3d0d7ca95d7da0fc41e7abe638166b62[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Sat Nov 21 17:01:45 2015 -0200
+
+    em users: método update, com e sem senha - permitido usuário ver todos e editar apenas seu usuário - ĺogin para acessar - métodos restringidos (cancan), no application: sigla SAP redireciona para admin ou member - avisos e alertas estão sendo exibidos ao login/logout, update, failed creation, etc...
+
+[33mcommit 563911fb2d31616f6fbce576a25a2350d55b477a[m
+Merge: fedc894 c318fb1
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Sat Nov 21 15:22:28 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit fedc89472e918d1fed53bd760f7e99acae0aaf43[m
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Sat Nov 21 15:22:19 2015 -0200
+
+    frescura materialize
+
+[33mcommit c318fb1004386490ad3d09f5d1a0a3bdb983bd3e[m
+Merge: 4b4ac04 a44fafc
+Author: Rafael Alves Fernandes <rafaelalves@cjr.org.br>
+Date:   Sat Nov 21 15:20:48 2015 -0200
+
+    Merge pull request #1 from urielSilva/develop
+    
+    Merge develop -> master
+
+[33mcommit a44fafcc7c6cad5135b7b94541f99f78a153f65d[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Fri Nov 20 15:51:58 2015 -0200
+
+    update form cadastro: migration sector e add sector_id
+
+[33mcommit 3c4d644a9b6a743aa3c538c97e33598bc25b5936[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Fri Nov 20 15:45:47 2015 -0200
+
+    update form cadastro: add job_id
+
+[33mcommit bd506cfa8671f1c635ebc018910f1622ee31f5c9[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Fri Nov 20 15:43:08 2015 -0200
+
+    update form cadastro: add profile_id
+
+[33mcommit b1723958477a56d7cc8e6c238dd32d8ecfdcb7fe[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Fri Nov 20 15:36:16 2015 -0200
+
+    update form cadastro: add name e last_name
+
+[33mcommit 4b4ac049de919be6876891efc8b150fe57597109[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Fri Nov 20 15:30:55 2015 -0200
+
+    views de admin/member
+
+[33mcommit 18e638240b35c4fdd7f7f37ce00523f3de4203e2[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Fri Nov 20 14:59:21 2015 -0200
+
+    Finalmente: cadastro/gerenciamento de usuários, login e views de admin/membro
+
+[33mcommit 872442c854573f2906b7eeb33159b674e08e4555[m
+Merge: 8e8f870 9e95d4f
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Tue Nov 17 11:53:41 2015 -0200
+
+    conflitos
+
+[33mcommit 9e95d4fd5387898662f29648c71d10b5f8f6f453[m
+Merge: 04f523b 1c93836
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 17 13:51:32 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit 04f523bb68d99aff3b21cb5630d8191107a3f5ca[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 17 13:50:47 2015 -0200
+
+    update
+
+[33mcommit 136b8cb83db68a71cef0c49938ac4759603b5911[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 17 13:47:52 2015 -0200
+
+    update
+
+[33mcommit 1c9383642ebc18884bdd0ade0642256ca73f2046[m
+Merge: 4081e5a f3778b7
+Author: gabrielalmeidaa <g.almeidaa.campos@gmail.com>
+Date:   Tue Nov 17 15:40:23 2015 +0000
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit f3778b7fe0d87798c272c0938a8e131cb092a4f8[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 17 13:39:44 2015 -0200
+
+    update
+
+[33mcommit 4081e5ad527f0b1582aed9e5ccccd834803366f8[m
+Merge: b8bab58 c494dcd
+Author: gabrielalmeidaa <g.almeidaa.campos@gmail.com>
+Date:   Tue Nov 17 15:38:33 2015 +0000
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit b8bab5812133ba066d38395184cb91cab86b4cfc[m
+Author: gabrielalmeidaa <g.almeidaa.campos@gmail.com>
+Date:   Tue Nov 17 15:38:08 2015 +0000
+
+    view de areas
+
+[33mcommit 463ffdb22a5ba69432fbcdcd5a06d5d39fba883f[m
+Author: gabrielalmeidaa <g.almeidaa.campos@gmail.com>
+Date:   Tue Nov 17 15:36:52 2015 +0000
+
+    Views de Area
+
+[33mcommit 8e8f8700430758b123fed4301c852e53683c2ec0[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Tue Nov 17 11:53:15 2015 -0200
+
+    conflitos
+
+[33mcommit ff4ddca6e2f93447665d3976b52d78f6b2af6c2d[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Tue Nov 17 11:51:51 2015 -0200
+
+    fixed areas/sectors relationship
+
+[33mcommit c494dcdbf10c6a734469cad584bfc915ab7c42b5[m
+Merge: 3442ee0 dafe44f
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Tue Nov 17 11:35:06 2015 -0200
+
+    js clean
+
+[33mcommit dafe44f3c3ef8b757a272107649b1cf3f44c1b10[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 17 13:29:29 2015 -0200
+
+    update
+
+[33mcommit 760253a1443cf617cc26a6b712209f5f47d40cf9[m
+Merge: d3d2159 0cc7410
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 17 12:53:10 2015 -0200
+
+    update
+
+[33mcommit d3d215933798877e2db6955fb64fbf7459e3b167[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Tue Nov 17 12:46:38 2015 -0200
+
+    update
+
+[33mcommit 3442ee02d5957b145f768cfd3daae3bf898c56a7[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Tue Nov 17 11:33:27 2015 -0200
+
+    fixed select
+
+[33mcommit 0cc7410501cb9dcfdb7de226dc4fd3ef76e96fd1[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Tue Nov 17 08:36:50 2015 -0200
+
+    fixed nav/footer, arrumado path projects e estilos
+
+[33mcommit 363b8649630b4b44712050b496d432b272aacecf[m
+Merge: 5a89956 09f37fb
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 16 13:49:46 2015 -0200
+
+    Atividade ...
+
+[33mcommit 5a8995640f459392d78258319c31078c6c97f62f[m
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 16 13:43:56 2015 -0200
+
+    Atividade ...
+
+[33mcommit 00dd3d32800250a626d33ef4cde0b6b21f25e48d[m
+Merge: 991482a 07b4e5b
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 16 13:26:39 2015 -0200
+
+    Atividade 2 ...
+
+[33mcommit 991482a46f4540e4e6b52b5a2cd36d6f76183f89[m
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Mon Nov 16 13:07:04 2015 -0200
+
+    Atividade...
+
+[33mcommit c275d2ba5a94c13e913468453dc0e20cfc8173d6[m
+Merge: 164c454 07b4e5b
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Mon Nov 16 13:03:20 2015 -0200
+
+    socorro
+
+[33mcommit 164c454b5855470db2e5f3ed87fc7b17e6d3a38d[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Mon Nov 16 12:59:35 2015 -0200
+
+    socorro
+
+[33mcommit e0689d924b043b93c10094191920389d4c6fb36b[m
+Merge: 972e40d b9bf443
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Mon Nov 16 12:58:47 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+    
+    Conflicts:
+    	db/schema.rb
+
+[33mcommit 09f37fb6bbb9a8ea7e80a43d31b2123bcc04e195[m
+Merge: e0b88c4 00dd3d3
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 16 11:41:17 2015 -0200
+
+    conflitos
+
+[33mcommit e0b88c4244d83ae8c4adb65d546e32901e10f291[m
+Merge: f00d07b 07b4e5b
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 16 11:19:34 2015 -0200
+
+    conflitos
+
+[33mcommit f00d07b923425f0d9383350cecc7b18148d8f71f[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 16 11:16:33 2015 -0200
+
+    aplication view e js
+
+[33mcommit f45ccd6344e24eeba430212c15a6e1b8fe83c296[m
+Author: Rafael <rafaelalves@cjr.org.br>
+Date:   Mon Nov 16 11:15:36 2015 -0200
+
+    novo estilo
+
+[33mcommit 07b4e5b6a005f33e40caffd5057ef5e562153c4e[m
+Merge: e26d7f6 bb68ade
+Author: gabriel <g.almeidaa.campos@gmail.com>
+Date:   Thu Nov 12 16:55:47 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit e26d7f6df1ffcba93af6698e79da646141db34c9[m
+Author: gabriel <g.almeidaa.campos@gmail.com>
+Date:   Thu Nov 12 16:54:10 2015 -0200
+
+    Resolvendo erro em Sectors
+
+[33mcommit bb68ade4aaa048d325f434f86acad1056c80911c[m
+Merge: a90224a 21183a8
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Thu Nov 12 13:45:36 2015 -0200
+
+    arrumando conflito
+
+[33mcommit a90224a0d80b6591f21535fc48e9e1c4ee28656b[m
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Thu Nov 12 13:40:55 2015 -0200
+
+    project e projectStatus funcionando
+
+[33mcommit 21183a8fb5326e17fd324e6fcd3890098e560bc4[m
+Merge: 5291e69 9b8e9c4
+Author: Rafael Fernandes <rafaelalves@cjr.org.br>
+Date:   Thu Nov 12 10:45:25 2015 -0200
+
+    conflitos
+
+[33mcommit 5291e69016b4672594c47f401525ec4a1a014f12[m
+Author: Rafael Fernandes <rafaelalves@cjr.org.br>
+Date:   Thu Nov 12 10:44:04 2015 -0200
+
+    rotas jobs
+
+[33mcommit 9b8e9c471a2b278b562ba4a6d9da2ac8e00d281d[m
+Author: gabriel <g.almeidaa.campos@gmail.com>
+Date:   Wed Nov 11 20:40:20 2015 -0200
+
+    maldito database.yml
+
+[33mcommit 330ba024b2132062efc48f8f9540bcd2648e90b4[m
+Author: gabriel <g.almeidaa.campos@gmail.com>
+Date:   Wed Nov 11 20:37:23 2015 -0200
+
+    Adicionado o model referente a Areas
+
+[33mcommit 45128095de1fc34ef7b1e608059ddbc9e3a473ae[m
+Merge: abee119 e84ec39
+Author: Rafael Fernandes <rafaelalves@cjr.org.br>
+Date:   Tue Nov 10 11:33:50 2015 -0200
+
+    Arrumando conflitos
+
+[33mcommit abee119f3e21dcdeac4cb8bc0846cd35bf196714[m
+Author: Rafael Fernandes <rafaelalves@cjr.org.br>
+Date:   Tue Nov 10 11:30:23 2015 -0200
+
+    Criado CRUD de Tecnologia
+
+[33mcommit e84ec39ac9b9add37129246cc3f19e06eeeeb6fe[m
+Merge: e0770cf b9bf443
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Mon Nov 9 13:46:51 2015 -0200
+
+    consertando conflicts
+
+[33mcommit e0770cf56d29464fdbed6af4526f8cc011706f1c[m
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Mon Nov 9 13:45:39 2015 -0200
+
+    consertando project e project status ta funfando
+
+[33mcommit 972e40d8d3c897ae8a01d6a5239691dee7a7e0dc[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Mon Nov 9 13:24:52 2015 -0200
+
+    update
+
+[33mcommit b9bf44320f37fc4cf2bd1ab75a62a76fe891ee10[m
+Merge: 70551ae 57b2e07
+Author: Rafael Fernandes <rafaelalves@cjr.org.br>
+Date:   Sun Nov 8 17:09:45 2015 -0200
+
+    Conflitos
+
+[33mcommit 70551aef3d72c9ecb20c6af837babfe593dcf34a[m
+Author: Rafael Fernandes <rafaelalves@cjr.org.br>
+Date:   Sun Nov 8 17:08:03 2015 -0200
+
+    Model de technoogy
+
+[33mcommit 57b2e07723513273a1746c003f15bdc1c43f7d19[m
+Merge: 5f473da 19f69d9
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Fri Nov 6 10:07:32 2015 -0200
+
+    commit ae
+
+[33mcommit 5f473da72cdf8a5ac960944a7d4f1c8ad7c80b5a[m
+Author: gabrielmm1234 <gabrielmesquita@cjr.org.br>
+Date:   Fri Nov 6 09:54:54 2015 -0200
+
+    subindo models e migration project e project_status
+
+[33mcommit 19f69d96897c9090960714f31cbf192b5b50532b[m
+Merge: 375cb8f e9659b8
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Thu Nov 5 15:25:26 2015 -0200
+
+    Merge branch 'master' of https://github.com/urielSilva/projetoFinalPT22015Grupo2
+
+[33mcommit 375cb8ff21120179c6cc22518c76911efc742d71[m
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Thu Nov 5 13:58:32 2015 -0200
+
+    Model do Atividade
+
+[33mcommit e9659b8dbab9c4ea98af775dbefc97926706bff7[m
+Author: Bruno <brunooliveira@cjr.rg.br>
+Date:   Thu Nov 5 13:53:32 2015 -0200
+
+    update da aula de hoje
+
+[33mcommit 3ced5c29e2bc891ce927937b5008a01f68fbb5e1[m
+Merge: d58152e 8c08fd1
+Author: annecarolina <annecarolina@cjr.org.br>
+Date:   Thu Nov 5 12:51:48 2015 -0200
+
+    alteracoes
+
+[33mcommit d58152e4b02c4114dde0054451bf048d31be9600[m
+Author: annecarolina <annecarolina@cjr.o

@@ -1,4 +1,5 @@
 = form_for @area do |f|
+
   - if @area.errors.any?
     #error_explanation
       h2 = "#{pluralize(@area.errors.count, "error")} prohibited this area from being saved:"
@@ -6,12 +7,21 @@
         - @area.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
+  .form-group
+    = f.label 'Nome'
+    = f.text_field :name, class:'form-control'
 
-  .field
+  .form-group
     = f.label 'Núcleo'
-    = f.select :sector_id,Sector.all.map{|ps| [ps.name,ps.id]}
+    = f.select :sector_id, Sector.all.map{|ps| [ps.name,ps.id]}, {}, { class:'form-control' }
  
-  .actions = f.submit
+  .actions
+
+    br
+    
+    - if current_page?(new_area_path)
+      = f.button 'Criar Área', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Área', class:'btn btn-primary'
+         
+    = link_to 'Voltar', areas_path, class:'btn btn-primary pull-right'

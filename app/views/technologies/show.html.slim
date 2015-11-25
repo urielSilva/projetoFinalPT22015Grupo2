@@ -1,4 +1,6 @@
-p#notice = notice
+h3.text-right
+	span Tecnologia: 
+	span = @technology.name
 
 p
   strong Nome: 
@@ -6,10 +8,12 @@ p
 
   br
 
-  strong Description: 
+  strong Descrição: 
   = @technology.description
 
-- if @user == current_user or current_user.profile_id == 2
-= link_to 'Editar', edit_technology_path(@technology), class:'btn btn-primary pull-left'
-'|
+br
+
+- if can? :edit, @technology
+  = link_to 'Editar', edit_technology_path(@technology), class:'btn btn-primary'
+
 = link_to 'Voltar', technologies_path, class:'btn btn-primary pull-right'

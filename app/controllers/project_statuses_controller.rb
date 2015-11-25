@@ -1,5 +1,6 @@
 class ProjectStatusesController < ApplicationController
-		before_action :set_project, only: [:show, :edit, :update, :destroy]
+	
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
   # GET /jobs.json
@@ -64,7 +65,7 @@ class ProjectStatusesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @projectstatus = ProjectStatus.find(params[:id])
+      @project_status = ProjectStatus.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

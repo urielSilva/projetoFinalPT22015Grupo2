@@ -1,0 +1,65 @@
+= form_for(@user) do |f|
+  
+  - if @user.errors.any?
+  
+    #error_explanation
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
+        - @user.errors.full_messages.each do |message|
+          p = message
+          
+  .form-group
+    = f.label 'Nome'
+    = f.text_field :name, class:'form-control'
+
+  .form-group
+    = f.label 'Sobrenome'
+    = f.text_field :last_name, class:'form-control'
+
+  - if can? :new, @user # Retire essa linha para o cadastro do 1º admin
+
+    .form-group
+      = f.label 'Status'
+      = f.select :user_status_id, UserStatus.all.map{|u| [u.status, u.id]}, {}, {class:'form-control'}
+
+    .form-group
+      = f.label 'Perfil'
+      = f.select :profile_id, Profile.all.map{ |p| [p.name, p.id]}, {}, {class:'form-control'}
+
+    .form-group
+      = f.label 'Cargo'
+      = f.select :job_id, Job.all.map{ |j| [j.name, j.id]}, {}, {class:'form-control'}
+
+    .form-group
+      = f.label 'Núcleo'
+      = f.select :sector_id, Sector.all.map{ |s| [s.name, s.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Email'
+    = f.email_field :email, class:'form-control'
+
+  .form-group
+    = f.label 'Senha'
+
+    - unless current_page?(new_user_path) or @user.errors.any?
+      span.help-block Deixe em branco se não quiser alterar
+
+    = f.password_field :password, class:'form-control'
+
+  .form-group
+    = f.label 'Confirmação de Senha'
+    = f.password_field :password_confirmation, class:'form-control'
+  
+  .actions
+
+    br
+
+    - if current_page?(new_user_path) or @user.errors.any?
+      = f.button 'Criar Usuário', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Usuário', class:'btn btn-primary'
+
+    = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'

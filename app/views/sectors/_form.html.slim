@@ -1,23 +1,33 @@
 = form_for @sector do |f|
+
   - if @sector.errors.any?
+
     #error_explanation
       h2 = "#{pluralize(@sector.errors.count, "error")} prohibited this sector from being saved:"
       ul
         - @sector.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :short_name
-    = f.text_field :short_name
+  .form-group
+    = f.label 'Sigla'
+    = f.text_field :short_name, class:'form-control'
     
-  .field
-    = f.label :name
-    = f.text_field :name
+  .form-group
+    = f.label 'Nome'
+    = f.text_field :name, class:'form-control'
   
-  .field
-    = f.label :description
-    = f.text_field :description
+  .form-group
+    = f.label 'Descrição'
+    = f.text_field :description, class:'form-control'
 
-  .actions 
-    = f.button 'Criar Núcleo'
+  .actions
 
+    br
+
+    - if current_page?(new_sector_path)
+      = f.button 'Criar Núcleo', class:'btn btn-primary'
+
+    - else
+      = f.button 'Atualizar Núcleo', class:'btn btn-primary'
+
+    = link_to 'Voltar', sectors_path, class:'btn btn-primary pull-right'

@@ -1,0 +1,14 @@
+h3.text-right
+	span Tipo de Atividade: 
+	span = @activity_type.description
+
+p
+  strong Descrição: 
+  = @activity_type.description
+
+br
+
+- if can? :edit, @activity_type
+	= link_to 'Editar', edit_activity_type_path(@activity_type), class:'btn btn-primary'
+	
+= link_to 'Voltar', activity_types_path, class:'btn btn-primary pull-right'

@@ -16,5 +16,5 @@ class ApplicationController < ActionController::Base
 		flash[:error] = 'Você não tem autorização para tal ação.'
 		redirect_to (request.referer || member_path)
   end
-  
+
 end

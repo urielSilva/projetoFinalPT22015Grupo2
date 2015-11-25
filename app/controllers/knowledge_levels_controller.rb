@@ -1,5 +1,6 @@
 class KnowledgeLevelsController < ApplicationController
-  
+  load_and_authorize_resource except: [:create]
+  before_action :authenticate_user!
   before_action :set_knowledge_level, only: [:show, :edit, :update, :destroy]
 
   # GET /knowledge_levels

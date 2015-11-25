@@ -1,47 +1,53 @@
 - if @projects.size == 0
-  == render '/errorempty'
-  br
-  br
-  .center
-    = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary pull-left'
+  = render 'layouts/errorempty'
+  .vertical-align
+    - if can? :new, @project
+    = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary btn-empty'
 
 - else
 
-  .titlepage.right
-    span Projetos
+  h3.text-right Projetos
 
-  table.table.table-hover.table-responsive
+  table.table.table.table-hover.table-responsive
+
     thead
       tr
+        th ID
+        th Link
         th Descrição
         th Preço
-        th Link
-        th Status
+        th Estado
         th
-        th
-        th
+        - if can? :edit, @project
+          th
+        - if can? :delete, @project
+          th
 
     tbody
       
       - @projects.each do |project|
       
         tr
+          td
+            strong
+              = project.id
+          td = link_to 'Acessar', project.link
           td = project.description
           td = project.price
-          td = project.link
           td = project.project_status.status
           td = link_to 'Exibir', project
           td 
-            -if current_user.profile_id == 2
+            - if can? :edit, @project
               = link_to 'Editar', edit_project_path(project)
           td 
-            -if current_user.profile_id == 2
+            - if can? :delete, @project
               = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
   - if can? :new, @project
-    = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary pull-left'
+    = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
 
-  - if current_user.profile_id == 1
-    = link_to 'Voltar',  member_path, class:'btn btn-primary pull-right'
+  - else
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

@@ -1,11 +1,11 @@
 - if @knowledge_levels.empty?
   = render '/layouts/errorempty'
   .vertical-align
-    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary', style:'margin-top: 140px'
+    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  .titlepage.text-right Níveis de Conhecimento
+  
+  h3.text-right Níveis de Conhecimento
 
   table.table.table-hover.table-responsive
 
@@ -29,15 +29,16 @@
           td = knowledge_level.level
           td = knowledge_level.description
           td = link_to 'Exibir', knowledge_level
-          td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
-          td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if can? :edit, @knowledge_level
+            td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
+          - if can? :destroy, @knowledge_level
+            td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 
-  = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  - if can? :create, @knowledge_level
+    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary'
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'   
 
   - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'   
+    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
