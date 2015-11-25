@@ -7,11 +7,11 @@ p
   = @area.name
 p
   strong Núcleo: 
-  = @area.sector.short_name 
-  span  - 
-  = @area.sector.name
+  = @area.sector.short_name + ' ' + @area.sector.name
 
 br
 
-= link_to 'Editar', edit_area_path(@area), class:'btn btn-primary'
+- if can? :edit, @area
+  = link_to 'Editar', edit_area_path(@area), class:'btn btn-primary'
+  
 = link_to 'Voltar', areas_path, class:'btn btn-primary pull-right'
