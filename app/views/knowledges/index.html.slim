@@ -1,12 +1,15 @@
+.row.container-fluid
+
+  == render '/layouts/cruds/header_index_crud'
+
 - if @knowledges.size == 0
+
   = render '/layouts/errorempty'
   .vertical-align
     - if can? :new, @knowledge
       = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  h3.text-right Conhecimentos
 
   table.table.table-hover.table-responsive
 
@@ -39,9 +42,5 @@
           - if can? :delete, @knowledge
             td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
-  - if can? :new, @knowledge
-    = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary'
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'     
-
-  - else
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  br
+  == render '/layouts/cruds/footer_index_crud'

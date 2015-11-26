@@ -1,12 +1,15 @@
+.row.container-fluid
+
+  == render '/layouts/cruds/header_index_crud'
+
 - if @projects.size == 0
+
   = render 'layouts/errorempty'
   .vertical-align
     - if can? :new, @project
     = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  h3.text-right Projetos
 
   table.table.table.table-hover.table-responsive
 
@@ -44,10 +47,4 @@
               = link_to 'Excluir', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  - if can? :new, @project
-    = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary'
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
-
-  - else
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  == render '/layouts/cruds/footer_index_crud'

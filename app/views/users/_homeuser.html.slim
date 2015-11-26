@@ -1,118 +1,124 @@
-#home
+.row
 
-  .row
-  
-    .col-sm-9.col-xs-12
-      h1.text-left.name-home
-        span = current_user.name + ' ' + current_user.last_name
+  .col-sm-9.col-xs-12
+    h1.text-left.name-home
+      span = current_user.name + ' ' + current_user.last_name
 
-      - if can? :new, @user
-        span.label.label-primary Administrador
-      - else
-        span.label.label-primary Membro
+    - if can? :new, @user
+      span.label.label-primary Administrador
+    - else
+      span.label.label-primary Membro
 
-      = ' '
+    = ' '
 
-      - if current_user.user_status.status == "Ativo"
-        span.label.label-success Ativo
-      - else
-        span.label.label-danger Inativo
+    - if current_user.user_status.status == "Ativo"
+      span.label.label-success Ativo
+    - else
+      span.label.label-danger Inativo
 
-    .col-sm-3.col-xs-12
-      = gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 130 }, class:'gravatar pull-right')
+  .col-sm-3.col-xs-12
+    = gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar pull-right')
 
-  / trick
-  .row
+/ trick
+.row
 
-    #home-menu
+  #home-menu
 
-      .col-sm-4.col-xs-12
+    .col-sm-4.col-xs-12
 
-        .ul.list-group
+      .ul.list-group
 
+        li.list-group-item.text-right
+          span.pull-left
+            strong Membro desde
+          span Mês/Ano
+
+        li.list-group-item.text-right
+          span.pull-left
+            strong Cargo
+          span = current_user.job.name
+
+        li.list-group-item.text-right
+          span.pull-left
+            strong Núcleo
+          span = current_user.sector.short_name
+
+        li.list-group-item.text-right
+          span.pull-left
+            strong Alocado em projeto?
+          span Sim | Não
+
+        - if can? :new, @user
           li.list-group-item.text-right
             span.pull-left
-              strong Membro desde
-            span Mês/Ano
+              strong Informações
+            = link_to 'Adquirir', :info
 
+        li.list-group-item.text-right
+          span.pull-left
+            strong Histórico de Projetos
+          = link_to 'Visualizar'
+
+        - if cannot? :new, @user
           li.list-group-item.text-right
             span.pull-left
-              strong Cargo
-            span = current_user.job.name
+              strong Solicitar
+            = link_to 'Conhecimento'
 
-          li.list-group-item.text-right
-            span.pull-left
-              strong Núcleo
-            span = current_user.sector.short_name
+        li.list-group-item.text-center Enviar Mensagem
 
-          li.list-group-item.text-right
-            span.pull-left
-              strong Alocado em projeto?
-            span Sim | Não
+  .col-sm-8
+    
+    ul.nav.nav-tabs.nav-justified
 
-          - if can? :new, @user
-            li.list-group-item.text-right
-              span.pull-left
-                strong Informações
-              = link_to 'Adquirir', :info
+      li.active
+        a href="#membros" data-toggle="tab" Membros
+      li
+        a href="#conhecimentos" data-toggle="tab" Conhecimentos
+      li
+        a href="#projetos" data-toggle="tab" Projetos
+      li
+        a href="#configuracoes" data-toggle="tab" Configurações
 
-          li.list-group-item.text-right
-            span.pull-left
-              strong Histórico de Projetos
-            = link_to 'Visualizar'
+    #tab-content
 
-          - if cannot? :new, @user
-            li.list-group-item.text-right
-              span.pull-left
-                strong Solicitar
-              = link_to 'Conhecimento'
+      .tab-pane.active#membros
 
-          li.list-group-item.text-center Enviar Mensagem
+        .content-home
+          = link_to 'usuários', users_path
+          br
+          = link_to 'perfis', profiles_path
+          br
+          = link_to 'cargo', jobs_path
+          br
+          = link_to 'núcleo', sectors_path
+          br
+          = link_to 'area', areas_path
+          br
+          = link_to 'status do usuario', user_statuses_path
 
-    .col-sm-8
-      
-      ul.nav.nav-tabs.nav-justified
+      .tab-pane#conhecimentos
+          
+        .content-home
+          = link_to 'conhecimento', knowledges_path
+          br
+          = link_to 'nivel de conhecimento', knowledge_levels_path
+          br
+          = link_to 'tecnologia', technologies_path
+          br
+          = link_to 'tipos de atividade', activity_types_path
+          br
+          = link_to 'atividade', activities_path
 
-        li.active
-          a href="#membros" data-toggle="tab" Membros
-        li
-          a href="#conhecimentos" data-toggle="tab" Conhecimentos
-        li
-          a href="#projetos" data-toggle="tab" Projetos
+      .tab-pane#projetos
 
-      #tab-content
+        .content-home
+          = link_to 'estado de projeto', project_statuses_path
+          br
+          = link_to 'projeto', projects_path
 
-        .tab-pane.active#membros
+      .tab-pane#configuracoes
 
-          .content-home
-            = link_to 'usuários', users_path
-            br
-            = link_to 'perfis', profiles_path
-            br
-            = link_to 'cargo', jobs_path
-            br
-            = link_to 'núcleo', sectors_path
-            br
-            = link_to 'area', areas_path
-            br
-            = link_to 'status do usuario', user_statuses_path
-
-        .tab-pane#conhecimentos
-            
-          .content-home
-            = link_to 'conhecimento', knowledges_path
-            br
-            = link_to 'nivel de conhecimento', knowledge_levels_path
-            br
-            = link_to 'tecnologia', technologies_path
-            br
-            = link_to 'tipos de atividade', activity_types_path
-            br
-            = link_to 'atividade', activities_path
-
-        .tab-pane#projetos
-
-          .content-home
-            = link_to 'estado de projeto', project_statuses_path
-            br
-            = link_to 'projeto', projects_path
+        .content-home
+          - @user = current_user
+          == render '/users/form'

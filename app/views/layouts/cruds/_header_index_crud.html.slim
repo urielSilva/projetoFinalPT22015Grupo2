@@ -1,0 +1,73 @@
+h3
+
+  - if current_page?(users_path)
+
+    span Usuários
+    span.label.label-success.pull-right = 'Total: ' + @users.count.to_s
+
+  - elsif current_page?(activities_path)
+
+    span Atividades
+    span.label.label-success.pull-right = 'Total: ' + @activities.count.to_s
+
+  - elsif current_page?(activity_types_path)
+
+    span Tipos de Atividade
+    span.label.label-success.pull-right = 'Total: ' + @activity_types.count.to_s
+
+  - elsif current_page?(areas_path)
+
+    span Áreas
+    span.label.label-success.pull-right = 'Total: ' + @areas.count.to_s
+
+  - elsif current_page?(jobs_path)
+
+    span Cargos
+    span.label.label-success.pull-right = 'Total: ' + @jobs.count.to_s
+
+  - elsif current_page?(knowledge_levels_path)
+
+    span Níveis de Conhecimento
+    span.label.label-success.pull-right = 'Total: ' + @knowledge_levels.count.to_s
+
+  - elsif current_page?(knowledges_path)
+
+    span Conhecimentos
+    span.label.label-success.pull-right = 'Total: ' + @knowledges.count.to_s
+
+  - elsif current_page?(profiles_path)
+
+    span Perfis
+    span.label.label-success.pull-right = 'Total: ' + @profiles.count.to_s
+
+  - elsif current_page?(project_statuses_path)
+
+    span Estados de Projeto
+    span.label.label-success.pull-right = 'Total: ' + @projectstatuses.count.to_s
+
+  - elsif current_page?(projects_path)
+
+    span Projetos
+    span.label.label-success.pull-right = 'Total: ' + @projects.count.to_s
+
+  - elsif current_page?(projects_path)
+
+    span Projetos
+    span.label.label-success.pull-right = 'Total: ' + @projects.count.to_s
+
+  - elsif current_page?(sectors_path)
+
+    span Núcleos
+    span.label.label-success.pull-right = 'Total: ' + @sectors.count.to_s
+
+  - elsif current_page?(technologies_path)
+
+    span Tecnologias
+    span.label.label-success.pull-right = 'Total: ' + @technologies.count.to_s
+
+  - elsif current_page?(user_statuses_path)
+
+    span Status de Usuário
+    span.label.label-success.pull-right = 'Total: ' + @user_statuses.count.to_s
+
+hr.divider

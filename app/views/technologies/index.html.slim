@@ -1,4 +1,9 @@
+.row.container-fluid
+
+  == render '/layouts/cruds/header_index_crud'
+
 - if @technologies.empty?
+
   = render 'layouts/errorempty'
   .vertical-align
     - if can? :new, @technology
@@ -6,12 +11,11 @@
 
 - else
 
-  h3.text-right Tecnologias
-    
   table.table.table-hover.table-responsive
 
     thead
       tr
+        th ID
         th Nome
         th Descrição
         th
@@ -40,9 +44,4 @@
 
   br
   
-  - if can? :new, @technology
-    = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary'
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
-
-  - else
-    = link_to 'Voltar',  member_path, class:'btn btn-primary pull-right'
+  == render '/layouts/cruds/footer_index_crud'

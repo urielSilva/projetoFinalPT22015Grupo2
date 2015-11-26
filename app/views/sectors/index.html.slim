@@ -1,12 +1,15 @@
+.row.container-fluid
+
+  == render '/layouts/cruds/header_index_crud'
+
 - if @sectors.size == 0
+
   = render 'layouts/errorempty'
   .vertical-align
     - if can? :new, @sector
       = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  h3.text-right Núcleos
 
   table.table.table-hover.table-responsive
 
@@ -38,12 +41,5 @@
             td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  - if can? :new, @sector
-    = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary'
-
-  - if current_user.profile_id == 1
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
-
-  - else
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+  
+  == render '/layouts/cruds/footer_index_crud'

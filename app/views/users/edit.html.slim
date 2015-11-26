@@ -1,7 +1,9 @@
-h3
-	span = 'Usuário: ' + @user.name + ' ' + @user.last_name
-	span.label.label-primary.pull-right Atualizar
+.row.container-fluid
 
-hr.divider
+  h3
+  	span = 'Usuário: ' + @user.name + ' ' + @user.last_name
+  	span.label.label-success.pull-right Atualizar
 
-= render 'form'
+  hr.divider
+
+  = render 'form'

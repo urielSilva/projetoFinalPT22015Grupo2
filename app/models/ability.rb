@@ -3,7 +3,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.profile_id == 2 # profile_id == 2 => "Administrador"
+    if user.admin?
         can :manage, :all
     else
         can :read, :all

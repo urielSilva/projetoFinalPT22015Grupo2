@@ -19,18 +19,18 @@ en:
       confirmation_instructions:
         subject: "Confirmation instructions"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "[SAP] Instruções de recuperação de senha"
       unlock_instructions:
         subject: "Unlock instructions"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
     passwords:
-      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
-      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
+      no_token: "Você não pode acessar esta página sem antes requisitar a recuperação."
+      send_instructions: "Você receberá um email em breve com as instruções de recuperação."
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-      updated: "Your password has been changed successfully. You are now signed in."
-      updated_not_active: "Your password has been changed successfully."
+      updated: "Sua senha foi alterada com sucesso."
+      updated_not_active: "Sua senha foi alterada com sucesso.."
     registrations:
       destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
@@ -41,8 +41,8 @@ en:
       updated: "Your account has been updated successfully."
     sessions:
       signed_in: "Seja bem vindo!"
-      signed_out: "Tchau! Até a próxima."
-      already_signed_out: "Tchau! Até a próxima."
+      signed_out: "Até a próxima."
+      already_signed_out: "Até a próxima."
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."

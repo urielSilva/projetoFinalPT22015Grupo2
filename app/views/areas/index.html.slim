@@ -1,12 +1,15 @@
+.row.container-fluid
+
+  == render '/layouts/cruds/header_index_crud'
+
 - if @areas.size == 0
+
   = render 'layouts/errorempty'
   .vertical-align
     - if can? :new, @area
       = link_to 'Nova Área', new_area_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  h3.text-right Áreas
 
   table.table.table-hover.table-responsive
 
@@ -38,11 +41,4 @@
             td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  
-  - if can? :new, @area
-    = link_to 'Nova Área', new_area_path, class:'btn btn-primary'
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
-
-  - else
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
-
+  == render '/layouts/cruds/footer_index_crud'

@@ -1,11 +1,14 @@
+.row.container-fluid
+
+  == render '/layouts/cruds/header_index_crud'
+
 - if @profiles.empty?
+
   = render 'layouts/errorempty'
   .vertical-align
     = link_to 'Novo Perfil', new_profile_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  h3.text-right Perfis
 
   table.table.table-hover.table-responsive
 
@@ -35,10 +38,5 @@
             td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  - if can? :create, @profile
-    = link_to 'Novo Perfil', new_profile_path, class:'btn btn-primary'
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'    
-
-  - else
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
-
+  
+  == render '/layouts/cruds/footer_index_crud'

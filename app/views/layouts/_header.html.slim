@@ -1,23 +1,39 @@
-- if current_user.present?
+nav.navbar.navbar-default.navbar-fixed-top
 
-	nav.navbar.navbar-default.navbar-fixed-top
+  .container
 
-		.container
+    .navbar-header
 
-			.navbar-header
-				- if current_user.profile_id == 1
-					= link_to 'SAP.CJR', member_path, class:'navbar-brand', style:"font-size: 20px"
-				- else
-					= link_to 'SAP.CJR', admin_path, class:'navbar-brand', style:"font-size: 23px"
+      - if current_user.present?
 
-			.collapse.navbar-collapse
+        - if current_user.admin?
+          .text-center.logo-header
+            span.logo-blue = link_to 'SAP.', admin_path
+            span.logo-green = link_to 'CJR', admin_path
+        - else
+          .text-center.logo-header
+            span.logo-blue = link_to 'SAP.', member_path
+            span.logo-green = link_to 'CJR', member_path
 
-				ul.nav.navbar-nav.navbar-right
-				
-					li
-						= gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true }, :gravatar => { :size => 30 }, class:'gravatar_header')
-					li
-						a href="/logout" Sair
+      - else
+          .text-center.logo-header
+            span.logo-blue = link_to 'SAP.', '/'
+            span.logo-green = link_to 'CJR', '/'
 
-				p.navbar-text.navbar-right = current_user.name + ' ' + current_user.last_name
-				p.navbar-text.navbar-right Seja bem vindo,
+    .collapse.navbar-collapse
+
+      ul.nav.navbar-nav.navbar-right
+      
+        - if current_user.present?
+          li
+            = gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true }, :gravatar => { :size => 30 }, class:'gravatar_header')
+          li
+            a href="/logout" Sair
+
+        - else
+          li
+            a href="/login" Entrar
+
+      - if current_user.present?
+        p.navbar-text.navbar-right = current_user.name + ' ' + current_user.last_name
+        p.navbar-text.navbar-right Seja bem vindo,

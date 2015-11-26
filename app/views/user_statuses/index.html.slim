@@ -1,8 +1,6 @@
-h3
-  span Status de Usuário
-  span.label.label-primary.pull-right = 'Total: ' + @user_statuses.count.to_s
+.row.container-fluid
 
-hr.divider
+  == render '/layouts/cruds/header_index_crud'
 
 - if @user_statuses.size == 0
 
@@ -42,9 +40,4 @@ hr.divider
 
   br
 
-  - if can? :new, @user_status
-    = link_to 'Novo Status de usuário', new_user_status_path, class:'btn btn-primary'
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
-
-  - else
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  == render '/layouts/cruds/footer_index_crud'

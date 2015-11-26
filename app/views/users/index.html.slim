@@ -1,64 +1,57 @@
-h3
-  span Usuários
-  span.label.label-primary.pull-right = 'Total: ' + @users.count.to_s
+.row.container-fluid
 
-hr.divider
+  == render '/layouts/cruds/header_index_crud'
 
-table.table.table-hover.table-responsive
+  table.table.table-hover.table-responsive
 
-  thead
-    tr
-      - if can? :new, @user
-        th ID
-      th Status
-      th Nome
-      th Email
-      th Perfil
-      th
-      th
-      - if can? :destroy, @user
-        th
-
-  tboby
-
-    - @users.each do |user|
-    
+    thead
       tr
-        - if can? :new, @user
+        - if current_user.admin?
+          th ID
+        th Status
+        th Nome
+        th Email
+        th Perfil
+        th
+        th
+        - if current_user.admin?
+          th
+
+    tboby
+
+      - @users.each do |user|
+      
+        tr
+          - if current_user.admin?
+            td
+              strong
+                = user.id
           td
-            strong
-              = user.id
-        td
-          - if user.user_status.status == 'Ativo'
-            .text-success
-              = user.user_status.status
-          - else
-            .text-danger
-              = user.user_status.status
+            - if user.user_status.status == 'Ativo'
+              .text-success
+                = user.user_status.status
+            - else
+              .text-danger
+                = user.user_status.status
 
-        td = user.name + ' ' + user.last_name
-        td = user.email
-        td
-          - if user.profile.name == "Membro"
-            span Membro
-          - else
-            .text-primary
-              strong Administrador
+          td = user.name + ' ' + user.last_name
+          td = user.email
+          td
+            - if user.profile.name == "Membro"
+              span Membro
+            - else
+              .text-primary
+                strong Administrador
 
-        td = link_to 'Exibir', user
+          td = link_to 'Exibir', user
 
-        td
-          - if user.id == current_user.id or current_user.profile.name == "Administrador"
-            = link_to 'Editar', edit_user_path(user)
+          td
+            - if user.id == current_user.id or current_user.admin?
+              = link_to 'Editar', edit_user_path(user)
 
-        - if can? :destroy, @user
-          td = link_to 'Excluir', user, data: {:confirm => 'Tem certeza?'}, :method => :delete
+          - if current_user.admin?
+            td = link_to 'Excluir', user, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
-br
+  br
 
-- if can? :new, @user
-  = link_to 'Criar usuário', new_user_path, class:'btn btn-primary'
-  = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
-
-- else
-  = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+  == render '/layouts/cruds/footer_index_crud'

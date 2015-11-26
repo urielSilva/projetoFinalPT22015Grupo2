@@ -1,7 +1,11 @@
-h3.text-right
-	span Cargo: 
-	span = @job.name
+#home-crud
 
-br
+  .row.container-fluid
 
-= render 'form'
+    h3
+      span Cargo
+      span.label.label-primary.pull-right Atualizar
+
+    hr.divider
+
+    = render 'form'

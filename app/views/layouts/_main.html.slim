@@ -1,11 +1,11 @@
-- if current_user.present?
+/ - if current_user.present?
 
-	#content.container
-		= render 'layouts/alert'
-		= yield
+#content.container
+	= render 'layouts/alert'
+	= yield
 
-- else
+/ - else
 
-	.container
-		= render 'layouts/alert'
-		= yield 
+/ 	.container
+/ 		= render 'layouts/alert'
+/ 		= yield
