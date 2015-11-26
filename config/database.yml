@@ -23,7 +23,7 @@ default: &default
   pool: 5
 
   username: postgres
-  password: postgres
+  password: 12345
 
 development:
   <<: *default

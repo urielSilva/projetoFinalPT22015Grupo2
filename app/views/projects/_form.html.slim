@@ -1,4 +1,4 @@
-= form_for @project do |f|
+= form_for @project,:html => {:multipart => true} do |f|
 
   - if @project.errors.any?
 
@@ -23,7 +23,12 @@
   .form-group
     = f.label 'Estado'
     = f.select :project_status_id, ProjectStatus.all.map{|ps| [ps.status,ps.id]}, {}, {class:'form-control'}
-
+  
+  - @users.each do |t|
+      = f.label t.name
+      = check_box_tag "users[#{t.id}]"
+  end
+  
   .actions
 
     br

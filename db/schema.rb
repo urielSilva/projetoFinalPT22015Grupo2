@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124212414) do
+ActiveRecord::Schema.define(version: 20151125163835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "activities", force: :cascade do |t|
     t.string   "description"
@@ -89,6 +88,14 @@ ActiveRecord::Schema.define(version: 20151124212414) do
 
   add_index "projects", ["project_status_id"], name: "index_projects_on_project_status_id", using: :btree
 
+  create_table "projects_users", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
+  add_index "projects_users", ["project_id"], name: "index_projects_users_on_project_id", using: :btree
+  add_index "projects_users", ["user_id"], name: "index_projects_users_on_user_id", using: :btree
+
   create_table "sectors", force: :cascade do |t|
     t.string   "short_name"
     t.string   "name"
@@ -102,6 +109,12 @@ ActiveRecord::Schema.define(version: 20151124212414) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "type_activities", force: :cascade do |t|
+    t.string   "Type_Activity_description"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "user_statuses", force: :cascade do |t|
@@ -143,6 +156,8 @@ ActiveRecord::Schema.define(version: 20151124212414) do
   add_foreign_key "knowledges", "knowledge_levels"
   add_foreign_key "knowledges", "technologies"
   add_foreign_key "projects", "project_statuses"
+  add_foreign_key "projects_users", "projects"
+  add_foreign_key "projects_users", "users"
   add_foreign_key "users", "jobs"
   add_foreign_key "users", "profiles"
   add_foreign_key "users", "sectors"
