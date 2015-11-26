@@ -1,12 +1,15 @@
+.row.container-fluid
+
+  == render '/layouts/cruds/header_index_crud'
+
 - if @activity_types.size == 0
+
   = render 'layouts/errorempty'
   .vertical-align
     - if can? :new, @activity_type
       = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary btn-empty'
 
 - else
-
-  h3.text-right Tipos de Atividade
 
   table.table.table-hover.table-responsive
 
@@ -37,12 +40,4 @@
 
   br
   
-  - if can? :new, @activity_type
-    = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary'
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
-    
-  - else
-    = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
-
-
-
+  == render '/layouts/cruds/footer_index_crud'

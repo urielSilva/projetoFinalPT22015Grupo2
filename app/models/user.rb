@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   belongs_to :sector
   belongs_to :user_status
 
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :rememberable, :recoverable, :trackable, :validatable
+
+  def admin?
+    self.profile.name == "Administrador" || self.profile.name == "Admin"
+  end
   
 end

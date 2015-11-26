@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user! # Retire essa linha para o cadastro do 1º admin
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource except: [:create] # Retire essa linha para o cadastro do 1º admin
+  load_and_authorize_resource except: [:create]
 
   def index
-    @users = User.all.order(:name)
+    @users = User.includes(:profile, :user_status).all.order(:name)
   end
 
   def new
@@ -13,8 +13,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # pros espertos
-    unless @user == current_user or current_user.profile_id == 2
+    unless @user == current_user or current_user.admin?
       redirect_to users_path, :alert => "Acesso negado."
     end
   end

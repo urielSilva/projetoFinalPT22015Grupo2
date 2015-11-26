@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :user_statuses
   devise_scope :user do
     root to: "devise/sessions#new"
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
 
-  devise_for :users, :controllers => { registrations: 'users' }
+  devise_for :users#, :controllers => { registrations: 'users', passwords: 'devise/passwords' }
 
   get '/admin' => 'admin#index'
   get '/member' => 'member#index'
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
   get "info" => "infos#index"
 
   resources :users
+  resources :user_statuses
   resources :activities
   resources :activity_types
   resources :sectors

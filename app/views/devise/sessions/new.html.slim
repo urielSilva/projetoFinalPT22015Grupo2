@@ -1,8 +1,14 @@
-.vertical-align
+- clear_danger # fix flash danger from devise reset password
 
-  h2 class="sap-login text-center" Sistema de Alocação de Projetos
+#login
 
-  .loginbox.center-block
+  .col-sm-4.col-sm-offset-4.col-xs-12
+    .logo-login.text-center
+      span.logo-blue SAP.
+      span.logo-green CJR
+    br
+
+  .col-sm-4.col-sm-offset-4.col-xs-12.loginbox
 
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
 
@@ -14,6 +20,7 @@
 
         .form-group
           = f.label 'Senha'
+          = link_to "Esqueci minha senha", new_password_path(resource_name), class:'pull-right'
           = f.password_field :password, autofocus: true, class:'form-control'
 
         - if devise_mapping.rememberable?
@@ -26,7 +33,3 @@
       .actions
 
         = f.button 'Entrar', class:'btn btn-primary form-control'
-
-  br
-
-  p.text-center SAP © CJR 2015

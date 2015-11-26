@@ -1,48 +1,50 @@
-h3
-  span = @user.name + ' ' + @user.last_name
-  - if @user.user_status.status == "Ativo"
-    span.label.label-success.pull-right Ativo
-  - else
-    span.label.label-danger.pull-right Inativo
+.row.container-fluid
 
-hr.divider
+  h3
+    span = @user.name + ' ' + @user.last_name
+    - if @user.user_status.status == "Ativo"
+      span.label.label-success.pull-right Ativo
+    - else
+      span.label.label-danger.pull-right Inativo
 
-.row
+  hr.divider
 
-  .col-sm-9
+  .row
 
-    p
+    .col-sm-9
+
       p
-        strong Nome: 
-        = @user.name + ' ' + @user.last_name
-      p
-        strong Perfil: 
-        = @user.profile.name
-      p
-        strong Cargo: 
-        = @user.job.name
-      p
-        strong Email: 
-        = @user.email
-      p
-        strong Último acesso:
+        p
+          strong Nome: 
+          = @user.name + ' ' + @user.last_name
+        p
+          strong Perfil: 
+          = @user.profile.name
+        p
+          strong Cargo: 
+          = @user.job.name
+        p
+          strong Email: 
+          = @user.email
+        p
+          strong Último acesso:
 
-        - if @user.last_sign_in_at == nil
-          = ' Nunca acessou'
+          - if @user.last_sign_in_at == nil
+            = ' Nunca acessou'
 
-        - else
-          = ' '
-          = @user.last_sign_in_at
+          - else
+            = ' '
+            = @user.last_sign_in_at
 
-  .col-sm-3
+    .col-sm-3
 
-    .ul.list-group.text-center
+      .ul.list-group.text-center
 
-      li.list-group-item
-      
-        = gravatar_image_tag(@user.email.gsub('email', current_user.name), :gravatar => { :secure => true }, :gravatar => { :size => 160}, class:'gravatar')
+        li.list-group-item
+        
+          = gravatar_image_tag(@user.email.gsub('email', current_user.name), :gravatar => { :secure => true }, :gravatar => { :size => 160}, class:'gravatar')
 
-    - if @user == current_user or current_user.profile_id == 2
-    	= link_to 'Editar', edit_user_path(@user), class:'btn btn-primary'
+      - if @user == current_user or current_user.admin?
+      	= link_to 'Editar', edit_user_path(@user), class:'btn btn-primary'
 
-    = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'
+      = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'

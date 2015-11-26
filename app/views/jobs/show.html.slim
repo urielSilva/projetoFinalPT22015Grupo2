@@ -1,16 +1,21 @@
-h3.text-right
-	span Cargo: 
-	span = @job.name
+#home-crud
 
-br
+  .row.container-fluid
 
-p
-  b Nome: 
-  = @job.name
+    h3
+      span Cargo: 
+      span = @job.name
+      span.label.label-primary.pull-right Exibir
 
-br
+    hr.divider
 
-- if can? :edit, @user
-	= link_to 'Editar', edit_job_path(@job), class:'btn btn-primary'
-	
-= link_to 'Voltar', jobs_path, class:'btn btn-primary pull-right'
+    p
+      b Nome: 
+      = @job.name
+
+    br
+
+    - if can? :edit, @user
+    	= link_to 'Editar', edit_job_path(@job), class:'btn btn-primary'
+    	
+    = link_to 'Voltar', jobs_path, class:'btn btn-primary pull-right'

@@ -1,0 +1,26 @@
+#password-new
+  
+  .col-sm-4.col-sm-offset-4.col-xs-12
+    h2.text-center Recuperar Senha
+    br
+
+  .col-sm-4.col-sm-offset-4.col-xs-12.loginbox
+
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+
+      - devise_error_messages!
+
+      .form-group
+        = f.label 'Email'
+        = f.email_field :email, class:'form-control'
+
+      .actions
+
+        = f.submit "Enviar instruções de recuperação", class:'btn btn-primary form-control'
+
+        br
+        br
+
+
+        .text-center
+          = link_to 'Login', '/login'
