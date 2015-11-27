@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @activity_types.size == 0
-
+- if @activity_types.empty?
   = render 'layouts/errorempty'
-  .vertical-align
-    - if can? :new, @activity_type
-      = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -18,9 +14,9 @@
         th ID
         th Descrição
         th
-        - if can? :edit, @activity_type
+        - if current_user.admin?
           th
-        - if can? :delete, @activity_type
+        - if current_user.admin?
           th
 
     tbody
@@ -33,11 +29,10 @@
               = activity_type.id
           td = activity_type.description
           td = link_to 'Exibir', activity_type
-          - if can? :edit, @activity_type
+          - if current_user.admin?
             td = link_to 'Editar', edit_activity_type_path(activity_type)
-          - if can? :delete, @activity_type
+          - if current_user.admin?
             td = link_to 'Excluir', activity_type, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

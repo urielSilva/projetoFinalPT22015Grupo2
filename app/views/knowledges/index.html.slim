@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @knowledges.size == 0
-
+- if @knowledges.empty?
   = render '/layouts/errorempty'
-  .vertical-align
-    - if can? :new, @knowledge
-      = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -20,9 +16,9 @@
         th Descrição
         th Tecnologia
         th
-        - if can? :edit, @knowledge
+        - if current_user.admin?
           th
-        - if can? :delete, @knowledge
+        - if current_user.admin?
           th
 
     tbody
@@ -37,10 +33,10 @@
           td = knowledge.description
           td = knowledge.technology.name
           td = link_to 'Exibir', knowledge
-          - if can? :edit, @knowledge
+          - if current_user.admin?
             td = link_to 'Editar', edit_knowledge_path(knowledge)
-          - if can? :delete, @knowledge
+          - if current_user.admin?
             td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

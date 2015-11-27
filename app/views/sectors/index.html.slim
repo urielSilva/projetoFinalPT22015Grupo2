@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @sectors.size == 0
-
+- if @sectors.empty?
   = render 'layouts/errorempty'
-  .vertical-align
-    - if can? :new, @sector
-      = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -20,9 +16,9 @@
         th Nome
         th Descrição
         th
-        - if can? :edit, @sector
+        - if current_user.admin?
           th
-        - if can? :delete, @sector
+        - if current_user.admin?
           th
 
     tbody
@@ -35,11 +31,10 @@
           td = sector.name
           td = sector.description
           td = link_to 'Exibir', sector
-          - if can? :edit, @sector
+          - if current_user.admin?
             td = link_to 'Editar', edit_sector_path(sector)
-          - if can? :delete, @sector
+          - if current_user.admin?
             td = link_to 'Excluir', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

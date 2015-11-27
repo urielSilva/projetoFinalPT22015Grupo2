@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @projects = @user.projects
   end
 
   def create
@@ -61,6 +62,15 @@ class UsersController < ApplicationController
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_path, notice: 'O usuário foi excluído com sucesso.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def makemeadmin
+    @user.update_attributes(profile_id: 2)
+    @user.save
+    respond_to do |format|
+      format.html { redirect_to admin_path, notice: 'Agora você é um admin!' }
       format.json { head :no_content }
     end
   end

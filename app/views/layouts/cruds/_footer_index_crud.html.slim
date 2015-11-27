@@ -39,6 +39,9 @@
   - elsif current_page?(user_statuses_path)
     = link_to 'Novo Status de Usuário', new_user_status_path, class:'btn btn-primary'
 
+  - elsif current_page?(projects_users_path)
+    = link_to 'Novo Relacionamento Membro-Projeto', new_projects_user_path, class:'btn btn-primary'
+
   = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
 
 - else

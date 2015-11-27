@@ -1,11 +1,55 @@
-.vertical-align
+.row.container-fluid
+  
+  .col-sm-6.col-sm-offset-3
 
-	.errorempty.center-block.alert.alert-danger
+    .errorempty
+      .alert.alert-danger
+      	span.glyphicon.glyphicon-remove-sign
+      	br
+      	br
+      	strong
+      		span Não foi possível encontrar
+      		br
+      		span nenhum dado para esta tabela.
 
-		span.glyphicon.glyphicon-remove-sign
-		br
-		br
-		strong
-			span Não foi possível encontrar
-			br
-			span nenhum dado para esta tabela.
+      - if current_page?(users_path)
+        = link_to 'Novo Usuário', new_user_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(activities_path)
+        = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(activity_types_path)
+        = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(areas_path)
+        = link_to 'Nova Área', new_area_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(jobs_path)
+        = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(knowledge_levels_path)
+         = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(knowledges_path)
+        = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(profiles_path)
+        = link_to 'Novo Perfil', new_profile_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(project_statuses_path)
+        = link_to 'Novo Estado de Projeto', new_project_status_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(projects_path)
+        = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(sectors_path)
+        = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(technologies_path)
+        = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(user_statuses_path)
+        = link_to 'Novo Status de Usuário', new_user_status_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(projects_users_path)
+        = link_to 'Novo Relacionamento Membro-Projeto', new_projects_user_path, class:'btn btn-primary form-control'

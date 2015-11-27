@@ -17,9 +17,9 @@
         th ID
         th Nome
         th
-        - if can? :edit, @profile
+        - if current_user.admin?
           th
-        - if can? :destroy, @profile
+        - if current_user.admin?
           th
 
     tbody
@@ -32,9 +32,9 @@
               = profile.id
           td = profile.name
           td = link_to 'Exibir', profile
-          - if can? :edit, @profile
+          - if current_user.admin?
             td = link_to 'Editar', edit_profile_path(profile)
-          - if can? :destroy, @profile  
+          - if current_user.admin?
             td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br

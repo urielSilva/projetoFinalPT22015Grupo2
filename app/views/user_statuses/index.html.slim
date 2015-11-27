@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @user_statuses.size == 0
-
+- if @user_statuses.empty?
   = render '/layouts/errorempty'
-  .vertical-align
-    - if can? :new, @user_status
-      = link_to 'Novo Status de Usuário', new_user_status_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -18,9 +14,9 @@
         th ID
         th Status
         th
-        - if can? :edit, @user_status
+        - if current_user.admin?
           th
-        - if can? :delete, @user_status
+        - if current_user.admin?
           th
 
     tbody
@@ -33,11 +29,10 @@
               = user_status.id
           td = user_status.status
           td = link_to 'Exibir', user_status
-          - if can? :edit, @user_status
+          - if current_user.admin?
             td = link_to 'Editar', edit_user_status_path(user_status)
-          - if can? :delete, @user_status
+          - if current_user.admin?
             td = link_to 'Excluir', user_status, data: {:confirm => 'Are you sure?'}, :method => :delete
 
   br
-
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

@@ -1,0 +1,29 @@
+.row.container-fluid
+
+  = render '/layouts/cruds/header_index_crud'
+
+table.table.table.table-hover.table-responsive
+
+  thead
+    tr
+      th ID
+      th Projeto
+      th Membro
+      th
+      th
+      th
+
+  tbody
+    - @projects_users.each do |projects_user|
+      tr
+        td
+          strong
+            = projects_user.id
+        td = projects_user.project.description
+        td = projects_user.user.name
+        td = link_to 'Exibir', projects_user
+        td = link_to 'Editar', edit_projects_user_path(projects_user)
+        td = link_to 'Excluir', projects_user, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+
+br
+= render '/layouts/cruds/footer_index_crud'

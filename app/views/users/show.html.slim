@@ -36,6 +36,12 @@
             = ' '
             = @user.last_sign_in_at
 
+        p
+          strong Projetos:
+          - @projects.each do |p|
+            p = p.description
+            br
+
     .col-sm-3
 
       .ul.list-group.text-center

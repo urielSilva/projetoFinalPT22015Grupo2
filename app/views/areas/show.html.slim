@@ -11,7 +11,7 @@ p
 
 br
 
-- if can? :edit, @area
+- if current_user.admin?
   = link_to 'Editar', edit_area_path(@area), class:'btn btn-primary'
   
 = link_to 'Voltar', areas_path, class:'btn btn-primary pull-right'

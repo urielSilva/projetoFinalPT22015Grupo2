@@ -1,12 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
 - if @knowledge_levels.empty?
-
   = render '/layouts/errorempty'
-  .vertical-align
-    = link_to 'Novo Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary btn-empty'
 
 - else
   
@@ -32,11 +29,10 @@
           td = knowledge_level.level
           td = knowledge_level.description
           td = link_to 'Exibir', knowledge_level
-          - if can? :edit, @knowledge_level
+          - if current_user.admin?
             td = link_to 'Editar', edit_knowledge_level_path(knowledge_level)
-          - if can? :destroy, @knowledge_level
+          - if current_user.admin?
             td = link_to 'Excluir', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @activities.size == 0
-
+- if @activities.empty?
   = render 'layouts/errorempty'
-  .vertical-align
-    - if can? :new, @activity
-      = link_to 'Nova Atividade', new_activity_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -43,4 +39,4 @@
             td = link_to 'Excluir', activity, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

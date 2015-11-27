@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @jobs.size == 0
-
+- if @jobs.empty?
   = render '/layouts/errorempty'
-  .vertical-align
-    - if can? :new, @job
-      = link_to 'Novo Cargo', new_job_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -18,9 +14,9 @@
         th ID
         th Nome
         th
-        - if can? :edit, @job
+        - if current_user.admin?
           th
-        - if can? :delete, @job
+        - if current_user.admin?
           th
 
     tbody
@@ -33,11 +29,10 @@
               = job.id
           td = job.name
           td = link_to 'Exibir', job
-          - if can? :edit, @job
+          - if current_user.admin?
             td = link_to 'Editar', edit_job_path(job)
-          - if can? :delete, @job
+          - if current_user.admin?
             td = link_to 'Excluir', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

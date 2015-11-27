@@ -70,4 +70,9 @@ h3
     span Status de Usuário
     span.label.label-success.pull-right = 'Total: ' + @user_statuses.count.to_s
 
+  - elsif current_page?(projects_users_path)
+
+    span Relacionamentos Membro-Projeto
+    span.label.label-success.pull-right = 'Total: ' + @projects_users.count.to_s
+
 hr.divider

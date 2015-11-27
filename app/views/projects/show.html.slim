@@ -15,9 +15,17 @@ p
 	strong Estado: 
 	= @project.project_status.status
 
+p
+  strong Membros:
+  - if @users.empty?
+    p Não há ninguém alocado neste projeto.
+  - else
+    - @users.each do |u|
+      p = u.name + ' ' + u.last_name
+
 br
 
-- if can? :edit, @project
+- if current_user.admin?
   = link_to 'Editar', edit_project_path(@project), class:'btn btn-primary'
 
 = link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'

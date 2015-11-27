@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
 - if @projectstatuses.size == 0
-
   = render '/layouts/errorempty'
-  .vertical-align
-  - if can? :new, @project_status
-    = link_to 'Novo Estado', new_project_status_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -18,9 +14,9 @@
         th ID
         th Estado
         th
-        - if can? :edit, @project_status
+        - if current_user.admin?
           th
-        - if can? :delete, @project_status
+        - if current_user.admin?
           th
 
     tbody
@@ -33,11 +29,10 @@
               = project_status.id
           td = project_status.status
           td = link_to 'Exibir', project_status
-          - if can? :edit, @project_status
+          - if current_user.admin?
             td = link_to 'Editar', edit_project_status_path(project_status)
-          - if can? :delete, @project_status
+          - if current_user.admin?
             td = link_to 'Excluir', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

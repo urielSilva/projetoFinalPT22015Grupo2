@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :projects_users
   devise_scope :user do
     root to: "devise/sessions#new"
     get '/login' => 'devise/sessions#new'
@@ -14,6 +15,11 @@ Rails.application.routes.draw do
   get "info" => "infos#index"
 
   resources :users
+  
+  post '/users/:id' => 'users#makemeadmin'
+  put '/users/:id' => 'users#makemeadmin'
+  patch '/users/:id' => 'users#makemeadmin'
+
   resources :user_statuses
   resources :activities
   resources :activity_types

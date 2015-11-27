@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
 - if @technologies.empty?
-
   = render 'layouts/errorempty'
-  .vertical-align
-    - if can? :new, @technology
-    = link_to 'Nova Tecnologia', new_technology_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -19,9 +15,9 @@
         th Nome
         th Descrição
         th
-        - if can? :edit, @technology
+        - if current_user.admin?
           th
-        - if can? :delete, @technology
+        - if current_user.admin?
           th
 
     tbody
@@ -35,13 +31,10 @@
           td = technology.name
           td = technology.description
           td = link_to 'Exibir', technology
-          td 
-            - if can? :edit, @technology
-              = link_to 'Editar', edit_technology_path(technology)
-          td 
-            - if can? :delete, @technology
-              = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+          - if current_user.admin?
+            td = link_to 'Editar', edit_technology_path(technology)
+          - if current_user.admin?
+            td = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

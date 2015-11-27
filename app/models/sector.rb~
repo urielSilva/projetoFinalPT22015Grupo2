@@ -1,4 +1,0 @@
-class Sector < ActiveRecord::Base
-  validates_presence_of :short_name, :name, :description
-  validates_lenght_of :short_name, maximum: 3
-end

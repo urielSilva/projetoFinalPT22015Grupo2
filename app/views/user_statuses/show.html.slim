@@ -1,21 +1,19 @@
-#home-crud
+.row.container-fluid
 
-  .row.container-fluid
+  h3
+    span Status de Usuário: 
+    span = @user_status.status
+    span.label.label-primary.pull-right Exibir
 
-    h3
-      span Status de Usuário: 
-      span = @user_status.status
-      span.label.label-primary.pull-right Exibir
+  hr.divider
 
-    hr.divider
+  p
+    strong Status: 
+    = @user_status.status
 
-    p
-      strong Status: 
-      = @user_status.status
+  br
 
-    br
+  - if current_user.admin?
+    = link_to 'Editar', edit_user_status_path(@user_status), class:'btn btn-primary'
 
-    - if can? :edit, @user_status
-      = link_to 'Editar', edit_user_status_path(@user_status), class:'btn btn-primary'
-
-    = link_to 'Voltar', user_statuses_path, class:'btn btn-primary pull-right'
+  = link_to 'Voltar', user_statuses_path, class:'btn btn-primary pull-right'

@@ -1,13 +1,9 @@
 .row.container-fluid
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @areas.size == 0
-
+- if @areas.empty?
   = render 'layouts/errorempty'
-  .vertical-align
-    - if can? :new, @area
-      = link_to 'Nova Área', new_area_path, class:'btn btn-primary btn-empty'
 
 - else
 
@@ -19,9 +15,9 @@
         th Nome
         th Núcleo
         th
-        - if can? :edit, @area
+        - if current_user.admin?
           th
-        - if can? :delete, @area
+        - if current_user.admin?
           th
 
     tbody
@@ -35,10 +31,10 @@
           td = area.name
           td = area.sector.name
           td = link_to 'Exibir', area
-          - if can? :edit, @area
+          - if current_user.admin?
             td = link_to 'Editar', edit_area_path(area)
-          - if can? :delete, @area
+          - if current_user.admin?
             td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
-  == render '/layouts/cruds/footer_index_crud'
+  = render '/layouts/cruds/footer_index_crud'

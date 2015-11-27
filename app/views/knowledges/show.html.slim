@@ -12,5 +12,7 @@ p
 
 br
 
-= link_to 'Editar', edit_knowledge_path(@knowledge), class:'btn btn-primary'
+- if current_user.admin?
+  = link_to 'Editar', edit_knowledge_path(@knowledge), class:'btn btn-primary'
+  
 = link_to 'Voltar', knowledges_path, class:'btn btn-primary pull-right'
