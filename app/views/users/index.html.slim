@@ -38,7 +38,8 @@
           td = user.email
           td
             - if user.profile.name == "Membro"
-              span Membro
+              text-primary
+                strong Membro
             - else
               .text-primary
                 strong Administrador
