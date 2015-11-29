@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/admin' => 'admin#index'
   get '/member' => 'member#index'
   get "projetoFD" => "infos#create"
+  get "membro_nucleo" => "infos#create_membro_nucleo"
   get "info" => "infos#index"
 
   resources :users

@@ -22,4 +22,20 @@ class InfosController < ApplicationController
 	    render json: @json
 	end
 
+	def create_membro_nucleo
+		sql = "SELECT short_name as name,count(short_name) as data from users,sectors 
+				where users.sector_id = sectors.id
+				group by short_name"
+		array = ActiveRecord::Base.connection.execute(sql)
+		arrayint = array.map{|a| {name: a["name"], data: [a["data"].to_i]}}
+		@json = []
+
+		arrayint.each do |t|
+  			@json << t
+		end
+
+		JSON.generate(@json)
+	    render json: @json
+	end
+
 end
