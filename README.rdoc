@@ -1,3 +1,3 @@
 == Sistema de Alocação de Projetos
 
-Ao clonar o repositório, dê um rake db:setup para configurar o banco de dados
+Ao clonar o repositório, dê bundle update e um rake db:setup para configurar o banco de dados.
