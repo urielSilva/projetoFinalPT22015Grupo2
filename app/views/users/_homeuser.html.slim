@@ -49,6 +49,11 @@
 
         li.list-group-item.text-right
           span.pull-left
+            strong Área
+          span = current_user.area.name
+
+        li.list-group-item.text-right
+          span.pull-left
             strong Alocado em projeto?
           - if current_user.projects.empty?
             span.text-danger Não

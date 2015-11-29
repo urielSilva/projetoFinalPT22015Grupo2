@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126235855) do
+ActiveRecord::Schema.define(version: 20151128214020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,8 +138,10 @@ ActiveRecord::Schema.define(version: 20151126235855) do
     t.string   "last_name"
     t.integer  "sector_id"
     t.integer  "user_status_id"
+    t.integer  "area_id"
   end
 
+  add_index "users", ["area_id"], name: "index_users_on_area_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["job_id"], name: "index_users_on_job_id", using: :btree
   add_index "users", ["profile_id"], name: "index_users_on_profile_id", using: :btree
@@ -147,15 +149,16 @@ ActiveRecord::Schema.define(version: 20151126235855) do
   add_index "users", ["sector_id"], name: "index_users_on_sector_id", using: :btree
   add_index "users", ["user_status_id"], name: "index_users_on_user_status_id", using: :btree
 
-  add_foreign_key "activities", "activity_types"
-  add_foreign_key "areas", "sectors"
-  add_foreign_key "knowledges", "knowledge_levels"
-  add_foreign_key "knowledges", "technologies"
-  add_foreign_key "projects", "project_statuses"
-  add_foreign_key "projects_users", "projects"
-  add_foreign_key "projects_users", "users"
-  add_foreign_key "users", "jobs"
-  add_foreign_key "users", "profiles"
-  add_foreign_key "users", "sectors"
-  add_foreign_key "users", "user_statuses"
+  add_foreign_key "activities", "activity_types", name: "activities_activity_type_id_fk"
+  add_foreign_key "areas", "sectors", name: "areas_sector_id_fk"
+  add_foreign_key "knowledges", "knowledge_levels", name: "knowledges_knowledge_level_id_fk"
+  add_foreign_key "knowledges", "technologies", name: "knowledges_technology_id_fk"
+  add_foreign_key "projects", "project_statuses", name: "projects_project_status_id_fk"
+  add_foreign_key "projects_users", "projects", name: "projects_users_project_id_fk"
+  add_foreign_key "projects_users", "users", name: "projects_users_user_id_fk"
+  add_foreign_key "users", "areas", name: "users_area_id_fk"
+  add_foreign_key "users", "jobs", name: "users_job_id_fk"
+  add_foreign_key "users", "profiles", name: "users_profile_id_fk"
+  add_foreign_key "users", "sectors", name: "users_sector_id_fk"
+  add_foreign_key "users", "user_statuses", name: "users_user_status_id_fk"
 end

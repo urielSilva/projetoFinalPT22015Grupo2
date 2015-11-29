@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
 
   def show
     @users = @project.users
+    @projects_users = ProjectsUser.where(project_id: @project.id)
   end
 
   def new

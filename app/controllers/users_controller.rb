@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @users = User.includes(:profile, :user_status).all.order(:name)
+    @users = User.includes(:profile, :user_status).all.order(:id)
   end
 
   def new
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      if @user.update_attributes(params[:user].permit(:name, :last_name, :user_status_id, :profile_id, :job_id, :sector_id, :email, :password, :password_confirmation))
+      if @user.update_attributes(params[:user].permit(:name, :last_name, :user_status_id, :profile_id, :job_id, :sector_id, :area_id, :email, :password, :password_confirmation))
         format.html { redirect_to users_path, notice: 'O usuário foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :last_name, :user_status_id, :profile_id, :job_id, :sector_id, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :last_name, :user_status_id, :profile_id, :job_id, :sector_id, :area_id, :email, :password, :password_confirmation)
     end
 
 end

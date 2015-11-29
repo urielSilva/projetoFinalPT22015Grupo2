@@ -43,14 +43,19 @@
               .text-primary
                 strong Administrador
 
-          td = link_to 'Exibir', user
+          td
+            .icon-show
+              = link_to '', user, class:'glyphicon glyphicon-eye-open'
 
           td
             - if user.id == current_user.id or current_user.admin?
-              = link_to 'Editar', edit_user_path(user)
+              .icon-show
+                = link_to '', edit_user_path(user), class:'glyphicon glyphicon-pencil'
 
           - if current_user.admin?
-            td = link_to 'Excluir', user, data: {:confirm => 'Tem certeza?'}, :method => :delete
+            td
+              .icon-show 
+                = link_to '', user, data: {:confirm => 'Tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove'
 
   br
   = render '/layouts/cruds/footer_index_crud'

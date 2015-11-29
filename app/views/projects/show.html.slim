@@ -22,6 +22,7 @@ p
   - else
     - @users.each do |u|
       p = u.name + ' ' + u.last_name
+      = link_to 'Excluir', @projects_users.where(user_id: u.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
 br
 

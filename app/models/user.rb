@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   belongs_to :job
   belongs_to :profile
   belongs_to :sector
+  belongs_to :area
   belongs_to :user_status
 
   devise :database_authenticatable, :rememberable, :recoverable, :trackable, :validatable

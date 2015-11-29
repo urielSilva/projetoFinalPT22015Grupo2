@@ -1,56 +1,96 @@
-.row.container-fluid
+#user-box.row
 
-  h3
-    span = @user.name + ' ' + @user.last_name
-    - if @user.user_status.status == "Ativo"
-      span.label.label-success.pull-right Ativo
+  .col-sm-9.col-xs-12
+    h1.text-left.name-home
+      span = @user.name + ' ' + @user.last_name
+
+    - if @user.admin?
+      span.label.label-primary Administrador
     - else
-      span.label.label-danger.pull-right Inativo
+      span.label.label-primary Membro
 
-  hr.divider
+    = ' '
 
-  .row
+    - if @user.user_status.status == "Ativo"
+      span.label.label-success Ativo
+    - else
+      span.label.label-danger Inativo
 
-    .col-sm-9
+  .col-sm-3.col-xs-12
+    = gravatar_image_tag(@user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar pull-right img-responsive')
 
-      p
-        p
-          strong Nome: 
-          = @user.name + ' ' + @user.last_name
-        p
-          strong Perfil: 
-          = @user.profile.name
-        p
-          strong Cargo: 
-          = @user.job.name
-        p
-          strong Email: 
-          = @user.email
-        p
-          strong Último acesso:
+  .col-sm-12
 
-          - if @user.last_sign_in_at == nil
-            = ' Nunca acessou'
+    ul.nav.nav-tabs.nav-justified style="margin-top: 30px"
 
-          - else
-            = ' '
-            = @user.last_sign_in_at
+      li.active
+        a href="#informacoes" data-toggle="tab" Informações
+      li
+        a href="#conhecimentos" data-toggle="tab" Conhecimentos
+      li
+        a href="#projetos" data-toggle="tab" Projetos
 
-        p
-          strong Projetos:
-          - @projects.each do |p|
-            p = p.description
-            br
+      - unless @user == current_user
+        li
+          a href="#nova-mensagem" data-toggle="tab" Enviar Mensagem
 
-    .col-sm-3
+    #tab-content
 
-      .ul.list-group.text-center
+      .tab-pane.active#informacoes
 
-        li.list-group-item
-        
-          = gravatar_image_tag(@user.email.gsub('email', current_user.name), :gravatar => { :secure => true }, :gravatar => { :size => 160}, class:'gravatar')
+        .content-home
 
-      - if @user == current_user or current_user.admin?
-      	= link_to 'Editar', edit_user_path(@user), class:'btn btn-primary'
+          .row.container-fluid
 
-      = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'
+            .ul.list-group style="margin-top: 10px"
+
+              li.list-group-item.text-center
+                strong.text-primary
+                  - if @user.job.name == "Trainee"
+                    = "Trainee"
+                  - elsif @user.job.name == "Presidente"
+                    = "Presidente"
+                  - else
+                    = @user.job.name + ' de '
+                    - if @user.sector.short_name == "NDP"
+                      = 'Desenvolvimento e Pesquisa'
+                    - elsif @user.sector.short_name == "NAM"
+                      = 'Atendimento e Marketing'
+                    - elsif @user.sector.short_name == 'NUT'
+                      = 'Talentos'
+                    - else
+                      = 'Organização Empresarial'
+
+              li.list-group-item.text-right
+                strong.pull-left Membro desde:
+                = 'Mes/Ano'
+
+              li.list-group-item.text-right
+                strong.pull-left Email
+                = @user.email
+
+              li.list-group-item.text-right
+                strong.pull-left Último acesso:
+
+                - if @user.last_sign_in_at == nil
+                  = 'Nunca acessou'
+
+                - else
+                  = @user.last_sign_in_at
+
+            - if @user == current_user or current_user.admin?
+              = link_to 'Editar', edit_user_path(@user), class:'btn btn-primary'
+
+            = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'
+
+      .tab-pane#conhecimentos
+        .content-home
+
+      .tab-pane#projetos
+        .content-home
+          - if @user.projects.empty?
+            .bg-danger.text-center style="padding: 10px; border-radius: 5px" O membro não está alocado em nenhum projeto.
+
+      - unless @user == current_user
+        .tab-pane#nova-mensagem
+          .content-home
