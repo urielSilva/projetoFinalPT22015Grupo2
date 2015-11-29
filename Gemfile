@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'mailboxer'
 gem 'rails', '4.2.4'
 gem 'rails-i18n'
 gem 'pg'
@@ -15,6 +16,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap-will_paginate'
+gem 'will_paginate'
 gem 'gravatar_image_tag'
 
 group :development, :test do

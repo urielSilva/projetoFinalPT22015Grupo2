@@ -1,0 +1,31 @@
+<h3>Suas Mensagens
+<%= link_to 'Nova Mensagem', new_message_path, class:'btn btn-success pull-right' %>
+</h3>
+<hr class="divider">
+
+<br>
+
+<div class="row">
+  <div class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+      <%= mailbox_section 'inbox', @box %>
+      <%= mailbox_section 'sent', @box %>
+      <%= mailbox_section 'trash', @box %>
+    </ul>
+  </div>
+
+  <div class="col-sm-9">
+    <% if @box == 'trash' %>
+      <p><%= link_to 'Esvaziar Lixeira', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete,
+                     data: {confirm: 'Você tem certeza?'} %></p>
+    <% end %>
+    <ul class="list-group">
+      <% if @conversations.empty? %>
+        <p class="bg-danger" style="padding: 10px; border-radius: 5px; text-align: center">Não há mensagens!</p>
+      <% end %>
+      <%= render partial: 'conversations/conversation', collection: @conversations %>
+    </ul>
+
+    <%= will_paginate %>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  acts_as_messageable
+
   validates :name, presence: true
   validates :last_name, presence: true
 
@@ -12,6 +14,10 @@ class User < ActiveRecord::Base
   belongs_to :user_status
 
   devise :database_authenticatable, :rememberable, :recoverable, :trackable, :validatable
+
+  def mailboxer_email(object)
+    email
+  end
 
   def admin?
     self.profile.name == "Administrador" || self.profile.name == "Admin"

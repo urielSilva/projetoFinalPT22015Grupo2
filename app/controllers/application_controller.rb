@@ -22,4 +22,13 @@ class ApplicationController < ActionController::Base
     flash[:danger] = nil
   end
 
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:warning] = 'Conteúdo não encontrado.'
+    redirect_back_or root_path
+  end
+
+  def redirect_back_or(path)
+    redirect_to request.referer || path
+  end
+
 end

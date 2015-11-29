@@ -17,6 +17,7 @@
       span.label.label-danger Inativo
 
   .col-sm-3.col-xs-12
+
     = gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar pull-right')
 
 / trick
@@ -30,7 +31,7 @@
 
         - unless current_user.admin?
           li.list-group-item.text-center
-            = link_to 'Make me admin', current_user, data: {:confirm => 'Grandes poderes vem com grandes responsabilidades!'}, :method => :makemeadmin
+            = link_to 'Make me admin', current_user, data: {:confirm => 'Grandes poderes vem com grandes responsabilidades!'}, :method => :makemeadmin, class:'btn btn-primary btn-responsive'
 
         li.list-group-item.text-right
           span.pull-left
@@ -78,7 +79,8 @@
               strong Solicitar
             = link_to 'Conhecimento'
 
-        li.list-group-item.text-center Enviar Mensagem
+        li.list-group-item.text-center
+          = link_to 'Mensagens', conversations_path, class:'btn btn-primary btn-responsive'
 
   .col-sm-8
     

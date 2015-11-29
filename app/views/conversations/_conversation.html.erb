@@ -1,0 +1,36 @@
+<li class="list-group-item clearfix">
+  <div class="media">
+
+    <div class="media-left">
+      <p><%= render 'conversations/participants', conversation: conversation %></p>
+    </div>
+
+    <div class="media-body">
+
+      <%= link_to conversation.subject, conversation_path(conversation) %>
+
+      <div class="btn-group-vertical pull-right">
+
+        <% if conversation.is_trashed?(current_user) %>
+          <%= link_to 'Restaurar', restore_conversation_path(conversation), class: 'btn btn-xs btn-info', method: :post %>
+        <% else %>
+          <%= link_to 'Enviar para a lixeira', conversation_path(conversation), class: 'btn btn-xs btn-danger', method: :delete,
+                      data: {confirm: 'Você tem certeza?'} %>
+
+          <% if conversation.is_unread?(current_user) %>
+            <%= link_to 'Marcar como lida', mark_as_read_conversation_path(conversation),
+                        class: 'btn btn-xs btn-info', method: :post %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <p><%= conversation.last_message.body %>
+        <small>
+          (<span class="text-muted"><%= conversation.last_message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></span>)
+        </small>
+      </p>
+    
+    </div>
+
+</div>
+</li>
