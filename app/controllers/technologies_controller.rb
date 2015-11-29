@@ -1,8 +1,11 @@
 class TechnologiesController < ApplicationController
+
+	before_action :authenticate_user!
 	before_action :set_technology, only: [:show, :edit, :update, :destroy]
+	load_and_authorize_resource except: [:create]
 
 	def index
-		@technologies = Technology.all
+		@technologies = Technology.all.paginate(page: params[:page], per_page: 10)
 	end
 
 	def show
@@ -21,7 +24,7 @@ class TechnologiesController < ApplicationController
 
 	    respond_to do |format|
 	      if @technology.save
-	        format.html { redirect_to @technology, notice: 'Technology was successfully created.' }
+	        format.html { redirect_to @technology, notice: 'A tecnologia foi criada com sucesso.' }
 	        format.json { render :show, status: :created, location: @technology}
 	      else
 	        format.html { render :new }
@@ -33,7 +36,7 @@ class TechnologiesController < ApplicationController
 	def update
 		respond_to do |format|
 			if @technology.update(technology_params)
-				format.html { redirect_to @technology, notice: 'Technology was successfully updated.' }
+				format.html { redirect_to @technology, notice: 'A tecnologia foi atualizada com sucesso.' }
 				format.json { render :show, status: :ok, location: @technology }
 			else
 				format.html { render :edit }
@@ -45,7 +48,7 @@ class TechnologiesController < ApplicationController
 	def destroy
 		@technology.destroy
 		respond_to do |format|
-			format.html { redirect_to technologies_url, notice: 'Technology was successfully destroyed.'}
+			format.html { redirect_to technologies_url, notice: 'A tecnologia foi excluída com sucesso.'}
 			format.json { head :no_content }
 		end
 	end

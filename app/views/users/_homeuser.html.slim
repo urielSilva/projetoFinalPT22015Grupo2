@@ -1,10 +1,11 @@
 .row
 
   .col-sm-9.col-xs-12
+
     h1.text-left.name-home
       span = current_user.name + ' ' + current_user.last_name
 
-    - if can? :new, @user
+    - if current_user.admin?
       span.label.label-primary Administrador
     - else
       span.label.label-primary Membro
@@ -17,9 +18,8 @@
       span.label.label-danger Inativo
 
   .col-sm-3.col-xs-12
-
-    = gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar pull-right')
-
+    = link_to current_user do
+      = gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar img-circle pull-right', title: 'Ver Perfil')
 / trick
 .row
 

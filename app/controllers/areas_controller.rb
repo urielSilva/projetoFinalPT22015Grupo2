@@ -5,7 +5,7 @@ class AreasController < ApplicationController
   load_and_authorize_resource except: [:create]
   
   def index
-      @areas = Area.all
+      @areas = Area.all.paginate(page: params[:page], per_page: 10)
   end
   
   def show

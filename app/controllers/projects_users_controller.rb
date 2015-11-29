@@ -5,7 +5,7 @@ class ProjectsUsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @projects_users = ProjectsUser.all
+    @projects_users = ProjectsUser.all.paginate(page: params[:page], per_page: 10)
   end
 
   def show

@@ -10,7 +10,14 @@
         br
         - @user.errors.full_messages.each do |message|
           p = message
-          
+  
+  - unless current_page?(new_user_path)
+    span.help-block
+      = 'Para alterar a imagem de usuário, basta se cadastrar no '
+      = link_to 'Gravatar', 'http://gravatar.com', target:'blank'
+      = ' usando o email da CJR. Altere a imagem lá e aguarde um pouco para as modificações ocorrem aqui.'
+    br
+
   .form-group
     = f.label 'Nome'
     = f.text_field :name, class:'form-control'

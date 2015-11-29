@@ -7,7 +7,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all.order(:id)
+    @jobs = Job.all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /jobs/1

@@ -1,12 +1,13 @@
 class KnowledgeLevelsController < ApplicationController
-  load_and_authorize_resource except: [:create]
+  
   before_action :authenticate_user!
   before_action :set_knowledge_level, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:create]
 
   # GET /knowledge_levels
   # GET /knowledge_levels.json
   def index
-    @knowledge_levels = KnowledgeLevel.all
+    @knowledge_levels = KnowledgeLevel.all.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /knowledge_levels/1

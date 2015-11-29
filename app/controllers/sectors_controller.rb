@@ -4,29 +4,20 @@ class SectorsController < ApplicationController
   before_action :set_sector, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource except: [:create]
 
-  # GET /sectors
-  # GET /sectors.json
   def index
-    #@sectors = Sector.all
-    @sectors = Sector.all.order(:id)
+    @sectors = Sector.all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
-  # GET /sectors/1
-  # GET /sectors/1.json
   def show
   end
 
-  # GET /sectors/new
   def new
     @sector = Sector.new
   end
 
-  # GET /sectors/1/edit
   def edit
   end
 
-  # POST /sectors
-  # POST /sectors.json
   def create
     @sector = Sector.new(sector_params)
 
@@ -41,8 +32,6 @@ class SectorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sectors/1
-  # PATCH/PUT /sectors/1.json
   def update
     respond_to do |format|
       if @sector.update(sector_params)
@@ -55,8 +44,6 @@ class SectorsController < ApplicationController
     end
   end
 
-  # DELETE /sectors/1
-  # DELETE /sectors/1.json
   def destroy
     @sector.destroy
     respond_to do |format|
@@ -66,13 +53,13 @@ class SectorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_sector
       @sector = Sector.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def sector_params
       params.require(:sector).permit(:short_name, :name, :description)
     end
+    
 end

@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @projects = Project.all
+    @projects = Project.all.paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -19,8 +19,6 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    # @users = User.all
-    # @users_allocated = @project.users
   end
 
   def create
@@ -76,4 +74,5 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:description, :price, :link, :project_status_id)
     end
+    
 end

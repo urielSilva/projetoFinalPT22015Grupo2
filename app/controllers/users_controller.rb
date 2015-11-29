@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @users = User.includes(:profile, :user_status).all.order(:id)
+    @users = User.includes(:profile, :user_status).all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
   def new

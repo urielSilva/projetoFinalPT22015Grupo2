@@ -1,7 +1,7 @@
 class Job < ActiveRecord::Base
 
-	has_many :users
-
 	validates_presence_of :name
+  
+  has_many :users
 
 end

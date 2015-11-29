@@ -17,7 +17,7 @@
       span.label.label-danger Inativo
 
   .col-sm-3.col-xs-12
-    = gravatar_image_tag(@user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar pull-right img-responsive')
+    = gravatar_image_tag(@user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar img-circle pull-right img-responsive')
 
   .col-sm-12
 

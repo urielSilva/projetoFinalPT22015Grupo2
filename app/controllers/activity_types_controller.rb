@@ -4,28 +4,20 @@ class ActivityTypesController < ApplicationController
   before_action :set_activity_type, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource except: [:create]
 
-  # GET /activity_types
-  # GET /activity_types.json
   def index
-    @activity_types = ActivityType.all.order(:id)
+    @activity_types = ActivityType.all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
-  # GET /activity_types/1
-  # GET /activity_types/1.json
   def show
   end
 
-  # GET /activity_types/new
   def new
     @activity_type = ActivityType.new
   end
 
-  # GET /activity_types/1/edit
   def edit
   end
 
-  # POST /activity_types
-  # POST /activity_types.json
   def create
     @activity_type = ActivityType.new(activity_type_params)
 
@@ -40,8 +32,6 @@ class ActivityTypesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /activity_types/1
-  # PATCH/PUT /activity_types/1.json
   def update
     respond_to do |format|
       if @activity_type.update(activity_type_params)
@@ -54,8 +44,6 @@ class ActivityTypesController < ApplicationController
     end
   end
 
-  # DELETE /activity_types/1
-  # DELETE /activity_types/1.json
   def destroy
     @activity_type.destroy
     respond_to do |format|
@@ -65,13 +53,13 @@ class ActivityTypesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_activity_type
       @activity_type = ActivityType.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def activity_type_params
       params.require(:activity_type).permit(:description)
     end
+    
 end
