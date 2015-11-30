@@ -1,4 +1,5 @@
-#main.container-fluid
-  #content.container
-  	= render 'layouts/alert'
-  	= yield
+#main.container
+  #content.container-fluid
+    .row
+    	= render 'layouts/alert'
+    = yield

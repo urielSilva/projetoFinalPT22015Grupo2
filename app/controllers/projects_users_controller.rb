@@ -45,10 +45,9 @@ class ProjectsUsersController < ApplicationController
   end
 
   def destroy
-    project = Project.find(@projects_user.project_id)
     @projects_user.destroy
     respond_to do |format|
-      format.html { redirect_to project, notice: 'Projects user was successfully destroyed.' }
+      format.html { redirect_to (request.referer || admin_path), notice: 'Projects user was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

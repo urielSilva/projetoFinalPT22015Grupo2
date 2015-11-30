@@ -11,6 +11,11 @@
       <%= mailbox_section 'inbox', @box %>
       <%= mailbox_section 'sent', @box %>
       <%= mailbox_section 'trash', @box %>
+      <% if current_user.admin? %>
+        <li><%= link_to 'Voltar', admin_path %></li>
+      <% else %>
+        <li><%= link_to 'Voltar', member_path %></li>
+      <% end %>
     </ul>
   </div>
 

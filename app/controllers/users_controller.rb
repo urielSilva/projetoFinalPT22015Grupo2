@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     @users = User.includes(:profile, :user_status).all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
+  def show
+    @projects = @user.projects
+    @projects_users = ProjectsUser.where(user_id: @user.id)
+  end
+
   def new
     @user = User.new
   end
@@ -16,10 +21,6 @@ class UsersController < ApplicationController
     unless @user == current_user or current_user.admin?
       redirect_to users_path, :alert => "Acesso negado."
     end
-  end
-
-  def show
-    @projects = @user.projects
   end
 
   def create
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user].permit(:name, :last_name, :user_status_id, :profile_id, :job_id, :sector_id, :area_id, :email, :password, :password_confirmation))
-        format.html { redirect_to users_path, notice: 'O usuário foi atualizado com sucesso.' }
+        format.html { redirect_to (users_path), notice: 'O usuário foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }

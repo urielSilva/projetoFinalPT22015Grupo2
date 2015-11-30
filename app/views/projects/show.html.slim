@@ -19,14 +19,29 @@
   	strong Estado: 
   	= @project.project_status.status
 
-  p
+  - if @users.empty?
     strong Membros:
-    - if @users.empty?
-      p Não há ninguém alocado neste projeto.
-    - else
-      - @users.each do |u|
-        p = u.name + ' ' + u.last_name
-        = link_to 'Excluir', @projects_users.where(user_id: u.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+    p Não há ninguém alocado neste projeto.
+
+  - else
+
+    br
+
+    table.table.table-hover.table-responsive
+
+      thead
+
+        tr
+          th Membro
+          th
+          
+      tbody
+
+        - @users.each do |user|
+
+          tr
+            td = link_to user.name + ' ' + user.last_name, user
+            td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
   br
 

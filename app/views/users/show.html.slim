@@ -86,3 +86,19 @@
         .content-home
           - if @user.projects.empty?
             .bg-danger.text-center style="padding: 10px; border-radius: 5px" O membro não está alocado em nenhum projeto.
+          - else
+
+            table.table.table-hover.table-responsive
+
+              thead
+                tr
+                  th Projeto
+                  th
+
+              tbody
+
+                - @projects.each do |project|
+                
+                  tr
+                    td = link_to project.description, project
+                    td align="right" = link_to 'Desalocar', @projects_users.where(project_id: project.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
