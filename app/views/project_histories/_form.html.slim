@@ -1,0 +1,33 @@
+= form_for @project_history do |f|
+
+  - if @project_history.errors.any?
+
+    #error_explanation
+      h2 = "#{pluralize(@project_history.errors.count, "error")} prohibited this project_history from being saved:"
+      ul
+        - @project_history.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    = f.label 'Projeto'
+    = f.select :project_id, Project.all.map {|p| [p.description, p.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Estado de Projeto'
+    = f.select :project_status_id, ProjectStatus.all.map {|p| [p.status, p.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Observação'
+    = f.text_area :observation, class:'form-control'
+
+  .actions
+
+  br
+
+  - if current_page?(new_project_history_path)
+    = f.button 'Criar Histórico', class:'btn btn-primary'
+  - else
+    = f.button 'Atualizar Histórico', class:'btn btn-primary'
+    
+  = link_to 'Voltar', project_histories_path, class:'btn btn-primary pull-right'
+

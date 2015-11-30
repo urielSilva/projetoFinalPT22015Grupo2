@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129095261) do
+ActiveRecord::Schema.define(version: 20151130224232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,17 @@ ActiveRecord::Schema.define(version: 20151129095261) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "project_histories", force: :cascade do |t|
+    t.text     "observation"
+    t.integer  "project_id"
+    t.integer  "project_status_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "project_histories", ["project_id"], name: "index_project_histories_on_project_id", using: :btree
+  add_index "project_histories", ["project_status_id"], name: "index_project_histories_on_project_status_id", using: :btree
+
   create_table "project_statuses", force: :cascade do |t|
     t.string   "status"
     t.datetime "created_at", null: false
@@ -209,6 +220,8 @@ ActiveRecord::Schema.define(version: 20151129095261) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "project_histories", "project_statuses"
+  add_foreign_key "project_histories", "projects"
   add_foreign_key "projects", "project_statuses", name: "projects_project_status_id_fk"
   add_foreign_key "projects_users", "projects", name: "projects_users_project_id_fk"
   add_foreign_key "projects_users", "users", name: "projects_users_user_id_fk"

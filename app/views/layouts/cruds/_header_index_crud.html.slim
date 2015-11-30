@@ -77,4 +77,9 @@
       span Relacionamentos Projeto-Membro
       span.label.label-success.pull-right = 'Total: ' + @projects_users.count.to_s
 
+    - elsif current_page?(project_histories_path)
+
+      span Histórico de Projetos
+      span.label.label-success.pull-right = 'Total: ' + @project_histories.count.to_s
+
   hr.divider
