@@ -8,6 +8,7 @@ class Ability
     else
         can :read, :all
         cannot :read, ProjectsUser
+        cannot :read, ProjectHistory
         can [:update, :makemeadmin], User
     end
   end

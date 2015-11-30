@@ -27,16 +27,16 @@
               strong
                 = profile.id
             td = profile.name
-            td
+            td align="right"
               .icon-show
                 = link_to '', profile, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
             - if current_user.admin?
-              td
+              td align="right"
                 .icon-show
                   = link_to '', edit_profile_path(profile), class:'glyphicon glyphicon-pencil', title:'Editar'
 
-              td
+              td align="right"
                 .icon-show
                   = link_to '', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
