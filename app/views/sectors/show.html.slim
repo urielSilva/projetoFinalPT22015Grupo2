@@ -1,20 +1,26 @@
-h3.text-right
-	span Núcleo: 
-	span = @sector.name
+.row
 
-p
-  strong Sigla: 
-  = @sector.short_name
-p
-  strong Nome: 
-  = @sector.name
-p
-  strong Descrição: 
-  = @sector.description
+  h3
+    span Núcleo
+    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-br
+  hr.divider
 
-- if current_user.admin?
-	= link_to 'Editar', edit_sector_path(@sector), class:'btn btn-primary'
-	
-= link_to 'Voltar', sectors_path, class:'btn btn-primary pull-right'
+  p
+    strong Sigla: 
+    = @sector.short_name
+
+  p
+    strong Nome: 
+    = @sector.name
+    
+  p
+    strong Descrição: 
+    = @sector.description
+
+  br
+
+  - if current_user.admin?
+  	= link_to 'Editar', edit_sector_path(@sector), class:'btn btn-primary'
+  	
+  = link_to 'Voltar', sectors_path, class:'btn btn-primary pull-right'

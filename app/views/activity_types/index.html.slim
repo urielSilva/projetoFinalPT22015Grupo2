@@ -1,38 +1,44 @@
-.row.container-fluid
+.row
 
   = render '/layouts/cruds/header_index_crud'
 
-- if @activity_types.empty?
-  = render 'layouts/errorempty'
+  - if @activity_types.empty?
+    = render 'layouts/errorempty'
 
-- else
+  - else
 
-  table.table.table-hover.table-responsive
+    table.table.table-hover.table-responsive
 
-    thead
-      tr
-        th ID
-        th Descrição
-        th
-        - if current_user.admin?
-          th
-        - if current_user.admin?
-          th
-
-    tbody
-
-      - @activity_types.each do |activity_type|
-
+      thead
         tr
-          td
-            strong
-              = activity_type.id
-          td = activity_type.description
-          td = link_to 'Exibir', activity_type
+          th ID
+          th Descrição
+          th
           - if current_user.admin?
-            td = link_to 'Editar', edit_activity_type_path(activity_type)
-          - if current_user.admin?
-            td = link_to 'Excluir', activity_type, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+            th
+            th
 
-  br
-  = render '/layouts/cruds/footer_index_crud'
+      tbody
+
+        - @activity_types.each do |activity_type|
+
+          tr
+            td
+              strong
+                = activity_type.id
+            td = activity_type.description
+            td
+              .icon-show
+                = link_to '', activity_type, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            - if current_user.admin?
+              td
+                .icon-show
+                  = link_to '', edit_activity_type_path(activity_type), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+              td
+                .icon-show
+                  = link_to '', activity_type, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+    br
+    = render '/layouts/cruds/footer_index_crud'

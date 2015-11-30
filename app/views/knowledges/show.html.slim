@@ -1,18 +1,22 @@
-h3.text-right
-	span Conhecimento: 
-	span = @knowledge.description
+.row
 
-p
-  strong Nível de Conhecimento: 
-  = @knowledge.knowledge_level.level
+  h3
+  	span Conhecimento
+    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-p
-  strong Descrição: 
-  = @knowledge.description
-
-br
-
-- if current_user.admin?
-  = link_to 'Editar', edit_knowledge_path(@knowledge), class:'btn btn-primary'
+  hr.divider
   
-= link_to 'Voltar', knowledges_path, class:'btn btn-primary pull-right'
+  p
+    strong Nível de Conhecimento: 
+    = @knowledge.knowledge_level.level
+
+  p
+    strong Descrição: 
+    = @knowledge.description
+
+  br
+
+  - if current_user.admin?
+    = link_to 'Editar', edit_knowledge_path(@knowledge), class:'btn btn-primary'
+    
+  = link_to 'Voltar', knowledges_path, class:'btn btn-primary pull-right'

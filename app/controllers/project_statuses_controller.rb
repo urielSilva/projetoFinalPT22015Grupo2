@@ -19,22 +19,22 @@ class ProjectStatusesController < ApplicationController
   end
 
   def create
-    @projectstatus = ProjectStatus.new(project_status_params)
+    @project_status = ProjectStatus.new(project_status_params)
 
     respond_to do |format|
-      if @projectstatus.save
-        format.html { redirect_to @projectstatus, notice: 'project status was successfully created.' }
+      if @project_status.save
+        format.html { redirect_to @project_status, notice: 'project status was successfully created.' }
         format.json { render :show, status: :created, location: @projectstatus }
       else
         format.html { render :new }
-        format.json { render json: @projectstatus.errors, status: :unprocessable_entity }
+        format.json { render json: @project_status.errors, status: :unprocessable_entity }
       end
     end
   end
   
   def update
     respond_to do |format|
-      if @projectstatus.update(project_status_params)
+      if @project_status.update(project_status_params)
         format.html { redirect_to @project_status, notice: 'project status was successfully updated.' }
         format.json { render :show, status: :ok, location: @projectstatus }
       else
@@ -45,7 +45,7 @@ class ProjectStatusesController < ApplicationController
   end
 
   def destroy
-    @projectstatus.destroy
+    @project_status.destroy
     respond_to do |format|
       format.html { redirect_to project_status_url, notice: 'project status was successfully destroyed.' }
       format.json { head :no_content }

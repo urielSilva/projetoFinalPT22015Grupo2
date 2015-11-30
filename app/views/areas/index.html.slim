@@ -1,40 +1,46 @@
-.row.container-fluid
+.row
 
   = render '/layouts/cruds/header_index_crud'
 
-- if @areas.empty?
-  = render 'layouts/errorempty'
+  - if @areas.empty?
+    = render 'layouts/errorempty'
 
-- else
+  - else
 
-  table.table.table-hover.table-responsive
+    table.table.table-hover.table-responsive
 
-    thead
-      tr
-        th ID
-        th Nome
-        th Núcleo
-        th
-        - if current_user.admin?
-          th
-        - if current_user.admin?
-          th
-
-    tbody
-
-      - @areas.each do |area|
-
+      thead
         tr
-          td
-            strong
-              = area.id
-          td = area.name
-          td = area.sector.name
-          td = link_to 'Exibir', area
+          th ID
+          th Nome
+          th Núcleo
+          th
           - if current_user.admin?
-            td = link_to 'Editar', edit_area_path(area)
-          - if current_user.admin?
-            td = link_to 'Excluir', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+            th
+            th
 
-  br
-  = render '/layouts/cruds/footer_index_crud'
+      tbody
+
+        - @areas.each do |area|
+
+          tr
+            td
+              strong
+                = area.id
+            td = area.name
+            td = area.sector.name
+            td
+              .icon-show
+                = link_to '', area, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            - if current_user.admin?
+              td
+                .icon-show
+                  = link_to '', edit_area_path(area), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+              td
+                .icon-show
+                  = link_to '', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+    br
+    = render '/layouts/cruds/footer_index_crud'

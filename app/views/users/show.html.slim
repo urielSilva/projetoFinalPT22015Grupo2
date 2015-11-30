@@ -29,11 +29,7 @@
         a href="#conhecimentos" data-toggle="tab" Conhecimentos
       li
         a href="#projetos" data-toggle="tab" Projetos
-
-      - unless @user == current_user
-        li
-          a href="#nova-mensagem" data-toggle="tab" Enviar Mensagem
-
+        
     #tab-content
 
       .tab-pane.active#informacoes
@@ -90,7 +86,3 @@
         .content-home
           - if @user.projects.empty?
             .bg-danger.text-center style="padding: 10px; border-radius: 5px" O membro não está alocado em nenhum projeto.
-
-      - unless @user == current_user
-        .tab-pane#nova-mensagem
-          .content-home

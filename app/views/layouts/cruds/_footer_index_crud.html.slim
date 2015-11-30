@@ -47,7 +47,10 @@
         = link_to 'Novo Relacionamento Membro-Projeto', new_projects_user_path, class:'btn btn-primary'
 
     .col-sm-6.text-center style="margin-top: -40px"
-      = will_paginate
+      - if current_page?(project_statuses_path)
+        = will_paginate @projectstatuses
+      - else
+        = will_paginate
 
     = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right', style:'margin-right: 15px'
 

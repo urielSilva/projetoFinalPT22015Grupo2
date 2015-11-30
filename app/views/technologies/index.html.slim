@@ -1,4 +1,4 @@
-.row.container-fluid
+.row
 
   = render '/layouts/cruds/header_index_crud'
 
@@ -17,7 +17,6 @@
         th
         - if current_user.admin?
           th
-        - if current_user.admin?
           th
 
     tbody
@@ -30,11 +29,18 @@
               = technology.id
           td = technology.name
           td = technology.description
-          td = link_to 'Exibir', technology
+          td
+            .icon-show
+              = link_to '', technology, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
           - if current_user.admin?
-            td = link_to 'Editar', edit_technology_path(technology)
-          - if current_user.admin?
-            td = link_to 'Excluir', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+            td
+              .icon-show
+                = link_to '', edit_technology_path(technology), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+            td
+              .icon-show
+                = link_to '', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
   = render '/layouts/cruds/footer_index_crud'

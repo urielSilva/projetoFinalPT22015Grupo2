@@ -1,38 +1,44 @@
-.row.container-fluid
+.row
 
   = render '/layouts/cruds/header_index_crud'
 
-- if @jobs.empty?
-  = render '/layouts/errorempty'
+  - if @jobs.empty?
+    = render '/layouts/errorempty'
 
-- else
+  - else
 
-  table.table.table-hover.table-responsive
+    table.table.table-hover.table-responsive
 
-    thead
-      tr
-        th ID
-        th Nome
-        th
-        - if current_user.admin?
-          th
-        - if current_user.admin?
-          th
-
-    tbody
-      
-      - @jobs.each do |job|
-      
+      thead
         tr
-          td 
-            strong
-              = job.id
-          td = job.name
-          td = link_to 'Exibir', job
+          th ID
+          th Nome
+          th
           - if current_user.admin?
-            td = link_to 'Editar', edit_job_path(job)
-          - if current_user.admin?
-            td = link_to 'Excluir', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+            th
+            th
 
-  br
-  = render '/layouts/cruds/footer_index_crud'
+      tbody
+        
+        - @jobs.each do |job|
+        
+          tr
+            td 
+              strong
+                = job.id
+            td = job.name
+            td
+              .icon-show
+                = link_to '', job, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            - if current_user.admin?
+              td
+                .icon-show
+                  = link_to '', edit_job_path(job), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+              td
+                .icon-show
+                  = link_to '', job, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+    br
+    = render '/layouts/cruds/footer_index_crud'

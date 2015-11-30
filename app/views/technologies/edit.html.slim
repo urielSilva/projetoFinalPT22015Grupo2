@@ -1,5 +1,9 @@
-h3.text-right
-	span Tecnologia: 
-	span = @technology.name
+.row
 
-= render 'form'
+  h3
+    span Atualizar Tecnologia
+    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+
+  hr.divider
+
+   = render 'form'

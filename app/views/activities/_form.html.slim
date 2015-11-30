@@ -16,6 +16,10 @@
     = f.label 'Número de créditos'
     = f.text_field :credit_numbers, class:'form-control'
 
+  .form-group
+    = f.label 'Tipo'
+    = f.select :activity_type_id, ActivityType.all.map{|a| [a.description, a.id]}, {}, {class:'form-control'}
+
   .actions
 
     br

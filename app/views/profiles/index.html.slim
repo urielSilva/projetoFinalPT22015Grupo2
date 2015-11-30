@@ -1,42 +1,44 @@
-.row.container-fluid
+.row
 
-  == render '/layouts/cruds/header_index_crud'
+  = render '/layouts/cruds/header_index_crud'
 
-- if @profiles.empty?
+  - if @profiles.empty?
+    = render 'layouts/errorempty'
 
-  = render 'layouts/errorempty'
-  .vertical-align
-    = link_to 'Novo Perfil', new_profile_path, class:'btn btn-primary btn-empty'
+  - else
 
-- else
+    table.table.table-hover.table-responsive
 
-  table.table.table-hover.table-responsive
-
-    thead
-      tr
-        th ID
-        th Nome
-        th
-        - if current_user.admin?
-          th
-        - if current_user.admin?
-          th
-
-    tbody
-
-      - @profiles.each do |profile|
-
+      thead
         tr
-          td
-            strong
-              = profile.id
-          td = profile.name
-          td = link_to 'Exibir', profile
+          th ID
+          th Nome
+          th
           - if current_user.admin?
-            td = link_to 'Editar', edit_profile_path(profile)
-          - if current_user.admin?
-            td = link_to 'Excluir', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+            th
+            th
 
-  br
-  
-  == render '/layouts/cruds/footer_index_crud'
+      tbody
+
+        - @profiles.each do |profile|
+
+          tr
+            td
+              strong
+                = profile.id
+            td = profile.name
+            td
+              .icon-show
+                = link_to '', profile, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            - if current_user.admin?
+              td
+                .icon-show
+                  = link_to '', edit_profile_path(profile), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+              td
+                .icon-show
+                  = link_to '', profile, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+    br
+    = render '/layouts/cruds/footer_index_crud'

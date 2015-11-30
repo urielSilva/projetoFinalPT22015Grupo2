@@ -12,13 +12,13 @@ Sector.create(short_name: "NOE", name: "Núcleo de Organização Empresarial", d
 Sector.create(short_name: "PRES", name: "Presidência", description: "Presidência")
 
 # Create areas
-Area.create(name: "Integração")
-Area.create(name: "Inovação")
-Area.create(name: "Financeiro")
-Area.create(name: "Projetos")
-Area.create(name: "Suporte")
-Area.create(name: "Negócios")
-Area.create(name: "Marketing")
+Area.create(name: "Integração", sector_id: 1)
+Area.create(name: "Inovação", sector_id: 2)
+Area.create(name: "Financeiro", sector_id: 4)
+Area.create(name: "Projetos", sector_id: 2)
+Area.create(name: "Suporte", sector_id: 2)
+Area.create(name: "Negócios", sector_id: 4)
+Area.create(name: "Marketing", sector_id: 3)
 
 # Create jobs
 Job.create(name: "Presidente")
@@ -56,3 +56,9 @@ Technology.create(name: "Python", description: "Linguagem de programação")
 Technology.create(name: "AngularJS", description: "Framework web")
 Technology.create(name: "Rails", description: "Framework web")
 Technology.create(name: "Bootstrap", description: "Framework CSS")
+
+# Create activity type
+ActivityType.create(description: "Matéria UnB")
+
+# Create activity
+Activity.create(description: "Teste de Atividade", credit_numbers: 4, activity_type_id: 1)

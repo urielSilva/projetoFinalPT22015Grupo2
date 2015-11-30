@@ -1,4 +1,4 @@
-.row.container-fluid
+.row
 
   = render '/layouts/cruds/header_index_crud'
 
@@ -16,7 +16,6 @@
         th
         - if current_user.admin?
           th
-        - if current_user.admin?
           th
 
     tbody
@@ -28,11 +27,18 @@
             strong
               = user_status.id
           td = user_status.status
-          td = link_to 'Exibir', user_status
+          td
+            .icon-show
+              = link_to '', user_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
           - if current_user.admin?
-            td = link_to 'Editar', edit_user_status_path(user_status)
-          - if current_user.admin?
-            td = link_to 'Excluir', user_status, data: {:confirm => 'Are you sure?'}, :method => :delete
+            td
+              .icon-show
+                = link_to '', edit_user_status_path(user_status), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+            td
+              .icon-show
+                = link_to '', user_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
   = render '/layouts/cruds/footer_index_crud'

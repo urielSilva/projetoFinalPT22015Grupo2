@@ -1,21 +1,22 @@
-.row.container-fluid
+.row
 
   h3
     span Relacionamento Membro-Projeto
-    span.label.label-primary.pull-right = '#' + @projects_user.id.to_s
+    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
   hr.divider
 
-p
-  strong Projeto: 
-  = @projects_user.project.description
-p
-  strong Membro: 
-  = @projects_user.user.name + ' ' + @projects_user.user.last_name
+  p
+    strong Projeto: 
+    = @projects_user.project.description
+    
+  p
+    strong Membro: 
+    = @projects_user.user.name + ' ' + @projects_user.user.last_name
 
-br
+  br
 
-- if current_user.admin?
-  = link_to 'Editar', edit_projects_user_path(@projects_user), class:'btn btn-primary'
+  - if current_user.admin?
+    = link_to 'Editar', edit_projects_user_path(@projects_user), class:'btn btn-primary'
 
-= link_to 'Voltar', projects_users_path, class:'btn btn-primary pull-right'
+  = link_to 'Voltar', projects_users_path, class:'btn btn-primary pull-right'

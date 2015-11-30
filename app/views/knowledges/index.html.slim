@@ -1,42 +1,48 @@
-.row.container-fluid
+.row
 
   = render '/layouts/cruds/header_index_crud'
 
-- if @knowledges.empty?
-  = render '/layouts/errorempty'
+  - if @knowledges.empty?
+    = render '/layouts/errorempty'
 
-- else
+  - else
 
-  table.table.table-hover.table-responsive
+    table.table.table-hover.table-responsive
 
-    thead
-      tr
-        th ID
-        th Nível
-        th Descrição
-        th Tecnologia
-        th
-        - if current_user.admin?
-          th
-        - if current_user.admin?
-          th
-
-    tbody
-
-      - @knowledges.each do |knowledge|
-
+      thead
         tr
-          td
-            strong
-              = knowledge.id
-          td = knowledge.knowledge_level.level
-          td = knowledge.description
-          td = knowledge.technology.name
-          td = link_to 'Exibir', knowledge
+          th ID
+          th Nível
+          th Descrição
+          th Tecnologia
+          th
           - if current_user.admin?
-            td = link_to 'Editar', edit_knowledge_path(knowledge)
-          - if current_user.admin?
-            td = link_to 'Excluir', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+            th
+            th
 
-  br
-  = render '/layouts/cruds/footer_index_crud'
+      tbody
+
+        - @knowledges.each do |knowledge|
+
+          tr
+            td
+              strong
+                = knowledge.id
+            td = knowledge.knowledge_level.level
+            td = knowledge.description
+            td = knowledge.technology.name
+            td
+              .icon-show
+                = link_to '', knowledge, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            - if current_user.admin?
+              td 
+                .icon-show
+                  = link_to '', edit_knowledge_path(knowledge), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+              td
+                .icon-show
+                  = link_to '', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+    br
+    = render '/layouts/cruds/footer_index_crud'

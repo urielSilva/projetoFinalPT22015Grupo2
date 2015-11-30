@@ -1,5 +1,9 @@
-h3.text-right
-	span Nível de conhecimento: 
-	span = @knowledge_level.level
+.row
 
-= render 'form'
+  h3
+  	span Atualizar Nível de Conhecimento
+    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+
+  hr.divider
+
+  = render 'form'

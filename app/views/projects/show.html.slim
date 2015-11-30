@@ -1,32 +1,36 @@
-h3.text-right
-	span Projeto: 
-	span = @project.description
+.row
 
-p
-  strong Descrição: 
-  = @project.description
-p
-  strong Preço: 
-  = @project.price
-p
-  strong Link: 
-  = link_to [@project.link], @project.link
-p
-	strong Estado: 
-	= @project.project_status.status
+  h3
+  	span Projeto
+    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-p
-  strong Membros:
-  - if @users.empty?
-    p Não há ninguém alocado neste projeto.
-  - else
-    - @users.each do |u|
-      p = u.name + ' ' + u.last_name
-      = link_to 'Excluir', @projects_users.where(user_id: u.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+  hr.divider
 
-br
+  p
+    strong Descrição: 
+    = @project.description
+  p
+    strong Preço: 
+    = @project.price
+  p
+    strong Link: 
+    = link_to [@project.link], @project.link
+  p
+  	strong Estado: 
+  	= @project.project_status.status
 
-- if current_user.admin?
-  = link_to 'Editar', edit_project_path(@project), class:'btn btn-primary'
+  p
+    strong Membros:
+    - if @users.empty?
+      p Não há ninguém alocado neste projeto.
+    - else
+      - @users.each do |u|
+        p = u.name + ' ' + u.last_name
+        = link_to 'Excluir', @projects_users.where(user_id: u.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
-= link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'
+  br
+
+  - if current_user.admin?
+    = link_to 'Editar', edit_project_path(@project), class:'btn btn-primary'
+
+  = link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'

@@ -1,38 +1,44 @@
-.row.container-fluid
+.row
 
   = render '/layouts/cruds/header_index_crud'
 
-- if @projectstatuses.size == 0
-  = render '/layouts/errorempty'
+  - if @projectstatuses.empty?
+    = render '/layouts/errorempty'
 
-- else
+  - else
 
-  table.table.table-hover.table-responsive
+    table.table.table-hover.table-responsive
 
-    thead
-      tr
-        th ID
-        th Estado
-        th
-        - if current_user.admin?
-          th
-        - if current_user.admin?
-          th
-
-    tbody
-      
-      - @projectstatuses.each do |project_status|
-      
+      thead
         tr
-          td
-            strong
-              = project_status.id
-          td = project_status.status
-          td = link_to 'Exibir', project_status
+          th ID
+          th Estado
+          th
           - if current_user.admin?
-            td = link_to 'Editar', edit_project_status_path(project_status)
-          - if current_user.admin?
-            td = link_to 'Excluir', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete
+            th
+            th
 
-  br
-  = render '/layouts/cruds/footer_index_crud'
+      tbody
+        
+        - @projectstatuses.each do |project_status|
+        
+          tr
+            td
+              strong
+                = project_status.id
+            td = project_status.status
+            td
+              .icon-show
+                = link_to '', project_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            - if current_user.admin?
+              td
+                .icon-show
+                  = link_to '', edit_project_status_path(project_status), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+              td
+                .icon-show
+                  = link_to '', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+    br
+    = render '/layouts/cruds/footer_index_crud'

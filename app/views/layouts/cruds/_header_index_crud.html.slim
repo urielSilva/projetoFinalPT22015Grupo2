@@ -1,78 +1,80 @@
-h3
+.row.container-fluid
 
-  - if current_page?(users_path)
+  h3
 
-    span Usuários
-    span.label.label-success.pull-right = 'Total: ' + @users.count.to_s
+    - if current_page?(users_path)
 
-  - elsif current_page?(activities_path)
+      span Usuários
+      span.label.label-success.pull-right = 'Total: ' + @users.count.to_s
 
-    span Atividades
-    span.label.label-success.pull-right = 'Total: ' + @activities.count.to_s
+    - elsif current_page?(activities_path)
 
-  - elsif current_page?(activity_types_path)
+      span Atividades
+      span.label.label-success.pull-right = 'Total: ' + @activities.count.to_s
 
-    span Tipos de Atividade
-    span.label.label-success.pull-right = 'Total: ' + @activity_types.count.to_s
+    - elsif current_page?(activity_types_path)
 
-  - elsif current_page?(areas_path)
+      span Tipos de Atividade
+      span.label.label-success.pull-right = 'Total: ' + @activity_types.count.to_s
 
-    span Áreas
-    span.label.label-success.pull-right = 'Total: ' + @areas.count.to_s
+    - elsif current_page?(areas_path)
 
-  - elsif current_page?(jobs_path)
+      span Áreas
+      span.label.label-success.pull-right = 'Total: ' + @areas.count.to_s
 
-    span Cargos
-    span.label.label-success.pull-right = 'Total: ' + @jobs.count.to_s
+    - elsif current_page?(jobs_path)
 
-  - elsif current_page?(knowledge_levels_path)
+      span Cargos
+      span.label.label-success.pull-right = 'Total: ' + @jobs.count.to_s
 
-    span Níveis de Conhecimento
-    span.label.label-success.pull-right = 'Total: ' + @knowledge_levels.count.to_s
+    - elsif current_page?(knowledge_levels_path)
 
-  - elsif current_page?(knowledges_path)
+      span Níveis de Conhecimento
+      span.label.label-success.pull-right = 'Total: ' + @knowledge_levels.count.to_s
 
-    span Conhecimentos
-    span.label.label-success.pull-right = 'Total: ' + @knowledges.count.to_s
+    - elsif current_page?(knowledges_path)
 
-  - elsif current_page?(profiles_path)
+      span Conhecimentos
+      span.label.label-success.pull-right = 'Total: ' + @knowledges.count.to_s
 
-    span Perfis
-    span.label.label-success.pull-right = 'Total: ' + @profiles.count.to_s
+    - elsif current_page?(profiles_path)
 
-  - elsif current_page?(project_statuses_path)
+      span Perfis
+      span.label.label-success.pull-right = 'Total: ' + @profiles.count.to_s
 
-    span Estados de Projeto
-    span.label.label-success.pull-right = 'Total: ' + @projectstatuses.count.to_s
+    - elsif current_page?(project_statuses_path)
 
-  - elsif current_page?(projects_path)
+      span Estados de Projeto
+      span.label.label-success.pull-right = 'Total: ' + @projectstatuses.count.to_s
 
-    span Projetos
-    span.label.label-success.pull-right = 'Total: ' + @projects.count.to_s
+    - elsif current_page?(projects_path)
 
-  - elsif current_page?(projects_path)
+      span Projetos
+      span.label.label-success.pull-right = 'Total: ' + @projects.count.to_s
 
-    span Projetos
-    span.label.label-success.pull-right = 'Total: ' + @projects.count.to_s
+    - elsif current_page?(projects_path)
 
-  - elsif current_page?(sectors_path)
+      span Projetos
+      span.label.label-success.pull-right = 'Total: ' + @projects.count.to_s
 
-    span Núcleos
-    span.label.label-success.pull-right = 'Total: ' + @sectors.count.to_s
+    - elsif current_page?(sectors_path)
 
-  - elsif current_page?(technologies_path)
+      span Núcleos
+      span.label.label-success.pull-right = 'Total: ' + @sectors.count.to_s
 
-    span Tecnologias
-    span.label.label-success.pull-right = 'Total: ' + @technologies.count.to_s
+    - elsif current_page?(technologies_path)
 
-  - elsif current_page?(user_statuses_path)
+      span Tecnologias
+      span.label.label-success.pull-right = 'Total: ' + @technologies.count.to_s
 
-    span Status de Usuário
-    span.label.label-success.pull-right = 'Total: ' + @user_statuses.count.to_s
+    - elsif current_page?(user_statuses_path)
 
-  - elsif current_page?(projects_users_path)
+      span Status de Usuário
+      span.label.label-success.pull-right = 'Total: ' + @user_statuses.count.to_s
 
-    span Relacionamentos Projeto-Membro
-    span.label.label-success.pull-right = 'Total: ' + @projects_users.count.to_s
+    - elsif current_page?(projects_users_path)
 
-hr.divider
+      span Relacionamentos Projeto-Membro
+      span.label.label-success.pull-right = 'Total: ' + @projects_users.count.to_s
+
+  hr.divider

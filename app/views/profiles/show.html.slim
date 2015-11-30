@@ -1,15 +1,19 @@
-h3.text-right
-	span Perfil: 
-	span = @profile.name
+.row
 
-p
-  strong Nome: 
-  = @profile.name
+  h3
+  	span Perfil 
+    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-br
+  hr.divider
 
-- if current_user.admin?
-	= link_to 'Editar', edit_profile_path(@profile), class:'btn btn-primary'
-	
-= link_to 'Voltar', profiles_path, class:'btn btn-primary pull-right'
+  p
+    strong Nome: 
+    = @profile.name
+
+  br
+
+  - if current_user.admin?
+  	= link_to 'Editar', edit_profile_path(@profile), class:'btn btn-primary'
+  	
+  = link_to 'Voltar', profiles_path, class:'btn btn-primary pull-right'
 
