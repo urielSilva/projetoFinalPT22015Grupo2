@@ -2,43 +2,43 @@
 
   = render '/layouts/cruds/header_index_crud'
 
-- if @user_statuses.empty?
-  = render '/layouts/errorempty'
+  - if @user_statuses.empty?
+    = render '/layouts/errorempty'
 
-- else
+  - else
 
-  table.table.table-hover.table-responsive
+    table.table.table-hover.table-responsive
 
-    thead
-      tr
-        th ID
-        th Status
-        th
-        - if current_user.admin?
-          th
-          th
-
-    tbody
-
-      - @user_statuses.each do |user_status|
-
+      thead
         tr
-          td
-            strong
-              = user_status.id
-          td = user_status.status
-          td
-            .icon-show
-              = link_to '', user_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
-
+          th ID
+          th Status
+          th
           - if current_user.admin?
-            td
-              .icon-show
-                = link_to '', edit_user_status_path(user_status), class:'glyphicon glyphicon-pencil', title:'Editar'
+            th
+            th
 
-            td
-              .icon-show
-                = link_to '', user_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+      tbody
 
-  br
-  = render '/layouts/cruds/footer_index_crud'
+        - @user_statuses.each do |user_status|
+
+          tr
+            td
+              strong
+                = user_status.id
+            td = user_status.status
+            td align="right"
+              .icon-show
+                = link_to '', user_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            - if current_user.admin?
+              td align="right"
+                .icon-show
+                  = link_to '', edit_user_status_path(user_status), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+              td align="right"
+                .icon-show
+                  = link_to '', user_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+    br
+    = render '/layouts/cruds/footer_index_crud'

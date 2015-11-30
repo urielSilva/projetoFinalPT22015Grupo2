@@ -82,7 +82,7 @@ $(document).ready(function () {
             text: 'Quantidade de Membros por Núcleo'
         },
         subtitle: {
-            text: 'Empresa júnior de Computação'
+            text: 'Empresa Júnior de Computação'
         },
         xAxis: {
             categories: [

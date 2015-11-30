@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'mailboxer'
 gem 'rails', '4.2.4'
 gem 'rails-i18n'
 gem 'pg'
@@ -19,6 +18,8 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'bootstrap-will_paginate'
 gem 'will_paginate'
 gem 'gravatar_image_tag'
+gem 'mailboxer'
+gem 'local_time'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

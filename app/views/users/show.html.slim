@@ -57,22 +57,26 @@
                     - else
                       = 'Organização Empresarial'
 
-              li.list-group-item.text-right
-                strong.pull-left Membro desde:
-                = 'Mes/Ano'
+            table.table.table-responsive
 
-              li.list-group-item.text-right
-                strong.pull-left Email
-                = @user.email
+              tbody
 
-              li.list-group-item.text-right
-                strong.pull-left Último acesso:
+                tr
+                  td Membro desde:
+                  td align="right" = 'Mes/Ano'
 
-                - if @user.last_sign_in_at == nil
-                  = 'Nunca acessou'
+                tr
+                  td Email:
+                  td align="right" = @user.email
 
-                - else
-                  = @user.last_sign_in_at
+                tr
+                  td Último acesso:
+                  td align="right"
+                    - if @user.last_sign_in_at == nil
+                      = 'Nunca acessou'
+
+                    - else
+                      = local_time_ago(@user.last_sign_in_at)
 
             - if @user == current_user or current_user.admin?
               = link_to 'Editar', edit_user_path(@user), class:'btn btn-primary'
