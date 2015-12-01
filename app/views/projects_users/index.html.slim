@@ -12,6 +12,7 @@
         th ID
         th Projeto
         th Membro
+        th Função
         th
         - if current_user.admin?
           th
@@ -27,6 +28,8 @@
               = projects_user.id
           td = projects_user.project.description
           td = projects_user.user.name + " " + projects_user.user.last_name
+          td = projects_user.project_role.role
+
           td align="right"
             .icon-show
               = link_to '', projects_user, class:'glyphicon glyphicon-eye-open', title:'Exibir'

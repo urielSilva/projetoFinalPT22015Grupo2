@@ -82,4 +82,9 @@
       span Histórico de Projetos
       span.label.label-success.pull-right = 'Total: ' + @project_histories.count.to_s
 
+    - elsif current_page?(project_roles_path)
+
+      span Funções de Projeto
+      span.label.label-success.pull-right = 'Total: ' + @project_roles.count.to_s
+
   hr.divider

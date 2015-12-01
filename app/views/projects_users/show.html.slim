@@ -12,6 +12,10 @@ p
   strong Membro: 
   = @projects_user.user.name + ' ' + @projects_user.user.last_name
 
+p
+  strong Função: 
+  = @projects_user.project_role.role
+
 br
 
 - if current_user.admin?
