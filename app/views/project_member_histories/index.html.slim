@@ -37,7 +37,7 @@
 
       tbody
 
-          - @project_member_histories.each do |project_member_history|
+          - @historico.each do |project_member_history|
 
             - if project_member_history.user == current_user or current_user.admin?
 
