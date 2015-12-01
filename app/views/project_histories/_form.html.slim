@@ -3,10 +3,13 @@
   - if @project_history.errors.any?
 
     #error_explanation
-      h2 = "#{pluralize(@project_history.errors.count, "error")} prohibited this project_history from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @project_history.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
     = f.label 'Projeto'
@@ -22,12 +25,12 @@
 
   .actions
 
-  br
+    br
 
-  - if current_page?(new_project_history_path)
-    = f.button 'Criar Histórico', class:'btn btn-primary'
-  - else
-    = f.button 'Atualizar Histórico', class:'btn btn-primary'
-    
-  = link_to 'Voltar', project_histories_path, class:'btn btn-primary pull-right'
+    - if current_page?(new_project_history_path) or @project_history.errors.any?
+      = f.button 'Criar Histórico', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Histórico', class:'btn btn-primary'
+      
+    = link_to 'Voltar', project_histories_path, class:'btn btn-primary pull-right'
 

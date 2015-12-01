@@ -1,0 +1,28 @@
+h3
+  span Histórico de Projeto 
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+
+hr.divider
+
+p
+  strong Observação: 
+  = @project_member_history.observation
+
+p
+  strong Projeto: 
+  = @project_member_history.project.description
+
+p
+  strong Membro: 
+  = @project_member_history.user.name + ' ' + @project_member_history.user.last_name
+
+p
+  strong Função: 
+  = @project_member_history.project_role.role
+
+br
+
+- if current_user.admin?
+  = link_to 'Editar', edit_project_member_history_path(@project_member_history), class:'btn btn-primary'
+
+= link_to 'Voltar', project_member_histories_path, class:'btn btn-primary pull-right'

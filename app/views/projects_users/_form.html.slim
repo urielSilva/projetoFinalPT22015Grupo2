@@ -19,11 +19,15 @@
     = f.label 'Usuários'
     = f.select :user_id, User.all.map{|u| [u.email, u.id]}, {}, {class:'form-control'}
 
+  .form-group
+    = f.label 'Função'
+    = f.select :project_role_id, ProjectRole.all.map{|p| [p.role, p.id]}, {}, {class:'form-control'}
+
   .actions
   
     br
 
-    - if current_page?(new_projects_user_path)
+    - if current_page?(new_projects_user_path) or @projects_user.errors.any?
       = f.button 'Criar Relacionamento', class:'btn btn-primary'
     - else
       = f.button 'Atualizar Relacionamento', class:'btn btn-primary'

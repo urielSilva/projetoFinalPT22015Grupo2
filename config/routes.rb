@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :project_member_histories
+  resources :project_roles
   resources :project_histories
   resources :projects_users
   devise_scope :user do

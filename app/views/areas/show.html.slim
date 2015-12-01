@@ -1,21 +1,19 @@
-.row
+h3
+  span Área
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-  h3
-    span Área
-    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+hr.divider
 
-  hr.divider
+p
+  strong Nome: 
+  = @area.name
+p
+  strong Núcleo: 
+  = @area.sector.short_name + ' ' + @area.sector.name
 
-  p
-    strong Nome: 
-    = @area.name
-  p
-    strong Núcleo: 
-    = @area.sector.short_name + ' ' + @area.sector.name
+br
 
-  br
-
-  - if current_user.admin?
-    = link_to 'Editar', edit_area_path(@area), class:'btn btn-primary'
-    
-  = link_to 'Voltar', areas_path, class:'btn btn-primary pull-right'
+- if current_user.admin?
+  = link_to 'Editar', edit_area_path(@area), class:'btn btn-primary'
+  
+= link_to 'Voltar', areas_path, class:'btn btn-primary pull-right'

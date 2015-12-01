@@ -3,10 +3,13 @@
   - if @project_status.errors.any?
 
     #error_explanation
-      h2 = "#{pluralize(@projectstatus.errors.count, "error")} prohibited this job from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @project_status.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
     = f.label 'Estado'
@@ -16,7 +19,7 @@
 
     br
 
-    - if current_page?(new_project_status_path)
+    - if current_page?(new_project_status_path) or @project_status.errors.any?
       = f.button 'Criar Estado de Projeto', class:'btn btn-primary'
     - else
       = f.button 'Atualizar Estado de Projeto', class:'btn btn-primary'

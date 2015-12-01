@@ -62,3 +62,9 @@ ActivityType.create(description: "Matéria UnB")
 
 # Create activity
 Activity.create(description: "Teste de Atividade", credit_numbers: 4, activity_type_id: 1)
+
+# Create project roles
+ProjectRole.create(role: "Gerente")
+ProjectRole.create(role: "Função 2")
+ProjectRole.create(role: "Função 3")
+ProjectRole.create(role: "Função 4")

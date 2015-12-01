@@ -7,20 +7,78 @@ nav.navbar.navbar-default.navbar-fixed-top.nav-gray
       - if current_user.present?
 
         - if current_user.admin?
-          .text-center.logo-header
-            span.logo-blue = link_to 'SAP.', admin_path
-            span.logo-green = link_to 'CJR', admin_path
+          = link_to 'SAP', admin_path, class:'navbar-brand'
         - else
-          .text-center.logo-header
-            span.logo-blue = link_to 'SAP.', member_path
-            span.logo-green = link_to 'CJR', member_path
+          = link_to 'SAP', member_path, class:'navbar-brand'
 
       - else
-          .text-center.logo-header
-            span.logo-blue = link_to 'SAP.', '/'
-            span.logo-green = link_to 'CJR', '/'
+          = link_to 'SAP', '/', class:'navbar-brand'
 
     .collapse.navbar-collapse
+
+      - if current_user.present?
+
+        ul.nav.navbar-nav
+
+          li.dropdown
+            / Passar pra slim depois (tá dando problema no span)
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membros <span class="caret"></span></a>
+
+            ul.dropdown-menu
+
+              li
+                a href="#" um
+              li
+                a href="#" dois
+              li
+                a href="#" tres
+
+              li.divider role="separator"
+
+              li.dropdown-header Header
+
+              li
+                a href="#" indiozinhos
+
+          li.dropdown
+            / Passar pra slim depois (tá dando problema no span)
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conhecimentos <span class="caret"></span></a>
+
+            ul.dropdown-menu
+
+              li
+                a href="#" um
+              li
+                a href="#" dois
+              li
+                a href="#" tres
+
+              li.divider role="separator"
+
+              li.dropdown-header Header
+
+              li
+                a href="#" indiozinhos
+
+          li.dropdown
+            / Passar pra slim depois (tá dando problema no span)
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projetos <span class="caret"></span></a>
+
+            ul.dropdown-menu
+
+              li
+                a href="#" um
+              li
+                a href="#" dois
+              li
+                a href="#" tres
+
+              li.divider role="separator"
+
+              li.dropdown-header Header
+
+              li
+                a href="#" indiozinhos
 
       ul.nav.navbar-nav.navbar-right
       

@@ -23,7 +23,7 @@ class ProjectsUsersController < ApplicationController
 
     respond_to do |format|
       if @projects_user.save
-        format.html { redirect_to @projects_user, notice: 'Projects user was successfully created.' }
+        format.html { redirect_to @projects_user, notice: 'O membro foi alocado com sucesso.' }
         format.json { render :show, status: :created, location: @projects_user }
       else
         format.html { render :new }
@@ -35,7 +35,7 @@ class ProjectsUsersController < ApplicationController
   def update
     respond_to do |format|
       if @projects_user.update(projects_user_params)
-        format.html { redirect_to @projects_user, notice: 'Projects user was successfully updated.' }
+        format.html { redirect_to @projects_user, notice: 'A alocação foi atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @projects_user }
       else
         format.html { render :edit }
@@ -47,7 +47,7 @@ class ProjectsUsersController < ApplicationController
   def destroy
     @projects_user.destroy
     respond_to do |format|
-      format.html { redirect_to (request.referer || admin_path), notice: 'Projects user was successfully destroyed.' }
+      format.html { redirect_to (request.referer || admin_path), notice: 'O membro foi deslocado do projeto com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -59,6 +59,6 @@ class ProjectsUsersController < ApplicationController
     end
 
     def projects_user_params
-      params.require(:projects_user).permit(:project_id, :user_id)
+      params.require(:projects_user).permit(:project_id, :user_id, :project_role_id)
     end
 end

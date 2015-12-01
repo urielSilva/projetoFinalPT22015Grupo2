@@ -1,44 +1,42 @@
-.row
+= render '/layouts/cruds/header_index_crud'
 
-  = render '/layouts/cruds/header_index_crud'
+- if @projectstatuses.empty?
+  = render '/layouts/errorempty'
 
-  - if @projectstatuses.empty?
-    = render '/layouts/errorempty'
+- else
 
-  - else
+  table.table.table-hover.table-responsive
 
-    table.table.table-hover.table-responsive
-
-      thead
-        tr
-          th ID
-          th Estado
+    thead
+      tr
+        th ID
+        th Estado
+        th
+        - if current_user.admin?
           th
+          th
+
+    tbody
+      
+      - @projectstatuses.each do |project_status|
+      
+        tr
+          td
+            strong
+              = project_status.id
+          td = project_status.status
+          td align="right"
+            .icon-show
+              = link_to '', project_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
           - if current_user.admin?
-            th
-            th
-
-      tbody
-        
-        - @projectstatuses.each do |project_status|
-        
-          tr
-            td
-              strong
-                = project_status.id
-            td = project_status.status
-            td
+            td align="right"
               .icon-show
-                = link_to '', project_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+                = link_to '', edit_project_status_path(project_status), class:'glyphicon glyphicon-pencil', title:'Editar'
 
-            - if current_user.admin?
-              td
-                .icon-show
-                  = link_to '', edit_project_status_path(project_status), class:'glyphicon glyphicon-pencil', title:'Editar'
+            td align="right"
+              .icon-show
+                = link_to '', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
-              td
-                .icon-show
-                  = link_to '', project_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
-
-    br
-    = render '/layouts/cruds/footer_index_crud'
+  br
+  = render '/layouts/cruds/footer_index_crud'

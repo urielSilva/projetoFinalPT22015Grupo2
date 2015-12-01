@@ -1,46 +1,44 @@
-.row
+= render '/layouts/cruds/header_index_crud'
 
-  = render '/layouts/cruds/header_index_crud'
+- if @sectors.empty?
+  = render 'layouts/errorempty'
 
-  - if @sectors.empty?
-    = render 'layouts/errorempty'
+- else
 
-  - else
+  table.table.table-hover.table-responsive
 
-    table.table.table-hover.table-responsive
-
-      thead
-        tr
-          th ID
-          th Sigla
-          th Nome
-          th Descrição
+    thead
+      tr
+        th ID
+        th Sigla
+        th Nome
+        th Descrição
+        th
+        - if current_user.admin?
           th
+          th
+
+    tbody
+
+      - @sectors.each do |sector|
+      
+        tr
+          td = sector.id
+          td = sector.short_name
+          td = sector.name
+          td = sector.description
+          td align="right"
+            .icon-show
+              = link_to '', sector, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
           - if current_user.admin?
-            th
-            th
-
-      tbody
-
-        - @sectors.each do |sector|
-        
-          tr
-            td = sector.id
-            td = sector.short_name
-            td = sector.name
-            td = sector.description
-            td
+            td align="right"
               .icon-show
-                = link_to '', sector, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+                = link_to '', edit_sector_path(sector), class:'glyphicon glyphicon-pencil', title:'Editar'
 
-            - if current_user.admin?
-              td
-                .icon-show
-                  = link_to '', edit_sector_path(sector), class:'glyphicon glyphicon-pencil', title:'Editar'
+            td align="right"
+              .icon-show
+                = link_to '', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
-              td
-                .icon-show
-                  = link_to '', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
-
-    br
-    = render '/layouts/cruds/footer_index_crud'
+  br
+  = render '/layouts/cruds/footer_index_crud'

@@ -3,10 +3,13 @@
   - if @profile.errors.any?
 
     #error_explanation
-      h2 = "#{pluralize(@profile.errors.count, "error")} prohibited this profile from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @profile.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
     = f.label 'Nome'
@@ -16,7 +19,7 @@
 
   br
 
-  - if current_page?(new_profile_path)
+  - if current_page?(new_profile_path) or @profile.errors.any?
     = f.button 'Criar Perfil', class:'btn btn-primary'
   - else
     = f.button 'Atualizar Perfil', class:'btn btn-primary'

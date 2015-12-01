@@ -1,51 +1,51 @@
-.row
+h3
+  span Projeto
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-  h3
-  	span Projeto
-    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+hr.divider
 
-  hr.divider
+p
+  strong Descrição: 
+  = @project.description
+p
+  strong Preço: 
+  = @project.price
+p
+  strong Link: 
+  = link_to [@project.link], @project.link
+p
+	strong Estado: 
+	= @project.project_status.status
 
-  p
-    strong Descrição: 
-    = @project.description
-  p
-    strong Preço: 
-    = @project.price
-  p
-    strong Link: 
-    = link_to [@project.link], @project.link
-  p
-  	strong Estado: 
-  	= @project.project_status.status
+- if @users.empty?
+  strong Membros:
+  p Não há ninguém alocado neste projeto.
 
-  - if @users.empty?
-    strong Membros:
-    p Não há ninguém alocado neste projeto.
-
-  - else
-
-    br
-
-    table.table.table-hover.table-responsive
-
-      thead
-
-        tr
-          th Membro
-          th
-          
-      tbody
-
-        - @users.each do |user|
-
-          tr
-            td = link_to user.name + ' ' + user.last_name, user
-            td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+- else
 
   br
 
-  - if current_user.admin?
-    = link_to 'Editar', edit_project_path(@project), class:'btn btn-primary'
+  table.table.table-hover.table-responsive
 
-  = link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'
+    thead
+
+      tr
+        th Membro
+        - if current_user.admin?
+          th
+        
+    tbody
+
+      - @users.each do |user|
+
+        tr
+          td = link_to user.name + ' ' + user.last_name, user
+          - if current_user.admin?
+            td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+
+br
+
+- if current_user.admin?
+  = link_to 'Editar', edit_project_path(@project), class:'btn btn-primary'
+
+= link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'

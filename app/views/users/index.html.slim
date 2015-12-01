@@ -1,62 +1,60 @@
-.row
+= render '/layouts/cruds/header_index_crud'
 
-  = render '/layouts/cruds/header_index_crud'
+table.table.table-hover.table-responsive
 
-  table.table.table-hover.table-responsive
+  thead
+    tr
+      - if current_user.admin?
+        th ID
+      th Status
+      th Nome
+      th Email
+      th Perfil
+      th
+      th
+      - if current_user.admin?
+        th
 
-    thead
+  tboby
+
+    - @users.each do |user|
+    
       tr
         - if current_user.admin?
-          th ID
-        th Status
-        th Nome
-        th Email
-        th Perfil
-        th
-        th
-        - if current_user.admin?
-          th
-
-    tboby
-
-      - @users.each do |user|
-      
-        tr
-          - if current_user.admin?
-            td
-              strong
-                = user.id
           td
-            - if user.user_status.status == 'Ativo'
-              .text-success
-                = user.user_status.status
-            - else
-              .text-danger
-                = user.user_status.status
+            strong
+              = user.id
+        td
+          - if user.user_status.status == 'Ativo'
+            .text-success
+              = user.user_status.status
+          - else
+            .text-danger
+              = user.user_status.status
 
-          td = user.name + ' ' + user.last_name
-          td = user.email
-          td
-            - if user.profile.name == "Membro"
-              text-primary
-                strong Membro
-            - else
-              .text-primary
-                strong Administrador
+        td = user.name + ' ' + user.last_name
+        td = user.email
+        td
+          - if user.profile.name == "Membro"
+            text-primary
+              strong Membro
+          - else
+            .text-primary
+              strong Administrador
 
-          td
+        td align="right"
+          .icon-show
+            = link_to '', user, class:'glyphicon glyphicon-eye-open'
+
+        td align="right"
+          - if user.id == current_user.id or current_user.admin?
             .icon-show
-              = link_to '', user, class:'glyphicon glyphicon-eye-open'
+              = link_to '', edit_user_path(user), class:'glyphicon glyphicon-pencil'
 
-          td
-            - if user.id == current_user.id or current_user.admin?
-              .icon-show
-                = link_to '', edit_user_path(user), class:'glyphicon glyphicon-pencil'
+        - if current_user.admin?
+          td align="right"
+            .icon-show 
+              = link_to '', user, data: {:confirm => 'Tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove'
 
-          - if current_user.admin?
-            td
-              .icon-show 
-                = link_to '', user, data: {:confirm => 'Tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove'
-
-  br
-  = render '/layouts/cruds/footer_index_crud'
+br
+= render '/layouts/cruds/footer_index_crud'
