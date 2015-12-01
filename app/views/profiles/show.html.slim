@@ -1,5 +1,5 @@
 h3
-	span Perfil 
+  span Perfil 
   = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
 hr.divider
@@ -11,7 +11,7 @@ p
 br
 
 - if current_user.admin?
-	= link_to 'Editar', edit_profile_path(@profile), class:'btn btn-primary'
-	
+  = link_to 'Editar', edit_profile_path(@profile), class:'btn btn-primary'
+  
 = link_to 'Voltar', profiles_path, class:'btn btn-primary pull-right'
 
