@@ -25,12 +25,12 @@
 
   .actions
 
-  br
+    br
 
-  - if current_page?(new_project_history_path) or @project_history.errors.any?
-    = f.button 'Criar Histórico', class:'btn btn-primary'
-  - else
-    = f.button 'Atualizar Histórico', class:'btn btn-primary'
-    
-  = link_to 'Voltar', project_histories_path, class:'btn btn-primary pull-right'
+    - if current_page?(new_project_history_path) or @project_history.errors.any?
+      = f.button 'Criar Histórico', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Histórico', class:'btn btn-primary'
+      
+    = link_to 'Voltar', project_histories_path, class:'btn btn-primary pull-right'
 

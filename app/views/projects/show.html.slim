@@ -31,7 +31,8 @@ p
 
       tr
         th Membro
-        th
+        - if current_user.admin?
+          th
         
     tbody
 
@@ -39,7 +40,8 @@ p
 
         tr
           td = link_to user.name + ' ' + user.last_name, user
-          td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+          - if current_user.admin?
+            td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
 br
 

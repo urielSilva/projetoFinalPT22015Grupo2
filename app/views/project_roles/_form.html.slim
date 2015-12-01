@@ -17,12 +17,12 @@
 
   .actions
 
-  br
+    br
 
-  - if current_page?(new_project_role_path) or @project_role.errors.any?
-    = f.button 'Criar Função', class:'btn btn-primary'
-  - else
-    = f.button 'Atualizar Função', class:'btn btn-primary'
-    
-  = link_to 'Voltar', project_roles_path, class:'btn btn-primary pull-right'
+    - if current_page?(new_project_role_path) or @project_role.errors.any?
+      = f.button 'Criar Função', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Função', class:'btn btn-primary'
+      
+    = link_to 'Voltar', project_roles_path, class:'btn btn-primary pull-right'
 

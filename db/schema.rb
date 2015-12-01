@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201204517) do
+ActiveRecord::Schema.define(version: 20151201212425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,19 @@ ActiveRecord::Schema.define(version: 20151201204517) do
   add_index "project_histories", ["project_id"], name: "index_project_histories_on_project_id", using: :btree
   add_index "project_histories", ["project_status_id"], name: "index_project_histories_on_project_status_id", using: :btree
 
+  create_table "project_member_histories", force: :cascade do |t|
+    t.text     "observation"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.integer  "project_role_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "project_member_histories", ["project_id"], name: "index_project_member_histories_on_project_id", using: :btree
+  add_index "project_member_histories", ["project_role_id"], name: "index_project_member_histories_on_project_role_id", using: :btree
+  add_index "project_member_histories", ["user_id"], name: "index_project_member_histories_on_user_id", using: :btree
+
   create_table "project_roles", force: :cascade do |t|
     t.string   "role"
     t.datetime "created_at", null: false
@@ -161,9 +174,9 @@ ActiveRecord::Schema.define(version: 20151201204517) do
   create_table "projects_users", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.integer  "project_role_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "project_role_id"
   end
 
   add_index "projects_users", ["project_id"], name: "index_projects_users_on_project_id", using: :btree
@@ -230,6 +243,9 @@ ActiveRecord::Schema.define(version: 20151201204517) do
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "project_histories", "project_statuses"
   add_foreign_key "project_histories", "projects"
+  add_foreign_key "project_member_histories", "project_roles"
+  add_foreign_key "project_member_histories", "projects"
+  add_foreign_key "project_member_histories", "users"
   add_foreign_key "projects", "project_statuses", name: "projects_project_status_id_fk"
   add_foreign_key "projects_users", "project_roles"
   add_foreign_key "projects_users", "projects", name: "projects_users_project_id_fk"

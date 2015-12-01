@@ -12,11 +12,14 @@
         th ID
         th Perfil
         th
-        th
-        th
+        - if current_user.admin?
+          th
+          th
 
     tbody
+
       - @project_roles.each do |project_role|
+      
         tr
           td
             strong

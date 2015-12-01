@@ -1,0 +1,40 @@
+= form_for @project_member_history do |f|
+
+  - if @project_member_history.errors.any?
+
+    #error_explanation
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
+        - @project_member_history.errors.full_messages.each do |message|
+          p = message
+
+  .form-group
+    = f.label 'Observação'
+    = f.text_area :observation, class:'form-control'
+
+  .form-group
+    = f.label 'Projeto'
+    = f.select :project_id, Project.all.map{|p| [p.description, p.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Membro'
+    = f.select :user_id, User.all.map{|u| [u.email, u.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Função'
+    = f.select :project_role_id, ProjectRole.all.map{|p| [p.role, p.id]}, {}, {class:'form-control'}
+
+  .actions
+
+    br
+
+    - if current_page?(new_project_member_history_path) or @project_member_history.errors.any?
+      = f.button 'Criar Histórico', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Histórico', class:'btn btn-primary'
+      
+    = link_to 'Voltar', project_member_histories_path, class:'btn btn-primary pull-right'
+
