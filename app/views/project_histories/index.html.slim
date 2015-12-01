@@ -19,12 +19,15 @@
           th
 
     tbody
+
       - @project_histories.each do |project_history|
+      
         tr
           td = project_history.id
           td = project_history.project.description
           td = project_history.project_status.status
           td = project_history.observation
+
           td align="right"
             .icon-show
               = link_to '', project_history, class:'glyphicon glyphicon-eye-open', title:'Exibir'
@@ -36,7 +39,7 @@
 
             td align="right"
               .icon-show
-                = link_to '', project_history, data: {:confirm => 'Are you sure?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+                = link_to '', project_history, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
                 
   br
   = render '/layouts/cruds/footer_index_crud'

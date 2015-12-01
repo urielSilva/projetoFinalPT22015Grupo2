@@ -1,0 +1,68 @@
+= render '/layouts/cruds/header_index_crud'
+
+- if @project_member_histories.empty?
+  - if current_user.admin?
+    = render 'layouts/errorempty'
+  - else
+    p Não há histórico de projetos que você tenha participado.
+    br
+    = link_to 'Voltar', member_path, class:'btn btn-primary'
+
+- else
+  
+  - @historico = Array.new
+
+  - @project_member_histories.each do |project_member_history|
+    - if project_member_history.user == current_user or current_user.admin?
+      - @historico.push(project_member_history)
+
+  - if @historico.empty?
+    p Não há histórico de projetos que você tenha participado.
+
+  - else
+
+    table.table.table-hover.table-responsive
+
+      thead
+        tr
+          th ID
+          th Observação
+          th Projeto
+          th Membro
+          th Função
+          th
+          - if current_user.admin?
+            th
+            th
+
+      tbody
+
+          - @project_member_histories.each do |project_member_history|
+
+            - if project_member_history.user == current_user or current_user.admin?
+
+              tr
+                td
+                  strong
+                    = project_member_history.id
+                td = project_member_history.observation
+                td = project_member_history.project.description
+                td = project_member_history.user.name + ' ' + project_member_history.user.last_name
+                td = project_member_history.project_role.role
+
+                td align="right"
+                  .icon-show
+                    = link_to '', project_member_history, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+                - if current_user.admin?
+                  td align="right"
+                    .icon-show
+                      = link_to '', edit_project_member_history_path(project_member_history), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+                  td align="right"
+                    .icon-show 
+                      = link_to '', project_member_history, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+  br
+  = render '/layouts/cruds/footer_index_crud'
+  

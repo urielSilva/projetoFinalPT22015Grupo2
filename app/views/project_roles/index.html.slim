@@ -1,0 +1,43 @@
+= render '/layouts/cruds/header_index_crud'
+
+- if @project_roles.empty?
+  = render 'layouts/errorempty'
+
+- else
+
+  table.table.table-hover.table-responsive
+
+    thead
+      tr
+        th ID
+        th Perfil
+        th
+        - if current_user.admin?
+          th
+          th
+
+    tbody
+
+      - @project_roles.each do |project_role|
+      
+        tr
+          td
+            strong
+              = project_role.id
+          td = project_role.role
+
+          td align="right"
+            .icon-show
+              = link_to '', project_role, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+          - if current_user.admin?
+            td align="right"
+              .icon-show
+                = link_to '', edit_project_role_path(project_role), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+            td align="right"
+              .icon-show
+                = link_to '', project_role, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+  br
+  = render '/layouts/cruds/footer_index_crud'

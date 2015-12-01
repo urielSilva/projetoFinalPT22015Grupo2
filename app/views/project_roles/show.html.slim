@@ -1,0 +1,16 @@
+h3
+  span Função de Projeto 
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+
+hr.divider
+
+p
+  strong Função: 
+  = @project_role.role
+
+br
+
+- if current_user.admin?
+  = link_to 'Editar', edit_project_role_path(@project_role), class:'btn btn-primary'
+
+= link_to 'Voltar', project_roles_path, class:'btn btn-primary pull-right'

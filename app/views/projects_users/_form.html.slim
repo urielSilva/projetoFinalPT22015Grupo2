@@ -19,6 +19,10 @@
     = f.label 'Usuários'
     = f.select :user_id, User.all.map{|u| [u.email, u.id]}, {}, {class:'form-control'}
 
+  .form-group
+    = f.label 'Função'
+    = f.select :project_role_id, ProjectRole.all.map{|p| [p.role, p.id]}, {}, {class:'form-control'}
+
   .actions
   
     br
