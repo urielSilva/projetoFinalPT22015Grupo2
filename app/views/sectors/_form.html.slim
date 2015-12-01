@@ -3,10 +3,13 @@
   - if @sector.errors.any?
 
     #error_explanation
-      h2 = "#{pluralize(@sector.errors.count, "error")} prohibited this sector from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @sector.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
     = f.label 'Sigla'
@@ -24,7 +27,7 @@
 
     br
 
-    - if current_page?(new_sector_path)
+    - if current_page?(new_sector_path) or @sector.errors.any?
       = f.button 'Criar Núcleo', class:'btn btn-primary'
 
     - else

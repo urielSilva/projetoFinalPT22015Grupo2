@@ -3,10 +3,13 @@
   - if @knowledge_level.errors.any?
   
     #error_explanation
-      h2 = "#{pluralize(@knowledge_level.errors.count, "error")} prohibited this knowledge_level from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @knowledge_level.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
     = f.label 'Nível'
@@ -19,7 +22,7 @@
   .actions
 
     br
-    - if current_page?(new_knowledge_level_path)
+    - if current_page?(new_knowledge_level_path) or @knowledge_level.errors.any?
       = f.button 'Criar Nível de Conhecimento', class:'btn btn-primary'
     - else
       = f.button 'Atualizar Nível de Conhecimento', class:'btn btn-primary'

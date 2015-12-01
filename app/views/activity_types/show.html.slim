@@ -1,18 +1,16 @@
-.row
+h3
+	span Tipo de Atividade
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-  h3
-  	span Tipo de Atividade
-    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+hr.divider
 
-  hr.divider
+p
+  strong Descrição: 
+  = @activity_type.description
 
-  p
-    strong Descrição: 
-    = @activity_type.description
+br
 
-  br
-
-  - if current_user.admin?
-  	= link_to 'Editar', edit_activity_type_path(@activity_type), class:'btn btn-primary'
-  	
-  = link_to 'Voltar', activity_types_path, class:'btn btn-primary pull-right'
+- if current_user.admin?
+	= link_to 'Editar', edit_activity_type_path(@activity_type), class:'btn btn-primary'
+	
+= link_to 'Voltar', activity_types_path, class:'btn btn-primary pull-right'

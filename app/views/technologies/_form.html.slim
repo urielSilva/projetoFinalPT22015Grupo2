@@ -3,10 +3,13 @@
   - if @technology.errors.any?
 
     #error_explanation
-      h2 = "#{pluralize(@technology.errors.count, "error")} prohibited this technology from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @technology.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
     = f.label 'Nome'
@@ -20,7 +23,7 @@
 
     br
 
-    - if current_page?(new_technology_path)
+    - if current_page?(new_technology_path) @technology.errors.any?
       = f.button 'Criar Tecnologia', class:'btn btn-primary'
     - else
       = f.button 'Atualizar Tecnologia', class:'btn btn-primary'

@@ -3,10 +3,13 @@
   - if @knowledge.errors.any?
 
     #error_explanation
-      h2 = "#{pluralize(@knowledge.errors.count, "error")} prohibited this knowledge from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @knowledge.errors.full_messages.each do |message|
-        li = message
+          p = message
 
   .form-group
     = f.label 'Descrição'
@@ -24,7 +27,7 @@
 
     br
 
-    - if current_page?(new_knowledge_path)
+    - if current_page?(new_knowledge_path) or @knowledge.errors.any?
       = f.button 'Criar Conhecimento', class:'btn btn-primary'
     - else
       = f.button 'Atualizar Conhecimento', class:'btn btn-primary'

@@ -1,23 +1,21 @@
-.row
+h3
+  span Atividade
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
-  h3
-    span Atividade
-    = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+hr.divider
 
-  hr.divider
+p
+  strong Descrição:  
+  = @activity.description
+  
+p
+  strong Número de créditos: 
+  = @activity.credit_numbers
 
-  p
-    strong Descrição:  
-    = @activity.description
-    
-  p
-    strong Número de créditos: 
-    = @activity.credit_numbers
+br
 
-  br
-
-  - if current_user.admin?
-  	= link_to 'Editar', edit_activity_path(@activity), class:'btn btn-primary'
-  	
-  = link_to 'Voltar', activities_path, class:'btn btn-primary pull-right'
+- if current_user.admin?
+	= link_to 'Editar', edit_activity_path(@activity), class:'btn btn-primary'
+	
+= link_to 'Voltar', activities_path, class:'btn btn-primary pull-right'
 

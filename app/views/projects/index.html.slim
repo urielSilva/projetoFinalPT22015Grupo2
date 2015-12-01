@@ -1,50 +1,48 @@
-.row
+= render '/layouts/cruds/header_index_crud'
 
-  = render '/layouts/cruds/header_index_crud'
+- if @projects.empty?
+  = render 'layouts/errorempty'
 
-  - if @projects.empty?
-    = render 'layouts/errorempty'
+- else
 
-  - else
+  table.table.table.table-hover.table-responsive
 
-    table.table.table.table-hover.table-responsive
-
-      thead
-        tr
-          th ID
-          th Link
-          th Descrição
-          th Preço
-          th Estado
+    thead
+      tr
+        th ID
+        th Link
+        th Descrição
+        th Preço
+        th Estado
+        th
+        - if current_user.admin?
           th
+          th
+
+    tbody
+      
+      - @projects.each do |project|
+      
+        tr
+          td
+            strong
+              = project.id
+          td = link_to 'Acessar', project.link
+          td = project.description
+          td = project.price
+          td = project.project_status.status
+          td align="right"
+            .icon-show
+              = link_to '', project, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
           - if current_user.admin?
-            th
-            th
-
-      tbody
-        
-        - @projects.each do |project|
-        
-          tr
-            td
-              strong
-                = project.id
-            td = link_to 'Acessar', project.link
-            td = project.description
-            td = project.price
-            td = project.project_status.status
-            td
+            td align="right"
               .icon-show
-                = link_to '', project, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+                = link_to '', edit_project_path(project), class:'glyphicon glyphicon-pencil', title:'Editar'
 
-            - if current_user.admin?
-              td
-                .icon-show
-                  = link_to '', edit_project_path(project), class:'glyphicon glyphicon-pencil', title:'Editar'
+            td align="right"
+              .icon-show
+                = link_to '', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
-              td
-                .icon-show
-                  = link_to '', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
-
-    br
-    = render '/layouts/cruds/footer_index_crud'
+  br
+  = render '/layouts/cruds/footer_index_crud'

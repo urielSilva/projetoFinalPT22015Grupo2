@@ -1,11 +1,15 @@
 = form_for @area do |f|
 
   - if @area.errors.any?
+
     #error_explanation
-      h2 = "#{pluralize(@area.errors.count, "error")} prohibited this area from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @area.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
     = f.label 'Nome'
