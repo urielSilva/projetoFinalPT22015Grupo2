@@ -1,0 +1,23 @@
+h1 Listing activities_users
+
+table
+  thead
+    tr
+      th User
+      th Activity
+      th
+      th
+      th
+
+  tbody
+    - @activities_users.each do |activities_user|
+      tr
+        td = activities_user.user.name
+        td = activities_user.activity.description
+        td = link_to 'Show', activities_user
+        td = link_to 'Edit', edit_activities_user_path(activities_user)
+        td = link_to 'Destroy', activities_user, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Activities user', new_activities_user_path

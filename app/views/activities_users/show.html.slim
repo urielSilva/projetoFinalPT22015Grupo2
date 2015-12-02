@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong User:
+  = @activities_user.user
+p
+  strong Activity:
+  = @activities_user.activity
+
+= link_to 'Edit', edit_activities_user_path(@activities_user)
+'|
+= link_to 'Back', activities_users_path

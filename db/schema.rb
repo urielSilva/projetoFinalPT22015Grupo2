@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201212425) do
+ActiveRecord::Schema.define(version: 20151202145503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20151201212425) do
   end
 
   add_index "activities", ["activity_type_id"], name: "index_activities_on_activity_type_id", using: :btree
+
+  create_table "activities_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "activity_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "activities_users", ["activity_id"], name: "index_activities_users_on_activity_id", using: :btree
+  add_index "activities_users", ["user_id"], name: "index_activities_users_on_user_id", using: :btree
 
   create_table "activity_types", force: :cascade do |t|
     t.string   "description"
@@ -235,6 +245,8 @@ ActiveRecord::Schema.define(version: 20151201212425) do
   add_index "users", ["user_status_id"], name: "index_users_on_user_status_id", using: :btree
 
   add_foreign_key "activities", "activity_types", name: "activities_activity_type_id_fk"
+  add_foreign_key "activities_users", "activities"
+  add_foreign_key "activities_users", "users"
   add_foreign_key "areas", "sectors", name: "areas_sector_id_fk"
   add_foreign_key "knowledges", "knowledge_levels", name: "knowledges_knowledge_level_id_fk"
   add_foreign_key "knowledges", "technologies", name: "knowledges_technology_id_fk"

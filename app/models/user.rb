@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   belongs_to :area
   belongs_to :user_status
   has_many :project_member_histories
+  has_and_belongs_to_many :activities
 
   has_and_belongs_to_many :projects
 

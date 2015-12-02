@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :activities_users
   devise_scope :user do
     root to: "devise/sessions#new"
     get '/login' => 'devise/sessions#new'
