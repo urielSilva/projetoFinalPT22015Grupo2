@@ -1,9 +1,13 @@
 nav.navbar.navbar-default.navbar-fixed-bottom.nav-gray
 
-	.container
-		.navbar-header
-			.navbar-brand style="font-size: 13px" Sistema de Alocação de Projetos © 2015
+  .container
+    .navbar-header
+      .navbar-brand style="font-size: 13px" Sistema de Alocação de Projetos © 2015
 
-		.collapse.navbar-collapse
-			p.navbar-text.navbar-right
-				a href="http://www.cjr.org.br" Empresa Júnior de Computação - CJR
+    .collapse.navbar-collapse
+      p.navbar-text.navbar-right
+        a href="http://www.cjr.org.br" Empresa Júnior de Computação - CJR
+
+      ul.nav.navbar-nav
+        li
+          = link_to 'Sobre', about_path

@@ -78,7 +78,9 @@ nav.navbar.navbar-default.navbar-fixed-top.nav-gray
 
               li
                 = link_to 'Todos os Projetos', projects_path
-
+              - if current_user.admin?
+                li
+                  = link_to 'Histórico de Projetos', project_histories_path
               li.divider role="separator"
 
               li

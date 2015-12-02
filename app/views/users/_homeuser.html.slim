@@ -1,4 +1,4 @@
-.row
+.row#userphoto
 
   .col-sm-9.col-xs-12
 
@@ -20,106 +20,195 @@
   .col-sm-3.col-xs-12
     = link_to current_user do
       = gravatar_image_tag(current_user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar img-circle pull-right', title: 'Ver Perfil')
-/ trick
-.row
 
-  #home-menu
+.row#notifications
 
-    .col-sm-4.col-xs-12
+  / #home-menu
 
-      .ul.list-group
+  /   .col-sm-3.col-xs-12
 
-        - unless current_user.admin?
-          li.list-group-item.text-center
-            = link_to 'Make me admin', current_user, data: {:confirm => 'Grandes poderes vem com grandes responsabilidades!'}, :method => :makemeadmin, class:'btn btn-primary btn-responsive'
+  /     .ul.list-group
 
-        li.list-group-item.text-right
-          span.pull-left
-            strong Membro desde
-          span Mês/Ano
+  /       - unless current_user.admin?
+  /         li.list-group-item.text-center
+  /           = link_to 'Make me admin', current_user, data: {:confirm => 'Grandes poderes vem com grandes responsabilidades!'}, :method => :makemeadmin, class:'btn btn-primary btn-responsive'
 
-        li.list-group-item.text-right
-          span.pull-left
-            strong Cargo
-          span = current_user.job.name
+  /       li.list-group-item.text-right
+  /         span.pull-left
+  /           strong Membro desde
+  /         span Mês/Ano
 
-        li.list-group-item.text-right
-          span.pull-left
-            strong Núcleo
-          span = current_user.sector.short_name
+  /       li.list-group-item.text-right
+  /         span.pull-left
+  /           strong Cargo
+  /         span = current_user.job.name
 
-        li.list-group-item.text-right
-          span.pull-left
-            strong Área
-          span = current_user.area.name
+  /       li.list-group-item.text-right
+  /         span.pull-left
+  /           strong Núcleo
+  /         span = current_user.sector.short_name
 
-        li.list-group-item.text-right
-          span.pull-left
-            strong Alocado em projeto?
-          - if current_user.projects.empty?
-            span.text-danger Não
-          - else
-            span.text-success Sim
+  /       li.list-group-item.text-right
+  /         span.pull-left
+  /           strong Área
+  /         span = current_user.area.name
 
-        - if current_user.admin?
-          li.list-group-item.text-right
-            span.pull-left
-              strong Informações
-            = link_to 'Adquirir', :info
+  /       li.list-group-item.text-right
+  /         span.pull-left
+  /           strong Alocado em projeto?
+  /         - if current_user.projects.empty?
+  /           span.text-danger Não
+  /         - else
+  /           span.text-success Sim
+
+  /       - if current_user.admin?
+  /         li.list-group-item.text-right
+  /           span.pull-left
+  /             strong Informações
+  /           = link_to 'Adquirir', :info
         
-        li.list-group-item.text-right
-          span.pull-left
-            strong Histórico de Projetos
-          = link_to 'Visualizar', project_member_histories_path
+  /       li.list-group-item.text-right
+  /         span.pull-left
+  /           strong Histórico de Projetos
+  /         = link_to 'Visualizar', project_member_histories_path
 
-        - unless current_user.admin?
-          li.list-group-item.text-right
-            span.pull-left
-              strong Solicitar
-            = link_to 'Conhecimento'
+  /       - unless current_user.admin?
+  /         li.list-group-item.text-right
+  /           span.pull-left
+  /             strong Solicitar
+  /           = link_to 'Conhecimento'
 
-        li.list-group-item.text-center
-          = link_to 'Mensagens', conversations_path, class:'btn btn-primary btn-responsive'
+  /       li.list-group-item.text-center
+  /         = link_to 'Mensagens', conversations_path, class:'btn btn-primary btn-responsive'
 
-  .col-sm-8
-    
-    ul.nav.nav-tabs.nav-justified
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading Informações básicas
+      .panel-body
+        span lala
+        span lala
 
-      li.active
-        a href="#membros" data-toggle="tab" Membros
-      li
-        a href="#conhecimentos" data-toggle="tab" Conhecimentos
-      li
-        a href="#projetos" data-toggle="tab" Projetos
-      li
-        a href="#configuracoes" data-toggle="tab" Configurações
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading Projetos atuais
+      .panel-body
+        span lala
+        span lala
 
-    #tab-content
+  .col-sm-4
+    .panel.panel-primary
+      .panel-heading
+        .row
+          .col-xs-3
+            i class="fa fa-comments fa-4x"
+          .col-xs-9.text-right
+            .panel-number
+              - if unread_messages_count == 0
+                span.pull-right Nenhuma
+              - else
+                span.pull-right = unread_messages_count
+            br
+            br
+            .panel-info
+              - if unread_messages_count == 0
+                span.pull-right Nova Mensagem
+              - elsif unread_messages_count == 1
+                span.pull-right Nova Mensagem!
+              - elsif unread_messages_count > 1
+                span.pull-right Novas Mensagens!
 
-      .tab-pane.active#membros
+      a href="/conversations"
+        .panel-footer
+          span Ver Detalhes
+          span.pull-right
+            i class="fa fa-arrow-circle-right"
 
-        .content-home
-          p aqui vai ficar: novas mensagens
-          p = link_to 'Mensagens', conversations_path 
+  .col-sm-4
+    .panel.panel-yellow
+      .panel-heading
+        .row
+          .col-xs-3
+            i class="fa fa-comments fa-4x"
+          .col-xs-9.text-right
+            .panel-number
+              - if current_user.admin?
+                span.pull-right 7
+              - else
+                span.pull-right Requisitar
+            br
+            br
+            .panel-info
+              - if current_user.admin?
+                span.pull-right Requisições de Conhecimento
+              - else
+                span.pull-right Conhecimento
 
-      .tab-pane#conhecimentos
+      a href="#"
+        .panel-footer
+          span Ver Detalhes
+          span.pull-right
+            i class="fa fa-arrow-circle-right"
+
+  .col-sm-4
+    .panel.panel-green
+      .panel-heading
+        .row
+          .col-xs-3
+            i class="fa fa-comments fa-4x"
+          .col-xs-9.text-right
+            .panel-number
+              - if current_user.admin?
+                span.pull-right Histórico Geral
+              - else
+                span.pull-right Seu Histórico
+            br
+            br
+            .panel-info
+              span.pull-right de Projetos
+
+      a href="/project_member_histories"
+        .panel-footer
+          span Ver Detalhes
+          span.pull-right
+            i class="fa fa-arrow-circle-right"
+
+    / ul.nav.nav-tabs.nav-justified
+
+    /   li.active
+    /     a href="#membros" data-toggle="tab" Membros
+    /   li
+    /     a href="#conhecimentos" data-toggle="tab" Conhecimentos
+    /   li
+    /     a href="#projetos" data-toggle="tab" Projetos
+    /   li
+    /     a href="#configuracoes" data-toggle="tab" Configurações
+
+    / #tab-content
+
+    /   .tab-pane.active#membros
+
+    /     .content-home
+    /       p aqui vai ficar: novas mensagens
+    /       p = link_to 'Mensagens', conversations_path 
+
+    /   .tab-pane#conhecimentos
           
-        .content-home
-          p aqui vai ficar: requisição de conhecimento (para member)
-          p = link_to 'Requisitar Conhecimento', '/'
-          p para admin: requisições de conhecimento pendentes, requisições de atividade pendentes
+    /     .content-home
+    /       p aqui vai ficar: requisição de conhecimento (para member)
+    /       p = link_to 'Requisitar Conhecimento', '/'
+    /       p para admin: requisições de conhecimento pendentes
 
-      .tab-pane#projetos
+    /   .tab-pane#projetos
 
-        .content-home
-          p aqui vai ficar (para admin): alocar membro em projeto, histórico de projetos
-          p = link_to 'Alocar Membro em Projeto', projects_users_path
-          p = link_to 'Histórico de Projetos', project_histories_path
-          p para ambos: histórico de projetos e membros
-          p = link_to 'Histórico de Projeto [Membro]', project_member_histories_path
+    /     .content-home
+    /       p aqui vai ficar (para admin): alocar membro em projeto, histórico de projetos
+    /       p = link_to 'Alocar Membro em Projeto', projects_users_path
+    /       p = link_to 'Histórico de Projetos', project_histories_path
+    /       p para ambos: histórico de projetos e membros
+    /       p = link_to 'Histórico de Projeto [Membro]', project_member_histories_path
 
-      .tab-pane#configuracoes
+    /   .tab-pane#configuracoes
 
-        .content-home
-          - @user = current_user
-          = render '/users/form'
+    /     .content-home
+    /       - @user = current_user
+    /       = render '/users/form'

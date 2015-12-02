@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :project_member_histories
-  resources :project_roles
-  resources :project_histories
-  resources :projects_users
   devise_scope :user do
     root to: "devise/sessions#new"
     get '/login' => 'devise/sessions#new'
@@ -35,19 +31,24 @@ Rails.application.routes.draw do
     end
   end
   
+  get '/about' => 'about#index', as: :about
   resources :messages, only: [:new, :create]
 
   resources :user_statuses
   resources :activities
   resources :activity_types
+  resources :areas
   resources :sectors
   resources :knowledge_levels
   resources :knowledges
+  resources :technologies
   resources :profiles
   resources :jobs
-  resources :project_statuses
   resources :projects
-  resources :technologies
-  resources :areas
+  resources :project_roles
+  resources :projects_users
+  resources :project_statuses
+  resources :project_histories
+  resources :project_member_histories
 
 end
