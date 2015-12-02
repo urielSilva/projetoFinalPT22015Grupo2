@@ -1,44 +1,44 @@
 = render '/layouts/cruds/header_index_crud'
 
 - if @technologies.empty?
-= render 'layouts/errorempty'
+  = render 'layouts/errorempty'
 
 - else
 
-table.table.table-hover.table-responsive
+  table.table.table-hover.table-responsive
 
-  thead
-    tr
-      th ID
-      th Nome
-      th Descrição
-      th
-      - if current_user.admin?
-        th
-        th
-
-  tbody
-    
-    - @technologies.each do |technology|
-    
+    thead
       tr
-        td
-          strong
-            = technology.id
-        td = technology.name
-        td = technology.description
-        td align="right"
-          .icon-show
-            = link_to '', technology, class:'glyphicon glyphicon-eye-open', title:'Exibir'
-
+        th ID
+        th Nome
+        th Descrição
+        th
         - if current_user.admin?
+          th
+          th
+
+    tbody
+      
+      - @technologies.each do |technology|
+      
+        tr
+          td
+            strong
+              = technology.id
+          td = technology.name
+          td = technology.description
           td align="right"
             .icon-show
-              = link_to '', edit_technology_path(technology), class:'glyphicon glyphicon-pencil', title:'Editar'
+              = link_to '', technology, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          td align="right"
-            .icon-show
-              = link_to '', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+          - if current_user.admin?
+            td align="right"
+              .icon-show
+                = link_to '', edit_technology_path(technology), class:'glyphicon glyphicon-pencil', title:'Editar'
 
-br
-= render '/layouts/cruds/footer_index_crud'
+            td align="right"
+              .icon-show
+                = link_to '', technology, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+  br
+  = render '/layouts/cruds/footer_index_crud'

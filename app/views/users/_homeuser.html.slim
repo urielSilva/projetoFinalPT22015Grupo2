@@ -99,43 +99,24 @@
       .tab-pane.active#membros
 
         .content-home
-          = link_to 'usuários', users_path
-          br
-          = link_to 'perfis', profiles_path
-          br
-          = link_to 'cargo', jobs_path
-          br
-          = link_to 'núcleo', sectors_path
-          br
-          = link_to 'area', areas_path
-          br
-          = link_to 'status do usuario', user_statuses_path
+          p aqui vai ficar: novas mensagens
+          p = link_to 'Mensagens', conversations_path 
 
       .tab-pane#conhecimentos
           
         .content-home
-          = link_to 'conhecimento', knowledges_path
-          br
-          = link_to 'nivel de conhecimento', knowledge_levels_path
-          br
-          = link_to 'tecnologia', technologies_path
-          br
-          = link_to 'tipos de atividade', activity_types_path
-          br
-          = link_to 'atividade', activities_path
+          p aqui vai ficar: requisição de conhecimento (para member)
+          p = link_to 'Requisitar Conhecimento', '/'
+          p para admin: requisições de conhecimento pendentes, requisições de atividade pendentes
 
       .tab-pane#projetos
 
         .content-home
-          = link_to 'estado de projeto', project_statuses_path
-          br
-          = link_to 'projeto', projects_path
-          br
-          = link_to 'Alocar Membro em Projeto', projects_users_path
-          br
-          = link_to 'Histórico de Projetos', project_histories_path
-          br
-          = link_to 'Funções de Projeto', project_roles_path
+          p aqui vai ficar (para admin): alocar membro em projeto, histórico de projetos
+          p = link_to 'Alocar Membro em Projeto', projects_users_path
+          p = link_to 'Histórico de Projetos', project_histories_path
+          p para ambos: histórico de projetos e membros
+          p = link_to 'Histórico de Projeto [Membro]', project_member_histories_path
 
       .tab-pane#configuracoes
 
