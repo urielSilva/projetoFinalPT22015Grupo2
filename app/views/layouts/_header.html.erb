@@ -1,0 +1,147 @@
+<nav class="navbar navbar-default navbar-fixed-top nav-gray">
+
+  <div class="container">
+
+    <div class="navbar-header">
+
+      <% if current_user.present? %>
+        <% if current_user.admin? %>
+          <%= link_to 'SAP', admin_path, class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
+        <% else %>
+          <%= link_to 'SAP', member_path, class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
+        <% end %>
+      <% else %>
+        <%= link_to 'SAP', '/', class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
+      <% end %>
+
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <% if current_user.present? %>
+
+        <ul class="nav navbar-nav">
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membros <span class="caret"></span></a>
+
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/users">
+                  <i class="fa fa-users"></i>&nbsp;&nbsp;Todos os Membros
+                </a>
+              </li>
+              <li class="divider" role="separator"></li>
+              <li><%= link_to 'Perfis', profiles_path %></li>
+              <li><%= link_to 'Cargos', jobs_path %></li>
+              <li><%= link_to 'Núcleos', sectors_path %></li>
+              <li><%= link_to 'Áreas', areas_path %></li>
+              <li><%= link_to 'Status de Usuário', user_statuses_path %></li>
+            </ul>
+
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conhecimentos <span class="caret"></span></a>
+
+            <ul class="dropdown-menu">
+
+              <li>
+                <a href="/knowledges">
+                  <i class="fa fa-cog"></i>&nbsp;&nbsp;Todos os Conhecimentos
+                </a>
+              </li>
+              <li class="divider" role="separator"></li>
+              <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
+              <li><%= link_to 'Tecnologias', technologies_path %></li>
+              <li class="divider" role="separator"></li>
+
+              <li class="dropdown-header">Atividades</li>
+              <li><%= link_to 'Todas as Atividades', activities_path %></li>
+              <li class="divider" role="separator"></li>
+              <li><%= link_to 'Tipos de Atividade', activity_types_path %></li>
+              <li><%= link_to 'Associar Atividade', activities_users_path %></li>
+            </ul>
+
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projetos <span class="caret"></span></a>
+
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/projects">
+                  <i class="fa fa-laptop"></i>&nbsp;&nbsp;Todos os Projetos
+                </a>
+              </li>
+
+              <li class="divider" role="separator"></li>
+
+              <%- if current_user.admin? or current_user.lider_ndp? %>
+                <li><%= link_to 'Histórico de Projetos', project_histories_path %></li>
+                <li><%= link_to 'Membros em Projetos', projects_users_path %></li>
+              <% end %>
+
+              <li><%= link_to 'Funções de Projeto', project_roles_path %></li>
+              <li><%= link_to 'Estados de Projeto', project_statuses_path %></li>
+            </ul>
+
+          </li>
+
+          <% if current_user.admin? %>
+            <li>
+              <a href="/info" title="Obter informações em gráficos sobre projetos e membros">Informações</a>
+            </li>
+          <% end %>
+
+        </ul>
+
+      <% end %>
+
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li>
+          <a href="/conversations" title="Visualizar suas mensagens">
+            Inbox&nbsp;&nbsp;<i class="fa fa-inbox"></i>
+          </a>
+        </li>
+
+        <% if current_user.present? %>
+
+          <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuário&nbsp;&nbsp;<i class="fa fa-user"></i> <span class="caret"></span></a>
+
+            <ul class="dropdown-menu">
+
+              <li>
+                <a href="<%= user_path(current_user) %>">
+                  <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver Perfil
+                </a>
+              </li>
+
+              <li>
+                <a href="<%= edit_user_path(current_user) %>">
+                  <i class="fa fa-pencil"></i>&nbsp;&nbsp;Editar Perfil
+                </a>
+              </li>
+
+              <li class="divider" role="separator"></li>
+
+              <li>
+                <a href="<%= logout_path %>">
+                  <i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sair
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+        <% else %>
+          <li><%= link_to 'Entrar', login_path %></li>
+        <% end %>
+        
+      </ul>
+    </div>
+  </div>
+</nav>

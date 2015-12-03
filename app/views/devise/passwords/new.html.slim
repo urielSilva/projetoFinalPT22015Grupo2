@@ -11,8 +11,10 @@
       - devise_error_messages!
 
       .form-group
-        = f.label 'Email'
-        = f.email_field :email, class:'form-control'
+        .input-group
+          .input-group-addon
+            i class="fa fa-envelope-o"
+          = f.email_field :email, class:'form-control', placeholder:'Email'
 
       .actions
 

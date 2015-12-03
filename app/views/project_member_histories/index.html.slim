@@ -1,7 +1,7 @@
 = render '/layouts/cruds/header_index_crud'
 
 - if @project_member_histories.empty?
-  - if current_user.admin?
+  - if current_user.admin? or current_user.lider_ndp?
     = render 'layouts/errorempty'
   - else
     p Não há histórico de projetos que você tenha participado.
@@ -13,7 +13,7 @@
   - @historico = Array.new
 
   - @project_member_histories.each do |project_member_history|
-    - if project_member_history.user == current_user or current_user.admin?
+    - if project_member_history.user == current_user or current_user.admin? or current_user.lider_ndp?
       - @historico.push(project_member_history)
 
   - if @historico.empty?
@@ -31,7 +31,7 @@
           th Membro
           th Função
           th
-          - if current_user.admin?
+          - if current_user.admin? or current_user.lider_ndp?
             th
             th
 
@@ -39,7 +39,7 @@
 
           - @historico.each do |project_member_history|
 
-            - if project_member_history.user == current_user or current_user.admin?
+            - if project_member_history.user == current_user or current_user.admin? or current_user.lider_ndp?
 
               tr
                 td
@@ -54,7 +54,7 @@
                   .icon-show
                     = link_to '', project_member_history, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-                - if current_user.admin?
+                - if current_user.admin? or current_user.lider_ndp?
                   td align="right"
                     .icon-show
                       = link_to '', edit_project_member_history_path(project_member_history), class:'glyphicon glyphicon-pencil', title:'Editar'

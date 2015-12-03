@@ -22,7 +22,7 @@ p
 
 br
 
-- if current_user.admin?
+- if current_user.admin? or current_user.lider_ndp?
   = link_to 'Editar', edit_project_member_history_path(@project_member_history), class:'btn btn-primary'
 
 = link_to 'Voltar', project_member_histories_path, class:'btn btn-primary pull-right'

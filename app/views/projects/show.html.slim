@@ -31,7 +31,7 @@ p
 
       tr
         th Membro
-        - if current_user.admin?
+        - if current_user.admin? or current_user.lider_ndp?
           th
         
     tbody
@@ -40,12 +40,12 @@ p
 
         tr
           td = link_to user.name + ' ' + user.last_name, user
-          - if current_user.admin?
+          - if current_user.admin? or current_user.lider_ndp?
             td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
 
 br
 
-- if current_user.admin?
+- if current_user.admin? or current_user.lider_ndp?
   = link_to 'Editar', edit_project_path(@project), class:'btn btn-primary'
 
 = link_to 'Voltar', projects_path, class:'btn btn-primary pull-right'

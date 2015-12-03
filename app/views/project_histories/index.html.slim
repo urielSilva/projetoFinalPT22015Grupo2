@@ -14,7 +14,7 @@
         th Estado de Projeto
         th Observação
         th
-        - if current_user.admin?
+        - if current_user.admin? or current_user.lider_ndp?
           th
           th
 
@@ -32,7 +32,7 @@
             .icon-show
               = link_to '', project_history, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin?
+          - if current_user.admin? or current_user.lider_ndp?
             td align="right"
               .icon-show
                 = link_to '', edit_project_history_path(project_history), class:'glyphicon glyphicon-pencil', title:'Editar'

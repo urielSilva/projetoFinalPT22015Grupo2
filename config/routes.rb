@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :activities_users
   devise_scope :user do
     root to: "devise/sessions#new"
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
 
-  devise_for :users#, :controllers => { registrations: 'users', passwords: 'devise/passwords' }
+  devise_for :users
 
   get '/admin' => 'admin#index'
   get '/member' => 'member#index'
@@ -17,10 +16,6 @@ Rails.application.routes.draw do
 
   resources :users
   
-  post '/users/:id' => 'users#makemeadmin'
-  put '/users/:id' => 'users#makemeadmin'
-  patch '/users/:id' => 'users#makemeadmin'
-
   resources :conversations, only: [:index, :show, :destroy] do
     member do
       post :reply
@@ -33,11 +28,11 @@ Rails.application.routes.draw do
   end
   
   get '/about' => 'about#index', as: :about
-  resources :messages, only: [:new, :create]
 
   resources :user_statuses
   resources :activities
   resources :activity_types
+  resources :activities_users
   resources :areas
   resources :sectors
   resources :knowledge_levels
@@ -51,5 +46,6 @@ Rails.application.routes.draw do
   resources :project_statuses
   resources :project_histories
   resources :project_member_histories
+  resources :messages, only: [:new, :create]
 
 end

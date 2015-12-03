@@ -14,7 +14,7 @@
         th Membro
         th Função
         th
-        - if current_user.admin?
+        - if current_user.admin? or current_user.lider_ndp?
           th
           th
 
@@ -34,7 +34,7 @@
             .icon-show
               = link_to '', projects_user, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin?
+          - if current_user.admin? or current_user.lider_ndp?
             td align="right"
               .icon-show
                 = link_to '', edit_projects_user_path(projects_user), class:'glyphicon glyphicon-pencil', title:'Editar'
