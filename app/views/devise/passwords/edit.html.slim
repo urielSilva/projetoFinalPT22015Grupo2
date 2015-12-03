@@ -12,14 +12,16 @@
       = f.hidden_field :reset_password_token
 
       .form-group
-        = f.label :password, "Nova senha"
-        - if @minimum_password_length
-          span.help-block.pull-right = 'Mínimo de ' + @minimum_password_length.to_s + ' caracteres'
-        = f.password_field :password, autofocus: true, autocomplete: "off", class:'form-control'
+        .input-group
+          .input-group-addon
+            i class="fa fa-key"
+          = f.password_field :password, autofocus: true, class:'form-control', placeholder:'Nova Senha (mínimo: ' + @minimum_password_length.to_s + ' caracteres)'
 
       .form-group
-        = f.label :password_confirmation, "Confirme a senha"
-        = f.password_field :password_confirmation, autocomplete: "off", class:'form-control'
+        .input-group
+          .input-group-addon
+            i class="fa fa-key"
+          = f.password_field :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirmação de Senha'
 
       .actions
         = f.button 'Alterar a senha', class:'btn btn-primary form-control'

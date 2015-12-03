@@ -74,7 +74,7 @@
                   <i class="fa fa-laptop"></i>&nbsp;&nbsp;Todos os Projetos
                 </a>
               </li>
-              
+
               <li class="divider" role="separator"></li>
 
               <%- if current_user.admin? %>
@@ -116,7 +116,7 @@
               <li class="divider" role="separator"></li>
 
               <li>
-                <a href="<% logout_path %>">
+                <a href="<%= logout_path %>">
                   <i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sair
                 </a>
               </li>
@@ -127,7 +127,7 @@
 
         <% else %>
 
-          <li><% link_to 'Sair', logout_path %></li>
+          <li><%= link_to 'Entrar', login_path %></li>
 
         <% end %>
 
