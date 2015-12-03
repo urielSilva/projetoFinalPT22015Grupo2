@@ -1,15 +1,32 @@
 = form_for @activities_user do |f|
-  - if @activities_user.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@activities_user.errors.count, "error")} prohibited this activities_user from being saved:"
-      ul
-        - @activities_user.errors.full_messages.each do |message|
-          li = message
 
-  .field
-    = f.label :user
-    = f.text_field :user_id
-  .field
-    = f.label :activity
-    = f.text_field :activity_id
-  .actions = f.submit
+  - if @activities_user.errors.any?
+
+    #error_explanation
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
+        - @activities_user.errors.full_messages.each do |message|
+          p = message
+
+  .form-group
+    = f.label 'Membro'
+    = f.select :user_id, User.all.map{|u| [u.name + ' ' + u.last_name, u.id]}, {}, class:'form-control'
+
+  .form-group
+    = f.label 'Atividade'
+    = f.select :activity_id, Activity.all.map{|a| [a.description, a.id]}, {}, class:'form-control'
+    
+  .actions
+
+    br
+
+    - if current_page?(new_activities_user_path) or @activities_user.errors.any?
+      = f.button 'Associar Atividade', class:'btn btn-primary'
+
+    - else
+      = f.button 'Atualizar Associação', class:'btn btn-primary'
+
+    = link_to 'Voltar', activities_users_path, class:'btn btn-primary pull-right'

@@ -24,5 +24,5 @@ class User < ActiveRecord::Base
   def admin?
     self.profile.name == "Administrador" || self.profile.name == "Admin"
   end
-  
+
 end

@@ -1,23 +1,42 @@
-h1 Listing activities_users
+= render '/layouts/cruds/header_index_crud'
 
-table
-  thead
-    tr
-      th User
-      th Activity
-      th
-      th
-      th
+- if @activities_users.empty?
+  = render 'layouts/errorempty'
 
-  tbody
-    - @activities_users.each do |activities_user|
+- else
+
+  table.table.table-hover.table-responsive
+
+    thead
       tr
-        td = activities_user.user.name
-        td = activities_user.activity.description
-        td = link_to 'Show', activities_user
-        td = link_to 'Edit', edit_activities_user_path(activities_user)
-        td = link_to 'Destroy', activities_user, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Membro
+        th Atividade
+        th
+        - if current_user.admin?
+          th
+          th
 
-br
+    tbody
 
-= link_to 'New Activities user', new_activities_user_path
+      - @activities_users.each do |activities_user|
+
+        tr
+          td = activities_user.user.name + ' ' + activities_user.user.last_name
+          td = activities_user.activity.description
+
+          td align="right"
+            .icon-show
+              = link_to '', activities_user, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+          - if current_user.admin?
+            td align="right"
+              .icon-show
+                = link_to '', edit_activities_user_path(activities_user), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+            td align="right"
+              .icon-show
+                = link_to '', activities_user, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+  br
+  = render '/layouts/cruds/footer_index_crud'
+  

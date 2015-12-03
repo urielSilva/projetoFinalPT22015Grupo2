@@ -70,6 +70,9 @@ nav.navbar.navbar-default.navbar-fixed-top.nav-gray
               li
                 = link_to 'Tipos de Atividade', activity_types_path
 
+              li
+                = link_to 'Associar Atividade', activities_users_path
+
           li.dropdown
             / Passar pra slim depois (tá dando problema no span)
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projetos <span class="caret"></span></a>
@@ -85,6 +88,9 @@ nav.navbar.navbar-default.navbar-fixed-top.nav-gray
 
               li
                 = link_to 'Funções de Projeto', project_roles_path
+
+              li
+                = link_to 'Estados de Projeto', project_statuses_path
 
       ul.nav.navbar-nav.navbar-right
       
