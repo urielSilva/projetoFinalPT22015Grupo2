@@ -42,9 +42,9 @@ class ProjectsController < ApplicationController
   
   def update
 
-    params[:users].each do |key,value|
-      @project.users << User.find(key)
-    end
+    # params[:users].each do |key,value|
+    #   @project.users << User.find(key)
+    # end
 
     respond_to do |format|
       if @project.update(project_params)

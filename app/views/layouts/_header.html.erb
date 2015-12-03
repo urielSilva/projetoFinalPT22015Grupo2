@@ -6,12 +6,12 @@
 
       <% if current_user.present? %>
         <% if current_user.admin? %>
-          <%= link_to 'SAP', admin_path, class:'navbar-brand' %>
+          <%= link_to 'SAP', admin_path, class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
         <% else %>
-          <%= link_to 'SAP', member_path, class:'navbar-brand' %>
+          <%= link_to 'SAP', member_path, class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
         <% end %>
       <% else %>
-        <%= link_to 'SAP', '/', class:'navbar-brand' %>
+        <%= link_to 'SAP', '/', class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
       <% end %>
 
     </div>
@@ -77,8 +77,9 @@
 
               <li class="divider" role="separator"></li>
 
-              <%- if current_user.admin? %>
+              <%- if current_user.admin? or current_user.lider_ndp? %>
                 <li><%= link_to 'Histórico de Projetos', project_histories_path %></li>
+                <li><%= link_to 'Membros em Projetos', projects_users_path %></li>
               <% end %>
 
               <li><%= link_to 'Funções de Projeto', project_roles_path %></li>
@@ -87,17 +88,29 @@
 
           </li>
 
+          <% if current_user.admin? %>
+            <li>
+              <a href="/info" title="Obter informações em gráficos sobre projetos e membros">Informações</a>
+            </li>
+          <% end %>
+
         </ul>
 
       <% end %>
 
       <ul class="nav navbar-nav navbar-right">
-      
+        
+        <li>
+          <a href="/conversations" title="Visualizar suas mensagens">
+            Inbox&nbsp;&nbsp;<i class="fa fa-inbox"></i>
+          </a>
+        </li>
+
         <% if current_user.present? %>
 
           <li class="dropdown">
 
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuário&nbsp;&nbsp;<i class="fa fa-user"></i> <span class="caret"></span></a>
 
             <ul class="dropdown-menu">
 
@@ -108,7 +121,7 @@
               </li>
 
               <li>
-                <a href="<% edit_user_path(current_user) %>">
+                <a href="<%= edit_user_path(current_user) %>">
                   <i class="fa fa-pencil"></i>&nbsp;&nbsp;Editar Perfil
                 </a>
               </li>
@@ -122,19 +135,13 @@
               </li>
 
             </ul>
-
           </li>
 
         <% else %>
-
           <li><%= link_to 'Entrar', login_path %></li>
-
         <% end %>
-
+        
       </ul>
-
     </div>
-
   </div>
-
 </nav>

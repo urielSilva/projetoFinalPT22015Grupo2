@@ -22,7 +22,11 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.profile.name == "Administrador" || self.profile.name == "Admin"
+    self.profile.name == "Administrador" or self.profile.name == "Admin"
+  end
+
+  def lider_ndp?
+    self.job.name == "Líder" and self.sector.short_name == "NDP"
   end
 
 end

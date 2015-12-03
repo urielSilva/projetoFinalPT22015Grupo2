@@ -97,7 +97,7 @@
               thead
                 tr
                   th Projeto
-                  - if current_user.admin?
+                  - if current_user.admin? or current_user.lider_ndp?
                     th
 
               tbody
@@ -106,5 +106,5 @@
                 
                   tr
                     td = link_to project.description, project
-                    - if current_user.admin?
+                    - if current_user.admin? or current_user.lider_ndp?
                       td align="right" = link_to 'Desalocar', @projects_users.where(project_id: project.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete

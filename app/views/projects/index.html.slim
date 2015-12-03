@@ -1,3 +1,6 @@
+- if current_user.lider_ndp?
+  p.bg-success.text-center style="padding: 10px;" Como Líder do Núcleo de Desenvolvimento e Pesquisa você tem pleno acesso a tudo relacionado com Projetos.
+
 = render '/layouts/cruds/header_index_crud'
 
 - if @projects.empty?
@@ -15,7 +18,7 @@
         th Preço
         th Estado
         th
-        - if current_user.admin?
+        - if current_user.admin? or current_user.lider_ndp?
           th
           th
 
@@ -35,7 +38,7 @@
             .icon-show
               = link_to '', project, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin?
+          - if current_user.admin? or current_user.lider_ndp?
             td align="right"
               .icon-show
                 = link_to '', edit_project_path(project), class:'glyphicon glyphicon-pencil', title:'Editar'

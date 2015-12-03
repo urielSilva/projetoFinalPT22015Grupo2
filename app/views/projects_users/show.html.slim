@@ -18,7 +18,7 @@ p
 
 br
 
-- if current_user.admin?
+- if current_user.admin? or current_user.lider_ndp?
   = link_to 'Editar', edit_projects_user_path(@projects_user), class:'btn btn-primary'
 
 = link_to 'Voltar', projects_users_path, class:'btn btn-primary pull-right'

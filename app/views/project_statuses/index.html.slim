@@ -12,7 +12,7 @@
         th ID
         th Estado
         th
-        - if current_user.admin?
+        - if current_user.admin? or current_user.lider_ndp?
           th
           th
 
@@ -29,7 +29,7 @@
             .icon-show
               = link_to '', project_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin?
+          - if current_user.admin? or current_user.lider_ndp?
             td align="right"
               .icon-show
                 = link_to '', edit_project_status_path(project_status), class:'glyphicon glyphicon-pencil', title:'Editar'
