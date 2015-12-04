@@ -1,7 +1,10 @@
 class Project < ActiveRecord::Base
 
-  validates_presence_of :description, :price, :link
+  has_attached_file :image
 
+  validates_presence_of :description, :price, :link
+  validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  
   belongs_to :project_status
   has_many :project_histories
   has_many :project_member_histories

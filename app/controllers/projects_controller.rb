@@ -72,7 +72,7 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-      params.require(:project).permit(:description, :price, :link, :project_status_id)
+      params.require(:project).permit(:image, :description, :price, :link, :project_status_id)
     end
     
 end
