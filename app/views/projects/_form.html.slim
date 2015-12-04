@@ -27,6 +27,10 @@
     = f.label 'Estado'
     = f.select :project_status_id, ProjectStatus.all.map{|ps| [ps.status,ps.id]}, {}, {class:'form-control'}
   
+  .form-group
+    = f.label 'Imagem do Projeto'
+    = f.file_field :image, class:'form-control'
+
   / - @users.each do |t|
       / - if @users_allocated.include? t
       /   = check_box_tag "users[#{t.id}]", {}, {:checked => "checked"}
