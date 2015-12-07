@@ -5,7 +5,8 @@
   load_and_authorize_resource except: [:create]
 
   def index
-    @areas = Area.all.paginate(page: params[:page], per_page: 10)
+    @search = Area.ransack(params[:q])
+    @areas = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show

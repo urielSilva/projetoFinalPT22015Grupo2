@@ -43,7 +43,7 @@ h3
   - elsif current_page?(project_statuses_path)
 
     span Estados de Projeto
-    span.label.label-success.pull-right = 'Total: ' + @projectstatuses.count.to_s
+    span.label.label-success.pull-right = 'Total: ' + @project_statuses.count.to_s
 
   - elsif current_page?(projects_path)
 
@@ -72,7 +72,7 @@ h3
 
   - elsif current_page?(projects_users_path)
 
-    span Relacionamentos Projeto-Membro
+    span Membros Alocados em Projetos
     span.label.label-success.pull-right = 'Total: ' + @projects_users.count.to_s
 
   - elsif current_page?(project_histories_path)

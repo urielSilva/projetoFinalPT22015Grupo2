@@ -20,6 +20,7 @@ gem 'gravatar_image_tag'
 gem 'mailboxer'
 gem 'local_time'
 gem "paperclip", "~> 4.2"
+gem 'ransack'
 
 group :development, :test do
   gem 'byebug'
@@ -29,4 +30,3 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-

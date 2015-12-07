@@ -5,7 +5,8 @@ class TechnologiesController < ApplicationController
 	load_and_authorize_resource except: [:create]
 
 	def index
-		@technologies = Technology.all.paginate(page: params[:page], per_page: 10)
+		@search = Technology.ransack(params[:q])
+		@technologies = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
 	end
 
 	def show

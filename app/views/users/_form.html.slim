@@ -26,15 +26,21 @@
     = f.label 'Sobrenome'
     = f.text_field :last_name, class:'form-control'
 
-  - if current_user.admin?
+  - if !current_user.member?
 
     .form-group
       = f.label 'Status'
       = f.select :user_status_id, UserStatus.all.map{|u| [u.status, u.id]}, {}, {class:'form-control'}
 
-    .form-group
-      = f.label 'Perfil'
-      = f.select :profile_id, Profile.all.map{ |p| [p.name, p.id]}, {}, {class:'form-control'}
+    - if current_user.admin?
+      .form-group
+        = f.label 'Perfil'
+        = f.select :profile_id, Profile.all.map{ |p| [p.name, p.id]}, {}, {class:'form-control'}
+    
+    - if current_user.mod? and current_page?(new_user_path)
+      .form-group
+        = f.label 'Perfil'
+        = f.text_field :profile_id, disabled: true, placeholder:'Membro', class:'form-control'
 
     .form-group
       = f.label 'Cargo'

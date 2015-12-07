@@ -1,6 +1,3 @@
-- if current_user.lider_ndp?
-  p.bg-success.text-center style="padding: 10px;" Como Líder do Núcleo de Desenvolvimento e Pesquisa você tem pleno acesso a tudo relacionado com Projetos.
-
 = render '/layouts/cruds/header_index_crud'
 
 - if @projects.empty?
@@ -8,17 +5,36 @@
 
 - else
 
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-3
+        = f.search_field :description_cont, class:'form-control', placeholder:'Pesquise um projeto'
+
+      .col-sm-4
+        = f.collection_select :project_status_id_eq, ProjectStatus.all, :id, :status, {include_blank: 'Pesquise um estado'}, {class:'form-control'}
+
+      .col-sm-2
+        = f.text_field :price_gteq, class:'form-control', placeholder:'Preço de'
+
+      .col-sm-2
+        = f.text_field :price_lteq, class:'form-control', placeholder:'até'
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
   table.table.table.table-hover.table-responsive
 
     thead
       tr
-        th ID
-        th Link
-        th Descrição
-        th Preço
-        th Estado
+        th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :link, 'Link')
+        th = sort_link(@search, :description, 'Descrição')
+        th = sort_link(@search, :price, 'Preço')
+        th = sort_link(@search, :project_status_id, 'Estado')
         th
-        - if current_user.admin? or current_user.lider_ndp?
+        - if !current_user.member?
           th
           th
 
@@ -38,7 +54,7 @@
             .icon-show
               = link_to '', project, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin? or current_user.lider_ndp?
+          - if !current_user.member?
             td align="right"
               .icon-show
                 = link_to '', edit_project_path(project), class:'glyphicon glyphicon-pencil', title:'Editar'
@@ -48,4 +64,26 @@
                 = link_to '', project, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
-  = render '/layouts/cruds/footer_index_crud'
+
+  .row
+
+    - if !current_user.member?
+
+      .col-sm-3
+        = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary'
+
+      .col-sm-7.text-center
+        div style="margin-top: -40px"
+          = will_paginate @projects, inner_window: 1, outter_window: 1
+
+      .col-sm-2
+        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+    - else
+
+      .col-sm-9
+        div style="margin-top: -40px"
+          = will_paginate @projects, inner_window: 1, outter_window: 1
+
+      .col-sm-3
+        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

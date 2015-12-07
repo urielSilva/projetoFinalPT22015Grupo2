@@ -5,7 +5,8 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @projects = Project.all.paginate(page: params[:page], per_page: 10)
+    @search = Project.ransack(params[:q])
+    @projects = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -22,7 +23,6 @@ class ProjectsController < ApplicationController
   end
 
   def create
-
     @project = Project.new(project_params)
 
     # params[:users].each do |key,value|
@@ -31,7 +31,11 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'O projeto foi criado com sucesso.' }
+        # Cria histórico
+        @project_history = ProjectHistory.new(observation: 'Projeto Criado', project_id: @project.id, project_status_id: @project.project_status.id)
+        @project_history.save
+        
+        format.html { redirect_to projects_url, notice: 'O projeto foi criado com sucesso e foi criado um histórico.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }

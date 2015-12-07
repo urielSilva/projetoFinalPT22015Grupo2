@@ -4,19 +4,34 @@
   = render 'layouts/errorempty'
 
 - else
+  
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-4
+        = f.collection_select :project_id_eq, Project.all, :id, :description, {include_blank: 'Busque por um projeto'}, {class:'form-control'}
+
+      .col-sm-4
+        = f.collection_select :user_id_eq, User.all, :id, :username, {include_blank: 'Pesquise por um membro'}, {class:'form-control'}
+
+      .col-sm-3
+        = f.collection_select :project_role_id_eq, ProjectRole.all, :id, :role, {include_blank: 'Pesquise por uma função'}, {class:'form-control'}
+
+      = f.button 'Buscar', class:'btn btn-primary pull-right', style:'margin-right: 15px'
+
+  br
 
   table.table.table.table-hover.table-responsive
 
     thead
       tr
-        th ID
-        th Projeto
-        th Membro
-        th Função
+        th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :project_id, 'Projeto')
+        th = sort_link(@search, :user_id, 'Membro')
+        th = sort_link(@search, :project_role_id, 'Função')
         th
-        - if current_user.admin? or current_user.lider_ndp?
-          th
-          th
+        th
+        th
 
     tbody
 
@@ -34,14 +49,23 @@
             .icon-show
               = link_to '', projects_user, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin? or current_user.lider_ndp?
-            td align="right"
-              .icon-show
-                = link_to '', edit_projects_user_path(projects_user), class:'glyphicon glyphicon-pencil', title:'Editar'
+          td align="right"
+            .icon-show
+              = link_to '', edit_projects_user_path(projects_user), class:'glyphicon glyphicon-pencil', title:'Editar'
 
-            td align="right"
-              .icon-show
-                = link_to '', projects_user, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+          td align="right"
+            .icon-show
+              = link_to '', projects_user, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
-  = render '/layouts/cruds/footer_index_crud'
+
+  .row
+    .col-sm-3
+      = link_to 'Novo Alocação', new_projects_user_path, class:'btn btn-primary'
+
+    .col-sm-7.text-center
+      div style="margin-top: -40px"
+        = will_paginate @projects_users, inner_window: 1, outter_window: 1
+
+    .col-sm-2
+      = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'

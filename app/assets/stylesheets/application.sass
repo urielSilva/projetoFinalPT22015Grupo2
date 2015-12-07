@@ -41,7 +41,7 @@ table
 h1, h2, h3, h4, h5, h6
   font-family: 'Roboto', sans-serif
 
-h1, h2, h3, .logo
+h1, h2, h3, h4, h5, h6
   color: #1e88e5
 
 .btn-responsive
@@ -72,3 +72,25 @@ a:hover, a:link, a:visited
   
   i
     color: #4f4f4f
+
+select option
+  color: #757575
+
+.modal-dialog
+  position: absolute
+  right: 0
+  left: 0
+  margin-top: 0
+  margin-bottom: 0
+
+.modal.fade .modal-dialog
+  transition: top 0.4s ease-out
+  transform: translate(0, -50%)
+  top: 0
+
+.modal.in .modal-dialog
+  transform: translate(0, -50%)
+  top: 50%
+
+.manage-count
+  margin-top: 10px

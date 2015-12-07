@@ -5,7 +5,8 @@ class ProjectsUsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @projects_users = ProjectsUser.all.paginate(page: params[:page], per_page: 10)
+    @search = ProjectsUser.ransack(params[:q])
+    @projects_users = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -23,13 +24,19 @@ class ProjectsUsersController < ApplicationController
 
     respond_to do |format|
       if @projects_user.save
-        format.html { redirect_to @projects_user, notice: 'O membro foi alocado com sucesso.' }
+
+        # Cria histórico de projeto do membro
+        @project_member_history = ProjectMemberHistory.new(observation: 'Membro Alocado', user_id: @projects_user.user.id, project_id: @projects_user.project.id, project_role_id: @projects_user.project_role.id)
+        @project_member_history.save
+
+        format.html { redirect_to projects_users_url, notice: 'O membro foi alocado com sucesso e foi criado um histórico.' }
         format.json { render :show, status: :created, location: @projects_user }
       else
         format.html { render :new }
         format.json { render json: @projects_user.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   def update
@@ -61,4 +68,5 @@ class ProjectsUsersController < ApplicationController
     def projects_user_params
       params.require(:projects_user).permit(:project_id, :user_id, :project_role_id)
     end
+
 end

@@ -25,8 +25,16 @@ class User < ActiveRecord::Base
     self.profile.name == "Administrador" or self.profile.name == "Admin"
   end
 
-  def lider_ndp?
-    self.job.name == "Líder" and self.sector.short_name == "NDP"
+  def mod?
+    self.profile.name == "Moderador"
+  end
+
+  def member?
+    self.profile.name == "Membro"
+  end
+
+  def username
+    "#{self.name} #{self.last_name}"
   end
 
 end

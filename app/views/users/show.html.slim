@@ -4,8 +4,10 @@
     h1.text-left.name-home
       span = @user.name + ' ' + @user.last_name
 
-    - if @user.admin?
-      span.label.label-primary Administrador
+    - if @user.mod?
+      span.label.label-warning Moderador
+    - elsif @user.admin?
+      span.label.label-warning Administrador
     - else
       span.label.label-primary Membro
 
@@ -19,92 +21,94 @@
   .col-sm-3.col-xs-12
     = gravatar_image_tag(@user.email.gsub('email', current_user.name), :gravatar => { :secure => true, :size => 140 }, class:'gravatar img-circle pull-right img-responsive')
 
-  .col-sm-12
 
-    ul.nav.nav-tabs.nav-justified style="margin-top: 30px"
 
-      li.active
-        a href="#informacoes" data-toggle="tab" Informações
-      li
-        a href="#conhecimentos" data-toggle="tab" Conhecimentos
-      li
-        a href="#projetos" data-toggle="tab" Projetos
+  / .col-sm-12
+
+  /   ul.nav.nav-tabs.nav-justified style="margin-top: 30px"
+
+  /     li.active
+  /       a href="#informacoes" data-toggle="tab" Informações
+  /     li
+  /       a href="#conhecimentos" data-toggle="tab" Conhecimentos
+  /     li
+  /       a href="#projetos" data-toggle="tab" Projetos
         
-    #tab-content
+  /   #tab-content
 
-      .tab-pane.active#informacoes
+  /     .tab-pane.active#informacoes
 
-        .content-home
+  /       .content-home
 
-          .row.container-fluid
+  /         .row.container-fluid
 
-            .ul.list-group style="margin-top: 10px"
+  /           .ul.list-group style="margin-top: 10px"
 
-              li.list-group-item.text-center
-                strong.text-primary
-                  - if @user.job.name == "Trainee"
-                    = "Trainee"
-                  - elsif @user.job.name == "Presidente"
-                    = "Presidente"
-                  - else
-                    = @user.job.name + ' de '
-                    - if @user.sector.short_name == "NDP"
-                      = 'Desenvolvimento e Pesquisa'
-                    - elsif @user.sector.short_name == "NAM"
-                      = 'Atendimento e Marketing'
-                    - elsif @user.sector.short_name == 'NUT'
-                      = 'Talentos'
-                    - else
-                      = 'Organização Empresarial'
+  /             li.list-group-item.text-center
+  /               strong.text-primary
+  /                 - if @user.job.name == "Trainee"
+  /                   = "Trainee"
+  /                 - elsif @user.job.name == "Presidente"
+  /                   = "Presidente"
+  /                 - else
+  /                   = @user.job.name + ' de '
+  /                   - if @user.sector.short_name == "NDP"
+  /                     = 'Desenvolvimento e Pesquisa'
+  /                   - elsif @user.sector.short_name == "NAM"
+  /                     = 'Atendimento e Marketing'
+  /                   - elsif @user.sector.short_name == 'NUT'
+  /                     = 'Talentos'
+  /                   - else
+  /                     = 'Organização Empresarial'
 
-            table.table.table-responsive
+  /           table.table.table-responsive
 
-              tbody
+  /             tbody
 
-                tr
-                  td Membro desde:
-                  td align="right" = 'Mes/Ano'
+  /               tr
+  /                 td Membro desde:
+  /                 td align="right" = 'Mes/Ano'
 
-                tr
-                  td Email:
-                  td align="right" = @user.email
+  /               tr
+  /                 td Email:
+  /                 td align="right" = @user.email
 
-                tr
-                  td Último acesso:
-                  td align="right"
-                    - if @user.last_sign_in_at == nil
-                      = 'Nunca acessou'
+  /               tr
+  /                 td Último acesso:
+  /                 td align="right"
+  /                   - if @user.last_sign_in_at == nil
+  /                     = 'Nunca acessou'
 
-                    - else
-                      = local_time_ago(@user.last_sign_in_at)
+  /                   - else
+  /                     = local_time_ago(@user.last_sign_in_at)
 
-            - if @user == current_user or current_user.admin?
-              = link_to 'Editar', edit_user_path(@user), class:'btn btn-primary'
+  /           - if @user == current_user or current_user.admin?
+  /             = link_to 'Editar', edit_user_path(@user), class:'btn btn-primary'
 
-            = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'
+  /           = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'
 
-      .tab-pane#conhecimentos
-        .content-home
+  /     .tab-pane#conhecimentos
+  /       .content-home
 
-      .tab-pane#projetos
-        .content-home
-          - if @user.projects.empty?
-            .bg-danger.text-center style="padding: 10px; border-radius: 5px" O membro não está alocado em nenhum projeto.
-          - else
+  /     .tab-pane#projetos
+  /       .content-home
+  /         - if @user.projects.empty?
+  /           .bg-danger.text-center style="padding: 10px; border-radius: 5px" O membro não está alocado em nenhum projeto.
+  /         - else
 
-            table.table.table-hover.table-responsive
+  /           table.table.table-hover.table-responsive
 
-              thead
-                tr
-                  th Projeto
-                  - if current_user.admin? or current_user.lider_ndp?
-                    th
+  /             thead
+  /               tr
+  /                 th Projeto
+  /                 - if current_user.admin? or current_user.mod?
+  /                   th
 
-              tbody
+  /             tbody
 
-                - @projects.each do |project|
+  /               - @projects.each do |project|
                 
-                  tr
-                    td = link_to project.description, project
-                    - if current_user.admin? or current_user.lider_ndp?
-                      td align="right" = link_to 'Desalocar', @projects_users.where(project_id: project.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+  /                 tr
+  /                   td = link_to project.description, project
+  /                   - if current_user.admin? or current_user.mod?
+  /                     td align="right" = link_to 'Desalocar', @projects_users.where(project_id: project.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete

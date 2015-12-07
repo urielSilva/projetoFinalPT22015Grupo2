@@ -17,7 +17,7 @@
 
   .form-group
     = f.label 'Usuários'
-    = f.select :user_id, User.all.map{|u| [u.email, u.id]}, {}, {class:'form-control'}
+    = f.select :user_id, User.all.map{|u| [u.name + ' ' + u.last_name, u.id]}, {}, {class:'form-control'}
 
   .form-group
     = f.label 'Função'
@@ -28,8 +28,8 @@
     br
 
     - if current_page?(new_projects_user_path) or @projects_user.errors.any?
-      = f.button 'Criar Relacionamento', class:'btn btn-primary'
+      = f.button 'Alocar Membro', class:'btn btn-primary'
     - else
-      = f.button 'Atualizar Relacionamento', class:'btn btn-primary'
+      = f.button 'Atualizar', class:'btn btn-primary'
 
     = link_to 'Voltar', projects_users_path, class:'btn btn-primary pull-right'

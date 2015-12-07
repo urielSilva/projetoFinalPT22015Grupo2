@@ -6,23 +6,21 @@ class Ability
 
     if user.admin?
 
+      # Líder de Desenvolvimento e Pesquisa
+      can :manage, :all
+      # permissões especiais
+
+    elsif user.mod?
+
       can :manage, :all
 
     else
 
       can :read, :all
       can [:update], User
-
-      if user.lider_ndp?
-        can [:index, :new, :create, :show, :update, :destroy], [Project, 
-                                                                ProjectRole, 
-                                                                ProjectStatus,
-                                                                ProjectsUser, 
-                                                                ProjectHistory, 
-                                                                ProjectMemberHistory]
-      else
-        cannot :read, [ProjectsUser, ProjectHistory]
-      end
+      can [:associar], Activity
+      can [:create, :update, :destroy], ActivitiesUser
+      cannot :read, [ProjectsUser, ProjectHistory]
 
     end
   end

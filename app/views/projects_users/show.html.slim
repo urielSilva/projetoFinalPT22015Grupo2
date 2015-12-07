@@ -1,5 +1,5 @@
 h3
-  span Relacionamento Membro-Projeto
+  span Membro Alocado em Projeto
   = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
 hr.divider
@@ -18,7 +18,7 @@ p
 
 br
 
-- if current_user.admin? or current_user.lider_ndp?
+- if !current_user.member?
   = link_to 'Editar', edit_projects_user_path(@projects_user), class:'btn btn-primary'
 
 = link_to 'Voltar', projects_users_path, class:'btn btn-primary pull-right'

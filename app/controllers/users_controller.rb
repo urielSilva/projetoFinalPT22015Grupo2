@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @users = User.includes(:profile, :user_status).all.order(:id).paginate(page: params[:page], per_page: 10)
+    @search = User.ransack(params[:q])
+    @users = @search.result(distinct: true).includes(:profile, :user_status).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    unless @user == current_user or current_user.admin?
+    unless @user == current_user or current_user.admin? or (@user.member? and current_user.mod?)
       redirect_to users_path, :alert => "Acesso negado."
     end
   end
@@ -33,6 +34,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
+        # verificar isso
+        if @user.profile_id == nil
+          @user.update(profile_id: 1)
+        end
+
         format.html { redirect_to users_path, notice: 'O usuário foi criado com sucesso.' }
       else
         format.html { render action: "new" }
@@ -60,19 +67,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_path, notice: 'O usuário foi excluído com sucesso.' }
-      format.json { head :no_content }
-    end
-  end
-
-  def makemeadmin
-    @user.update_attributes(profile_id: 2)
-    @user.save
-    respond_to do |format|
-      format.html { redirect_to admin_path, notice: 'Agora você é um admin!' }
-      format.json { head :no_content }
+    if current_user.admin?
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to users_path, notice: 'O usuário foi excluído com sucesso.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to users_path, :alert => "Acesso negado."
     end
   end
 

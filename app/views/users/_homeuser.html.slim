@@ -5,10 +5,12 @@
     h1.text-left.name-home
       span = current_user.name + ' ' + current_user.last_name
 
-    - if current_user.admin?
-      span.label.label-primary Administrador
+    - if current_user.mod?
+      span.label.label-primary Moderador
+    - elsif current_user.admin?
+      span.label.label-warning Administrador
     - else
-      span.label.label-primary Membro
+      span.label.label-success Membro
 
     = ' '
 
@@ -23,77 +25,36 @@
 
 .row#notifications
 
-  / #home-menu
-
-  /   .col-sm-3.col-xs-12
-
-  /     .ul.list-group
-
-  /       - unless current_user.admin?
-  /         li.list-group-item.text-center
-  /           = link_to 'Make me admin', current_user, data: {:confirm => 'Grandes poderes vem com grandes responsabilidades!'}, :method => :makemeadmin, class:'btn btn-primary btn-responsive'
-
-  /       li.list-group-item.text-right
-  /         span.pull-left
-  /           strong Membro desde
-  /         span Mês/Ano
-
-  /       li.list-group-item.text-right
-  /         span.pull-left
-  /           strong Cargo
-  /         span = current_user.job.name
-
-  /       li.list-group-item.text-right
-  /         span.pull-left
-  /           strong Núcleo
-  /         span = current_user.sector.short_name
-
-  /       li.list-group-item.text-right
-  /         span.pull-left
-  /           strong Área
-  /         span = current_user.area.name
-
-  /       li.list-group-item.text-right
-  /         span.pull-left
-  /           strong Alocado em projeto?
-  /         - if current_user.projects.empty?
-  /           span.text-danger Não
-  /         - else
-  /           span.text-success Sim
-
-  /       - if current_user.admin?
-  /         li.list-group-item.text-right
-  /           span.pull-left
-  /             strong Informações
-  /           = link_to 'Adquirir', :info
-        
-  /       li.list-group-item.text-right
-  /         span.pull-left
-  /           strong Histórico de Projetos
-  /         = link_to 'Visualizar', project_member_histories_path
-
-  /       - unless current_user.admin?
-  /         li.list-group-item.text-right
-  /           span.pull-left
-  /             strong Solicitar
-  /           = link_to 'Conhecimento'
-
-  /       li.list-group-item.text-center
-  /         = link_to 'Mensagens', conversations_path, class:'btn btn-primary btn-responsive'
-
   .col-sm-12
     .panel.panel-default
       .panel-heading Informações básicas
       .panel-body
-        span lala
-        span lala
+        span 
+          strong Área: 
+          = current_user.area.name
+        br
+        span
+          strong Núcleo: 
+          = current_user.sector.name
 
   .col-sm-12
     .panel.panel-default
       .panel-heading Projetos atuais
       .panel-body
-        span lala
-        span lala
+        - if current_user.projects.empty?
+          span Você não está alocado em projetos.
+        - else
+          - @projects = current_user.projects
+          table
+            thead
+              tr
+                th Projeto
+                th Função
+            tbody
+              - @projects.each do |project|
+                tr
+                  td = link_to project.description, project
+                  td lol
 
   .col-sm-4
     .panel.panel-primary
@@ -119,7 +80,7 @@
 
       a href="/conversations"
         .panel-footer
-          span Ver Detalhes
+          span Ver Mensagens
           span.pull-right
             i class="fa fa-arrow-circle-right"
 
@@ -145,7 +106,7 @@
 
       a href="#"
         .panel-footer
-          span Ver Detalhes
+          span Ver Requisições
           span.pull-right
             i class="fa fa-arrow-circle-right"
 
@@ -157,7 +118,7 @@
             i class="fa fa-comments fa-4x"
           .col-xs-9.text-right
             .panel-number
-              - if current_user.admin?
+              - if current_user.admin? or current_user.mod?
                 span.pull-right Histórico Geral
               - else
                 span.pull-right Seu Histórico
@@ -168,47 +129,6 @@
 
       a href="/project_member_histories"
         .panel-footer
-          span Ver Detalhes
+          span Ver Histórico
           span.pull-right
             i class="fa fa-arrow-circle-right"
-
-    / ul.nav.nav-tabs.nav-justified
-
-    /   li.active
-    /     a href="#membros" data-toggle="tab" Membros
-    /   li
-    /     a href="#conhecimentos" data-toggle="tab" Conhecimentos
-    /   li
-    /     a href="#projetos" data-toggle="tab" Projetos
-    /   li
-    /     a href="#configuracoes" data-toggle="tab" Configurações
-
-    / #tab-content
-
-    /   .tab-pane.active#membros
-
-    /     .content-home
-    /       p aqui vai ficar: novas mensagens
-    /       p = link_to 'Mensagens', conversations_path 
-
-    /   .tab-pane#conhecimentos
-          
-    /     .content-home
-    /       p aqui vai ficar: requisição de conhecimento (para member)
-    /       p = link_to 'Requisitar Conhecimento', '/'
-    /       p para admin: requisições de conhecimento pendentes
-
-    /   .tab-pane#projetos
-
-    /     .content-home
-    /       p aqui vai ficar (para admin): alocar membro em projeto, histórico de projetos
-    /       p = link_to 'Alocar Membro em Projeto', projects_users_path
-    /       p = link_to 'Histórico de Projetos', project_histories_path
-    /       p para ambos: histórico de projetos e membros
-    /       p = link_to 'Histórico de Projeto [Membro]', project_member_histories_path
-
-    /   .tab-pane#configuracoes
-
-    /     .content-home
-    /       - @user = current_user
-    /       = render '/users/form'

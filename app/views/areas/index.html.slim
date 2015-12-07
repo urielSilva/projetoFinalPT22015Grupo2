@@ -5,15 +5,28 @@
 
 - else
 
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-5
+        = f.search_field :name_cont, class:'form-control', placeholder:'Pesquise uma área'
+
+      .col-sm-6
+        = f.collection_select :sector_id_eq, Sector.all, :id, :name, {include_blank: 'Pesquise um núcleo'}, {class:'form-control'}
+
+      = f.button 'Buscar', class:'btn btn-primary pull-right', style:'margin-right: 15px'
+
+  br
+
   table.table.table-hover.table-responsive
 
     thead
       tr
-        th ID
-        th Nome
-        th Núcleo
+        th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :name, 'Nome')
+        th = sort_link(@search, :sector_id, 'Núcleo')
         th
-        - if current_user.admin?
+        - if !current_user.member?
           th
           th
 
@@ -31,7 +44,7 @@
             .icon-show
               = link_to '', area, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin?
+          - if !current_user.member?
             td align="right"
               .icon-show
                 = link_to '', edit_area_path(area), class:'glyphicon glyphicon-pencil', title:'Editar'
@@ -41,4 +54,25 @@
                 = link_to '', area, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
-  = render '/layouts/cruds/footer_index_crud'
+  .row
+
+    - if !current_user.member?
+
+      .col-sm-3
+        = link_to 'Nova Área', new_area_path, class:'btn btn-primary'
+
+      .col-sm-7.text-center
+        div style="margin-top: -40px"
+          = will_paginate @areas, inner_window: 1, outter_window: 1
+
+      .col-sm-2
+        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+    - else
+
+      .col-sm-9
+        div style="margin-top: -40px"
+          = will_paginate @areas, inner_window: 1, outter_window: 1
+
+      .col-sm-3
+        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

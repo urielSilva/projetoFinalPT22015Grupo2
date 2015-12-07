@@ -4,31 +4,39 @@
   = render 'layouts/errorempty'
 
 - else
+  
+  - @atividades = Array.new
+  - @activities_users.each do |activities_user|
+    - if activities_user.user == current_user or !current_user.member?
+      - @atividades.push(activities_user)
 
-  table.table.table-hover.table-responsive
+  - if @atividades.empty?
+    p Você não possui atividades.
 
-    thead
-      tr
-        th Membro
-        th Atividade
-        th
-        - if current_user.admin?
-          th
-          th
+  - else
 
-    tbody
+    table.table.table-hover.table-responsive
 
-      - @activities_users.each do |activities_user|
-
+      thead
         tr
-          td = activities_user.user.name + ' ' + activities_user.user.last_name
-          td = activities_user.activity.description
+          th Membro
+          th Atividade
+          th
+          th
+          th
 
-          td align="right"
-            .icon-show
-              = link_to '', activities_user, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+      tbody
 
-          - if current_user.admin?
+        - @atividades.each do |activities_user|
+
+          tr
+            td = activities_user.user.name + ' ' + activities_user.user.last_name
+            td = activities_user.activity.description
+
+            td align="right"
+              .icon-show
+                = link_to '', activities_user, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
             td align="right"
               .icon-show
                 = link_to '', edit_activities_user_path(activities_user), class:'glyphicon glyphicon-pencil', title:'Editar'
@@ -38,5 +46,25 @@
                 = link_to '', activities_user, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
-  = render '/layouts/cruds/footer_index_crud'
-  
+  .row
+
+    - if current_user
+
+      .col-sm-3
+        = link_to 'Nova Associação', activities_path, class:'btn btn-primary'
+
+      .col-sm-7.text-center
+        div style="margin-top: -40px"
+          = will_paginate @activities_users, inner_window: 1, outter_window: 1
+
+      .col-sm-2
+        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+    - else
+
+      .col-sm-9
+        div style="margin-top: -40px"
+          = will_paginate @activities_users, inner_window: 1, outter_window: 1
+
+      .col-sm-3
+        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

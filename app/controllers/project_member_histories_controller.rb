@@ -5,7 +5,8 @@ class ProjectMemberHistoriesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @project_member_histories = ProjectMemberHistory.all.paginate(page: params[:page], per_page: 10)
+    @search = ProjectMemberHistory.ransack(params[:q])
+    @project_member_histories = @search.result(distinct: true).includes(:user, :project, :project_role).paginate(page: params[:page], per_page: 7)
   end
 
   def show

@@ -2,10 +2,12 @@ class ActivitiesController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :index, only: [:associar]
   load_and_authorize_resource except: [:create]
 
   def index
-    @activities = Activity.all.paginate(page: params[:page], per_page: 10)
+    @search = Activity.ransack(params[:q])
+    @activities = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -24,6 +26,20 @@ class ActivitiesController < ApplicationController
     respond_to do |format|
       if @activity.save
         format.html { redirect_to @activity, notice: 'A atividade foi criada com sucesso.' }
+        format.json { render :show, status: :created, location: @activity }
+      else
+        format.html { render :new }
+        format.json { render json: @activity.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def associar
+    @activities_user = ActivitiesUser.new(user_id: current_user.id, activity_id: @activity.id)
+
+    respond_to do |format|
+      if @activities_user.save
+        format.html { redirect_to activities_url, notice: 'A atividade foi associada com sucesso.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }
@@ -61,5 +77,5 @@ class ActivitiesController < ApplicationController
     def activity_params
       params.require(:activity).permit(:description, :credit_numbers, :activity_type_id)
     end
-    
+
 end

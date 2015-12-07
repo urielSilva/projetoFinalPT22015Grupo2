@@ -5,16 +5,32 @@
 
 - else
 
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-4
+        = f.search_field :description_cont, class:'form-control', placeholder:'Pesquise um conhecimento'
+
+      .col-sm-3
+        = f.collection_select :technology_id_eq, Technology.all, :id, :name, {include_blank: 'Pesquise uma tecnologia'}, {class:'form-control'}
+
+      .col-sm-4
+        = f.collection_select :knowledge_level_id_eq, KnowledgeLevel.all, :id, :level, {include_blank: 'Pesquise um nível de conhecimento'}, {class:'form-control'}
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
   table.table.table-hover.table-responsive
 
     thead
       tr
-        th ID
-        th Nível
-        th Descrição
-        th Tecnologia
+        th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :knowledge_level_id, 'Nível')
+        th = sort_link(@search, :description, 'Descrição')
+        th = sort_link(@search, :technology_id, 'Tecnologia')
         th
-        - if current_user.admin?
+        - if !current_user.member?
           th
           th
 
@@ -33,7 +49,7 @@
             .icon-show
               = link_to '', knowledge, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-          - if current_user.admin?
+          - if !current_user.member?
             td align="right"
               .icon-show
                 = link_to '', edit_knowledge_path(knowledge), class:'glyphicon glyphicon-pencil', title:'Editar'
@@ -43,4 +59,26 @@
                 = link_to '', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
-  = render '/layouts/cruds/footer_index_crud'
+  
+  .row
+
+    - if !current_user.member?
+
+      .col-sm-3
+        = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary'
+        
+      .col-sm-7.text-center
+        div style="margin-top: -40px"
+          = will_paginate @technologies, inner_window: 1, outter_window: 1
+
+      .col-sm-2
+        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+    - else
+
+      .col-sm-9
+        div style="margin-top: -40px"
+          = will_paginate @technologies, inner_window: 1, outter_window: 1
+
+      .col-sm-3
+        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

@@ -5,7 +5,8 @@ class ProjectStatusesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @projectstatuses = ProjectStatus.all.paginate(page: params[:page], per_page: 10)
+    @search = ProjectStatus.ransack(params[:q])
+    @project_statuses = @search.result(distinct: true).all.paginate(page: params[:page], per_page: 7)
   end
 
   def show

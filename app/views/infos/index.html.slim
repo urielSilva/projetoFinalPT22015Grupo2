@@ -1,20 +1,19 @@
-h3
-	span Informações
+h3 Informações
 
-.row.container-fluid
-	div.col.s9.center
-    	li.btn.btn-primary.pull-left id="ProjetoFD"  Projetos Finalizados / Em Desenvolvimento
-    	li.btn.btn-primary.pull-left id="ProjetoPreço" Projetos / Preço
-    	li.btn.btn-primary.pull-left id="ProjetoYear" Projeto \ Ano
-    	li.btn.btn-primary.pull-left id="MembroJob" Membros / Cargo
-    	li.btn.btn-primary.pull-left id="MembrosKer" Membros / Núcleo
+hr.divider
 
-
-	br
-	br
-	br
-	br
-	div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"
+div.col.s9.center
+  nav.navbar.navbar-default
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav.nav-info
+      	li#ProjetoFD.info-link.navbar-text Projetos Finalizados / Em Desenvolvimento
+      	li#ProjetoPreço.info-link.navbar-text Projetos / Preço
+      	li#ProjetoYear.info-link.navbar-text Projeto \ Ano
+      	li#MembroJob.info-link.navbar-text Membros / Cargo
+      	li#MembrosKer.info-link.navbar-text Membros / Núcleo
+br
+br
+div id="container" style="margin-top: 80px; min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"
 
 script src="https://code.highcharts.com/highcharts.js"
 script src="https://code.highcharts.com/modules/exporting.js"

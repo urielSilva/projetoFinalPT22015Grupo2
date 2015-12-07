@@ -52,7 +52,7 @@
         = link_to 'Novo Status de Usuário', new_user_status_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(projects_users_path)
-        = link_to 'Novo Relacionamento Membro-Projeto', new_projects_user_path, class:'btn btn-primary form-control'
+        = link_to 'Nova Alocação', new_projects_user_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(project_histories_path)
         = link_to 'Novo Histórico de Projeto',new_project_history_path, class:'btn btn-primary form-control'
@@ -64,4 +64,4 @@
         = link_to 'Novo Histórico de Projeto', new_project_member_history_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(activities_users_path)
-        = link_to 'Nova Associação', new_activities_user_path
+        = link_to 'Nova Associação', new_activities_user_path, class:'btn btn-primary form-control'

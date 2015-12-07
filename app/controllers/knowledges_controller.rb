@@ -5,10 +5,11 @@ class KnowledgesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
 	def index
-    @knowledges = Knowledge.all.paginate(page: params[:page], per_page: 10)
+    @search = Knowledge.ransack(params[:q])
+    @knowledges = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
-	def new 
+	def new
 		@knowledge = Knowledge.new
 	end
 

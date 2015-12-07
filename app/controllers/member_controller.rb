@@ -6,6 +6,6 @@ class MemberController < ApplicationController
 		if current_user.admin?
 			redirect_to admin_path
 		end
-	end	
+	end
 
 end

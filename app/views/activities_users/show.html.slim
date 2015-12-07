@@ -14,7 +14,7 @@ p
 
 br
 
-- if current_user.admin?
+- if !current_user.member?
   = link_to 'Editar', edit_activities_user_path(@activities_user), class:'btn btn-primary'
 
 = link_to 'Voltar', activities_users_path, class:'btn btn-primary pull-right'

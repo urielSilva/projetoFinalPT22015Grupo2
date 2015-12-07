@@ -5,13 +5,15 @@ class ProjectHistoriesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @project_histories = ProjectHistory.all.paginate(page: params[:page], per_page: 10)
+    @search = ProjectHistory.ransack(params[:q])
+    @project_histories = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show
   end
 
   def new
+
     @project_history = ProjectHistory.new
   end
 

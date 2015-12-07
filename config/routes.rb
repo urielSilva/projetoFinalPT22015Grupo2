@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get '/admin' => 'admin#index'
   get '/member' => 'member#index'
+
   get "projetoFD" => "infos#create"
   get "membro_nucleo" => "infos#create_membro_nucleo"
   get "info" => "infos#index"
@@ -33,6 +34,9 @@ Rails.application.routes.draw do
   resources :activities
   resources :activity_types
   resources :activities_users
+
+  post '/activities/:id' => 'activities#associar'
+
   resources :areas
   resources :sectors
   resources :knowledge_levels

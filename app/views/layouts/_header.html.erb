@@ -60,7 +60,7 @@
               <li><%= link_to 'Todas as Atividades', activities_path %></li>
               <li class="divider" role="separator"></li>
               <li><%= link_to 'Tipos de Atividade', activity_types_path %></li>
-              <li><%= link_to 'Associar Atividade', activities_users_path %></li>
+              <li><%= link_to 'Suas Atividades', activities_users_path %></li>
             </ul>
 
           </li>
@@ -77,7 +77,7 @@
 
               <li class="divider" role="separator"></li>
 
-              <%- if current_user.admin? or current_user.lider_ndp? %>
+              <%- if current_user.admin? or current_user.mod? %>
                 <li><%= link_to 'Histórico de Projetos', project_histories_path %></li>
                 <li><%= link_to 'Membros em Projetos', projects_users_path %></li>
               <% end %>
@@ -88,7 +88,7 @@
 
           </li>
 
-          <% if current_user.admin? %>
+          <% if current_user.admin? or current_user.mod? %>
             <li>
               <a href="/info" title="Obter informações em gráficos sobre projetos e membros">Informações</a>
             </li>
@@ -100,19 +100,32 @@
 
       <ul class="nav navbar-nav navbar-right">
         
-        <li>
-          <a href="/conversations" title="Visualizar suas mensagens">
-            Inbox&nbsp;&nbsp;<i class="fa fa-inbox"></i>
-          </a>
-        </li>
 
         <% if current_user.present? %>
 
+          <li>
+            <a href="/conversations" title="Visualizar suas mensagens">
+              Inbox&nbsp;&nbsp;<i class="fa fa-inbox"></i>
+            </a>
+          </li>
+          
           <li class="dropdown">
 
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuário&nbsp;&nbsp;<i class="fa fa-user"></i> <span class="caret"></span></a>
 
             <ul class="dropdown-menu">
+
+              <br>
+              <li class="text-center">
+                <% if current_user.admin? %>
+                  <span class="label label-warning">Administrador</span>
+                <% elsif current_user.mod? %>
+                  <span class="label label-primary">Moderador</span>
+                <% else %>
+                  <span class="label label-success">Membro</span>
+                <% end %>
+              </li>
+              <br>
 
               <li>
                 <a href="<%= user_path(current_user) %>">
