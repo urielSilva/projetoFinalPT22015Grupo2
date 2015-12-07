@@ -52,6 +52,7 @@
                 </a>
               </li>
               <li class="divider" role="separator"></li>
+              <li><%= link_to 'Requisitar Conhecimento', knowledge_requests_path %></li>
               <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
               <li><%= link_to 'Tecnologias', technologies_path %></li>
               <li class="divider" role="separator"></li>
@@ -77,9 +78,10 @@
 
               <li class="divider" role="separator"></li>
 
-              <%- if current_user.admin? or current_user.mod? %>
+              <%- if !current_user.member? %>
                 <li><%= link_to 'Histórico de Projetos', project_histories_path %></li>
-                <li><%= link_to 'Membros em Projetos', projects_users_path %></li>
+                <li><%= link_to 'Histórico Geral de Projetos', project_member_histories_path %></li>
+                <li><%= link_to 'Alocar Membros em Projetos', projects_users_path %></li>
               <% end %>
 
               <li><%= link_to 'Funções de Projeto', project_roles_path %></li>
