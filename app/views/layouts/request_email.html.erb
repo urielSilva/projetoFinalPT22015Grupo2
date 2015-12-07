@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+  <p>
+    Olá <%= @admin.name + ' ' + @admin.last_name %>, <br><br>
+    o usuário <b><%= @requerente.name + ' ' + @requerente.last_name %></b> realizou uma requisição de conhecimento em <%= Time.now %><br><br>
+
+    <b>Informações da Requisição:</b><br><br>
+    <b>Conhecimento:</b> <%= @requisicao.knowledge.description %><br>
+    <b>Nível:</b> <%= @requisicao.knowledge.knowledge_level.level %>
+
+    <br><br>Acesse este <%= link_to 'link', @requisicao %> para aceitar ou recusar a requisição.<br><br>
+
+    Atenciosamente,<br>
+    SAP - Sistema de Alocação de Projetos
+  </p>
+
+</body>
+</html>
