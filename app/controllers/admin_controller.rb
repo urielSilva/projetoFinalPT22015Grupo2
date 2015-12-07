@@ -13,8 +13,8 @@ class AdminController < ApplicationController
     # Retorna um array de todos os projetos
     @projetos_usuario = current_user.projects
 
-    # Retorna um array de todas as requisições de conhecimento
-    @requisicoes_conhecimento = KnowledgeRequest.all
+    # Retorna o tamanho do array de todas as requisições de conhecimento
+    @requisicoes_conhecimento = KnowledgeRequest.all.count
 
 	end
 

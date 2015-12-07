@@ -1,3 +1,6 @@
+/ Variável que contem a quantidade de mensagens não lidas do usuário
+- mensagens_nao_lidas = unread_messages_count
+
 .row#userphoto
 
   .col-sm-9.col-xs-12
@@ -55,18 +58,18 @@
             i class="fa fa-comments fa-4x"
           .col-xs-9.text-right
             .panel-number
-              - if unread_messages_count == 0
+              - if mensagens_nao_lidas == 0
                 span.pull-right Nenhuma
               - else
-                span.pull-right = unread_messages_count
+                span.pull-right = mensagens_nao_lidas
             br
             br
             .panel-info
-              - if unread_messages_count == 0
+              - if mensagens_nao_lidas == 0
                 span.pull-right Nova Mensagem
-              - elsif unread_messages_count == 1
+              - elsif mensagens_nao_lidas == 1
                 span.pull-right Nova Mensagem!
-              - elsif unread_messages_count > 1
+              - elsif mensagens_nao_lidas > 1
                 span.pull-right Novas Mensagens!
 
       a href="/conversations"
@@ -85,17 +88,17 @@
             .panel-number
               - if !current_user.member?
                 span.pull-right
-                  - if @requisicoes_conhecimento.size == 0
+                  - if @requisicoes_conhecimento == 0
                     span Nenhuma
                   - else
-                    = @requisicoes_conhecimento.count
+                    = @requisicoes_conhecimento
               - else
                 span.pull-right Requisitar
             br
             br
             .panel-info
               - if !current_user.member?
-                - if @requisicoes_conhecimento.count == 0 || @requisicoes_conhecimento.count == 1
+                - if @requisicoes_conhecimento == 0 || @requisicoes_conhecimento == 1
                   span.pull-right Requisição de Conhecimento
                 - else
                   span.pull-right Requisições de Conhecimento
