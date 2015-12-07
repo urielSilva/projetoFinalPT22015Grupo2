@@ -58,6 +58,9 @@
               .icon-show
                 = link_to '', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
+            td align="right"
+              = link_to 'Requisitar', knowledge, method: :requisitar
+
   br
   
   .row

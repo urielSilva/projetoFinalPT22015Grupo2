@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :knowledge_requests
   devise_scope :user do
     root to: "devise/sessions#new"
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
+
+  post '/knowledges/:id' => 'knowledges#requisitar' 
 
   devise_for :users
 

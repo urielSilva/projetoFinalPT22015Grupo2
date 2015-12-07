@@ -50,6 +50,22 @@ class KnowledgesController < ApplicationController
   	end
   end
 
+  def requisitar
+    @knowledge_request = KnowledgeRequest.new(user_id: current_user.id, knowledge_id: @knowledge.id)
+
+    respond_to do |format|
+      if @knowledge_request.save
+        current_user.send_message(User.find(7), "Requisitei um conhecimento, abs", "Requisição de Conhecimento")
+        format.html { redirect_to knowledges_url, notice: 'O conhecimento foi requisitado' }
+        format.json { render :show, status: :created, location: @knowledge }
+      else
+        format.html { render :new }
+        format.json { render json: @knowledge.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   private
   	def set_knowledge
   		@knowledge = Knowledge.find(params[:id])

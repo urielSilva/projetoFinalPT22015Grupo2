@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204090200) do
+ActiveRecord::Schema.define(version: 20151207152441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 20151204090200) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "knowledge_requests", force: :cascade do |t|
+    t.integer  "knowledge_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "knowledge_requests", ["knowledge_id"], name: "index_knowledge_requests_on_knowledge_id", using: :btree
+  add_index "knowledge_requests", ["user_id"], name: "index_knowledge_requests_on_user_id", using: :btree
 
   create_table "knowledges", force: :cascade do |t|
     t.string   "description"
@@ -252,6 +262,8 @@ ActiveRecord::Schema.define(version: 20151204090200) do
   add_foreign_key "activities_users", "activities"
   add_foreign_key "activities_users", "users"
   add_foreign_key "areas", "sectors", name: "areas_sector_id_fk"
+  add_foreign_key "knowledge_requests", "knowledges"
+  add_foreign_key "knowledge_requests", "users"
   add_foreign_key "knowledges", "knowledge_levels", name: "knowledges_knowledge_level_id_fk"
   add_foreign_key "knowledges", "technologies", name: "knowledges_technology_id_fk"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"

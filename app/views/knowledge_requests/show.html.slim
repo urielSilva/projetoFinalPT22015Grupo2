@@ -1,0 +1,17 @@
+p#notice = notice
+
+p
+  strong Knowledge:
+  = @knowledge_request.knowledge.description
+
+p
+  strong Level: 
+  = @knowledge_request.knowledge.knowledge_level.level
+
+p
+  strong User:
+  = @knowledge_request.user.name + ' ' + @knowledge_request.user.last_name
+
+= link_to 'Edit', edit_knowledge_request_path(@knowledge_request)
+'|
+= link_to 'Back', knowledge_requests_path
