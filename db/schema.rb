@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207152441) do
+ActiveRecord::Schema.define(version: 20151208162820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,16 @@ ActiveRecord::Schema.define(version: 20151207152441) do
   add_index "projects_users", ["project_role_id"], name: "index_projects_users_on_project_role_id", using: :btree
   add_index "projects_users", ["user_id"], name: "index_projects_users_on_user_id", using: :btree
 
+  create_table "request_histories", force: :cascade do |t|
+    t.boolean  "deferido"
+    t.string   "observation"
+    t.integer  "knowledge_request_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "request_histories", ["knowledge_request_id"], name: "index_request_histories_on_knowledge_request_id", using: :btree
+
   create_table "sectors", force: :cascade do |t|
     t.string   "short_name"
     t.string   "name"
@@ -278,6 +288,7 @@ ActiveRecord::Schema.define(version: 20151207152441) do
   add_foreign_key "projects_users", "project_roles"
   add_foreign_key "projects_users", "projects", name: "projects_users_project_id_fk"
   add_foreign_key "projects_users", "users", name: "projects_users_user_id_fk"
+  add_foreign_key "request_histories", "knowledge_requests"
   add_foreign_key "users", "areas", name: "users_area_id_fk"
   add_foreign_key "users", "jobs", name: "users_job_id_fk"
   add_foreign_key "users", "profiles", name: "users_profile_id_fk"

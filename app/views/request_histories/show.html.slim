@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Deferido:
+  = @request_history.deferido
+p
+  strong Observation:
+  = @request_history.observation
+p
+  strong Knowledge request:
+  = @request_history.knowledge_request
+
+= link_to 'Edit', edit_request_history_path(@request_history)
+'|
+= link_to 'Back', request_histories_path

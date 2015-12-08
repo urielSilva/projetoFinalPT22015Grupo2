@@ -1,0 +1,18 @@
+= form_for @request_history do |f|
+  - if @request_history.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@request_history.errors.count, "error")} prohibited this request_history from being saved:"
+      ul
+        - @request_history.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :deferido
+    = f.check_box :deferido
+  .field
+    = f.label :observation
+    = f.text_field :observation
+  .field
+    = f.label :knowledge_request
+    = f.select :knowledge_request_id, KnowledgeRequest.all.map {|u| [u.knowledge.description + '('+u.user.name + ')', u.id]}, {}, {class:'form-control'}
+  .actions = f.submit
