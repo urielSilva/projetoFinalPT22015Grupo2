@@ -1,3 +1,6 @@
+/ Variável que contem a quantidade de mensagens não lidas do usuário
+- mensagens_nao_lidas = unread_messages_count
+
 .row#userphoto
 
   .col-sm-9.col-xs-12
@@ -41,20 +44,11 @@
     .panel.panel-default
       .panel-heading Projetos atuais
       .panel-body
-        - if current_user.projects.empty?
+        - if @projetos_usuario.empty?
           span Você não está alocado em projetos.
         - else
-          - @projects = current_user.projects
-          table
-            thead
-              tr
-                th Projeto
-                th Função
-            tbody
-              - @projects.each do |project|
-                tr
-                  td = link_to project.description, project
-                  td lol
+          - @projetos_usuario.each do |projeto|
+            p = link_to projeto.description, projeto
 
   .col-sm-4
     .panel.panel-primary
@@ -64,18 +58,18 @@
             i class="fa fa-comments fa-4x"
           .col-xs-9.text-right
             .panel-number
-              - if unread_messages_count == 0
+              - if mensagens_nao_lidas == 0
                 span.pull-right Nenhuma
               - else
-                span.pull-right = unread_messages_count
+                span.pull-right = mensagens_nao_lidas
             br
             br
             .panel-info
-              - if unread_messages_count == 0
+              - if mensagens_nao_lidas == 0
                 span.pull-right Nova Mensagem
-              - elsif unread_messages_count == 1
+              - elsif mensagens_nao_lidas == 1
                 span.pull-right Nova Mensagem!
-              - elsif unread_messages_count > 1
+              - elsif mensagens_nao_lidas > 1
                 span.pull-right Novas Mensagens!
 
       a href="/conversations"
@@ -89,36 +83,50 @@
       .panel-heading
         .row
           .col-xs-3
-            i class="fa fa-comments fa-4x"
+            i class="fa fa-cog fa-4x"
           .col-xs-9.text-right
             .panel-number
-              - if current_user.admin?
-                span.pull-right 7
+              - if !current_user.member?
+                span.pull-right
+                  - if @requisicoes_conhecimento == 0
+                    span Nenhuma
+                  - else
+                    = @requisicoes_conhecimento
               - else
                 span.pull-right Requisitar
             br
             br
             .panel-info
-              - if current_user.admin?
-                span.pull-right Requisições de Conhecimento
+              - if !current_user.member?
+                - if @requisicoes_conhecimento == 0 || @requisicoes_conhecimento == 1
+                  span.pull-right Requisição de Conhecimento
+                - else
+                  span.pull-right Requisições de Conhecimento
               - else
                 span.pull-right Conhecimento
 
-      a href="#"
-        .panel-footer
-          span Ver Requisições
-          span.pull-right
-            i class="fa fa-arrow-circle-right"
+      - if !current_user.member?
+        a href="/knowledge_requests"
+          .panel-footer
+            span Ver Requisições
+            span.pull-right
+              i class="fa fa-arrow-circle-right"
+      - else
+        a href="/knowledges"
+          .panel-footer
+            span Ver Conhecimentos
+            span.pull-right
+              i class="fa fa-arrow-circle-right"
 
   .col-sm-4
     .panel.panel-green
       .panel-heading
         .row
           .col-xs-3
-            i class="fa fa-comments fa-4x"
+            i class="fa fa-history fa-4x"
           .col-xs-9.text-right
             .panel-number
-              - if current_user.admin? or current_user.mod?
+              - if !current_user.member?
                 span.pull-right Histórico Geral
               - else
                 span.pull-right Seu Histórico

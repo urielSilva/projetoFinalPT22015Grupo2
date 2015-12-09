@@ -1,0 +1,18 @@
+= form_for @request_history do |f|
+  - if @request_history.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@request_history.errors.count, "error")} prohibited this request_history from being saved:"
+      ul
+        - @request_history.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :request_status
+    = f.text_field :request_status
+  .field
+    = f.label :knowledge_request
+    = f.text_field :knowledge_request
+  .field
+    = f.label :observation
+    = f.text_area :observation
+  .actions = f.submit

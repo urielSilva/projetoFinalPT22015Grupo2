@@ -1,25 +1,21 @@
 Rails.application.routes.draw do
 
-  resources :knowledge_requests
+  resources :request_histories
+  resources :request_statuses
+  # Define a raiz para a página de login e as rotas /login e /logout
   devise_scope :user do
     root to: "devise/sessions#new"
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
 
-  post '/knowledges/:id' => 'knowledges#requisitar' 
-
-  devise_for :users
-
-  get '/admin' => 'admin#index'
-  get '/member' => 'member#index'
-
+  # Rotas para informações de projetos e usuários
+  get "info" => "infos#index"
   get "projetoFD" => "infos#create"
   get "membro_nucleo" => "infos#create_membro_nucleo"
-  get "info" => "infos#index"
 
-  resources :users
-  
+  # Rotas para o sistema interno de mensagens
+  resources :messages, only: [:new, :create]
   resources :conversations, only: [:index, :show, :destroy] do
     member do
       post :reply
@@ -30,19 +26,32 @@ Rails.application.routes.draw do
       delete :empty_trash
     end
   end
+
+  # Rotas para home do usuário
+  get '/admin' => 'admin#index'
+  get '/member' => 'member#index'
   
+  # Rota página Sobre
   get '/about' => 'about#index', as: :about
 
-  resources :user_statuses
+  # Rota para associação de atividade
+  post '/activities/:id' => 'activities#associar'
+
+  # Rota para requisição de conhecimento
+  post '/knowledges/:id' => 'knowledges#requisitar'
+
+  # Rotas para usuários
+  devise_for :users
+  resources :users
+
+  # Rotas para os demais CRUDs
   resources :activities
   resources :activity_types
   resources :activities_users
-
-  post '/activities/:id' => 'activities#associar'
-
   resources :areas
   resources :sectors
   resources :knowledge_levels
+  resources :knowledge_requests
   resources :knowledges
   resources :technologies
   resources :profiles
@@ -53,6 +62,6 @@ Rails.application.routes.draw do
   resources :project_statuses
   resources :project_histories
   resources :project_member_histories
-  resources :messages, only: [:new, :create]
+  resources :user_statuses
 
 end

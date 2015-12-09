@@ -1,0 +1,25 @@
+h1 Listing request_histories
+
+table
+  thead
+    tr
+      th Request status
+      th Knowledge request
+      th Observation
+      th
+      th
+      th
+
+  tbody
+    - @request_histories.each do |request_history|
+      tr
+        td = request_history.request_status
+        td = request_history.knowledge_request
+        td = request_history.observation
+        td = link_to 'Show', request_history
+        td = link_to 'Edit', edit_request_history_path(request_history)
+        td = link_to 'Destroy', request_history, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Request history', new_request_history_path

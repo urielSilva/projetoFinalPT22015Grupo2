@@ -5,7 +5,7 @@ class ActivitiesUsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @activities_users = ActivitiesUser.all.paginate(page: params[:page], per_page: 10)
+    @activities_users = ActivitiesUser.all.includes(:activity, :user).paginate(page: params[:page], per_page: 10)
   end
 
   def show

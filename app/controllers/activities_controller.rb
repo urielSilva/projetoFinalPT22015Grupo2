@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
 
   def index
     @search = Activity.ransack(params[:q])
-    @activities = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
+    @activities = @search.result(distinct: true).includes(:activity_type).paginate(page: params[:page], per_page: 7)
   end
 
   def show

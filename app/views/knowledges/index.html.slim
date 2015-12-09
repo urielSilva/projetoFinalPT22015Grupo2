@@ -33,6 +33,7 @@
         - if !current_user.member?
           th
           th
+        th
 
     tbody
 
@@ -45,6 +46,7 @@
           td = knowledge.knowledge_level.level
           td = knowledge.description
           td = knowledge.technology.name
+
           td align="right"
             .icon-show
               = link_to '', knowledge, class:'glyphicon glyphicon-eye-open', title:'Exibir'
@@ -58,8 +60,8 @@
               .icon-show
                 = link_to '', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
-            td align="right"
-              = link_to 'Requisitar', knowledge, method: :requisitar
+          td align="center"
+            = link_to 'Requisitar', knowledge, method: :requisitar, class:'btn btn-primary btn-xs'
 
   br
   
