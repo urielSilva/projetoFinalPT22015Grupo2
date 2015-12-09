@@ -55,7 +55,7 @@ class KnowledgesController < ApplicationController
 
     respond_to do |format|
       if @knowledge_request.save
-        current_user.send_message(User.find(7), "Requisitei um conhecimento, abs", "Requisição de Conhecimento")
+        current_user.send_message(User.where(profile_id: 2), "Requisitei um conhecimento, abs", "Requisição de Conhecimento")
         format.html { redirect_to knowledges_url, notice: 'O conhecimento foi requisitado' }
         format.json { render :show, status: :created, location: @knowledge }
       else
