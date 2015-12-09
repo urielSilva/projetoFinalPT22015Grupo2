@@ -18,7 +18,7 @@ class RequestHistoriesControllerTest < ActionController::TestCase
 
   test "should create request_history" do
     assert_difference('RequestHistory.count') do
-      post :create, request_history: { deferido: @request_history.deferido, knowledge_request_id: @request_history.knowledge_request_id, observation: @request_history.observation }
+      post :create, request_history: { knowledge_request_id: @request_history.knowledge_request_id, observation: @request_history.observation, request_status_id: @request_history.request_status_id }
     end
 
     assert_redirected_to request_history_path(assigns(:request_history))
@@ -35,7 +35,7 @@ class RequestHistoriesControllerTest < ActionController::TestCase
   end
 
   test "should update request_history" do
-    patch :update, id: @request_history, request_history: { deferido: @request_history.deferido, knowledge_request_id: @request_history.knowledge_request_id, observation: @request_history.observation }
+    patch :update, id: @request_history, request_history: { knowledge_request_id: @request_history.knowledge_request_id, observation: @request_history.observation, request_status_id: @request_history.request_status_id }
     assert_redirected_to request_history_path(assigns(:request_history))
   end
 

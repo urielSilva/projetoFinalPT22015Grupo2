@@ -1,20 +1,28 @@
 class RequestHistoriesController < ApplicationController
   before_action :set_request_history, only: [:show, :edit, :update, :destroy]
 
+  # GET /request_histories
+  # GET /request_histories.json
   def index
     @request_histories = RequestHistory.all
   end
 
+  # GET /request_histories/1
+  # GET /request_histories/1.json
   def show
   end
 
+  # GET /request_histories/new
   def new
     @request_history = RequestHistory.new
   end
 
+  # GET /request_histories/1/edit
   def edit
   end
 
+  # POST /request_histories
+  # POST /request_histories.json
   def create
     @request_history = RequestHistory.new(request_history_params)
 
@@ -29,6 +37,8 @@ class RequestHistoriesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /request_histories/1
+  # PATCH/PUT /request_histories/1.json
   def update
     respond_to do |format|
       if @request_history.update(request_history_params)
@@ -41,6 +51,8 @@ class RequestHistoriesController < ApplicationController
     end
   end
 
+  # DELETE /request_histories/1
+  # DELETE /request_histories/1.json
   def destroy
     @request_history.destroy
     respond_to do |format|
@@ -50,12 +62,13 @@ class RequestHistoriesController < ApplicationController
   end
 
   private
-
+    # Use callbacks to share common setup or constraints between actions.
     def set_request_history
       @request_history = RequestHistory.find(params[:id])
     end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
     def request_history_params
-      params.require(:request_history).permit(:deferido, :observation, :knowledge_request_id)
+      params.require(:request_history).permit(:request_status_id, :knowledge_request_id, :observation)
     end
 end

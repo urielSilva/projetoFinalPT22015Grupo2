@@ -3,9 +3,9 @@ h1 Listing request_histories
 table
   thead
     tr
-      th Deferido
-      th Observation
+      th Request status
       th Knowledge request
+      th Observation
       th
       th
       th
@@ -13,9 +13,9 @@ table
   tbody
     - @request_histories.each do |request_history|
       tr
-        td = request_history.deferido
-        td = request_history.observation
+        td = request_history.request_status
         td = request_history.knowledge_request
+        td = request_history.observation
         td = link_to 'Show', request_history
         td = link_to 'Edit', edit_request_history_path(request_history)
         td = link_to 'Destroy', request_history, data: {:confirm => 'Are you sure?'}, :method => :delete

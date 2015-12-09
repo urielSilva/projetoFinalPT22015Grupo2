@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208162820) do
+ActiveRecord::Schema.define(version: 20151209161400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,11 +67,13 @@ ActiveRecord::Schema.define(version: 20151208162820) do
   create_table "knowledge_requests", force: :cascade do |t|
     t.integer  "knowledge_id"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "request_status_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "knowledge_requests", ["knowledge_id"], name: "index_knowledge_requests_on_knowledge_id", using: :btree
+  add_index "knowledge_requests", ["request_status_id"], name: "index_knowledge_requests_on_request_status_id", using: :btree
   add_index "knowledge_requests", ["user_id"], name: "index_knowledge_requests_on_user_id", using: :btree
 
   create_table "knowledges", force: :cascade do |t|
@@ -208,14 +210,21 @@ ActiveRecord::Schema.define(version: 20151208162820) do
   add_index "projects_users", ["user_id"], name: "index_projects_users_on_user_id", using: :btree
 
   create_table "request_histories", force: :cascade do |t|
-    t.boolean  "deferido"
-    t.string   "observation"
+    t.integer  "request_status_id"
     t.integer  "knowledge_request_id"
+    t.text     "observation"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
 
   add_index "request_histories", ["knowledge_request_id"], name: "index_request_histories_on_knowledge_request_id", using: :btree
+  add_index "request_histories", ["request_status_id"], name: "index_request_histories_on_request_status_id", using: :btree
+
+  create_table "request_statuses", force: :cascade do |t|
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "sectors", force: :cascade do |t|
     t.string   "short_name"
@@ -268,14 +277,15 @@ ActiveRecord::Schema.define(version: 20151208162820) do
   add_index "users", ["sector_id"], name: "index_users_on_sector_id", using: :btree
   add_index "users", ["user_status_id"], name: "index_users_on_user_status_id", using: :btree
 
-  add_foreign_key "activities", "activity_types", name: "activities_activity_type_id_fk"
+  add_foreign_key "activities", "activity_types"
   add_foreign_key "activities_users", "activities"
   add_foreign_key "activities_users", "users"
-  add_foreign_key "areas", "sectors", name: "areas_sector_id_fk"
+  add_foreign_key "areas", "sectors"
   add_foreign_key "knowledge_requests", "knowledges"
+  add_foreign_key "knowledge_requests", "request_statuses"
   add_foreign_key "knowledge_requests", "users"
-  add_foreign_key "knowledges", "knowledge_levels", name: "knowledges_knowledge_level_id_fk"
-  add_foreign_key "knowledges", "technologies", name: "knowledges_technology_id_fk"
+  add_foreign_key "knowledges", "knowledge_levels"
+  add_foreign_key "knowledges", "technologies"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
@@ -284,14 +294,15 @@ ActiveRecord::Schema.define(version: 20151208162820) do
   add_foreign_key "project_member_histories", "project_roles"
   add_foreign_key "project_member_histories", "projects"
   add_foreign_key "project_member_histories", "users"
-  add_foreign_key "projects", "project_statuses", name: "projects_project_status_id_fk"
+  add_foreign_key "projects", "project_statuses"
   add_foreign_key "projects_users", "project_roles"
-  add_foreign_key "projects_users", "projects", name: "projects_users_project_id_fk"
-  add_foreign_key "projects_users", "users", name: "projects_users_user_id_fk"
+  add_foreign_key "projects_users", "projects"
+  add_foreign_key "projects_users", "users"
   add_foreign_key "request_histories", "knowledge_requests"
-  add_foreign_key "users", "areas", name: "users_area_id_fk"
-  add_foreign_key "users", "jobs", name: "users_job_id_fk"
-  add_foreign_key "users", "profiles", name: "users_profile_id_fk"
-  add_foreign_key "users", "sectors", name: "users_sector_id_fk"
-  add_foreign_key "users", "user_statuses", name: "users_user_status_id_fk"
+  add_foreign_key "request_histories", "request_statuses"
+  add_foreign_key "users", "areas"
+  add_foreign_key "users", "jobs"
+  add_foreign_key "users", "profiles"
+  add_foreign_key "users", "sectors"
+  add_foreign_key "users", "user_statuses"
 end

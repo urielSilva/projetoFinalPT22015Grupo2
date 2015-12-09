@@ -1,1 +1,1 @@
-json.extract! @request_history, :id, :deferido, :observation, :knowledge_request_id, :created_at, :updated_at
+json.extract! @request_history, :id, :request_status_id, :knowledge_request_id, :observation, :created_at, :updated_at

@@ -7,12 +7,12 @@
           li = message
 
   .field
-    = f.label :deferido
-    = f.check_box :deferido
-  .field
-    = f.label :observation
-    = f.text_field :observation
+    = f.label :request_status
+    = f.text_field :request_status
   .field
     = f.label :knowledge_request
-    = f.select :knowledge_request_id, KnowledgeRequest.all.map {|u| [u.knowledge.description + '('+u.user.name + ')', u.id]}, {}, {class:'form-control'}
+    = f.text_field :knowledge_request
+  .field
+    = f.label :observation
+    = f.text_area :observation
   .actions = f.submit
