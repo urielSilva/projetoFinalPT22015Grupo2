@@ -6,12 +6,12 @@
 
       <% if current_user.present? %>
         <% if current_user.admin? %>
-          <%= link_to 'SAP', admin_path, class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
+          <%= link_to 'SAP', admin_path, class:'navbar-brand', title:'Início' %>
         <% else %>
-          <%= link_to 'SAP', member_path, class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
+          <%= link_to 'SAP', member_path, class:'navbar-brand', title:'Início' %>
         <% end %>
       <% else %>
-        <%= link_to 'SAP', '/', class:'navbar-brand', title:'Sistema de Alocação de Projetos' %>
+        <%= link_to 'SAP', '/', class:'navbar-brand' %>
       <% end %>
 
     </div>
@@ -52,13 +52,24 @@
                 </a>
               </li>
               <li class="divider" role="separator"></li>
-              <li><%= link_to 'Requisições de Conhecimento', knowledge_requests_path %></li>
+              <% if current_user.admin? %>
+                <li><%= link_to 'Requisições de Conhecimento', knowledge_requests_path %></li>
+              <% end %>
+              <% unless current_user.admin? %>
+                <li>
+                  <%= link_to 'Suas Requisições', request_histories_path %>
+                </li>
+              <% end %>
               <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
               <li><%= link_to 'Tecnologias', technologies_path %></li>
               <li class="divider" role="separator"></li>
 
               <li class="dropdown-header">Atividades</li>
-              <li><%= link_to 'Todas as Atividades', activities_path %></li>
+              <li>
+                <a href="activities">
+                  <i class="fa fa-university"></i>&nbsp;&nbsp;Todas as Atividades
+                </a>
+              </li>
               <li class="divider" role="separator"></li>
               <li><%= link_to 'Tipos de Atividade', activity_types_path %></li>
               <li><%= link_to 'Suas Atividades', activities_users_path %></li>

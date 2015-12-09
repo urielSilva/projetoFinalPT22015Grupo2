@@ -88,11 +88,15 @@ h3
   - elsif current_page?(project_member_histories_path)
 
     span Histórico de Projetos
-    span.label.label-success.pull-right = 'Total: ' + @project_member_histories.count.to_s
 
   - elsif current_page?(activities_users_path)
 
-    span Associações de Atividade
+    span Suas Atividades
     span.label.label-success.pull-right = 'Total: ' + @activities_users.count.to_s
+
+  - elsif current_page?(knowledge_requests_path)
+
+    span Requisições de Conhecimento
+    span.label.label-success.pull-right = 'Total: ' + @knowledge_requests.count.to_s
 
 hr.divider

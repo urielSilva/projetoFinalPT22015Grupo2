@@ -1,23 +1,50 @@
-h1 Listing knowledge_requests
+= render '/layouts/cruds/header_index_crud'
 
-table
+table.table
   thead
     tr
-      th Knowledge
-      th User
+      th ID
+      th Conhecimento
+      th Requerente
+      th
       th
       th
       th
 
   tbody
+
     - @knowledge_requests.each do |knowledge_request|
+
       tr
+        td
+          strong
+            = knowledge_request.id
         td = knowledge_request.knowledge.description
         td = knowledge_request.user.name
-        td = link_to 'Show', knowledge_request
-        td = link_to 'Edit', edit_knowledge_request_path(knowledge_request)
-        td = link_to 'Destroy', knowledge_request, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+        td align="right"
+          .icon-show
+            = link_to '', knowledge_request, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+        td align="right"
+          .icon-show
+            = link_to '', edit_knowledge_request_path(knowledge_request), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+        td align="right"
+          = link_to 'Aprovar', '/', class:'btn btn-xs btn-success'
+
+        td align="right"
+          = link_to 'Recusar', knowledge_request, data: {:confirm => 'Você em certeza?'}, :method => :delete, class:'btn btn-xs btn-danger'
 
 br
+.row
 
-= link_to 'New Knowledge request', new_knowledge_request_path
+  .col-sm-3
+    = link_to 'Nova Requisição de Conhecimento', new_knowledge_request_path, class:'btn btn-primary'
+
+  .col-sm-7.text-center
+    div style="margin-top: -40px"
+      = will_paginate @knowledge_requests, inner_window: 1, outter_window: 1
+
+  .col-sm-2
+    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
