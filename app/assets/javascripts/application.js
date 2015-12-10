@@ -19,4 +19,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require local_time
+//= require jquery.turbolinks
+//= require chosen-jquery
+//= require messages
 //= require_tree .

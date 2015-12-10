@@ -1,3 +1,5 @@
+- requisicoes_pendentes = conta_requisicoes_pendentes
+
 = render '/layouts/cruds/header_index_crud'
 
 - if @knowledge_requests.empty?
@@ -9,13 +11,13 @@
     
     .row
       .col-sm-4
-        = f.collection_select :knowledge_id_eq, Knowledge.all, :id, :complete_knowledge, {include_blank: 'Busque um conhecimento'}, {class:'form-control'}
+        = f.collection_select :knowledge_id_eq, Knowledge.all, :id, :complete_knowledge, {include_blank: 'Filtre por conhecimento'}, {class:'form-control'}
 
       .col-sm-4
-        = f.collection_select :user_id_eq, User.all, :id, :username, {include_blank: 'Busque um membro'}, {class:'form-control'}
+        = f.collection_select :user_id_eq, User.all, :id, :username, {include_blank: 'Filtre por membro'}, {class:'form-control'}
 
       .col-sm-3
-        = f.collection_select :request_status_id_eq, RequestStatus.all, :id, :status, {include_blank: 'Busque um status'}, {class:'form-control'}
+        = f.collection_select :request_status_id_eq, RequestStatus.all, :id, :status, {include_blank: 'Filtre por status'}, {class:'form-control'}
 
       = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
 
@@ -26,11 +28,11 @@
       tr
         th = sort_link(@search, :id, 'ID')
         th = sort_link(@search, :knowledge_id, 'Conhecimento')
-        th = sort_link(@search, :user_id, 'Requerente')
-        th = sort_link(@search, :request_status_id, 'Status')
+        th Nível
+        th Tecnologia
+        th = sort_link(@search, :user_id, 'Membro')
+        th.text-center = sort_link(@search, :request_status_id, 'Status')
         th
-        - if conta_requisicoes_pendentes > 0
-          th
 
     tbody
 
@@ -41,22 +43,32 @@
             strong
               = knowledge_request.id
           td = knowledge_request.knowledge.description
+          td = knowledge_request.knowledge.knowledge_level.level
+          td = knowledge_request.knowledge.technology.name
           td = knowledge_request.user.name + ' ' + knowledge_request.user.last_name
-          td
-            = knowledge_request.label_request_status
+          td align="center" = knowledge_request.label_request_status
 
           td align="right"
-            .btn-group
-              = link_to 'Exibir', knowledge_request, class:'btn btn-xs btn-primary'
-              = link_to 'Editar', edit_knowledge_request_path(knowledge_request), class:'btn btn-xs btn-primary'
-              = link_to 'Excluir', knowledge_request, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'btn btn-xs btn-primary'
+            li.dropdown.btn.btn-xs.btn-default
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gerenciar <span class="caret"></span></a>
 
-          - if conta_requisicoes_pendentes > 0
-            td align="right"
-              - if knowledge_request.em_analise?
-                .btn-group
-                  = link_to 'Aprovar', aprovar_requisicao_path(knowledge_request), method: :aprovar, class:'btn btn-xs btn-success'
-                  = link_to 'Recusar', recusar_requisicao_path(knowledge_request), method: :recusar, class:'btn btn-xs btn-danger'
+              ul.dropdown-menu
+                li.dropdown-header
+                  span Requisição
+                li
+                  = link_to 'Aprovar', aprovar_requisicao_path(knowledge_request), method: :aprovar
+                li
+                  = link_to 'Recusar', recusar_requisicao_path(knowledge_request), method: :recusar
+
+                li.divider
+                li.dropdown-header
+                  span Geral
+                li
+                  = link_to 'Exibir', knowledge_request
+                li
+                  = link_to 'Editar', edit_knowledge_request_path(knowledge_request)
+                li
+                  = link_to 'Excluir', knowledge_request, data: {:confirm => 'Você tem certeza?'}, :method => :delete
 
   br
 

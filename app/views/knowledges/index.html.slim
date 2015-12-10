@@ -1,4 +1,8 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Conhecimentos
+  span.label.label-success.pull-right = 'Total: ' + @knowledges.count.to_s
+
+hr.divider
 
 - if @knowledges.empty?
   = render '/layouts/errorempty'
@@ -61,7 +65,10 @@
                 = link_to '', knowledge, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
           td align="right"
-            = link_to 'Requisitar', requisitar_conhecimento_path(knowledge), method: :requisitar, class:'btn btn-primary btn-xs'
+            - if current_user.admin?
+              = link_to 'Associar', requisitar_conhecimento_path(knowledge), method: :requisitar, class:'btn btn-primary btn-xs'
+            - else
+              = link_to 'Requisitar', requisitar_conhecimento_path(knowledge), method: :requisitar, class:'btn btn-primary btn-xs'              
 
   br
   

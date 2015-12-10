@@ -23,7 +23,7 @@ class KnowledgeRequest < ActiveRecord::Base
     elsif self.request_status.status == "Indeferido"
       content_tag(:span, "Indeferido", class:["label label-danger label-center"])
     else
-      content_tag(:span, "Em análise", class:["label label-info label-center"])
+      content_tag(:span, "Em análise", class:["label label-primary label-center"])
     end
   end
 

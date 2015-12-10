@@ -13,15 +13,10 @@
 @import "layouts/admin"
 @import "layouts/member"
 @import "layouts/alert"
+@import 'chosen'
 
 .container
   width: 75%
-
-.vertical-align
-  position: absolute
-  top: 50%
-  left: 50%
-  transform: translate(-50%,-50%)
 
 html
   height: 100% !important
@@ -48,8 +43,6 @@ h1, h2, h3, h4, h5, h6
   white-space: normal
   width: 100%
 
-// GENERAL SHOW VIEW
-
 a:hover, a:link, a:visited
   text-decoration: none
 
@@ -67,11 +60,22 @@ a:hover, a:link, a:visited
   height: auto
   margin-top: -5px
 
-.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu
+.navbar-default .navbar-nav .open .dropdown-menu > li > a, .navbar-default .navbar-nav .open .dropdown-menu
   color: #757575
   
   i
     color: #4f4f4f
+    
+.dropdown-menu li > a:hover, .dropdown-menu li > a:focus
+  background-color: #1e88e5
+  color: #EEE
+  i
+    color: #EEE
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover
+  color: #EEE
+  i
+    color: #EEE
 
 select option
   color: #757575

@@ -19,11 +19,17 @@ class KnowledgeRequestsController < ApplicationController
   def edit
   end
 
+  # No método create, como a requsição é feita manualmente, cria-se também um histórico
   def create
     @knowledge_request = KnowledgeRequest.new(knowledge_request_params)
 
     respond_to do |format|
       if @knowledge_request.save
+
+        # Cria histórico de requisição
+        @request_history = RequestHistory.new(knowledge_request: @knowledge_request, observation: 'Conhecimento requisitado.')
+        @request_history.save
+
         format.html { redirect_to @knowledge_request, notice: 'A requisição de conhecimento foi realizada com sucesso.'}
         format.json { render :show, status: :created, location: @knowledge_request }
       else
@@ -60,10 +66,14 @@ class KnowledgeRequestsController < ApplicationController
     respond_to do |format|
       if @knowledge_request.update(request_status_id: 2)
 
-        @request_history = RequestHistory.find_by(knowledge_request: @knowledge_request)
-        @request_history.update(request_status_id: 2)
+        @knowledges_user = KnowledgesUser.new(user_id: @knowledge_request.user.id, knowledge_id: @knowledge_request.knowledge.id)
+        @knowledges_user.save
 
-        format.html { redirect_to request.referer, notice: 'A requisição de conhecimento foi aprovada.' }
+        # Atualiza observação para "Requisição deferida"
+        @request_history = RequestHistory.find_by(knowledge_request_id: @knowledge_request.id)
+        @request_history.update(observation: 'Requisição deferida.')
+
+        format.html { redirect_to request.referer, notice: 'A requisição de conhecimento foi deferida.' }
       end
     end
   end
@@ -74,10 +84,11 @@ class KnowledgeRequestsController < ApplicationController
     respond_to do |format|
       if @knowledge_request.update(request_status_id: 3)
 
-        @request_history = RequestHistory.find_by(knowledge_request: @knowledge_request)
-        @request_history.update(request_status_id: 3)
+        # Atualiza observação para "Requisição indeferida"
+        @request_history = RequestHistory.find_by(knowledge_request_id: @knowledge_request.id)
+        @request_history.update(observation: 'Requisição indeferida.')
 
-        format.html { redirect_to request.referer, notice: 'A requisição de conhecimento foi recusada.' }
+        format.html { redirect_to request.referer, notice: 'A requisição de conhecimento foi indeferida.' }
       end
     end
   end

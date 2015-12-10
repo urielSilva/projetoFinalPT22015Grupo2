@@ -6,7 +6,7 @@ class RequestHistoriesController < ApplicationController
 
   def index
     @search = RequestHistory.ransack(params[:q])
-    @request_histories = @search.result(distinct: true).includes(:knowledge_request, :request_status).paginate(page: params[:page], per_page: 7)
+    @request_histories = @search.result(distinct: true).includes(:knowledge_request).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -60,7 +60,7 @@ class RequestHistoriesController < ApplicationController
     end
 
     def request_history_params
-      params.require(:request_history).permit(:request_status_id, :knowledge_request_id, :observation)
+      params.require(:request_history).permit(:knowledge_request_id, :observation)
     end
 
 end

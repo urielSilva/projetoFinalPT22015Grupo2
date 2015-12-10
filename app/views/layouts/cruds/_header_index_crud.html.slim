@@ -30,11 +30,6 @@ h3
     span Níveis de Conhecimento
     span.label.label-success.pull-right = 'Total: ' + @knowledge_levels.count.to_s
 
-  - elsif current_page?(knowledges_path)
-
-    span Conhecimentos
-    span.label.label-success.pull-right = 'Total: ' + @knowledges.count.to_s
-
   - elsif current_page?(profiles_path)
 
     span Perfis

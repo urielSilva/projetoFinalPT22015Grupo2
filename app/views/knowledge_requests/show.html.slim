@@ -5,37 +5,35 @@ h3
 
 hr.divider
 
-table.table
+table.table.table-responsive
 
   thead
     tr
-      th Requerente
+      th Membro
       th Conhecimento
       th Nível
+      th Tecnologia
       th Realizada em
       th Atualizada em
+      - if @knowledge_request.em_analise?
+        th
 
   tbody
     tr
       td = link_to @knowledge_request.user.username, @knowledge_request.user
       td = link_to @knowledge_request.knowledge.description, @knowledge_request.knowledge
       td = @knowledge_request.knowledge.knowledge_level.level
+      td = @knowledge_request.knowledge.technology.name
       td = local_time_ago(@knowledge_request.created_at)
       td = local_time_ago(@knowledge_request.updated_at)
 
+      - if @knowledge_request.em_analise?
+        td align="right"
+          .btn-group
+            = link_to 'Aprovar', aprovar_requisicao_path(@knowledge_request), method: :aprovar, class:'btn btn-xs btn-success'
+            = link_to 'Recusar', recusar_requisicao_path(@knowledge_request), method: :recusar, class:'btn btn-xs btn-danger'
+
 br
 
-- if @knowledge_request.em_analise?
-
-  .btn-group
-    = link_to 'Aprovar', aprovar_requisicao_path(@knowledge_request), method: :aprovar, class:'btn btn-success'
-    = link_to 'Recusar', recusar_requisicao_path(@knowledge_request), method: :recusar, class:'btn btn-danger'
-
-  .btn-group.pull-right
-    = link_to 'Editar', edit_knowledge_request_path(@knowledge_request), class:'btn btn-primary'
-    = link_to 'Voltar', knowledge_requests_path, class:'btn btn-primary'
-
-- else
-  
-  = link_to 'Editar', edit_knowledge_request_path(@knowledge_request), class:'btn btn-primary'
-  = link_to 'Voltar', knowledge_requests_path, class:'btn btn-primary pull-right'
+= link_to 'Editar', edit_knowledge_request_path(@knowledge_request), class:'btn btn-primary'
+= link_to 'Voltar', knowledge_requests_path, class:'btn btn-primary pull-right'

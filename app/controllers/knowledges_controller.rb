@@ -62,7 +62,10 @@ class KnowledgesController < ApplicationController
     
     # Se houver um admin igual ao usuário atual
     if @admins.include?(current_user)
+
       # Associa conhecimento diretamente
+      @knowledges_user = KnowledgesUser.new(user_id: current_user.id, knowledge_id: @knowledge.id)
+      @knowledges_user.save
 
       respond_to do |format|
         format.html {redirect_to knowledges_url, notice: 'O conhecimento foi associado com sucesso.'}
@@ -83,7 +86,7 @@ class KnowledgesController < ApplicationController
           current_user.send_message(User.find(7), "Requisitei o conhecimento: " + @knowledge_request.knowledge.description + " (" + @knowledge_request.knowledge.knowledge_level.level + "). Aprove ou recuse acessando Requisições de Conhecimento da sua home.", "[CONHECIMENTO] Requisição")
           
           # Cria-se um histórico da requisição
-          @request_history = RequestHistory.new(knowledge_request_id: @knowledge_request.id, observation:'Conhecimento Requisitado.', request_status_id: 1)
+          @request_history = RequestHistory.new(knowledge_request_id: @knowledge_request.id, observation:'Conhecimento requisitado.')
           @request_history.save
 
           format.html { redirect_to knowledges_url, notice: 'A solicitação foi feita ao administrador.' }

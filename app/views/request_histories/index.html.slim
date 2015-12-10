@@ -31,7 +31,7 @@ hr.divider
           tr
             - if !current_user.member?
               td = request_history.id
-            td = request_history.request_status.status
+            td = request_history.knowledge_request.label_request_status
             td = request_history.knowledge_request.knowledge.description
             td = request_history.knowledge_request.user.username
             td = request_history.observation
