@@ -1,0 +1,2 @@
+module KnowledgesUsersHelper
+end

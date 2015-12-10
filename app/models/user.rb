@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   belongs_to :sector
   belongs_to :area
   belongs_to :user_status
+  has_and_belongs_to_many :knowledges
 
   # O usuário tem vários históricos de projetos, requisições de conhecimento e históricos de requisição
   has_many :project_member_histories

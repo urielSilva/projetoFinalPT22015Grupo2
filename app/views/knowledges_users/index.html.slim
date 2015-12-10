@@ -1,0 +1,23 @@
+h1 Listing knowledges_users
+
+table
+  thead
+    tr
+      th User
+      th Knowledge
+      th
+      th
+      th
+
+  tbody
+    - @knowledges_users.each do |knowledges_user|
+      tr
+        td = knowledges_user.user
+        td = knowledges_user.knowledge
+        td = link_to 'Show', knowledges_user
+        td = link_to 'Edit', edit_knowledges_user_path(knowledges_user)
+        td = link_to 'Destroy', knowledges_user, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Knowledges user', new_knowledges_user_path

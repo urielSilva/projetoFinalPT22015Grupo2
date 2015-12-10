@@ -1,0 +1,18 @@
+= form_for @knowledges_user do |f|
+  - if @knowledges_user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@knowledges_user.errors.count, "error")} prohibited this knowledges_user from being saved:"
+      ul
+        - @knowledges_user.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    = f.label :user
+    = f.select :user_id, User.all.map {|u| [u.username, u.id]}, {}, {class:'form-control'}
+
+
+  .form-group
+    = f.label :knowledge
+    = f.select :knowledge_id, Knowledge.all.map {|u| [u.complete_knowledge, u.id]}, {}, {class:'form-control'}
+
+  .actions = f.submit

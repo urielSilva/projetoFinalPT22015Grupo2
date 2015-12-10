@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209161400) do
+ActiveRecord::Schema.define(version: 20151210131819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 20151209161400) do
   create_table "knowledge_requests", force: :cascade do |t|
     t.integer  "knowledge_id"
     t.integer  "user_id"
-    t.integer  "request_status_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "request_status_id"
   end
 
   add_index "knowledge_requests", ["knowledge_id"], name: "index_knowledge_requests_on_knowledge_id", using: :btree
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(version: 20151209161400) do
 
   add_index "knowledges", ["knowledge_level_id"], name: "index_knowledges_on_knowledge_level_id", using: :btree
   add_index "knowledges", ["technology_id"], name: "index_knowledges_on_technology_id", using: :btree
+
+  create_table "knowledges_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "knowledges_users", ["knowledge_id"], name: "index_knowledges_users_on_knowledge_id", using: :btree
+  add_index "knowledges_users", ["user_id"], name: "index_knowledges_users_on_user_id", using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
@@ -286,6 +296,8 @@ ActiveRecord::Schema.define(version: 20151209161400) do
   add_foreign_key "knowledge_requests", "users"
   add_foreign_key "knowledges", "knowledge_levels"
   add_foreign_key "knowledges", "technologies"
+  add_foreign_key "knowledges_users", "knowledges"
+  add_foreign_key "knowledges_users", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"

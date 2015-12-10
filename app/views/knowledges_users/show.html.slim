@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong User:
+  = @knowledges_user.user
+p
+  strong Knowledge:
+  = @knowledges_user.knowledge
+
+= link_to 'Edit', edit_knowledges_user_path(@knowledges_user)
+'|
+= link_to 'Back', knowledges_users_path

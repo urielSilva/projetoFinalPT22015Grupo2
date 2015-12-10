@@ -5,6 +5,7 @@ class Knowledge < ActiveRecord::Base
   belongs_to :knowledge_level
   belongs_to :technology
   has_many :knowledge_requests
+  has_and_belongs_to_many :users
 
   # Colocar os métodos abaixo num helper
 
