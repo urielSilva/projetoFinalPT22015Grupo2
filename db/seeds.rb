@@ -62,6 +62,7 @@ User.create(name: "Renan", last_name: "Reboredo", email: "renanreboredo@cjr.org.
 KnowledgeLevel.create(level: "Baixo", description: "Baixo")
 KnowledgeLevel.create(level: "Médio", description: "Médio")
 KnowledgeLevel.create(level: "Alto", description: "Alto")
+KnowledgeLevel.create(level: "N/A", description: "Não se aplica")
 
 # Create project status
 ProjectStatus.create(status: "Não iniciado")
@@ -165,6 +166,11 @@ Knowledge.create(description: "Transformações", knowledge_level_id: 3, technol
 Knowledge.create(description: "Consultas de Mídia", knowledge_level_id: 1, technology_id: 2)
 Knowledge.create(description: "Consultas de Mídia", knowledge_level_id: 2, technology_id: 2)
 Knowledge.create(description: "Consultas de Mídia", knowledge_level_id: 3, technology_id: 2)
+
+# Create request statuses
+RequestStatus.create(status: "Em análise")
+RequestStatus.create(status: "Deferido")
+RequestStatus.create(status: "Indeferido")
 
 # Create activity type
 ActivityType.create(description: "Matéria UnB")

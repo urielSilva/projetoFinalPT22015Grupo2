@@ -6,7 +6,7 @@
   .col-sm-9.col-xs-12
 
     h1.text-left.name-home
-      span = current_user.name + ' ' + current_user.last_name
+      span = current_user.username
 
     - if current_user.mod?
       span.label.label-primary Moderador
@@ -17,7 +17,7 @@
 
     = ' '
 
-    - if current_user.user_status.status == "Ativo"
+    - if current_user.ativo?
       span.label.label-success Ativo
     - else
       span.label.label-danger Inativo
@@ -88,18 +88,18 @@
             .panel-number
               - if !current_user.member?
                 span.pull-right
-                  - if @requisicoes_conhecimento == 0
+                  - if @requisicoes_pendentes == 0
                     span Nenhuma
                   - else
-                    = @requisicoes_conhecimento
+                    = @requisicoes_pendentes
               - else
                 span.pull-right Requisitar
             br
             br
             .panel-info
               - if !current_user.member?
-                - if @requisicoes_conhecimento == 0 || @requisicoes_conhecimento == 1
-                  span.pull-right Requisição de Conhecimento
+                - if @requisicoes_pendentes == 0 || @requisicoes_pendentes == 1
+                  span.pull-right Requisição Pendente
                 - else
                   span.pull-right Requisições de Conhecimento
               - else
@@ -108,7 +108,7 @@
       - if !current_user.member?
         a href="/knowledge_requests"
           .panel-footer
-            span Ver Requisições
+            span Ver Requisições de Conhecimento
             span.pull-right
               i class="fa fa-arrow-circle-right"
       - else

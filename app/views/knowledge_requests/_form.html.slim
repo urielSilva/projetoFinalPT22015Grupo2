@@ -1,17 +1,38 @@
 = form_for @knowledge_request do |f|
+
   - if @knowledge_request.errors.any?
+
     #error_explanation
-      h2 = "#{pluralize(@knowledge_request.errors.count, "error")} prohibited this knowledge_request from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @knowledge_request.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
-    = f.label :knowledge
+    = f.label 'Conhecimento'
     = f.select :knowledge_id, Knowledge.all.map {|k| [k.description + ' (' +  k.knowledge_level.level + ')' , k.id]}, {}, {class:'form-control'}
 
-  .field
-    = f.label :user
+  .form-group
+    = f.label 'Membro'
     = f.select :user_id, User.all.map {|u| [u.name + ' ' + u.last_name , u.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Status da Requisição'
+    = f.select :request_status_id, RequestStatus.all.map {|r| [r.status, r.id]}, {}, {class:'form-control'}
  
-  .actions = f.submit
+  .actions
+
+    br
+
+    - if current_page?(new_knowledge_request_path) or @knowledge_request.errors.any?
+      .btn-group
+        = f.button 'Criar Requisição', class:'btn btn-primary'
+        = link_to 'Ver Conhecimentos', knowledges_path, class:'btn btn-primary'
+
+    - else
+      = f.button 'Atualizar Requisição', class:'btn btn-primary'
+
+    = link_to 'Voltar', knowledge_requests_path, class:'btn btn-primary pull-right'

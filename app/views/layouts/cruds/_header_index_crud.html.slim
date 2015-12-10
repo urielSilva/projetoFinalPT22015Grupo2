@@ -99,4 +99,6 @@ h3
     span Requisições de Conhecimento
     span.label.label-success.pull-right = 'Total: ' + @knowledge_requests.count.to_s
 
+  - elsif current_page?(request_histories_path)
+
 hr.divider

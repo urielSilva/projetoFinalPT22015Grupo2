@@ -1,50 +1,75 @@
 = render '/layouts/cruds/header_index_crud'
 
-table.table
-  thead
-    tr
-      th ID
-      th Conhecimento
-      th Requerente
-      th
-      th
-      th
-      th
+- if @knowledge_requests.empty?
+  = render '/layouts/errorempty'
 
-  tbody
+- else
+    
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-4
+        = f.collection_select :knowledge_id_eq, Knowledge.all, :id, :complete_knowledge, {include_blank: 'Busque um conhecimento'}, {class:'form-control'}
 
-    - @knowledge_requests.each do |knowledge_request|
+      .col-sm-4
+        = f.collection_select :user_id_eq, User.all, :id, :username, {include_blank: 'Busque um membro'}, {class:'form-control'}
 
+      .col-sm-3
+        = f.collection_select :request_status_id_eq, RequestStatus.all, :id, :status, {include_blank: 'Busque um status'}, {class:'form-control'}
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
+  table.table.table-hover
+    thead
       tr
-        td
-          strong
-            = knowledge_request.id
-        td = knowledge_request.knowledge.description
-        td = knowledge_request.user.name
+        th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :knowledge_id, 'Conhecimento')
+        th = sort_link(@search, :user_id, 'Requerente')
+        th = sort_link(@search, :request_status_id, 'Status')
+        th
+        - if conta_requisicoes_pendentes > 0
+          th
 
-        td align="right"
-          .icon-show
-            = link_to '', knowledge_request, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+    tbody
 
-        td align="right"
-          .icon-show
-            = link_to '', edit_knowledge_request_path(knowledge_request), class:'glyphicon glyphicon-pencil', title:'Editar'
+      - @knowledge_requests.each do |knowledge_request|
 
-        td align="right"
-          = link_to 'Aprovar', '/', class:'btn btn-xs btn-success'
+        tr
+          td
+            strong
+              = knowledge_request.id
+          td = knowledge_request.knowledge.description
+          td = knowledge_request.user.name + ' ' + knowledge_request.user.last_name
+          td
+            = knowledge_request.label_request_status
 
-        td align="right"
-          = link_to 'Recusar', knowledge_request, data: {:confirm => 'Você em certeza?'}, :method => :delete, class:'btn btn-xs btn-danger'
+          td align="right"
+            .btn-group
+              = link_to 'Exibir', knowledge_request, class:'btn btn-xs btn-primary'
+              = link_to 'Editar', edit_knowledge_request_path(knowledge_request), class:'btn btn-xs btn-primary'
+              = link_to 'Excluir', knowledge_request, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'btn btn-xs btn-primary'
 
-br
-.row
+          - if conta_requisicoes_pendentes > 0
+            td align="right"
+              - if knowledge_request.em_analise?
+                .btn-group
+                  = link_to 'Aprovar', aprovar_requisicao_path(knowledge_request), method: :aprovar, class:'btn btn-xs btn-success'
+                  = link_to 'Recusar', recusar_requisicao_path(knowledge_request), method: :recusar, class:'btn btn-xs btn-danger'
 
-  .col-sm-3
-    = link_to 'Nova Requisição de Conhecimento', new_knowledge_request_path, class:'btn btn-primary'
+  br
 
-  .col-sm-7.text-center
-    div style="margin-top: -40px"
-      = will_paginate @knowledge_requests, inner_window: 1, outter_window: 1
+  .row
+  
+    .col-sm-4
+      .btn-group
+        = link_to 'Nova Requisição', new_knowledge_request_path, class:'btn btn-primary'
+        = link_to 'Ver Conhecimentos', knowledges_path, class:'btn btn-primary'
 
-  .col-sm-2
-    = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+    .col-sm-6.text-center
+      div style="margin-top: -40px"
+        = will_paginate @knowledge_requests, inner_window: 1, outter_window: 1
+
+    .col-sm-2
+      = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'

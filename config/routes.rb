@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-
-  resources :request_histories
-  resources :request_statuses
+  
   # Define a raiz para a página de login e as rotas /login e /logout
   devise_scope :user do
     root to: "devise/sessions#new"
@@ -28,17 +26,23 @@ Rails.application.routes.draw do
   end
 
   # Rotas para home do usuário
-  get '/admin' => 'admin#index'
-  get '/member' => 'member#index'
+  get '/administrador' => 'admin#index', as: :admin
+  get '/membro' => 'member#index', as: :member
   
   # Rota página Sobre
   get '/about' => 'about#index', as: :about
 
   # Rota para associação de atividade
-  post '/activities/:id' => 'activities#associar'
+  post '/activities/associar/:id' => 'activities#associar', as: :associar_atividade
 
   # Rota para requisição de conhecimento
-  post '/knowledges/:id' => 'knowledges#requisitar'
+  post '/knowledges/requisitar/:id' => 'knowledges#requisitar', as: :requisitar_conhecimento
+
+  # Rota para aprovação de requisição de conhecimento
+  post '/knowledge_requests/aprovar/:id' => 'knowledge_requests#aprovar', as: :aprovar_requisicao
+
+  # Rota para recusa de requisição de conhecimento
+  post '/knowledge_requests/recusar/:id' => 'knowledge_requests#recusar', as: :recusar_requisicao
 
   # Rotas para usuários
   devise_for :users
@@ -62,6 +66,8 @@ Rails.application.routes.draw do
   resources :project_statuses
   resources :project_histories
   resources :project_member_histories
+  resources :request_histories
+  resources :request_statuses
   resources :user_statuses
 
 end

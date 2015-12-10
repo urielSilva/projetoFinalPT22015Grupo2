@@ -1,18 +1,36 @@
 = form_for @request_history do |f|
-  - if @request_history.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@request_history.errors.count, "error")} prohibited this request_history from being saved:"
-      ul
-        - @request_history.errors.full_messages.each do |message|
-          li = message
 
-  .field
-    = f.label :request_status
-    = f.text_field :request_status
-  .field
-    = f.label :knowledge_request
-    = f.text_field :knowledge_request
-  .field
-    = f.label :observation
-    = f.text_area :observation
-  .actions = f.submit
+  - if @request_history.errors.any?
+
+    #error_explanation
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
+        - @request_history.errors.full_messages.each do |message|
+          p = message
+
+  .form-group
+    = f.label 'Status da Requisição'
+    = f.select :request_status_id, RequestStatus.all.map {|r| [r.status, r.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Requisição de Conhecimento'
+    = f.select :knowledge_request_id, KnowledgeRequest.all.map {|k| [k.knowledge.description + '( ' + k.user.username + ')', k.id]}, {}, {class:'form-control'}
+
+  .form-group
+    = f.label 'Observação'
+    = f.text_area :observation, class:'form-control'
+
+  .actions
+
+    br
+
+    - if current_page?(new_request_history_path) or @request_history.errors.any?
+      = f.button 'Criar Histórico', class:'btn btn-primary'
+
+    - else
+      = f.button 'Atualizar Histórico', class:'btn btn-primary'
+
+    = link_to 'Voltar', request_histories_path, class:'btn btn-primary pull-right'

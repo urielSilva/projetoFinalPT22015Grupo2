@@ -6,4 +6,11 @@ class Knowledge < ActiveRecord::Base
   belongs_to :technology
   has_many :knowledge_requests
 
+  # Colocar os métodos abaixo num helper
+
+  # Método que retorna a descrição do conhecimento com seu nível
+  def complete_knowledge
+    "#{self.description} (#{self.knowledge_level.level})"
+  end
+
 end

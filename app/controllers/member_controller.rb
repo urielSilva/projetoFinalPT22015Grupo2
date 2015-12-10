@@ -1,9 +1,12 @@
 class MemberController < ApplicationController
 
+  # Requer login antes de continuar
 	before_action :authenticate_user!
 
 	def index
-		if current_user.admin?
+
+    # Se um usuário que não for membro acessar a página, ele é redirecionado para a home de admin
+		if !current_user.member?
 			redirect_to admin_path
 		end
 

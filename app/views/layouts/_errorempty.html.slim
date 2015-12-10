@@ -65,3 +65,12 @@
 
       - elsif current_page?(activities_users_path)
         = link_to 'Nova Associação', new_activities_user_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(knowledge_requests_path)
+        = link_to 'Nova Requisição', new_knowledge_request_path, class:'btn btn-primary form-control'
+        br
+        br
+        = link_to 'Ver Conhecimentos', knowledges_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(request_histories_path)
+        = link_to 'Novo Histórico de Requisição', new_request_history_path, class:'btn btn-primary form-control'

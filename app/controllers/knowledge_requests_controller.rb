@@ -1,12 +1,12 @@
 class KnowledgeRequestsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_knowledge_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_knowledge_request, only: [:show, :edit, :update, :destroy, :aprovar, :recusar]
   load_and_authorize_resource except: [:create]
 
   def index
     @search = KnowledgeRequest.ransack(params[:q])
-    @knowledge_requests = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
+    @knowledge_requests = @search.result(distinct: true).includes(:knowledge, :user, :request_status).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -24,7 +24,7 @@ class KnowledgeRequestsController < ApplicationController
 
     respond_to do |format|
       if @knowledge_request.save
-        format.html { redirect_to @knowledge_request, notice: 'A requisição de conhecimento foi feita.'}
+        format.html { redirect_to @knowledge_request, notice: 'A requisição de conhecimento foi realizada com sucesso.'}
         format.json { render :show, status: :created, location: @knowledge_request }
       else
         format.html { render :new }
@@ -48,8 +48,37 @@ class KnowledgeRequestsController < ApplicationController
   def destroy
     @knowledge_request.destroy
     respond_to do |format|
-      format.html { redirect_to knowledge_requests_url, notice: 'A requisição de conhecimento foi recusada.' }
+      format.html { redirect_to knowledge_requests_url, notice: 'A requisição de conhecimento foi excluída.' }
       format.json { head :no_content }
+    end
+  end
+
+  # Método que aprova uma requisição de conhecimento, atualizando o status da requisição para "Deferido"
+  # Cria uma associação de conhecimento entre o usuário requerente e o conhecimento solicitado
+  # Atualiza o histórico de requisição do usuário para "Deferido"
+  def aprovar
+    respond_to do |format|
+      if @knowledge_request.update(request_status_id: 2)
+
+        @request_history = RequestHistory.find_by(knowledge_request: @knowledge_request)
+        @request_history.update(request_status_id: 2)
+
+        format.html { redirect_to request.referer, notice: 'A requisição de conhecimento foi aprovada.' }
+      end
+    end
+  end
+
+  # Método que recusa uma requisição do conhecimento, atualizando o status da requisição para "Indeferido"
+  # Atualiza o histórico de requisição do usuário para "Indeferido"
+  def recusar
+    respond_to do |format|
+      if @knowledge_request.update(request_status_id: 3)
+
+        @request_history = RequestHistory.find_by(knowledge_request: @knowledge_request)
+        @request_history.update(request_status_id: 3)
+
+        format.html { redirect_to request.referer, notice: 'A requisição de conhecimento foi recusada.' }
+      end
     end
   end
 
@@ -60,7 +89,7 @@ class KnowledgeRequestsController < ApplicationController
     end
 
     def knowledge_request_params
-      params.require(:knowledge_request).permit(:knowledge_id, :user_id)
+      params.require(:knowledge_request).permit(:knowledge_id, :user_id, :request_status_id)
     end
 
 end

@@ -1,6 +1,7 @@
 class ActivityType < ActiveRecord::Base
 
-	validates :description, presence: true
+	validates_presence_of :description
+
 	has_many :activities
 	
 end

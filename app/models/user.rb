@@ -13,13 +13,15 @@ class User < ActiveRecord::Base
   belongs_to :area
   belongs_to :user_status
 
-  # O usuário tem vários históricos de projetos e requisições de conhecimento
+  # O usuário tem vários históricos de projetos, requisições de conhecimento e históricos de requisição
   has_many :project_member_histories
   has_many :knowledge_requests
+  has_many :request_histories
 
-  # O usuário tem e pertence a muitas atividades e projetos
+  # O usuário tem e pertence a muitas atividades, projetos e conhecimentos
   has_and_belongs_to_many :activities
   has_and_belongs_to_many :projects
+  # has_and_belongs_to_many :knowledges
 
   # Permite que o usuário tenha tais propriedades
   devise :database_authenticatable, :rememberable, :recoverable, :trackable, :validatable
@@ -47,6 +49,11 @@ class User < ActiveRecord::Base
   # Método que retorna o nome completo do usuário
   def username
     "#{self.name} #{self.last_name}"
+  end
+
+  # Método que retorna true ou false se o usuário estiver ativo
+  def ativo?
+    self.user_status.status == "Ativo"
   end
 
 end

@@ -1,17 +1,41 @@
-p#notice = notice
+h3
+  span Requisição de Conhecimento
+  .pull-right
+    = @knowledge_request.label_request_status
 
-p
-  strong Knowledge:
-  = @knowledge_request.knowledge.description
+hr.divider
 
-p
-  strong Level: 
-  = @knowledge_request.knowledge.knowledge_level.level
+table.table
 
-p
-  strong User:
-  = @knowledge_request.user.name + ' ' + @knowledge_request.user.last_name
+  thead
+    tr
+      th Requerente
+      th Conhecimento
+      th Nível
+      th Realizada em
+      th Atualizada em
 
-= link_to 'Edit', edit_knowledge_request_path(@knowledge_request)
-'|
-= link_to 'Back', knowledge_requests_path
+  tbody
+    tr
+      td = link_to @knowledge_request.user.username, @knowledge_request.user
+      td = link_to @knowledge_request.knowledge.description, @knowledge_request.knowledge
+      td = @knowledge_request.knowledge.knowledge_level.level
+      td = local_time_ago(@knowledge_request.created_at)
+      td = local_time_ago(@knowledge_request.updated_at)
+
+br
+
+- if @knowledge_request.em_analise?
+
+  .btn-group
+    = link_to 'Aprovar', aprovar_requisicao_path(@knowledge_request), method: :aprovar, class:'btn btn-success'
+    = link_to 'Recusar', recusar_requisicao_path(@knowledge_request), method: :recusar, class:'btn btn-danger'
+
+  .btn-group.pull-right
+    = link_to 'Editar', edit_knowledge_request_path(@knowledge_request), class:'btn btn-primary'
+    = link_to 'Voltar', knowledge_requests_path, class:'btn btn-primary'
+
+- else
+  
+  = link_to 'Editar', edit_knowledge_request_path(@knowledge_request), class:'btn btn-primary'
+  = link_to 'Voltar', knowledge_requests_path, class:'btn btn-primary pull-right'

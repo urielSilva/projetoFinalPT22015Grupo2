@@ -1,25 +1,64 @@
-h1 Listing request_histories
+h3
+  span Histórico de Requisições
+  span.label.label-success.pull-right = 'Total: ' + @request_histories.count.to_s
 
-table
-  thead
-    tr
-      th Request status
-      th Knowledge request
-      th Observation
-      th
-      th
-      th
+hr.divider
 
-  tbody
-    - @request_histories.each do |request_history|
-      tr
-        td = request_history.request_status
-        td = request_history.knowledge_request
-        td = request_history.observation
-        td = link_to 'Show', request_history
-        td = link_to 'Edit', edit_request_history_path(request_history)
-        td = link_to 'Destroy', request_history, data: {:confirm => 'Are you sure?'}, :method => :delete
+- if @request_histories.empty?
+  = render '/layouts/errorempty'
 
-br
+- else
 
-= link_to 'New Request history', new_request_history_path
+  - if recupera_historico_requisicoes.empty?
+    p Você não possui histórico de requisições.
+
+  - else
+    table.table.table-hover.table-responsive
+      thead
+        tr
+          - if !current_user.member?
+            th = sort_link(@search, :id, 'ID')
+          th = sort_link(@search, :request_status_id, 'Status')
+          th Conhecimento
+          th Membro
+          th Observação
+          th
+          th
+          th
+
+      tbody
+        - recupera_historico_requisicoes.each do |request_history|
+          tr
+            - if !current_user.member?
+              td = request_history.id
+            td = request_history.request_status.status
+            td = request_history.knowledge_request.knowledge.description
+            td = request_history.knowledge_request.user.username
+            td = request_history.observation
+            td = link_to 'Show', request_history
+            td = link_to 'Edit', edit_request_history_path(request_history)
+            td = link_to 'Destroy', request_history, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+  br
+  .row
+
+    - if !current_user.member?
+
+      .col-sm-3
+        = link_to 'Novo Histórico', new_request_history_path, class:'btn btn-primary'
+
+      .col-sm-7.text-center
+        div style="margin-top: -40px"
+          = will_paginate @request_histories, inner_window: 1, outter_window: 1
+
+      .col-sm-2
+        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+    - else
+
+      .col-sm-9
+        div style="margin-top: -40px"
+          = will_paginate @request_histories, inner_window: 1, outter_window: 1
+
+      .col-sm-3
+        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
