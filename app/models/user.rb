@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  include ActionView::Helpers::TagHelper
+  include ActionView::Context
+
   # Permite que o usuário envie e receba mensagens
   acts_as_messageable
 

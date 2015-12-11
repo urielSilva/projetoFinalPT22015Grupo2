@@ -1,12 +1,28 @@
 = form_for @request_status do |f|
-  - if @request_status.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@request_status.errors.count, "error")} prohibited this request_status from being saved:"
-      ul
-        - @request_status.errors.full_messages.each do |message|
-          li = message
 
-  .field
-    = f.label :status
-    = f.text_field :status
-  .actions = f.submit
+  - if @request_status.errors.any?
+
+    #error_explanation
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
+        - @request_status.errors.full_messages.each do |message|
+          p = message
+
+  .form-group
+    = f.label 'Status'
+    = f.text_field :status, class:'form-control'
+
+  .actions
+
+    br
+
+    - if current_page?(new_request_status_path) or @request_status.errors.any?
+      = f.button 'Criar Status', class:'btn btn-primary'
+
+    - else
+      = f.button 'Atualizar Status', class:'btn btn-primary'
+
+    = link_to 'Voltar', request_statuses_path, class:'btn btn-primary pull-right'

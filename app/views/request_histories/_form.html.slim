@@ -13,7 +13,7 @@
 
   .form-group
     = f.label 'Requisição de Conhecimento'
-    = f.select :knowledge_request_id, KnowledgeRequest.all.map {|k| [k.knowledge.description + '( ' + k.user.username + ')', k.id]}, {}, {class:'form-control'}
+    = f.select :knowledge_request_id, KnowledgeRequest.all.map {|k| [k.knowledge.description + ' (' + k.user.username + ')', k.id]}, {}, {class:'form-control'}
 
   .form-group
     = f.label 'Observação'

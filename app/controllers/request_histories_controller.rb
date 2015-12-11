@@ -5,11 +5,14 @@ class RequestHistoriesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @search = RequestHistory.ransack(params[:q])
+    @search = RequestHistory.joins(:knowledge_request).ransack(params[:q])
     @request_histories = @search.result(distinct: true).includes(:knowledge_request).paginate(page: params[:page], per_page: 7)
   end
 
   def show
+    unless @request_history.knowledge_request.user == current_user or !current_user.member?
+      redirect_to request_histories_path, alert: 'Acesso negado.'
+    end
   end
 
   def new

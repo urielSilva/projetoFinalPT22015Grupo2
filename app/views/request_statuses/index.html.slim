@@ -1,21 +1,60 @@
-h1 Listing request_statuses
+h3
+  span Status de Requisição de Conhecimento
+  span.label.label-success.pull-right = 'Total: ' + @request_statuses.count.to_s
 
-table
+hr.divider
+
+table.table.table-hover.table-responsive
   thead
     tr
-      th Status
+      th = sort_link(@search, :id, 'ID')
+      th = sort_link(@search, :status, 'Status')
       th
-      th
-      th
+      - if !current_user.member?
+        th
+        th
 
   tbody
+
     - @request_statuses.each do |request_status|
+
       tr
+        td
+          strong = request_status.id
         td = request_status.status
-        td = link_to 'Show', request_status
-        td = link_to 'Edit', edit_request_status_path(request_status)
-        td = link_to 'Destroy', request_status, data: {:confirm => 'Are you sure?'}, :method => :delete
 
+        td align="right"
+          .icon-show
+            = link_to '', request_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+        - if !current_user.member?
+          td align="right"
+            .icon-show
+              = link_to '', edit_request_status_path(request_status), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+          td align="right"
+            .icon-show
+              = link_to '', request_status, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 br
+.row
 
-= link_to 'New Request status', new_request_status_path
+  - if !current_user.member?
+
+    .col-sm-3
+      = link_to 'Novo Status', new_request_status_path, class:'btn btn-primary'
+
+    .col-sm-7.text-center
+      div style="margin-top: -40px"
+        = will_paginate @request_statuses, inner_window: 1, outter_window: 1
+
+    .col-sm-2
+      = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+  - else
+
+    .col-sm-9
+      div style="margin-top: -40px"
+        = will_paginate @request_statuses, inner_window: 1, outter_window: 1
+
+    .col-sm-3
+      = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

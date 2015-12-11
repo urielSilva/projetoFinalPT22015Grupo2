@@ -1,64 +1,113 @@
 h3
   span Histórico de Requisições
-  span.label.label-success.pull-right = 'Total: ' + @request_histories.count.to_s
+  span.label.label-success.pull-right = 'Total: ' + recupera_historico_requisicoes.count.to_s
 
 hr.divider
 
-- if @request_histories.empty?
-  = render '/layouts/errorempty'
+- if recupera_historico_requisicoes.empty?
+  p Não há nenhum histórico de requisição de conhecimento que você tenha feito.
+  br
+  = link_to 'Voltar', member_path, class:'btn btn-primary'
 
 - else
 
-  - if recupera_historico_requisicoes.empty?
-    p Você não possui histórico de requisições.
+  - if @request_histories.empty?
+    = render '/layouts/errorempty'
 
   - else
+
+    = search_form_for @search do |f|
+      
+      .row
+
+        - if !current_user.member?
+
+          .col-sm-3
+            = f.collection_select :knowledge_request_request_status_id_eq, RequestStatus.all, :id, :status, {include_blank: 'Filtre por status'}, {class:'form-control'}
+
+          .col-sm-4
+            = f.collection_select :knowledge_request_knowledge_id_eq, Knowledge.all, :id, :complete_knowledge, {include_blank: 'Filtre por conhecimento'}, {class:'form-control'}
+
+          .col-sm-4
+            = f.collection_select :knowledge_request_user_id_eq, User.all, :id, :username, {include_blank: 'Filtre por membro'}, {class:'form-control'}
+
+        - else
+
+          .col-sm-5
+            = f.collection_select :knowledge_request_request_status_id_eq, RequestStatus.all, :id, :status, {include_blank: 'Filtre por status'}, {class:'form-control'}
+
+          .col-sm-6
+            = f.collection_select :knowledge_request_knowledge_id_eq, Knowledge.all, :id, :complete_knowledge, {include_blank: 'Filtre por conhecimento'}, {class:'form-control'}       
+
+        = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+    br
+
     table.table.table-hover.table-responsive
+
       thead
         tr
           - if !current_user.member?
             th = sort_link(@search, :id, 'ID')
-          th = sort_link(@search, :request_status_id, 'Status')
+          th Status
           th Conhecimento
+          th Nível
+          th Tecnologia
           th Membro
           th Observação
           th
-          th
-          th
+          - if !current_user.member?
+            th
+            th
 
       tbody
-        - recupera_historico_requisicoes.each do |request_history|
-          tr
-            - if !current_user.member?
-              td = request_history.id
-            td = request_history.knowledge_request.label_request_status
-            td = request_history.knowledge_request.knowledge.description
-            td = request_history.knowledge_request.user.username
-            td = request_history.observation
-            td = link_to 'Show', request_history
-            td = link_to 'Edit', edit_request_history_path(request_history)
-            td = link_to 'Destroy', request_history, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-  br
-  .row
+        - @request_histories.each do |request_history|
+          - if request_history.knowledge_request.user == current_user or !current_user.member?
+            tr
+              - if !current_user.member?
+                td
+                  strong = request_history.id
+              td = request_history.knowledge_request.label_request_status
+              td = request_history.knowledge_request.knowledge.description
+              td = request_history.knowledge_request.knowledge.knowledge_level.level
+              td = request_history.knowledge_request.knowledge.technology.name
+              td = request_history.knowledge_request.user.username
+              td = request_history.observation
 
-    - if !current_user.member?
+              td align="right"
+                .icon-show
+                  = link_to '', request_history, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
-      .col-sm-3
-        = link_to 'Novo Histórico', new_request_history_path, class:'btn btn-primary'
+              - if !current_user.member?
+                td align="right"
+                  .icon-show
+                    = link_to '', edit_request_history_path(request_history), class:'glyphicon glyphicon-pencil', title:'Editar'
 
-      .col-sm-7.text-center
-        div style="margin-top: -40px"
-          = will_paginate @request_histories, inner_window: 1, outter_window: 1
+                td align="right"
+                  .icon-show
+                    = link_to '', request_history, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+    br
+    .row
 
-    - else
+      - if !current_user.member?
 
-      .col-sm-9
-        div style="margin-top: -40px"
-          = will_paginate @request_histories, inner_window: 1, outter_window: 1
+        .col-sm-3
+          = link_to 'Novo Histórico', new_request_history_path, class:'btn btn-primary'
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+        .col-sm-7.text-center
+          div style="margin-top: -40px"
+            = will_paginate @request_histories, inner_window: 1, outter_window: 1
+
+        .col-sm-2
+          = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+
+      - else
+
+        .col-sm-9
+          div style="margin-top: -40px"
+            = will_paginate @request_histories, inner_window: 1, outter_window: 1
+
+        .col-sm-3
+          = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'

@@ -5,7 +5,8 @@ class RequestStatusesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @request_statuses = RequestStatus.all
+    @search = RequestStatus.ransack(params[:q])
+    @request_statuses = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show

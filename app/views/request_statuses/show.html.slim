@@ -1,9 +1,16 @@
-p#notice = notice
+h3
+  span Status de Requisição de Conhecimento
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+
+hr.divider
 
 p
-  strong Status:
+  strong Status: 
   = @request_status.status
 
-= link_to 'Edit', edit_request_status_path(@request_status)
-'|
-= link_to 'Back', request_statuses_path
+br
+
+- if !current_user.member?
+  = link_to 'Editar', edit_request_status_path(@request_status), class:'btn btn-primary'
+
+= link_to 'Back', request_statuses_path, class:'btn btn-primary pull-right'
