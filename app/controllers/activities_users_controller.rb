@@ -5,7 +5,8 @@ class ActivitiesUsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @activities_users = ActivitiesUser.all.includes(:activity, :user).paginate(page: params[:page], per_page: 10)
+    @search = ActivitiesUser.joins(:activity, :user).ransack(params[:q])
+    @activities_users = @search.result(distinct: true).includes(:activity, :user).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -24,14 +25,15 @@ class ActivitiesUsersController < ApplicationController
   def create
     @activities_user = ActivitiesUser.new(activities_user_params)
 
-    # verificar isso
+    # O usuário, ao criar uma associação de atividade, não passa nenhum parâmetro de membro
+    # Para a atividade ser associada a ele, é necessário atualizar o usuário para o usuário atual da requisição
     if @activities_user.user_id == nil
       @activities_user.update(user_id: current_user.id)
     end
 
     respond_to do |format|
       if @activities_user.save
-        format.html { redirect_to @activities_user, notice: 'A associação foi criada com sucesso.' }
+        format.html { redirect_to @activities_user, notice: 'A atividade foi criada com sucesso.' }
         format.json { render :show, status: :created, location: @activities_user }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class ActivitiesUsersController < ApplicationController
   def update
     respond_to do |format|
       if @activities_user.update(activities_user_params)
-        format.html { redirect_to @activities_user, notice: 'A associação foi atualizada com sucesso.' }
+        format.html { redirect_to @activities_user, notice: 'A atividade foi atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @activities_user }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class ActivitiesUsersController < ApplicationController
     if @activities_user.user == current_user or !current_user.member?
       @activities_user.destroy
       respond_to do |format|
-        format.html { redirect_to activities_users_url, notice: 'A associação foi excluída com sucesso.' }
+        format.html { redirect_to request.referer, notice: 'A atividade foi excluída com sucesso.' }
         format.json { head :no_content }
       end
     else

@@ -1,12 +1,28 @@
-p#notice = notice
+h3
+  span Conhecimento
+  = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
+
+hr.divider
+
+br
+
+p 
+  strong Membro: 
+  = @knowledges_user.user.username
 
 p
-  strong User:
-  = @knowledges_user.user
-p
-  strong Knowledge:
-  = @knowledges_user.knowledge
+  strong Conhecimento: 
+  = @knowledges_user.knowledge.description
 
-= link_to 'Edit', edit_knowledges_user_path(@knowledges_user)
-'|
-= link_to 'Back', knowledges_users_path
+p
+  strong Nível: 
+  = @knowledges_user.knowledge.knowledge_level.level
+
+p
+  strong Tecnologia: 
+  = @knowledges_user.knowledge.technology.name
+
+br
+
+= link_to 'Editar', edit_knowledges_user_path(@knowledges_user), class:'btn btn-primary'
+= link_to 'Voltar', knowledges_users_path, class:'btn btn-primary pull-right'

@@ -75,8 +75,8 @@
     br
 
     - if current_page?(new_user_path) or @user.errors.any?
-      = f.button 'Criar Usuário', class:'btn btn-primary'
+      = f.button 'Criar Membro', class:'btn btn-primary'
     - else
-      = f.button 'Atualizar Usuário', class:'btn btn-primary'
+      = f.button 'Atualizar Membro', class:'btn btn-primary'
 
     = link_to 'Voltar', users_path, class:'btn btn-primary pull-right'

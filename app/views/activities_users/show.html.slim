@@ -1,20 +1,28 @@
 h3
-  span Associação de Atividade
+  span Atividade do Membro
   = image_tag("cjrbox.png", class:'pull-right img-responsive cjr-box')
 
 hr.divider
 
+br
+
 p
   strong Membro: 
-  = @activities_user.user.name + ' ' + @activities_user.user.last_name
+  = @activities_user.user.username
 
 p
   strong Atividade: 
   = @activities_user.activity.description
 
+p
+  strong Tipo: 
+  = @activities_user.activity.activity_type.description
+
+p
+  strong Créditos: 
+  = @activities_user.activity.credit_numbers
+
 br
 
-- if !current_user.member?
-  = link_to 'Editar', edit_activities_user_path(@activities_user), class:'btn btn-primary'
-
+= link_to 'Editar', edit_activities_user_path(@activities_user), class:'btn btn-primary'
 = link_to 'Voltar', activities_users_path, class:'btn btn-primary pull-right'

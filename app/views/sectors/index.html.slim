@@ -1,18 +1,33 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Núcleos
+  span.label.label-success.pull-right = 'Total: ' + @sectors.count.to_s
+
+hr.divider
 
 - if @sectors.empty?
   = render 'layouts/errorempty'
 
 - else
 
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-11
+        = f.search_field :name_cont, class:'form-control', placeholder:'Filtre por núcleo'
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
   table.table.table-hover.table-responsive
 
     thead
       tr
-        th ID
-        th Sigla
-        th Nome
-        th Descrição
+        - if !current_user.member?
+          th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :short_name, 'Sigla')
+        th = sort_link(@search, :name, 'Núcleo')
+        th = sort_link(@search, :description, 'Descrição')
         th
         - if !current_user.member?
           th
@@ -23,15 +38,19 @@
       - @sectors.each do |sector|
       
         tr
-          td = sector.id
+          - if !current_user.member?
+            td
+              strong = sector.id
           td = sector.short_name
           td = sector.name
           td = sector.description
+
           td align="right"
             .icon-show
               = link_to '', sector, class:'glyphicon glyphicon-eye-open', title:'Exibir'
 
           - if !current_user.member?
+
             td align="right"
               .icon-show
                 = link_to '', edit_sector_path(sector), class:'glyphicon glyphicon-pencil', title:'Editar'
@@ -41,25 +60,26 @@
                 = link_to '', sector, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
+
   .row
 
     - if !current_user.member?
 
-      .col-sm-3
+      .col-sm-2
         = link_to 'Novo Núcleo', new_sector_path, class:'btn btn-primary'
 
-      .col-sm-7.text-center
+      .col-sm-9.text-center
         div style="margin-top: -40px"
-          = will_paginate @sectors, inner_window: 1, outter_window: 1
+          = will_paginate @sectors, inner_window: 2, outter_window: 1
 
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'
 
     - else
 
-      .col-sm-9
+      .col-sm-11
         div style="margin-top: -40px"
-          = will_paginate @sectors, inner_window: 1, outter_window: 1
+          = will_paginate @sectors, inner_window: 3, outter_window: 3
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

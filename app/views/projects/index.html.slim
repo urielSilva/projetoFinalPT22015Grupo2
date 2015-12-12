@@ -1,4 +1,8 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Projetos
+  span.label.label-success.pull-right = 'Total: ' + @projects.count.to_s
+
+hr.divider
 
 - if @projects.empty?
   = render 'layouts/errorempty'
@@ -9,10 +13,10 @@
     
     .row
       .col-sm-3
-        = f.search_field :description_cont, class:'form-control', placeholder:'Pesquise um projeto'
+        = f.search_field :description_cont, class:'form-control', placeholder:'Filtre por projeto'
 
       .col-sm-4
-        = f.collection_select :project_status_id_eq, ProjectStatus.all, :id, :status, {include_blank: 'Pesquise um estado'}, {class:'form-control'}
+        = f.collection_select :project_status_id_eq, ProjectStatus.all, :id, :status, {include_blank: 'Filtre por status'}, {class:'form-control'}
 
       .col-sm-2
         = f.text_field :price_gteq, class:'form-control', placeholder:'Preço de'
@@ -28,11 +32,12 @@
 
     thead
       tr
-        th = sort_link(@search, :id, 'ID')
+        - if !current_user.member?
+          th = sort_link(@search, :id, 'ID')
         th = sort_link(@search, :link, 'Link')
         th = sort_link(@search, :description, 'Descrição')
         th = sort_link(@search, :price, 'Preço')
-        th = sort_link(@search, :project_status_id, 'Estado')
+        th = sort_link(@search, :project_status_id, 'Status')
         th
         - if !current_user.member?
           th
@@ -43,13 +48,14 @@
       - @projects.each do |project|
       
         tr
-          td
-            strong
-              = project.id
+          - if !current_user.member?
+            td
+              strong = project.id
           td = link_to 'Acessar', project.link
           td = project.description
           td = project.price
           td = project.project_status.status
+
           td align="right"
             .icon-show
               = link_to '', project, class:'glyphicon glyphicon-eye-open', title:'Exibir'
@@ -69,21 +75,21 @@
 
     - if !current_user.member?
 
-      .col-sm-3
+      .col-sm-2
         = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary'
 
-      .col-sm-7.text-center
+      .col-sm-9.text-center
         div style="margin-top: -40px"
           = will_paginate @projects, inner_window: 1, outter_window: 1
 
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'
 
     - else
 
-      .col-sm-9
+      .col-sm-11
         div style="margin-top: -40px"
           = will_paginate @projects, inner_window: 1, outter_window: 1
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

@@ -11,17 +11,10 @@
         - @activities_user.errors.full_messages.each do |message|
           p = message
 
-  - if !current_user.member?
-    .form-group
-      = f.label 'Membro'
-      = f.select :user_id, User.all.map{|u| [u.name + ' ' + u.last_name, u.id]}, {}, class:'form-control'
-
-  - else
-    - unless current_page?(edit_activities_user_path)
-      .form-group
-        = f.label 'Membro'
-        = f.text_field :user_id, disabled: true, placeholder: current_user.name + ' ' + current_user.last_name, class:'form-control'
-
+  .form-group
+    = f.label 'Membro'
+    = f.select :user_id, User.all.map{|u| [u.name + ' ' + u.last_name, u.id]}, {}, class:'form-control'
+    
   .form-group
     = f.label 'Atividade'
     = f.select :activity_id, Activity.all.map{|a| [a.description, a.id]}, {}, class:'form-control'
@@ -31,9 +24,9 @@
     br
 
     - if current_page?(new_activities_user_path) or @activities_user.errors.any?
-      = f.button 'Associar Atividade', class:'btn btn-primary'
+      = f.button 'Criar Atividade', class:'btn btn-primary'
 
     - else
-      = f.button 'Atualizar Associação', class:'btn btn-primary'
+      = f.button 'Atualizar Atividade', class:'btn btn-primary'
 
     = link_to 'Voltar', activities_users_path, class:'btn btn-primary pull-right'

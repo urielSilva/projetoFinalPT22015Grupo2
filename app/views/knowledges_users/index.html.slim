@@ -1,23 +1,74 @@
-h1 Listing knowledges_users
+h3
+  span Conhecimentos dos Membros
+  span.label.label-success.pull-right = 'Total: ' + @knowledges_users.count.to_s
 
-table.table.table-hover.table-responsive
-  thead
-    tr
-      th User
-      th Knowledge
-      th
-      th
-      th
+hr.divider
 
-  tbody
-    - @knowledges_users.each do |knowledges_user|
+- if @knowledges_users.empty?
+  = render 'layouts/errorempty'
+
+- else
+
+  = search_form_for @search do |f|
+    
+    .row
+
+      .col-sm-5
+        = f.collection_select :user_id_eq, User.all, :id, :username, {include_blank: 'Filtre por membro'}, {class:'form-control'}
+
+      .col-sm-6
+        = f.collection_select :knowledge_id_eq, Knowledge.all, :id, :complete_knowledge, {include_blank: 'Filtre por conhecimento'}, {class:'form-control'}
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
+  table.table.table-hover.table-responsive
+    thead
       tr
-        td = link_to knowledges_user.user.username, knowledges_user.user
-        td = link_to knowledges_user.knowledge.description, knowledges_user.knowledge
-        td = link_to 'Show', knowledges_user
-        td = link_to 'Edit', edit_knowledges_user_path(knowledges_user)
-        td = link_to 'Destroy', knowledges_user, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :user_name, 'Membro')
+        th = sort_link(@search, :knowledge_description, 'Conhecimento')
+        th Nível
+        th Tecnologia
+        th
+        th
+        th
 
-br
+    tbody
 
-= link_to 'New Knowledges user', new_knowledges_user_path
+      - @knowledges_users.each do |knowledges_user|
+
+          tr
+            td
+              strong = knowledges_user.id
+            td = link_to knowledges_user.user.username, knowledges_user.user
+            td = link_to knowledges_user.knowledge.description, knowledges_user.knowledge
+            td = knowledges_user.knowledge.knowledge_level.level
+            td = knowledges_user.knowledge.technology.name
+
+            td align="right"
+              .icon-show
+                = link_to '', knowledges_user, class:'glyphicon glyphicon-eye-open', title:'Exibir'
+
+            td align="right"
+              .icon-show
+                = link_to '', edit_knowledges_user_path(knowledges_user), class:'glyphicon glyphicon-pencil', title:'Editar'
+
+            td align="right"
+              .icon-show
+                = link_to '', knowledges_user, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
+
+  br
+
+  .row
+
+    .col-sm-2
+      = link_to 'Novo Conhecimento', new_knowledges_user_path, class:'btn btn-primary'
+
+    .col-sm-9.text-center
+      div style="margin-top: -40px"
+        = will_paginate @knowledges_users, inner_window: 2, outter_window: 2
+
+    .col-sm-1
+      = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

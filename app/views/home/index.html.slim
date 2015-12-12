@@ -1,0 +1,266 @@
+/ Variável que contem a quantidade de mensagens não lidas do usuário
+- mensagens_nao_lidas = unread_messages_count
+
+.row#home-logo
+
+  .col-sm-9
+    h1 Home
+    hr.divider
+
+  .col-sm-3
+    = image_tag("cjr.png", class:'pull-right')
+
+.row#informacoes
+
+  .col-sm-3
+
+    ul.list-group
+
+      li.list-group-item
+        .text-primary.text-center
+          h4
+            = current_user.username
+
+      li.list-group-item.text-right
+        span.pull-left Perfil:
+        = current_user.profile.name
+
+      li.list-group-item
+        span.badge = mensagens_nao_lidas
+        = link_to 'Mensagens não lidas', conversations_path
+
+      li.list-group-item
+        - if current_user.admin?
+          span.badge = @requisicoes_pendentes
+          = link_to 'Requisições Pendentes', knowledge_requests_path
+        - else
+          = link_to 'Requisitar Conhecimento', knowledges_path
+
+      - if !current_user.admin?
+        li.list-group-item
+          a href="#" data-toggle="modal" data-target="#historico-requisicoes-home" Histórico de Requisições
+
+      - if !current_user.admin?        
+        li.list-group-item
+          a href="#" data-toggle="modal" data-target="#historico-projetos-home" Histórico de Projetos
+
+      li.list-group-item
+        = link_to 'Requisitar Atividade', activities_path
+
+
+    #historico-projetos-home.modal.fade role="dialog"
+
+      .modal-dialog
+
+          .modal-content
+
+            .modal-header
+              button.close type="button" data-dismiss="modal" &times;
+              h4 Histórico de Projetos
+
+            .modal-body
+
+              - if @historico_projetos_usuario.empty?
+                p Você não tem históricos de projetos.
+
+              - else
+
+                table.table
+                  thead
+                    tr
+                      th Projeto
+                      th Função
+                      th Observação
+
+                  tbody
+
+                    - @historico_projetos_usuario.each do |historico|
+                      tr
+                        td = historico.project.description
+                        td = historico.project_role.role
+                        td = historico.observation
+
+            .modal-footer
+              button.btn.btn-default type="button" data-dismiss="modal" Fechar
+
+    #historico-requisicoes-home.modal.fade role="dialog"
+
+      .modal-dialog
+
+          .modal-content
+
+            .modal-header
+              button.close type="button" data-dismiss="modal" &times;
+              h4 Histórico de Requisições
+
+            .modal-body
+
+              - if @historico_requisicoes_usuario.empty?
+                p Você não tem históricos de requisições de conhecimento.
+
+              - else
+
+                table.table
+                  thead
+                    tr
+                      th Status
+                      th Conhecimento
+                      th Nível
+                      th Tecnologia
+
+                  tbody
+
+                    - @historico_requisicoes_usuario.each do |historico|
+                      tr
+                        td = historico.label_request_status
+                        td = historico.knowledge.description
+                        td = historico.knowledge.knowledge_level.level
+                        td = historico.knowledge.technology.name
+
+            .modal-footer
+              button.btn.btn-default type="button" data-dismiss="modal" Fechar
+
+  .col-sm-9
+
+    ul.nav.nav-pills.nav-justified
+
+      li.active
+        a href="#informacoes-home" data-toggle="tab" Informações
+
+      li
+        a href="#atividades-home" data-toggle="tab" Atividades
+
+      li
+        a href="#conhecimentos-home" data-toggle="tab" Conhecimentos
+
+      li
+        a href="#projetos-home" data-toggle="tab" Projetos
+
+    #tab-content style="margin-top: 15px"
+
+      .tab-pane.active#informacoes-home
+
+        .panel.panel-default
+          .panel-body
+            .text-center.text-primary
+              strong
+                - if current_user.job.name == "Trainee"
+                  span Trainee
+                - elsif current_user.job.name == "Presidente"
+                  span Presidente
+                - else
+                  span = current_user.job.name + ' de '
+                  - if current_user.sector.short_name == "NDP"
+                    span Desenvolvimento e Pesquisa
+                  - elsif current_user.sector.short_name == "NAM"
+                    span Atendimento e Marketing
+                  - elsif current_user.sector.short_name == "NOE"
+                    span Organização Empresarial
+                  - else
+                    span Talentos
+
+        .panel.panel-default
+          table.table
+            tbody
+              tr
+                td Nome Completo: 
+                td align="right" = current_user.username
+              tr
+                td Email:
+                td align="right"
+                  = mail_to current_user.email, current_user.email
+              tr
+                td Área:
+                td align="right" = current_user.area.name + ' [' + current_user.sector.short_name + ']'
+              tr
+                td Último acesso:
+                td align="right"
+                  - if current_user.current_sign_in_at == nil
+                    span Nunca acessou
+                  - else
+                    = local_time_ago(current_user.current_sign_in_at)
+
+      .tab-pane#atividades-home
+
+        .panel.panel-default
+
+          - if @atividades_usuario.empty?
+            .panel-body
+              span Você não possui atividades.
+
+          - else
+
+            table.table.table-hover.table-responsive
+
+              thead
+                tr
+                  th Atividade
+                  th Tipo
+                  th Créditos
+                  th
+
+              tbody
+
+                - @atividades_usuario.each do |activity_user|
+
+                  tr
+                    td = link_to activity_user.description, activity_user
+                    td = activity_user.activity_type.description
+                    td = activity_user.credit_numbers.to_s
+                    td align="right" = link_to 'Excluir', @activities_user.where(activity_id: activity_user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+
+      .tab-pane#conhecimentos-home
+
+        .panel.panel-default
+
+          - if @conhecimentos_usuario.empty?
+
+            .panel-body
+              span Você não possui conhecimentos associados.
+
+          - else
+
+            table.table.table-hover.table-responsive
+
+              thead
+                tr
+                  th Conhecimento
+                  th Nível
+                  th Tecnologia
+
+              tbody
+
+                - @conhecimentos_usuario.each do |knowledge_user|
+
+                  tr
+                    td = link_to knowledge_user.description, knowledge_user
+                    td = knowledge_user.knowledge_level.level
+                    td = knowledge_user.technology.name
+
+      .tab-pane#projetos-home
+
+        .panel.panel-default
+
+          - if @projetos_usuario.empty?
+
+            .panel-body
+              span Você não possui projetos.
+
+          - else
+
+             table.table.table-hover.table-responsive
+
+              thead
+                tr
+                  th Projeto
+                  - if !current_user.member?
+                    th 
+
+              tbody
+
+                - @projetos_usuario.each do |project_user|
+
+                  tr
+                    td = link_to project_user.description, project_user
+                    - if !current_user.member?
+                      td = link_to 'Desalocar', @projects_user.where(project_id: project_user.id).first, data: {:confirm => 'Você tem certeza?'}, :method => :delete

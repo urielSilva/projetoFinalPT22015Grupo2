@@ -5,7 +5,8 @@ class JobsController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @jobs = Job.all.order(:id).paginate(page: params[:page], per_page: 10)
+    @search = Job.ransack(params[:q])
+    @jobs = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -61,4 +62,5 @@ class JobsController < ApplicationController
     def job_params
       params.require(:job).permit(:name)
     end
+    
 end

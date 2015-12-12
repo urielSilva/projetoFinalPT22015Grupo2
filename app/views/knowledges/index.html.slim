@@ -12,14 +12,14 @@ hr.divider
   = search_form_for @search do |f|
     
     .row
-      .col-sm-4
-        = f.search_field :description_cont, class:'form-control', placeholder:'Pesquise um conhecimento'
+      .col-sm-5
+        = f.search_field :description_cont, class:'form-control', placeholder:'Filtre por conhecimento'
 
       .col-sm-3
-        = f.collection_select :technology_id_eq, Technology.all, :id, :name, {include_blank: 'Pesquise uma tecnologia'}, {class:'form-control'}
+        = f.collection_select :technology_id_eq, Technology.all, :id, :name, {include_blank: 'Filtre por tecnologia'}, {class:'form-control'}
 
-      .col-sm-4
-        = f.collection_select :knowledge_level_id_eq, KnowledgeLevel.all, :id, :level, {include_blank: 'Pesquise um nível de conhecimento'}, {class:'form-control'}
+      .col-sm-3
+        = f.collection_select :knowledge_level_id_eq, KnowledgeLevel.all, :id, :level, {include_blank: 'Filtre por nível'}, {class:'form-control'}
 
       = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
 
@@ -29,7 +29,8 @@ hr.divider
 
     thead
       tr
-        th = sort_link(@search, :id, 'ID')
+        - if !current_user.member?
+          th = sort_link(@search, :id, 'ID')
         th = sort_link(@search, :knowledge_level_id, 'Nível')
         th = sort_link(@search, :description, 'Descrição')
         th = sort_link(@search, :technology_id, 'Tecnologia')
@@ -44,9 +45,10 @@ hr.divider
       - @knowledges.each do |knowledge|
 
         tr
-          td
-            strong
-              = knowledge.id
+          - if !current_user.member?
+            td
+              strong
+                = knowledge.id
           td = knowledge.knowledge_level.level
           td = knowledge.description
           td = knowledge.technology.name
@@ -76,21 +78,21 @@ hr.divider
 
     - if !current_user.member?
 
-      .col-sm-3
+      .col-sm-2
         = link_to 'Novo Conhecimento', new_knowledge_path, class:'btn btn-primary'
         
-      .col-sm-7.text-center
+      .col-sm-9.text-center
         div style="margin-top: -40px"
-          = will_paginate @knowledges, inner_window: 1, outter_window: 1
+          = will_paginate @knowledges, inner_window: 2, outter_window: 2
 
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'
 
     - else
 
-      .col-sm-9
+      .col-sm-11
         div style="margin-top: -40px"
-          = will_paginate @knowledges, inner_window: 1, outter_window: 1
+          = will_paginate @knowledges, inner_window: 3, outter_window: 3
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

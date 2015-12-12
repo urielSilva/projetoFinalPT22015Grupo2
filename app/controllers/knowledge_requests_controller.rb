@@ -5,7 +5,7 @@ class KnowledgeRequestsController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @search = KnowledgeRequest.ransack(params[:q])
+    @search = KnowledgeRequest.joins(:knowledge, :user, :request_status).ransack(params[:q])
     @knowledge_requests = @search.result(distinct: true).includes(:knowledge, :user, :request_status).paginate(page: params[:page], per_page: 7)
   end
 

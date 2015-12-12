@@ -1,17 +1,35 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Níveis de Conhecimento
+  span.label.label-success.pull-right = 'Total: ' + @knowledge_levels.count.to_s
+
+hr.divider
 
 - if @knowledge_levels.empty?
   = render '/layouts/errorempty'
 
 - else
   
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-6
+        = f.search_field :level_cont, class:'form-control', placeholder:'Filtre por nível'
+
+      .col-sm-5
+        = f.search_field :description_cont, class:'form-control', placeholder:'Filtre por Descrição'
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
   table.table.table-hover.table-responsive
 
     thead
       tr
-        th ID
-        th Nível
-        th Descrição
+        - if !current_user.member?
+          th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :level, 'Nível')
+        th = sort_link(@search, :description, 'Descrição')
         th
         - if !current_user.member?
           th
@@ -22,11 +40,12 @@
       - @knowledge_levels.each do |knowledge_level|
 
         tr
-          td 
-            strong
-              = knowledge_level.id
+          - if !current_user.member?
+            td 
+              strong = knowledge_level.id
           td = knowledge_level.level
           td = knowledge_level.description
+
           td align="right"
             .icon-show
               = link_to '', knowledge_level, class:'glyphicon glyphicon-eye-open', title:'Exibir'
@@ -41,25 +60,26 @@
                 = link_to '', knowledge_level, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
+
   .row
 
     - if !current_user.member?
 
-      .col-sm-3
+      .col-sm-2
         = link_to 'Nova Nível de Conhecimento', new_knowledge_level_path, class:'btn btn-primary'
 
-      .col-sm-7.text-center
+      .col-sm-9.text-center
         div style="margin-top: -40px"
-          = will_paginate @knowledge_levels, inner_window: 1, outter_window: 1
+          = will_paginate @knowledge_levels, inner_window: 2, outter_window: 2
 
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'
 
     - else
 
-      .col-sm-9
+      .col-sm-11
         div style="margin-top: -40px"
-          = will_paginate @knowledge_levels, inner_window: 1, outter_window: 1
+          = will_paginate @knowledge_levels, inner_window: 3, outter_window: 3
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

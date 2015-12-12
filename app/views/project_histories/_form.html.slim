@@ -16,7 +16,7 @@
     = f.select :project_id, Project.all.map {|p| [p.description, p.id]}, {}, {class:'form-control'}
 
   .form-group
-    = f.label 'Estado de Projeto'
+    = f.label 'Status do Projeto'
     = f.select :project_status_id, ProjectStatus.all.map {|p| [p.status, p.id]}, {}, {class:'form-control'}
 
   .form-group

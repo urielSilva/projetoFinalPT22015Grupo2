@@ -1,16 +1,20 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Membros
+  span.label.label-success.pull-right = 'Total: ' + @users.count.to_s
+
+hr.divider
 
 = search_form_for @search do |f|
   
   .row
     .col-sm-3
-      = f.search_field :name_cont, class:'form-control', placeholder:'Busque um usuário'
+      = f.search_field :name_cont, class:'form-control', placeholder:'Filtre por membro'
 
     .col-sm-4
-      = f.collection_select :user_status_id_eq, UserStatus.all, :id, :status, {include_blank: 'Busque um status'}, {class:'form-control'}
+      = f.collection_select :user_status_id_eq, UserStatus.all, :id, :status, {include_blank: 'Filtre por status'}, {class:'form-control'}
 
     .col-sm-4
-      = f.collection_select :profile_id_eq, Profile.all, :id, :name, {include_blank: 'Busque um perfil'}, {class:'form-control'}
+      = f.collection_select :profile_id_eq, Profile.all, :id, :name, {include_blank: 'Filtre por perfil'}, {class:'form-control'}
 
     = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
 
@@ -21,11 +25,11 @@ br
 
 - else
 
-  - @membros = 0
+  - membros = 0
 
   - @users.each do |user|
     - if user.member?
-      - @membros = @membros + 1
+      - membros = membros + 1
 
   table.table.table-hover.table-responsive
 
@@ -39,7 +43,7 @@ br
         th Perfil
         th
         th
-        - if current_user.admin? or (current_user.mod? and @membros >= 1)
+        - if current_user.admin? or (current_user.mod? and membros >= 1)
           th
 
     tboby
@@ -49,8 +53,7 @@ br
         tr
           - if !current_user.member?
             td
-              strong
-                = user.id
+              strong = user.id
           td
             - if user.user_status.status == 'Ativo'
               .text-success
@@ -59,15 +62,17 @@ br
               .text-danger
                 = user.user_status.status
 
-          td = user.name + ' ' + user.last_name
+          td = user.username
           td = user.email
           td
             - if user.member?
               .text-success
                 strong Membro
+
             - elsif user.admin?
               .text-warning
                 strong Administrador
+
             - else
               .text-primary
                 strong Moderador
@@ -84,28 +89,29 @@ br
             td align="right"
               - if current_user.admin? or (current_user.mod? and user.member?)
                 .icon-show 
-                  = link_to '', user, data: {:confirm => 'Tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove'
+                  = link_to '', user, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove'
 
   br
+
   .row
 
     - if !current_user.member?
 
-      .col-sm-3
-        = link_to 'Novo Usuário', new_user_path, class:'btn btn-primary'
-
-      .col-sm-7.text-center
-        div style="margin-top: -40px"
-          = will_paginate @users, inner_window: 1, outter_window: 1
-
       .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+        = link_to 'Novo Membro', new_user_path, class:'btn btn-primary'
+
+      .col-sm-9.text-center
+        div style="margin-top: -40px"
+          = will_paginate @users, inner_window: 2, outter_window: 2
+
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'
 
     - else
 
-      .col-sm-9
+      .col-sm-11
         div style="margin-top: -40px"
-          = will_paginate @users, inner_window: 1, outter_window: 1
+          = will_paginate @users, inner_window: 3, outter_window: 3
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

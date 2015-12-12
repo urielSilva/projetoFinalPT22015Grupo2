@@ -1,16 +1,31 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Status de Projeto
+  span.label.label-success.pull-right = 'Total: ' + @project_statuses.count.to_s
+
+hr.divider
 
 - if @project_statuses.empty?
   = render '/layouts/errorempty'
 
 - else
 
+  = search_form_for @search do |f|
+  
+    .row
+      .col-sm-11
+        = f.search_field :status_cont, class:'form-control', placeholder:'Filtre por status'
+      
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
   table.table.table-hover.table-responsive
 
     thead
       tr
-        th = sort_link(@search, :id, 'ID')
-        th = sort_link(@search, :status, 'Estado')
+        - if !current_user.member?
+          th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :status, 'Status')
         th
         - if !current_user.member?
           th
@@ -21,10 +36,11 @@
       - @project_statuses.each do |project_status|
       
         tr
-          td
-            strong
-              = project_status.id
+          - if !current_user.member?
+            td
+              strong = project_status.id
           td = project_status.status
+          
           td align="right"
             .icon-show
               = link_to '', project_status, class:'glyphicon glyphicon-eye-open', title:'Exibir'
@@ -43,21 +59,21 @@
 
     - if !current_user.member?
 
-      .col-sm-3
-        = link_to 'Novo Estado de Projeto', new_project_status_path, class:'btn btn-primary'
+      .col-sm-2
+        = link_to 'Novo Status de Projeto', new_project_status_path, class:'btn btn-primary'
 
-      .col-sm-7.text-center
+      .col-sm-9.text-center
         div style="margin-top: -40px"
           = will_paginate @project_statuses, inner_window: 1, outter_window: 1
 
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'
 
     - else
 
-      .col-sm-9
+      .col-sm-11
         div style="margin-top: -40px"
           = will_paginate @project_statuses, inner_window: 1, outter_window: 1
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

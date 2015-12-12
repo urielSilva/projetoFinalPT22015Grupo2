@@ -5,8 +5,8 @@ class ProjectsUsersController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @search = ProjectsUser.ransack(params[:q])
-    @projects_users = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
+    @search = ProjectsUser.joins(:user, :project).ransack(params[:q])
+    @projects_users = @search.result(distinct: true).includes(:user, :project).paginate(page: params[:page], per_page: 7)
   end
 
   def show
@@ -54,7 +54,7 @@ class ProjectsUsersController < ApplicationController
   def destroy
     @projects_user.destroy
     respond_to do |format|
-      format.html { redirect_to (request.referer || admin_path), notice: 'O membro foi deslocado do projeto com sucesso.' }
+      format.html { redirect_to (request.referer || home_path), notice: 'O membro foi desalocado do projeto com sucesso.' }
       format.json { head :no_content }
     end
   end

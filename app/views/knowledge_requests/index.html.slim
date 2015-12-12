@@ -1,6 +1,10 @@
 - requisicoes_pendentes = conta_requisicoes_pendentes
 
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Requisições de Conhecimento
+  span.label.label-success.pull-right = 'Total: ' + @knowledge_requests.count.to_s
+
+hr.divider
 
 - if @knowledge_requests.empty?
   = render '/layouts/errorempty'
@@ -23,15 +27,16 @@
 
   br
 
-  table.table.table-hover
+  table.table.table-hover.table-responsive
+
     thead
       tr
         th = sort_link(@search, :id, 'ID')
-        th = sort_link(@search, :knowledge_id, 'Conhecimento')
+        th = sort_link(@search, :knowledge_description, 'Conhecimento')
         th Nível
         th Tecnologia
-        th = sort_link(@search, :user_id, 'Membro')
-        th.text-center = sort_link(@search, :request_status_id, 'Status')
+        th = sort_link(@search, :user_name, 'Membro')
+        th.text-center = sort_link(@search, :request_status_status, 'Status')
         th
 
     tbody
@@ -84,4 +89,4 @@
         = will_paginate @knowledge_requests, inner_window: 1, outter_window: 1
 
     .col-sm-2
-      = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+      = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

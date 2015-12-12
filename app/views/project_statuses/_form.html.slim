@@ -12,7 +12,7 @@
           p = message
 
   .form-group
-    = f.label 'Estado'
+    = f.label 'Status'
     = f.text_field :status, class:'form-control'
 
   .actions
@@ -20,8 +20,8 @@
     br
 
     - if current_page?(new_project_status_path) or @project_status.errors.any?
-      = f.button 'Criar Estado de Projeto', class:'btn btn-primary'
+      = f.button 'Criar Status de Projeto', class:'btn btn-primary'
     - else
-      = f.button 'Atualizar Estado de Projeto', class:'btn btn-primary'
+      = f.button 'Atualizar Status de Projeto', class:'btn btn-primary'
 
     = link_to 'Voltar', project_statuses_path, class:'btn btn-primary pull-right'

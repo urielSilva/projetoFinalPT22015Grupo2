@@ -1,37 +1,61 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Atividades dos Membros
+  span.label.label-success.pull-right = 'Total: ' + @activities_users.count.to_s
+
+hr.divider
 
 - if @activities_users.empty?
   = render 'layouts/errorempty'
 
 - else
-  
-  - @atividades = Array.new
-  - @activities_users.each do |activities_user|
-    - if activities_user.user == current_user or !current_user.member?
-      - @atividades.push(activities_user)
 
-  - if @atividades.empty?
-    p Você não possui atividades.
+  = search_form_for @search do |f|
 
-  - else
+    .row
 
-    table.table.table-hover.table-responsive
+      .col-sm-3
+        = f.search_field :activity_description_cont, class:'form-control', placeholder:'Filtre por atividade'
 
-      thead
-        tr
-          th Membro
-          th Atividade
-          th
-          th
-          th
+      .col-sm-3
+        = f.collection_select :user_id_eq, User.all, :id, :username, {include_blank: 'Filtre por membro'}, {class:'form-control'}
 
-      tbody
+      .col-sm-2
+        = f.collection_select :activity_activity_type_id_eq, ActivityType.all, :id, :description, {include_blank: 'Filtre por tipo'}, {class:'form-control'}
 
-        - @atividades.each do |activities_user|
+      .col-sm-2
+        = f.text_field :activity_credit_numbers_gteq, class:'form-control', placeholder:'Créditos de'
+
+      .col-sm-1
+        = f.text_field :activity_credit_numbers_lteq, class:'form-control', placeholder:'até'
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
+  table.table.table-hover.table-responsive
+
+    thead
+      tr
+        th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :user_name, 'Membro')
+        th = sort_link(@search, :activity_description, 'Atividade')
+        th Tipo
+        th Créditos
+        th
+        th
+        th
+
+    tbody
+
+      - @activities_users.each do |activities_user|
 
           tr
-            td = activities_user.user.name + ' ' + activities_user.user.last_name
+            td
+              strong = activities_user.id
+            td = activities_user.user.username
             td = activities_user.activity.description
+            td = activities_user.activity.activity_type.description
+            td = activities_user.activity.credit_numbers
 
             td align="right"
               .icon-show
@@ -46,25 +70,15 @@
                 = link_to '', activities_user, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
+
   .row
 
-    - if current_user
+    .col-sm-2
+      = link_to 'Nova Atividade', new_activities_user_path, class:'btn btn-primary'
 
-      .col-sm-3
-        = link_to 'Nova Associação', activities_path, class:'btn btn-primary'
+    .col-sm-9.text-center
+      div style="margin-top: -40px"
+        = will_paginate @activities_users, inner_window: 1, outter_window: 1
 
-      .col-sm-7.text-center
-        div style="margin-top: -40px"
-          = will_paginate @activities_users, inner_window: 1, outter_window: 1
-
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
-
-    - else
-
-      .col-sm-9
-        div style="margin-top: -40px"
-          = will_paginate @activities_users, inner_window: 1, outter_window: 1
-
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+    .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

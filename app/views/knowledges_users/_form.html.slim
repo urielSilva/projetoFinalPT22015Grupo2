@@ -1,18 +1,32 @@
 = form_for @knowledges_user do |f|
+
   - if @knowledges_user.errors.any?
+
     #error_explanation
-      h2 = "#{pluralize(@knowledges_user.errors.count, "error")} prohibited this knowledges_user from being saved:"
-      ul
+      .alert.alert-danger.text-center.fade.in
+        button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+        = "Há algo errado. Por favor, verifique:"
+        br
+        br
         - @knowledges_user.errors.full_messages.each do |message|
-          li = message
+          p = message
 
   .form-group
-    = f.label :user
+    = f.label 'Membro'
     = f.select :user_id, User.all.map {|u| [u.username, u.id]}, {}, {class:'form-control'}
 
 
   .form-group
-    = f.label :knowledge
+    = f.label 'Conhecimento'
     = f.select :knowledge_id, Knowledge.all.map {|u| [u.complete_knowledge, u.id]}, {}, {class:'form-control'}
 
-  .actions = f.submit
+  .actions
+
+    br
+
+    - if current_page?(new_knowledges_user_path) or @knowledges_user.errors.any?
+      = f.button 'Criar Conhecimento', class:'btn btn-primary'
+    - else
+      = f.button 'Atualizar Conhecimento', class:'btn btn-primary'
+    
+    = link_to 'Voltar', knowledges_users_path, class:'btn btn-primary pull-right'

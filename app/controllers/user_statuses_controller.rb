@@ -5,7 +5,8 @@ class UserStatusesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @user_statuses = UserStatus.all.order(:id).paginate(page: params[:page], per_page: 10)
+    @search = UserStatus.ransack(params[:q])
+    @user_statuses = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show

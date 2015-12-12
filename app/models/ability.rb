@@ -21,7 +21,7 @@ class Ability
       can [:associar], Activity
       can [:requisitar], Knowledge
       can [:create, :update, :destroy], ActivitiesUser
-      cannot :read, [ProjectsUser, ProjectHistory, KnowledgeRequest, RequestStatus]
+      cannot :read, [ActivitiesUser, KnowledgesUser, ProjectsUser, ProjectHistory, ProjectMemberHistory, KnowledgeRequest, RequestHistory, RequestStatus, KnowledgeRequest]
 
     end
   end

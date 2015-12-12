@@ -5,11 +5,7 @@
     <div class="navbar-header">
 
       <% if current_user.present? %>
-        <% if current_user.admin? %>
-          <%= link_to 'SAP', admin_path, class:'navbar-brand', title:'Início' %>
-        <% else %>
-          <%= link_to 'SAP', member_path, class:'navbar-brand', title:'Início' %>
-        <% end %>
+        <%= link_to 'SAP', home_path, class:'navbar-brand', title:'Início' %>
       <% else %>
         <%= link_to 'SAP', '/', class:'navbar-brand' %>
       <% end %>
@@ -55,10 +51,12 @@
               <% if current_user.admin? %>
                 <li><%= link_to 'Status de Requisição', request_statuses_path %></li>
                 <li><%= link_to 'Requisições de Conhecimento', knowledge_requests_path %></li>
+                <li><%= link_to 'Histórico de Requisições', request_histories_path %></li>
               <% end %>
-              <li><%= link_to 'Histórico de Requisições', request_histories_path %></li>
               <li><%= link_to 'Níveis de Conhecimento', knowledge_levels_path %></li>
-              <li><%= link_to 'Seus Conhecimentos', knowledges_users_path %></li>
+              <% if !current_user.member? %>
+                <li><%= link_to 'Conhecimentos dos Membros', knowledges_users_path %></li>
+              <% end %>
               <li><%= link_to 'Tecnologias', technologies_path %></li>
               <li class="divider" role="separator"></li>
 
@@ -70,7 +68,9 @@
               </li>
               <li class="divider" role="separator"></li>
               <li><%= link_to 'Tipos de Atividade', activity_types_path %></li>
-              <li><%= link_to 'Suas Atividades', activities_users_path %></li>
+              <% if !current_user.member? %>
+                <li><%= link_to 'Atividades dos Membros', activities_users_path %></li>
+              <% end %>
             </ul>
 
           </li>
@@ -90,11 +90,11 @@
               <%- if !current_user.member? %>
                 <li><%= link_to 'Histórico de Projetos', project_histories_path %></li>
                 <li><%= link_to 'Histórico Geral de Projetos', project_member_histories_path %></li>
-                <li><%= link_to 'Alocar Membros em Projetos', projects_users_path %></li>
+                <li><%= link_to 'Membros Alocados em Projetos', projects_users_path %></li>
               <% end %>
 
               <li><%= link_to 'Funções de Projeto', project_roles_path %></li>
-              <li><%= link_to 'Estados de Projeto', project_statuses_path %></li>
+              <li><%= link_to 'Status de Projeto', project_statuses_path %></li>
             </ul>
 
           </li>
@@ -125,18 +125,6 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuário&nbsp;&nbsp;<i class="fa fa-user"></i> <span class="caret"></span></a>
 
             <ul class="dropdown-menu">
-
-              <br>
-              <li class="text-center">
-                <% if current_user.admin? %>
-                  <span class="label label-warning">Administrador</span>
-                <% elsif current_user.mod? %>
-                  <span class="label label-primary">Moderador</span>
-                <% else %>
-                  <span class="label label-success">Membro</span>
-                <% end %>
-              </li>
-              <br>
 
               <li>
                 <a href="<%= user_path(current_user) %>">

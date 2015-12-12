@@ -1,16 +1,31 @@
-= render '/layouts/cruds/header_index_crud'
+h3
+  span Tipos de Atividade
+  span.label.label-success.pull-right = 'Total: ' + @activity_types.count.to_s
+
+hr.divider
 
 - if @activity_types.empty?
   = render 'layouts/errorempty'
 
 - else
 
+  = search_form_for @search do |f|
+    
+    .row
+      .col-sm-11
+        = f.search_field :description_cont, class:'form-control', placeholder:'Filtre por tipo'
+
+      = f.button 'Buscar', class:'btn btn-default pull-right', style:'margin-right: 15px'
+
+  br
+
   table.table.table-hover.table-responsive
 
     thead
       tr
-        th ID
-        th Descrição
+        - if !current_user.member?
+          th = sort_link(@search, :id, 'ID')
+        th = sort_link(@search, :description, 'Descrição')
         th
         - if !current_user.member?
           th
@@ -21,10 +36,11 @@
       - @activity_types.each do |activity_type|
 
         tr
-          td
-            strong
-              = activity_type.id
+          - if !current_user.member?
+            td
+              strong = activity_type.id
           td = activity_type.description
+
           td align="right"
             .icon-show
               = link_to '', activity_type, class:'glyphicon glyphicon-eye-open', title:'Exibir'
@@ -39,25 +55,26 @@
                 = link_to '', activity_type, data: {:confirm => 'Você tem certeza?'}, :method => :delete, class:'glyphicon glyphicon-remove', title:'Excluir'
 
   br
+
   .row
 
     - if !current_user.member?
 
-      .col-sm-3
+      .col-sm-2
         = link_to 'Novo Tipo de Atividade', new_activity_type_path, class:'btn btn-primary'
 
-      .col-sm-7.text-center
+      .col-sm-9.text-center
         div style="margin-top: -40px"
-          = will_paginate @activity_types, inner_window: 1, outter_window: 1
+          = will_paginate @activity_types, inner_window: 2, outter_window: 2
 
-      .col-sm-2
-        = link_to 'Voltar', admin_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'
 
     - else
 
-      .col-sm-9
+      .col-sm-11
         div style="margin-top: -40px"
-          = will_paginate @activity_types, inner_window: 1, outter_window: 1
+          = will_paginate @activity_types, inner_window: 3, outter_window: 3
 
-      .col-sm-3
-        = link_to 'Voltar', member_path, class:'btn btn-primary pull-right'
+      .col-sm-1
+        = link_to 'Voltar', home_path, class:'btn btn-primary pull-right'

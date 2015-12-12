@@ -24,7 +24,7 @@ class RequestStatusesController < ApplicationController
 
     respond_to do |format|
       if @request_status.save
-        format.html { redirect_to @request_status, notice: 'Request status was successfully created.' }
+        format.html { redirect_to @request_status, notice: 'O status da requisição foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @request_status }
       else
         format.html { render :new }
@@ -36,7 +36,7 @@ class RequestStatusesController < ApplicationController
   def update
     respond_to do |format|
       if @request_status.update(request_status_params)
-        format.html { redirect_to @request_status, notice: 'Request status was successfully updated.' }
+        format.html { redirect_to @request_status, notice: 'O status da requisição foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @request_status }
       else
         format.html { render :edit }
@@ -48,7 +48,7 @@ class RequestStatusesController < ApplicationController
   def destroy
     @request_status.destroy
     respond_to do |format|
-      format.html { redirect_to request_statuses_url, notice: 'Request status was successfully destroyed.' }
+      format.html { redirect_to request_statuses_url, notice: 'O status da requisição foi excluído com sucesso.' }
       format.json { head :no_content }
     end
   end

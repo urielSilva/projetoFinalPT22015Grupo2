@@ -4,10 +4,16 @@ h3
 
 hr.divider
 
+br
+
 p
   strong Descrição:  
   = @activity.description
-  
+
+p
+  strong Tipo: 
+  = @activity.activity_type.description
+
 p
   strong Número de créditos: 
   = @activity.credit_numbers

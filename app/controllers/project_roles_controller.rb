@@ -5,7 +5,8 @@ class ProjectRolesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @project_roles = ProjectRole.all.paginate(page: params[:page], per_page: 10)
+    @search = ProjectRole.ransack(params[:q])
+    @project_roles = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show

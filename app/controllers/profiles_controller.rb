@@ -5,7 +5,8 @@ class ProfilesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @profiles = Profile.all.paginate(page: params[:page], per_page: 10)
+    @search = Profile.ransack(params[:q])
+    @profiles = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show

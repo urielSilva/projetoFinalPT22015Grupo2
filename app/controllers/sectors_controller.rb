@@ -5,7 +5,8 @@ class SectorsController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @sectors = Sector.all.order(:id).paginate(page: params[:page], per_page: 10)
+    @search = Sector.ransack(params[:q])
+    @sectors = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show

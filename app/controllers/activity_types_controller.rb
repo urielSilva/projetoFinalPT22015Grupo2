@@ -5,7 +5,8 @@ class ActivityTypesController < ApplicationController
   load_and_authorize_resource except: [:create]
 
   def index
-    @activity_types = ActivityType.all.order(:id).paginate(page: params[:page], per_page: 10)
+    @search = ActivityType.ransack(params[:q])
+    @activity_types = @search.result(distinct: true).paginate(page: params[:page], per_page: 7)
   end
 
   def show

@@ -4,6 +4,8 @@ h3
 
 hr.divider
 
+br
+
 table.table.table-responsive
 
   thead
@@ -26,7 +28,6 @@ table.table.table-responsive
 
 br
 
-- if !current_user.member?
-  = link_to 'Editar', edit_request_history_path(@request_history), class:'btn btn-primary'
 
+= link_to 'Editar', edit_request_history_path(@request_history), class:'btn btn-primary'
 = link_to 'Back', request_histories_path, class:'btn btn-primary pull-right'

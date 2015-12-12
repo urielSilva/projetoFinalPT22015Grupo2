@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :knowledges_users
   # Define a raiz para a página de login e as rotas /login e /logout
   devise_scope :user do
     root to: "devise/sessions#new"
@@ -26,10 +25,9 @@ Rails.application.routes.draw do
     end
   end
 
-  # Rotas para home do usuário
-  get '/administrador' => 'admin#index', as: :admin
-  get '/membro' => 'member#index', as: :member
-  
+  # Rota para home do membro
+  get '/home' => 'home#index', as: :home
+
   # Rota página Sobre
   get '/about' => 'about#index', as: :about
 
@@ -56,6 +54,7 @@ Rails.application.routes.draw do
   resources :areas
   resources :sectors
   resources :knowledge_levels
+  resources :knowledges_users
   resources :knowledge_requests
   resources :knowledges
   resources :technologies

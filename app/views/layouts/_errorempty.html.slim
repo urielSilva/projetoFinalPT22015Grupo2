@@ -37,7 +37,7 @@
         = link_to 'Novo Perfil', new_profile_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(project_statuses_path)
-        = link_to 'Novo Estado de Projeto', new_project_status_path, class:'btn btn-primary form-control'
+        = link_to 'Novo Status de Projeto', new_project_status_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(projects_path)
         = link_to 'Novo Projeto', new_project_path, class:'btn btn-primary form-control'
@@ -52,7 +52,7 @@
         = link_to 'Novo Status de Usuário', new_user_status_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(projects_users_path)
-        = link_to 'Nova Alocação', new_projects_user_path, class:'btn btn-primary form-control'
+        = link_to 'Nova Alocação de Membro em Projeto', new_projects_user_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(project_histories_path)
         = link_to 'Novo Histórico de Projeto',new_project_history_path, class:'btn btn-primary form-control'
@@ -64,7 +64,7 @@
         = link_to 'Novo Histórico de Projeto', new_project_member_history_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(activities_users_path)
-        = link_to 'Nova Associação', new_activities_user_path, class:'btn btn-primary form-control'
+        = link_to 'Nova Atividade de Membro', new_activities_user_path, class:'btn btn-primary form-control'
 
       - elsif current_page?(knowledge_requests_path)
         = link_to 'Nova Requisição', new_knowledge_request_path, class:'btn btn-primary form-control'
@@ -74,3 +74,9 @@
 
       - elsif current_page?(request_histories_path)
         = link_to 'Novo Histórico de Requisição', new_request_history_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(knowledges_users_path)
+        = link_to 'Novo Conhecimento de Membro', new_knowledges_user_path, class:'btn btn-primary form-control'
+
+      - elsif current_page?(request_statuses_path)
+        = link_to 'Novo Status de Requisição', new_request_status_path, class:'btn btn-primary form-control'

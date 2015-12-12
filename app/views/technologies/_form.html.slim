@@ -23,8 +23,9 @@
 
     br
 
-    - if current_page?(new_technology_path) @technology.errors.any?
+    - if current_page?(new_technology_path) or @technology.errors.any?
       = f.button 'Criar Tecnologia', class:'btn btn-primary'
+
     - else
       = f.button 'Atualizar Tecnologia', class:'btn btn-primary'
 

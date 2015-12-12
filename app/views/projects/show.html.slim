@@ -4,46 +4,51 @@ h3
 
 hr.divider
 
-= link_to image_tag(@project.image.url), @project.image.url, target: '_blank'
+.row
 
-p
-  strong Descrição: 
-  = @project.description
-p
-  strong Preço: 
-  = @project.price
-p
-  strong Link: 
-  = link_to [@project.link], @project.link
-p
-	strong Estado: 
-	= @project.project_status.status
+  .col-sm-9
 
-- if @users.empty?
-  strong Membros:
-  p Não há ninguém alocado neste projeto.
+    p
+      strong Descrição: 
+      = @project.description
+    p
+      strong Preço: 
+      = @project.price
+    p
+      strong Link: 
+      = link_to [@project.link], @project.link
+    p
+    	strong Estado: 
+    	= @project.project_status.status
 
-- else
+    - if @users.empty?
+      strong Membros:
+      p Não há ninguém alocado neste projeto.
 
-  br
+    - else
 
-  table.table.table-hover.table-responsive
+      br
 
-    thead
+      table.table.table-hover.table-responsive
 
-      tr
-        th Membro
-        - if !current_user.member?
-          th
-        
-    tbody
+        thead
 
-      - @users.each do |user|
+          tr
+            th Membro
+            - if !current_user.member?
+              th
+            
+        tbody
 
-        tr
-          td = link_to user.name + ' ' + user.last_name, user
-          - if !current_user.member?
-            td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+          - @users.each do |user|
+
+            tr
+              td = link_to user.name + ' ' + user.last_name, user
+              - if !current_user.member?
+                td align="right" = link_to 'Desalocar', @projects_users.where(user_id: user.id).first, data: {:confirm => 'Tem certeza?'}, :method => :delete
+
+  .col-sm-3
+    = link_to image_tag(@project.image.url), @project.image.url, target: '_blank'
 
 br
 

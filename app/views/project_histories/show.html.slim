@@ -4,12 +4,14 @@ h3
 
 hr.divider
 
+br
+
 p
   strong Projeto: 
   = @project_history.project.description
 
 p
-  strong Estado do Projeto: 
+  strong Status do Projeto: 
   = @project_history.project_status.status
 
 p
@@ -18,7 +20,5 @@ p
 
 br
 
-- if !current_user.member?
-  = link_to 'Editar', edit_project_history_path(@project_history), class:'btn btn-primary'
-
+= link_to 'Editar', edit_project_history_path(@project_history), class:'btn btn-primary'
 = link_to 'Voltar', project_histories_path, class:'btn btn-primary pull-right'
