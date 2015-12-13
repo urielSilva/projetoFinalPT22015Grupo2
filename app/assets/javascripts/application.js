@@ -11,15 +11,12 @@
 // about supported directives.
 //
 //= require jquery
-
-
 //= require jquery2
 //= require jquery_ujs
-//= require bootstrap-sprockets
-//= require jquery_ujs
-//= require turbolinks
-//= require local_time
 //= require jquery.turbolinks
+//= require turbolinks
+//= require bootstrap-sprockets
+//= require local_time
 //= require chosen-jquery
 //= require messages
 //= require_tree .

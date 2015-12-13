@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
 
-  has_attached_file :image
+  has_attached_file :image, :default_url => ActionController::Base.helpers.asset_path("original/missing.png")
 
   validates_presence_of :description, :price, :link
   validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
